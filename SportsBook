@@ -202,7 +202,7 @@ def mainMenu():
 
     displaySelection(selectedLeague)
     
-# Call the first funticon to get the program running.
+# Call the first function to get the program running.
 mainMenu()
 
 
