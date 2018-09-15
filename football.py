@@ -199,5 +199,98 @@ availableLeagues = {"1 English Premier League":[1, "england/premier-league/", 20
                     "99 Export JSON":[99, "", 0],
                     "100 Quit":[100, "", 0]
                     }
+
+def getLeague(t, leagueData):
+    """
+    Takes in a team name as a string and the leagueData dictionary.
+    Returns the name of the league the team belongs to as a string.
+
+    Not yet in use.
+    """
+    leagueTeamPairs = leagueData.items()
+    for team in leagueTeamPairs:
+        if t in team[1]:
+            return team[0]
+    print("Error: Team not found")
+    return ("Error: Team not found")
+
+
+def compare(homeTeam, awayTeam, leagueData):
+    """
+    Takes in 2 team names as strings.
+    Compares the home team's home stats with the away team's away stats.
+    Also compares both teams total stats.
+    Returns lists containing the differences.
+
+    Works as expected, but doesn't provide a clear comparison alone.
+    For example, a difference of -2 for goals "for" is good for the away team.
+    However, a difference of - 2 for goals "against" is good for the home team.
+    Possible solution is to manually reverse bad stats. However, this will be
+    difficult to do without affecting modularity. Eg. if a new stat is added to the
+    league data, this function may need to be updated.
+    A solution would be to use dictionaries instead of lists. Bending my head now
+    though, so probably my next task for another day.
+
+    Not yet in use.
+    """
+    # Check what league the home team belongs to
+    homeLeague = getLeague(homeTeam, leagueData)
+
+    # Initialise the home team stats lists (one for home and one for total)
+    homeTeamHomeStats = [homeTeam]
+    homeTeamTotalStats = [homeTeam]
+
+    # Append the value of each "Home" stat for the home team to the homeTeamHomeStats list
+    # Append the value of each "Total" stat for the home team to the homeTeamTotalStats list
+    for section in ["Home", "Total"]:
+        for stat in leagueData[homeLeague][homeTeam][section]:
+            if section == "Home":
+                homeTeamHomeStats.append(leagueData[homeLeague][homeTeam][section][stat])
+            if section == "Total":
+                homeTeamTotalStats.append(leagueData[homeLeague][homeTeam][section][stat])
+
+    # Check what league the away team belongs to
+    awayLeague = getLeague(awayTeam, leagueData)
+
+    # Initialise the away stats lists (one for away and one for total)
+    awayTeamAwayStats = [awayTeam]
+    awayTeamTotalStats = [awayTeam]
+
+    # Append the value of each "Away" stat for the away team to the awayTeamAwayStats list
+    # Append the value of each "Total" stat for the away team to the awayTeamTotalStats list
+    for section in ["Away", "Total"]:
+        for stat in leagueData[awayLeague][awayTeam][section]:
+            if section == "Away":
+                awayTeamAwayStats.append(leagueData[awayLeague][awayTeam][section][stat])
+            if section == "Total":
+                awayTeamTotalStats.append(leagueData[awayLeague][awayTeam][section][stat])
+
+    # Initialise the homeAwaydifference, totalDifference and pcVariance lists
+    homeAwayDifference = ["Home Away Statistic Differences"]
+    totalDifference = ["Total Statistic Differences"]
+    #pcVariance = ["Variance %"] #Omitted, see line comment below
+
+    # For each statistic for each team calculate the home and away difference and the total difference
+    # Assign the values to the appropriate list
+    for stat in range(1,len(homeTeamHomeStats)):
+        
+        homeAwayDifference.append(homeTeamHomeStats[stat] - awayTeamAwayStats[stat])
+        totalDifference.append(homeTeamTotalStats[stat] - awayTeamTotalStats[stat])
+
+        """
+        Calculating variance percentage: Not working as planned so currently omitted.
+        Prototype only created for H/A difference, total difference would also need implementing.
+        # Avoiding a division by zero error by appending 0 when the highest value is 0
+        if max(homeTeamStats[stat], awayTeamStats[stat]) == 0:
+            pcVariance.append(0)
+        else:
+            pcVariance.append(round(min(homeTeamStats[stat], awayTeamStats[stat])
+                              / max(homeTeamStats[stat], awayTeamStats[stat])*100, 2))
+        """
+    #initialise comparison list for easy return of all generated lists
+    comparison = [homeAwayDifference, totalDifference]
+    
+    return comparison
+
 # Initialise the leagueData dictionary
 leagueData = {}
