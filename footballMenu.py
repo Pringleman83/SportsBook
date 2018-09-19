@@ -1,64 +1,38 @@
 #Football menu system
 
+from football import *
+
+# Initialise the leagueData dictionary
+leagueData = {}
+
 # temporary, placeholder functions:
 
-def leagueSelect():
-    print("leagueSelect")
-
 def downloadFixtures():
-    print("downloadFixtures")
+    print("\nThe download fixtures feature is not yet available.\n")
 
 def displayFixtures():
-    print("displayFixtures")
+    print("\nThe display fixtures feature is not yet available.\n")
 
 def analyseFixtures():
-    print("analyseFixtures")
+    print("\nThe analyse fixtures feature is not yet available.\n")
 
 def displayAnalysis():
-    print("displayAnalysis")
+    print("\nThe display analysis feature is not yet available.\n")
 
 def singleGameAnalysis():
-    print("singleGameAnalysis")
+    print("\nThe single game analysis feature is not yet available.\n")
 
 def manualGameAnalysis():
-    print("manualGameAnalysis")
+    print("\nThe manual game analysis feature is coming soon!\n")
 
 def reports():
-    print("reports")
+    print("\nThe reports feature is not yet available.\n")
 
 def leave():
-    print("leave")
-                   
-def footballMenu(footballOptions):
-    selectedLeagues = ""
-    exitMenu = False
-    availableOptions = []
-    selection = ""
-    while exitMenu == False:
-        
-        if selectedLeagues != "":
-            print("Selected league(s): " )
-            for league in selectedLeagues:
-                print(league)
-        else:
-            print("No league currently selected. Please start by selecting a league.")
-            
-        for option in footballOptions:
-            print(option[0])
-            availableOptions.append(option[1])
+    print("\nExit to main menu.\n")
 
-        while selection not in availableOptions:
-            selection = input()
-
-        for option in footballOptions:
-            if selection == "m":
-                exitMenu = True
-                break
-            if selection == option[1]:
-                option[2]()
-                selection = ""
-
-footballOptions = [["(1) League select*", "1", leagueSelect],#The leagueSelect function needs to return a list of leagues
+def footballMenu():
+    footballOptions = [["(1) League select*", "1", selectLeague],#The selectLeague function from football.py
                    ["(2) Download upcoming fixtures*", "2", downloadFixtures],
                    ["(3) Display upcoming fixtures*", "3", displayFixtures],
                    ["(4) Run analytics on upcoming fixtures*", "4", analyseFixtures],
@@ -68,6 +42,49 @@ footballOptions = [["(1) League select*", "1", leagueSelect],#The leagueSelect f
                    ["(8) Reports*", "8", reports],
                    ["(M) Main menu*", "m", leave]
                    ]
+    selectedLeagues = []
+    exitMenu = False
+    availableOptions = []
+    selection = ""
 
-footballMenu(footballOptions)
+    # Gather a list of availableOption numbers for input recognition
+    for option in footballOptions:
+        availableOptions.append(option[1])
+    
+    while exitMenu == False:
         
+        selectedLeagues = []
+
+        #If there are leages selected in LeagueData, add them to the selectedLeagues
+        #list and display the list.
+        if leagueData != {}:
+            for league in leagueData:
+                selectedLeagues.append(league)
+            print("\n Selected league(s):\n" )
+            for league in selectedLeagues:
+                print(league)
+            print()
+        else:
+            print("\n No league currently selected. Please start by selecting a league.\n")
+
+        # Display the available options 
+        for option in footballOptions:
+            print(option[0])
+
+        # Keep asking for a selection while the selection provided is not in the availableOptions list.
+        while selection not in availableOptions:
+            selection = input()
+            selection = selection.lower()
+
+        # If the seleciton is in the list, check if it is "m". If it's not, run it's function,
+        #passing the leagueData dictionary.
+        for option in footballOptions:
+            if selection.lower() == "m":
+                exitMenu = True
+                break
+            if selection == option[1]:
+                option[2](leagueData)
+                selection = ""
+
+
+
