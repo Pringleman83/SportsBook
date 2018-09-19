@@ -7,28 +7,28 @@ leagueData = {}
 
 # temporary, placeholder functions:
 
-def downloadFixtures():
+def downloadFixtures(x):
     print("\nThe download fixtures feature is not yet available.\n")
 
-def displayFixtures():
+def displayFixtures(x):
     print("\nThe display fixtures feature is not yet available.\n")
 
-def analyseFixtures():
+def analyseFixtures(x):
     print("\nThe analyse fixtures feature is not yet available.\n")
 
-def displayAnalysis():
+def displayAnalysis(x):
     print("\nThe display analysis feature is not yet available.\n")
 
-def singleGameAnalysis():
+def singleGameAnalysis(x):
     print("\nThe single game analysis feature is not yet available.\n")
 
-def manualGameAnalysis():
+def manualGameAnalysis(x):
     print("\nThe manual game analysis feature is coming soon!\n")
 
-def reports():
+def reports(x):
     print("\nThe reports feature is not yet available.\n")
 
-def leave():
+def leave(x):
     print("\nExit to main menu.\n")
 
 def footballMenu():
@@ -85,6 +85,7 @@ def footballMenu():
             if selection == option[1]:
                 option[2](leagueData)
                 selection = ""
+
 
 
 
