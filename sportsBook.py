@@ -1,4 +1,4 @@
-from football import footballMain
+from footballMenu import footballMenu
 
 def isNumber(s):
     """
@@ -26,10 +26,10 @@ def tennis():
     Placeholder for Tennis selection.
     Serves no function except for menu testing.
     """
-    print("Tennis selected")
+    print("The tennis option is a placeholder for testing. The option is not currently available. \n\n")
 
 # options list can only now be declared (after its functions have been)
-options = [[1, "Football", footballMain],[2, "Tennis", tennis], ["Q", "Quit"]]
+options = [[1, "Football", footballMenu],[2, "Tennis", tennis], ["Q", "Quit"]]
 
 def mainMenu(options):
     """
@@ -63,3 +63,5 @@ def mainMenu(options):
 
 # As this is the main file, call up the main menu    
 mainMenu(options)
+
+
