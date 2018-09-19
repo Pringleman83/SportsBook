@@ -36,7 +36,7 @@ def mainMenu(options):
     Main menu function
     Offers all options in the options list (no need to edit this function)
     Returns the selected funtion to run.
-    """
+    """ 
     while True:
         print("Welcome to SportsBook - A sports analysis tool.")
         print("Please select from one of the following sports:")
