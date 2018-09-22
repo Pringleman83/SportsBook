@@ -1,5 +1,5 @@
 #Football menu system
-
+from commonFunctions import isNumber
 from football import *
 
 # Initialise the leagueData dictionary
@@ -22,9 +22,6 @@ def displayAnalysis(x):
 def singleGameAnalysis(x):
     print("\nThe single game analysis feature is not yet available.\n")
 
-def manualGameAnalysis(x):
-    print("\nThe manual game analysis feature is coming soon!\n")
-
 def reports(x):
     print("\nThe reports feature is not yet available.\n")
 
@@ -32,13 +29,13 @@ def leave(x):
     print("\nExit to main menu.\n")
 
 def footballMenu():
-    footballOptions = [["(1) League select*", "1", selectLeague],#The selectLeague function from football.py
+    footballOptions = [["(1) League select", "1", selectLeague],#The selectLeague function from football.py
                    ["(2) Download upcoming fixtures*", "2", downloadFixtures],
                    ["(3) Display upcoming fixtures*", "3", displayFixtures],
                    ["(4) Run analytics on upcoming fixtures*", "4", analyseFixtures],
                    ["(5) Display analytics in upcoming fixtures*", "5", displayAnalysis],
                    ["(6) Single game analysis from fixture list*", "6", singleGameAnalysis],
-                   ["(7) Manual single game analysis*", "7", manualGameAnalysis],
+                   ["(7) Manual single game analysis", "7", manualGameAnalysis],
                    ["(8) Reports*", "8", reports],
                    ["(M) Main menu*", "m", leave]
                    ]
@@ -70,6 +67,9 @@ def footballMenu():
         # Display the available options 
         for option in footballOptions:
             print(option[0])
+            
+        # Display any additional information
+        print("\nItems marked with a * are not available in this version.")
 
         # Keep asking for a selection while the selection provided is not in the availableOptions list.
         while selection not in availableOptions:
@@ -85,7 +85,3 @@ def footballMenu():
             if selection == option[1]:
                 option[2](leagueData)
                 selection = ""
-
-
-
-
