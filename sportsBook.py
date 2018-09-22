@@ -1,25 +1,5 @@
 from footballMenu import footballMenu
-
-def isNumber(s):
-    """
-    Tests if the value passed is a number.
-    Returns True or False.
-    """
-    try:
-        float(s)
-        return True
-    except ValueError:
-        pass
- 
-    try:
-        import unicodedata
-        unicodedata.numeric(s)
-        return True
-    except (TypeError, ValueError):
-        pass
- 
-    return False
-
+from commonFunctions import *
 
 def tennis():
     """
@@ -36,7 +16,7 @@ def mainMenu(options):
     Main menu function
     Offers all options in the options list (no need to edit this function)
     Returns the selected funtion to run.
-    """ 
+    """
     while True:
         print("Welcome to SportsBook - A sports analysis tool.")
         print("Please select from one of the following sports:")
@@ -58,10 +38,9 @@ def mainMenu(options):
                     break
         # Having broken out of the loop, run the selected function
         for option in options:
+        
             if selected == option[0]:
                 option[2]()
 
 # As this is the main file, call up the main menu    
 mainMenu(options)
-
-
