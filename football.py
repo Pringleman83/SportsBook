@@ -216,7 +216,7 @@ availableLeagues = {"1 English Premier League":["1", "england/premier-league/", 
                     "97 Display Currently Loaded Data":["97", "", 0],
                     "98 Import JSON":["98", "", 0],
                     "99 Export JSON":["99", "", 0],
-                    "100 Quit":["100", "", 0]
+                    "100 Previous Menu":["100", "", 0]
                     }
 
 def getLeague(t, leagueData):
