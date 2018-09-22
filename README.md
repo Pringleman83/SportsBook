@@ -5,6 +5,6 @@ This project is in its very early days and currently only supports football (soc
 
 When complete, the user will be able to select a sport and a league or competition. They'll then be able to view stats, build comparisons, review fixtures and generate reports.
 
-Read the wiki to see the latest ews and progress.
+Read the wiki to see the latest news and progress.
 
 It'd be great to hear from you so please leave a comment.
