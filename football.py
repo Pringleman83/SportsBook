@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
+from commonFunctions import *
 import pprint
 import json
     
@@ -238,7 +239,9 @@ def compare(homeTeam, awayTeam, leagueData):
     Takes in 2 team names as strings.
     Compares the home team's home stats with the away team's away stats.
     Also compares both teams total stats.
-    Returns lists containing the differences.
+    Returns a list of 2 lists.
+    First list contains Home / Away differences.
+    Second list contains Total differences.
 
     Works as expected, but doesn't provide a clear comparison alone.
     For example, a difference of -2 for goals "for" is good for the away team.
@@ -284,8 +287,8 @@ def compare(homeTeam, awayTeam, leagueData):
                 awayTeamTotalStats.append(leagueData[awayLeague][awayTeam][section][stat])
 
     # Initialise the homeAwaydifference, totalDifference and pcVariance lists
-    homeAwayDifference = ["Home Away Statistic Differences"]
-    totalDifference = ["Total Statistic Differences"]
+    homeAwayDifference = []
+    totalDifference = []
     #pcVariance = ["Variance %"] #Omitted, see line comment below
 
     # For each statistic for each team calculate the home and away difference and the total difference
@@ -309,3 +312,80 @@ def compare(homeTeam, awayTeam, leagueData):
     comparison = [homeAwayDifference, totalDifference]
     
     return comparison
+
+def listTeams(leagueData):
+    """
+	Takes the leagueData dictionary.
+	Returns a list of all teams within it.
+	"""
+    teamList = []
+    for league in leagueData:
+        for team in leagueData[league]:
+            teamList.append(team)
+    return teamList
+
+def manualGameAnalysis(leagueData):
+    """
+    Takes the leagueData dictionary.
+    Asks the user to select the home and away teams from the available
+    teams.
+    Provides a comparison.
+    """
+    homeTeam = ""
+    awayTeam = ""
+    teamList = []
+    selection1 = ""
+    selection2 = ""
+    
+    for team in listTeams(leagueData):
+        teamList.append(team)
+        
+    for team in teamList:
+        print(teamList.index(team) + 1, team)
+        
+    #while homeTeam not in teamList or awayTeam not in teamList:
+        
+    while not validInput(selection1, range(1, len(teamList) + 1)):
+        print("\n Select home team from the above list.")
+        selection1 = input()
+    while not validInput(selection2, range(1, len(teamList) + 1)):
+        print("\n Select away team from the above list.")
+        selection2 = input()
+        
+    homeTeam = teamList[int(selection1)-1]
+    awayTeam = teamList[int(selection2)-1]
+    homeTeamLeague = getLeague(homeTeam, leagueData)
+    awayTeamLeague = getLeague(awayTeam, leagueData)
+        
+    print("\nHome Team is: ", homeTeam)
+    print("Home game stats:")
+    for stat in leagueData[homeTeamLeague][homeTeam]["Home"]:
+        print(stat, leagueData[homeTeamLeague][homeTeam]["Home"][stat], end = " ")
+    print("\nTotal game stats")
+    for stat in leagueData[homeTeamLeague][homeTeam]["Total"]:
+        print(stat, leagueData[homeTeamLeague][homeTeam]["Total"][stat], end = " ")
+            
+    print("\n\nAway Team is: ", awayTeam)
+    print("Away game stats:")
+    for stat in leagueData[awayTeamLeague][awayTeam]["Away"]:
+        print(stat, leagueData[awayTeamLeague][awayTeam]["Away"][stat], end = " ")
+    print("\nTotal game stats")
+    for stat in leagueData[homeTeamLeague][awayTeam]["Total"]:
+        print(stat, leagueData[homeTeamLeague][awayTeam]["Total"][stat], end = " ")
+        
+    comparison = compare(homeTeam, awayTeam, leagueData)
+    print("\n\nComparison")
+    comparisonIndexCount = 0
+        
+    print("Home / Away game stat differences")
+    for stat in leagueData[homeTeamLeague][homeTeam]["Home"]:
+        print(stat, comparison[0][comparisonIndexCount], end = " ")
+        comparisonIndexCount += 1
+        
+    print("\n\nTotal game stat differences")
+    comparisonIndexCount = 0
+    for stat in leagueData[awayTeamLeague][awayTeam]["Away"]:
+        print(stat, comparison[0][comparisonIndexCount], end = " ")
+        comparisonIndexCount += 1
+    input()
+    return
