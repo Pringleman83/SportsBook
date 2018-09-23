@@ -53,7 +53,7 @@ def selectLeague(leagueData):
             pprint.pprint(leagueData)
             input("Press enter to continue")
 
-        elif selection == "100 Quit":
+        elif selection == "100 Previous Menu":
             #Debug code: indicate selection:
             print("Option 100 selected")
             return leagueData
