@@ -1,0 +1,78 @@
+File and function list
+
+sportsBook.py
+    
+    tennis()
+        Place holder for second sport.
+        
+    mainMenu()
+        Introductory menu for the project.
+    
+footballMenu.py
+    
+    downloadFixtures(leagueData)
+        Place holder for futre function.
+        Will be used to scrape upcoming fixtures.
+    
+    displayFixtures(leagueData)
+        Place holder for future function.
+        Will be used to display scraped fixtures.
+    
+    analyseFixtures(leagueData)
+        Place holder for futue function.
+        Will be used to run match analysis on scraped fixtures.
+    
+    displayAnalysis(leagueData)
+        Place holder for future function.
+        Will be used to display analyitics.
+    
+    singleGameAnalysis(leagueData)
+        Place holder for future function.
+        Will be used to run analysis on a single game selected from
+        a selection of available fixtures.
+        
+    chooseLeagues(leagueData)
+        Assigns the returned value from the selectLeague() function to leagueData.
+    
+    displaySelectedLeagues(leagueData)
+        Displays each of the leagues currently in the leagueData dictionary.
+        
+    reports(leagueData)
+        The reports submenu
+    
+    leave(leagueData)
+        Used to return to the main menu.
+    
+    footballMenu()
+        Displays the menu for availble football options.
+    
+    
+football.py
+
+    selectLeague(leagueData)
+        Prompts the user to select which league to analyise.
+        Passes the selection to the getLeagueData() function.
+    
+    importJSONFile(leagueData)
+        Reads the leagueData.json file to the leagueData dictionary, replacing the existing dictionary contents.
+    
+    exportJSONFile(leagueData)
+        Saves the current leagueData data to the leagueData.json file.
+    
+    displaySelection(leagueData)
+        Displays the current leagueData dictionary content on the screen.
+    
+    getLeagueData(selected league, leagueData)
+        Scrapes data for the selected league. Adds it to the leagueData dictionary if it isn't already present.
+    
+    getLeague(team, leagueData)
+        Returns the league the provided team belongs to.
+    
+    compare(homeTeam, awayTeam, leagueData)
+        Returns a list of two lists. One list contains a home / away league statistic comparison. The other list contains a total league statistic comparison.
+        
+    listTeams(leagueData)
+        Returns a list of all of the teams in the current leagueData dictionary.
+    
+    manualGameAnalysis(leagueData)
+        Prompts the user to select a home team and an away team. Displays league statitistics for both and a comparison of the two.
