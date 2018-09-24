@@ -3,15 +3,17 @@ from urllib.request import urlopen as uReq
 from commonFunctions import *
 import pprint
 import json
-    
+
+__author__ = "David Bristoll"
+__copyright__ = "Copyright 2018, David Bristoll"
+__maintainer__ = "David Bristoll"
+__email__ = "david.bristoll@gmail.com"
+__status__ = "Development"
+
 def selectLeague(leagueData):
     """Takes  in the availableLeagues dictionary.
     Prompts the user to select a league.
-    Returns the key value of theselected league.
-
-    Currently has an extra function for program testing.
-    This is the acceptance of options 97-100.
-    This function needs to be built into a menu.
+    Returns the key value of the selected league.
     """
     while True:
         availableOptions = []
@@ -40,53 +42,30 @@ def selectLeague(leagueData):
             if option == availableLeagues[league][0]:
                 selection = league
                 #Debug code: Display selected league string
-                print("Selected league" + league)
-        
-        # Extra function as described in docstring
-        if selection == "99 Export JSON":
-            exportJSONFile(leagueData)
-            
-        elif selection == "98 Import JSON":
-            leagueData = importJSONFile(leagueData)
-            
-        elif selection == "97 Display Currently Loaded Data":
-            pprint.pprint(leagueData)
-            input("Press enter to continue")
+                #print("Selected league" + league)
 
-        elif selection == "100 Previous Menu":
-            #Debug code: indicate selection:
-            print("Option 100 selected")
+        if selection == "100 Previous Menu":
             return leagueData
-        # End of extra function
 
         else:
             leagueData = displaySelection(selection, leagueData)
 
-
-def importJSONFile(leagueData):
-    """ Loads the leagueData.json file into the leagueData dictionary.
-    Needs to return the file rather than all be actioned in the function.
-    This can only be done properly once the menu system is in place because
-    the importJSONFile function is currently being called from within another
-    function. This would mean passing the leagueData dictionary down through
-    multiple functions rather than directly to this function.
+def importJSONFile():
     """
-    #global leagueData
+    Loads the leagueData.json file into the leagueData dictionary.
+    """
+    loadedJSON = {}
     print("---LOADING...---")
     with open("leagueData.json") as infile:
-        leagueData = json.load(infile)
+    
+        loadedJSON = json.load(infile)
     print("---LOADED---")
     input("Press enter to continue")
-    return leagueData
+    return loadedJSON
         
 def exportJSONFile(leagueData):
     """ Saves the leagueData dictionary to a json file called
     leagueData.json.
-    Needs to return the file rather than all be actioned in the function.
-    This can only be done properly once the menu system is in place because
-    the exportJSONFile function is currently being called from within another
-    function. This would mean passing the leagueData dictionary down through
-    multiple functions rather than directly to this function.
     """
     print("---SAVING...---")
     with open("leagueData.json", "w") as outfile:
@@ -118,7 +97,8 @@ def displaySelection(selection, leagueData):
 
 
 def getLeagueData(selection, leagueData):
-    """ Takes the key of the selected league from the availableLeagues dictionary.
+    """
+    Takes the key of the selected league from the availableLeagues dictionary.
     Scrapes the selected league information from bedstudy.com.
     Calculates unscraped data (for example, total games won).
     Adds all data to the leagueData dictionary.
@@ -165,6 +145,7 @@ def getLeagueData(selection, leagueData):
         totalPoints = homePoints + awayPoints
 
         # Add league to the leagueData dictionary if the league does not already exist within it.
+        #Any additional stats calculated above must be added to the dictionary generator here.
         if selection not in leagueData:
             leagueData[selection] = {teamName:
             {"Home":
@@ -209,13 +190,10 @@ availableLeagues = {"1 English Premier League":["1", "england/premier-league/", 
                     "17 Argentinian Primera Division":["17", "argentina/primera-division/", 26],
                     "18 Argentinian Prim B Nacional":["18", "argentina/prim-b-nacional/", 25],
                     "19 Argentinian Prim B Metro":["19", "argentina/prim-b-metro/", 20],
-                    "20 Scottish Premier":["20", "scotland/premiership/", 12], #check
-                    "21 Scottish Championship":["21", "scotland/championship/", 10], #check
-                    "22 Scottish League One":["22", "scotland/league-one/", 10], #check
-                    "23 Scottish League Two":["23", "scotland/league-two/", 10], #check
-                    "97 Display Currently Loaded Data":["97", "", 0],
-                    "98 Import JSON":["98", "", 0],
-                    "99 Export JSON":["99", "", 0],
+                    "20 Scottish Premier":["20", "scotland/premiership/", 12],
+                    "21 Scottish Championship":["21", "scotland/championship/", 10],
+                    "22 Scottish League One":["22", "scotland/league-one/", 10],
+                    "23 Scottish League Two":["23", "scotland/league-two/", 10],
                     "100 Previous Menu":["100", "", 0]
                     }
 
@@ -336,7 +314,10 @@ def manualGameAnalysis(leagueData):
     teamList = []
     selection1 = ""
     selection2 = ""
-    
+    if leagueData == {}:
+        print("You can't run manual game analysis until you have selected the appropriate league(s).")
+        print("Please select a league or import a JSON file first.")
+        return leagueData
     for team in listTeams(leagueData):
         teamList.append(team)
         
@@ -370,19 +351,19 @@ def manualGameAnalysis(leagueData):
     for stat in leagueData[awayTeamLeague][awayTeam]["Away"]:
         print(stat, leagueData[awayTeamLeague][awayTeam]["Away"][stat], end = " ")
     print("\nTotal game stats")
-    for stat in leagueData[homeTeamLeague][awayTeam]["Total"]:
-        print(stat, leagueData[homeTeamLeague][awayTeam]["Total"][stat], end = " ")
+    for stat in leagueData[awayTeamLeague][awayTeam]["Total"]:
+        print(stat, leagueData[awayTeamLeague][awayTeam]["Total"][stat], end = " ")
         
     comparison = compare(homeTeam, awayTeam, leagueData)
-    print("\n\nComparison")
+    print("\n\nComparison\nPositive numbers indicate Home team statistic is higher. \nNegative numers indicate Away team statsistic is higher.\n")
     comparisonIndexCount = 0
         
-    print("Home / Away game stat differences")
+    print("Home / Away Game Statistical Differences")
     for stat in leagueData[homeTeamLeague][homeTeam]["Home"]:
         print(stat, comparison[0][comparisonIndexCount], end = " ")
         comparisonIndexCount += 1
         
-    print("\n\nTotal game stat differences")
+    print("\n\nTotal Game Statistical Differences")
     comparisonIndexCount = 0
     for stat in leagueData[awayTeamLeague][awayTeam]["Away"]:
         print(stat, comparison[0][comparisonIndexCount], end = " ")
