@@ -7,8 +7,6 @@ __maintainer__ = "David Bristoll"
 __email__ = "david.bristoll@gmail.com"
 __status__ = "Development"
 
-leagueData={}
-
 def tennis():
     """
     Placeholder for Tennis selection.
@@ -46,6 +44,7 @@ def mainMenu(options):
                     break
         # Having broken out of the loop, run the selected function
         if selected == options[0][0]:
+            leagueData={}
             footballMenu(leagueData)
         if selected == options[1][0]:
             tennis()
