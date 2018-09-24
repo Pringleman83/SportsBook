@@ -355,7 +355,7 @@ def manualGameAnalysis(leagueData):
         print(stat, leagueData[awayTeamLeague][awayTeam]["Total"][stat], end = " ")
         
     comparison = compare(homeTeam, awayTeam, leagueData)
-    print("\n\nComparison\nPositive numbers indicate Home team statistic is higher. \nNegative numers indicate Away team statsistic is higher.\n")
+    print("\n\nComparison\nPositive numbers indicate Home team statistic is higher. \nNegative numbers indicate Away team statsistic is higher.\n")
     comparisonIndexCount = 0
         
     print("Home / Away Game Statistical Differences")
