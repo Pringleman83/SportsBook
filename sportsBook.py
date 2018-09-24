@@ -1,6 +1,14 @@
 from footballMenu import footballMenu
 from commonFunctions import *
 
+__author__ = "David Bristoll"
+__copyright__ = "Copyright 2018, David Bristoll"
+__maintainer__ = "David Bristoll"
+__email__ = "david.bristoll@gmail.com"
+__status__ = "Development"
+
+leagueData={}
+
 def tennis():
     """
     Placeholder for Tennis selection.
@@ -37,10 +45,10 @@ def mainMenu(options):
                 if selected in range(len(options)) and selected != 0:
                     break
         # Having broken out of the loop, run the selected function
-        for option in options:
-        
-            if selected == option[0]:
-                option[2]()
+        if selected == options[0][0]:
+            footballMenu(leagueData)
+        if selected == options[1][0]:
+            tennis()
 
 # As this is the main file, call up the main menu    
 mainMenu(options)
