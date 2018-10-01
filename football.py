@@ -44,11 +44,10 @@ def selectLeague(leagueData):
                 #Debug code: Display selected league string
                 #print("Selected league" + league)
 
-        if selection == "100 Previous Menu":
-            return leagueData
-
-        else:
             leagueData = displaySelection(selection, leagueData)
+            print("\nLeague data has been downloaded. Press enter to continue.")
+            input()
+            return leagueData
 
 def importJSONFile():
     """
@@ -88,7 +87,7 @@ def displaySelection(selection, leagueData):
     print("The league has " + str(availableLeagues[selection][2]) + " teams.")
 
     while choice != "1" or choice != "2":
-        choice = input("Type 1 to gather this data or 2 to go back to the main menu.")
+        choice = input("Type 1 to download this data or 2 to go back to the main menu.")
         if choice == "1":
             getLeagueData(selection, leagueData)
             return leagueData
@@ -166,8 +165,6 @@ def getLeagueData(selection, leagueData):
             , "Total":
             {"Played":totalPlayed, "Won":totalWon, "Drew":totalDrew, "Lost":totalLost, "For":totalFor, "Against":totalAgainst, "Points":totalPoints}
             }
-
-    input("Press enter to continue.")
     return leagueData
 
 # The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com", "Number of teams in league"]   
@@ -193,8 +190,7 @@ availableLeagues = {"1 English Premier League":["1", "england/premier-league/", 
                     "20 Scottish Premier":["20", "scotland/premiership/", 12],
                     "21 Scottish Championship":["21", "scotland/championship/", 10],
                     "22 Scottish League One":["22", "scotland/league-one/", 10],
-                    "23 Scottish League Two":["23", "scotland/league-two/", 10],
-                    "100 Previous Menu":["100", "", 0]
+                    "23 Scottish League Two":["23", "scotland/league-two/", 10]
                     }
 
 def getLeague(t, leagueData):
@@ -307,13 +303,17 @@ def manualGameAnalysis(leagueData):
     Takes the leagueData dictionary.
     Asks the user to select the home and away teams from the available
     teams.
-    Provides a comparison.
+    Provides a comparison and a comparison.
+    Returns the prediction as a list: [homeTeam, predictedHomeScore, awayTeam, predictedAwayScore]
     """
     homeTeam = ""
     awayTeam = ""
     teamList = []
     selection1 = ""
     selection2 = ""
+    homeTeamPredictedScore = 0
+    awayTeamPredictedScore = 0
+    predictions = []
     if leagueData == {}:
         print("You can't run manual game analysis until you have selected the appropriate league(s).")
         print("Please select a league or import a JSON file first.")
@@ -368,5 +368,22 @@ def manualGameAnalysis(leagueData):
     for stat in leagueData[awayTeamLeague][awayTeam]["Away"]:
         print(stat, comparison[0][comparisonIndexCount], end = " ")
         comparisonIndexCount += 1
-    input()
-    return
+    
+    #Basic prediction based on average goals scored per game for each team at home or away respectively
+    print("Predicted outcome: \n")
+    homeTeamPredictedScore = int(leagueData[homeTeamLeague][homeTeam]["Home"]["For"] / leagueData[homeTeamLeague][homeTeam]["Home"]["Played"]) # Average gaols per for per game
+    
+    awayTeamPredictedScore = int(leagueData[awayTeamLeague][awayTeam]["Away"]["For"] / leagueData[awayTeamLeague][awayTeam]["Away"]["Played"])# Average gaols per for per game
+    
+    """
+    ***For possible future use***
+    homeGoalsAgainstPerGame = int(leagueData[homeTeamLeague][homeTeam]["Home"]["Against"] / leagueData[homeTeamLeague][homeTeam]["Home"]["Played"]) # Average goals against per game
+    awayGoalsAgainstPerGame = int(leagueData[awayTeamLeague][awayTeam]["Away"]["Against"] / leagueData[awayTeamLeague][awayTeam]["Away"]["Played"])  # Average goals against per game
+    
+    print(homeTeam + " " + str(homeTeamPredictedScorea) + " - " + awayTeam + " " + str(awayTeamPredictedScorea))
+    """
+    print(homeTeam + " " + str(homeTeamPredictedScore) + " - " + awayTeam + " " + str(awayTeamPredictedScore))
+
+    predictions = [homeTeam, homeTeamPredictedScore, awayTeam, awayTeamPredictedScore]
+    
+    return predictions
