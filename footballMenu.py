@@ -9,6 +9,8 @@ __maintainer__ = "David Bristoll"
 __email__ = "david.bristoll@gmail.com"
 __status__ = "Development"
 
+predictions = []
+
 # temporary, placeholder functions:
 
 def downloadFixtures(x):
@@ -35,11 +37,31 @@ def chooseLeagues(leagueData):
 def displaySelectedLeagues(leagueData):
     pprint.pprint(leagueData)
 
-def reports(leagueData):
+def displayPredictions(predictions):
+    """
+    Takes in the current list of predictions generated via game analysis options.
+    Displays the predictions on screen.
+    """
+    if predictions == []:
+        print("\n No predictions to display. Run manual game analysis and select games to predict first.")
+        print("\nPress enter to return to previous menu.\n")
+        input()
+        return
+    else:
+        print("\n Predictions")
+        print("-----------\n")
+        for game in predictions:
+            print(game[0],game[1],game[2],game[3])
+        print("\nPress enter to return to previous menu.\n")
+        input()
+        return
+        
+def reports(leagueData, predictions):
     print("\nReports Menu\n")
     
     reportOptions = [["(1) Export JSON data", "1"],
                     ["(2) Display currently loaded league data", "2"],
+                    ["(3) Display predictions", "3"],
                     ["(M) Return to previous menu", "m"]
                     ]
     
@@ -70,10 +92,12 @@ def reports(leagueData):
             exportJSONFile(leagueData)
         if selection == reportOptions[1][1]:
             displaySelectedLeagues(leagueData)
+        if selection == reportOptions[2][1]:
+            displayPredictions(predictions)
         selection = ""
 
 def footballMenu(leagueData):
-    footballOptions = [["(1) League select", "1", chooseLeagues],#The selectLeague function from football.py
+    footballOptions = [["(1) Select a league", "1", chooseLeagues],#The selectLeague function from football.py
                    ["(2) Download upcoming fixtures*", "2", downloadFixtures],
                    ["(3) Display upcoming fixtures*", "3", displayFixtures],
                    ["(4) Run analytics on upcoming fixtures*", "4", analyseFixtures],
@@ -95,6 +119,10 @@ def footballMenu(leagueData):
         availableOptions.append(option[1])
     
     while exitMenu == False:
+        if leagueData == {}:
+            footballOptions[0][0] = "(1) Select a league"
+        else:
+            footballOptions[0][0] = "(1) Select another league"
         
         selectedLeagues = []
 
@@ -128,6 +156,29 @@ def footballMenu(leagueData):
             if selection.lower() == "m":
                 exitMenu = True
                 break
+            if selection == "7":
+                exitManualAnalysisMenu = False
+                while exitManualAnalysisMenu == False:
+                    anotherGame = ""
+                    newPrediction = []
+                    newPrediction = manualGameAnalysis(leagueData)
+                    if newPrediction != "" and newPrediction != []:
+                        predictions.append(newPrediction)
+                        selection = ""
+                        while anotherGame.lower() != "y" and anotherGame.lower() != "n":
+                            print("\nAnalyse another game? (Y/N)")
+                            anotherGame = input()
+                            if anotherGame.lower() == "n":
+                                exitManualAnalysisMenu = True
+                                break
+                            if anotherGame.lower() == "y":
+                                break
+                            
+                continue     
+            if selection == "8":
+                reports(leagueData, predictions)
+                selection = ""
+                continue
             if selection == "9":
                 leagueData = importJSONFile()
                 selection = ""
@@ -136,6 +187,8 @@ def footballMenu(leagueData):
                 leagueData = {}
                 selection = ""
                 continue
+            
+            # General action for other menu items
             if selection == option[1]:
                 option[2](leagueData)
                 selection = ""
