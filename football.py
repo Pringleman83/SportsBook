@@ -11,17 +11,15 @@ __email__ = "david.bristoll@gmail.com"
 __status__ = "Development"
 
 def selectLeague(leagueData):
-    """Takes  in the availableLeagues dictionary.
+    """Takes  in the leagueData dictionary.
     Prompts the user to select a league.
     Returns the key value of the selected league.
-    """
+    """             
     while True:
         availableOptions = []
         option = "" #Number entered by user
         selection = "" #League the option relates to
-    
-        print("\n Select a league to add: \n ")
-
+   
         # Display the leagues available and create the availableOptions list of availble
         #option numbers for input validation later on.
         for league in availableLeagues:
@@ -35,6 +33,7 @@ def selectLeague(leagueData):
         # While no valid option has been entered, wait for a valid option
         #(the earlier described input validation)
         while option not in availableOptions:
+            print("\n Select a league to add: ")
             option = input()
 
         # Assign the league name to the selection variable
@@ -42,13 +41,40 @@ def selectLeague(leagueData):
             if option == availableLeagues[league][0]:
                 selection = league
                 #Debug code: Display selected league string
-                #print("Selected league" + league)
+                #print("Selected league: " + league)
+            
 
-            leagueData = displaySelection(selection, leagueData)
-            print("\nLeague data has been downloaded. Press enter to continue.")
-            input()
-            return leagueData
+        leagueData = displaySelection(selection, leagueData)
+        print("\nLeague data has been downloaded. Press enter to continue.")
+        input()
+        return leagueData
 
+# The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com", "Number of teams in league"]   
+availableLeagues = {"1 English Premier League":["1", "england/premier-league/", 20],
+                    "2 English Championship":["2", "england/championship/", 24],
+                    "3 English League One":["3", "england/league-one/", 24],
+                    "4 English League Two":["4", "england/league-two/", 24],
+                    "5 Spanish Primera":["5", "spain/primera-division/", 20],
+                    "6 Spanish Segunda":["6", "spain/segunda-division/", 22],
+                    "7 Spanish Segunda B":["7", "spain/segunda-b/", 20],
+                    "8 French Lique 1":["8", "france/ligue-1/", 20],
+                    "9 French Ligue 2":["9", "france/ligue-2/", 20],
+                    "10 German Bundesliga":["10", "germany/bundesliga/", 18],
+                    "11 German 2 Bundesliga":["11", "germany/2.-bundesliga/", 18],
+                    "12 German Liga":["12", "germany/3.-liga/", 20],
+                    "13 Italian Serie A":["13", "italy/serie-a/", 20],
+                    "14 Italian Serie B":["14", "italy/serie-b/", 19],
+                    "15 Brazillian Serie A":["15", "brazil/serie-a/", 20],
+                    "16 Brazillian Serie B":["16", "brazil/serie-b/", 20],
+                    "17 Argentinian Primera Division":["17", "argentina/primera-division/", 26],
+                    "18 Argentinian Prim B Nacional":["18", "argentina/prim-b-nacional/", 25],
+                    "19 Argentinian Prim B Metro":["19", "argentina/prim-b-metro/", 20],
+                    "20 Scottish Premier":["20", "scotland/premiership/", 12],
+                    "21 Scottish Championship":["21", "scotland/championship/", 10],
+                    "22 Scottish League One":["22", "scotland/league-one/", 10],
+                    "23 Scottish League Two":["23", "scotland/league-two/", 10]
+                    }          
+            
 def importJSONFile():
     """
     Loads the leagueData.json file into the leagueData dictionary.
@@ -166,32 +192,6 @@ def getLeagueData(selection, leagueData):
             {"Played":totalPlayed, "Won":totalWon, "Drew":totalDrew, "Lost":totalLost, "For":totalFor, "Against":totalAgainst, "Points":totalPoints}
             }
     return leagueData
-
-# The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com", "Number of teams in league"]   
-availableLeagues = {"1 English Premier League":["1", "england/premier-league/", 20],
-                    "2 English Championship":["2", "england/championship/", 24],
-                    "3 English League One":["3", "england/league-one/", 24],
-                    "4 English League Two":["4", "england/league-two/", 24],
-                    "5 Spanish Primera":["5", "spain/primera-division/", 20],
-                    "6 Spanish Segunda":["6", "spain/segunda-division/", 22],
-                    "7 Spanish Segunda B":["7", "spain/segunda-b/", 20],
-                    "8 French Lique 1":["8", "france/ligue-1/", 20],
-                    "9 French Ligue 2":["9", "france/ligue-2/", 20],
-                    "10 German Bundesliga":["10", "germany/bundesliga/", 18],
-                    "11 German 2 Bundesliga":["11", "germany/2.-bundesliga/", 18],
-                    "12 German Liga":["12", "germany/3.-liga/", 20],
-                    "13 Italian Serie A":["13", "italy/serie-a/", 20],
-                    "14 Italian Serie B":["14", "italy/serie-b/", 19],
-                    "15 Brazillian Serie A":["15", "brazil/serie-a/", 20],
-                    "16 Brazillian Serie B":["16", "brazil/serie-b/", 20],
-                    "17 Argentinian Primera Division":["17", "argentina/primera-division/", 26],
-                    "18 Argentinian Prim B Nacional":["18", "argentina/prim-b-nacional/", 25],
-                    "19 Argentinian Prim B Metro":["19", "argentina/prim-b-metro/", 20],
-                    "20 Scottish Premier":["20", "scotland/premiership/", 12],
-                    "21 Scottish Championship":["21", "scotland/championship/", 10],
-                    "22 Scottish League One":["22", "scotland/league-one/", 10],
-                    "23 Scottish League Two":["23", "scotland/league-two/", 10]
-                    }
 
 def getLeague(t, leagueData):
     """
