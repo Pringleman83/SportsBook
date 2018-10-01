@@ -38,13 +38,17 @@ footballMenu.py
         Displays each of the leagues currently in the leagueData dictionary.
         
     reports(leagueData)
-        The reports submenu
+        The reports submenu.
     
     leave(leagueData)
         Used to return to the main menu.
     
     footballMenu()
         Displays the menu for availble football options.
+        Manages predictions returned from analysis options. Adds the individual predictions to the main list.
+        
+    displayPredictions(predictions)
+        Displays the current set of predictions.
     
     
 football.py
@@ -75,4 +79,5 @@ football.py
         Returns a list of all of the teams in the current leagueData dictionary.
     
     manualGameAnalysis(leagueData)
-        Prompts the user to select a home team and an away team. Displays league statitistics for both and a comparison of the two.
+        Prompts the user to select a home team and an away team. Displays league statitistics for both, a comparison of the two and a prediction.
+        Returns the prediction as a list.
