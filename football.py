@@ -33,7 +33,7 @@ def selectLeague(leagueData):
         # While no valid option has been entered, wait for a valid option
         #(the earlier described input validation)
         while option not in availableOptions:
-            print("\n Select a league to add: ")
+            print("\nSelect a league to add: ")
             option = input()
 
         # Assign the league name to the selection variable
@@ -44,10 +44,15 @@ def selectLeague(leagueData):
                 #print("Selected league: " + league)
             
 
-        leagueData = displaySelection(selection, leagueData)
-        print("\nLeague data has been downloaded. Press enter to continue.")
-        input()
-        return leagueData
+        gatherData = displaySelection(selection, leagueData)
+        # If the user exits instead of downlaoding the league data, just exit.
+        # Otherwise, confirm data has been downloaded before exiting.
+        if gatherData == False:
+            return leagueData
+        else:
+            print("\nLeague data has been downloaded. Press enter to continue.")
+            input()
+            return leagueData
 
 # The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com", "Number of teams in league"]   
 availableLeagues = {"1 English Premier League":["1", "england/premier-league/", 20],
@@ -72,7 +77,21 @@ availableLeagues = {"1 English Premier League":["1", "england/premier-league/", 
                     "20 Scottish Premier":["20", "scotland/premiership/", 12],
                     "21 Scottish Championship":["21", "scotland/championship/", 10],
                     "22 Scottish League One":["22", "scotland/league-one/", 10],
-                    "23 Scottish League Two":["23", "scotland/league-two/", 10]
+                    "23 Scottish League Two":["23", "scotland/league-two/", 10],
+                    "24 Swiss Super League":["24", "switzerland/super-league/", 10],
+                    "25 Swiss Challenge League":["25", "switzerland/challenge-league/", 10],
+                    "26 Ukranian Premier League":["26", "ukraine/premier-league/", 12],
+                    "27 Ukranian Persha Liga":["27", "ukraine/persha-liga/", 16],
+                    "28 Dutch Eredivisie":["28", "netherlands/eredivisie/", 18],
+                    "29 Dutch Eerste Divisie":["29", "netherlands/eerste-divisie/", 20],
+                    "30 Greek Super League":["30", "greece/super-league/", 16],
+                    "31 Greek Football League":["31", "greece/football-league/", 18],
+                    "32 Czech Liga":["32", "czech-republic/czech-liga/", 16],
+                    "33 Czech FNL":["33", "czech-republic/fnl/", 16],
+                    "34 Russian Premier League":["34", "russia/premier-league/", 16],
+                    "35 Russina FNL":["35", "russia/fnl/", 20],
+                    "36 Turkish Super Lig":["36", "turkey/super-lig/", 18],
+                    "37 Turkish 1 Lig":["37", "turkey/1.-lig/", 18]
                     }          
             
 def importJSONFile():
@@ -105,12 +124,13 @@ def displaySelection(selection, leagueData):
     to the main menu.
     """
     choice = ""
-    print("You selected " + selection + "\n")
+    print("You selected " + selection + ".")
     
     # Debug code: display the URL that will be used to obtain the league data
     #print("This will use the following url: " + availableLeagues[selection][1] + "\n")
     
-    print("The league has " + str(availableLeagues[selection][2]) + " teams.")
+    # Currently no need to display the following information
+    #print("The league has " + str(availableLeagues[selection][2]) + " teams.")
 
     while choice != "1" or choice != "2":
         choice = input("Type 1 to download this data or 2 to go back to the main menu.")
@@ -118,7 +138,7 @@ def displaySelection(selection, leagueData):
             getLeagueData(selection, leagueData)
             return leagueData
         elif choice == "2":
-            return leagueData
+            return False
 
 
 def getLeagueData(selection, leagueData):
@@ -317,7 +337,7 @@ def manualGameAnalysis(leagueData):
     if leagueData == {}:
         print("You can't run manual game analysis until you have selected the appropriate league(s).")
         print("Please select a league or import a JSON file first.")
-        return leagueData
+        return False
     for team in listTeams(leagueData):
         teamList.append(team)
         
@@ -327,10 +347,10 @@ def manualGameAnalysis(leagueData):
     #while homeTeam not in teamList or awayTeam not in teamList:
         
     while not validInput(selection1, range(1, len(teamList) + 1)):
-        print("\n Select home team from the above list.")
+        print("\nSelect home team from the above list:", end = " ")
         selection1 = input()
     while not validInput(selection2, range(1, len(teamList) + 1)):
-        print("\n Select away team from the above list.")
+        print("Select away team from the above list:", end = " ")
         selection2 = input()
         
     homeTeam = teamList[int(selection1)-1]
@@ -355,22 +375,27 @@ def manualGameAnalysis(leagueData):
         print(stat, leagueData[awayTeamLeague][awayTeam]["Total"][stat], end = " ")
         
     comparison = compare(homeTeam, awayTeam, leagueData)
-    print("\n\nComparison\nPositive numbers indicate Home team statistic is higher. \nNegative numbers indicate Away team statsistic is higher.\n")
+    print("\n\nComparison")
+    print("==========")
+    print("\nPositive numbers indicate home team statistic is higher. \nNegative numbers indicate away team statsistic is higher.\n")
     comparisonIndexCount = 0
         
     print("Home / Away Game Statistical Differences")
+    print("========================================")
     for stat in leagueData[homeTeamLeague][homeTeam]["Home"]:
         print(stat, comparison[0][comparisonIndexCount], end = " ")
         comparisonIndexCount += 1
         
     print("\n\nTotal Game Statistical Differences")
+    print("==================================")
     comparisonIndexCount = 0
     for stat in leagueData[awayTeamLeague][awayTeam]["Away"]:
         print(stat, comparison[0][comparisonIndexCount], end = " ")
         comparisonIndexCount += 1
     
     #Basic prediction based on average goals scored per game for each team at home or away respectively
-    print("Predicted outcome: \n")
+    print("\n\nPredicted outcome:")
+    print("==================")
     homeTeamPredictedScore = int(leagueData[homeTeamLeague][homeTeam]["Home"]["For"] / leagueData[homeTeamLeague][homeTeam]["Home"]["Played"]) # Average gaols per for per game
     
     awayTeamPredictedScore = int(leagueData[awayTeamLeague][awayTeam]["Away"]["For"] / leagueData[awayTeamLeague][awayTeam]["Away"]["Played"])# Average gaols per for per game
