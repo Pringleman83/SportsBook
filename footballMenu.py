@@ -1,4 +1,4 @@
-#Football menu system
+# Football menu system
 from commonFunctions import is_number
 from football import *
 import pprint
@@ -70,10 +70,10 @@ def reports(league_data, predictions):
     print("\nReports Menu\n")
     
     report_options = [["(1) Export JSON data", "1"],
-                    ["(2) Display currently loaded league data", "2"],
-                    ["(3) Display predictions", "3"],
-                    ["(M) Return to previous menu", "m"]
-                    ]
+                      ["(2) Display currently loaded league data", "2"],
+                      ["(3) Display predictions", "3"],
+                      ["(M) Return to previous menu", "m"]
+                      ]
     
     exit_menu = False
     available_options = []
