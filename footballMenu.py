@@ -43,13 +43,13 @@ def displayPredictions(predictions):
     Displays the predictions on screen.
     """
     if predictions == []:
-        print("\n No predictions to display. Run manual game analysis and select games to predict first.")
+        print("\nNo predictions to display. Run manual game analysis and select games to predict first.")
         print("\nPress enter to return to previous menu.\n")
         input()
         return
     else:
-        print("\n Predictions")
-        print("-----------\n")
+        print("\nPredictions")
+        print("===========\n")
         for game in predictions:
             print(game[0],game[1],game[2],game[3])
         print("\nPress enter to return to previous menu.\n")
@@ -57,7 +57,8 @@ def displayPredictions(predictions):
         return
         
 def reports(leagueData, predictions):
-    print("\nReports Menu\n")
+    print("\nReports Menu")
+    print("============")
     
     reportOptions = [["(1) Export JSON data", "1"],
                     ["(2) Display currently loaded league data", "2"],
@@ -119,6 +120,7 @@ def footballMenu(leagueData):
         availableOptions.append(option[1])
     
     while exitMenu == False:
+        #Change the wording of the first option if a league is already selected.
         if leagueData == {}:
             footballOptions[0][0] = "(1) Select a league"
         else:
@@ -131,12 +133,12 @@ def footballMenu(leagueData):
         if leagueData != {}:
             for league in leagueData:
                 selectedLeagues.append(league)
-            print("\n Selected league(s):\n" )
+            print("\nSelected league(s):\n" )
             for league in selectedLeagues:
                 print(league)
             print()
         else:
-            print("\n No league currently selected. Please start by selecting a league.\n")
+            print("\nNo league currently selected. Please start by selecting a league.\n")
 
         # Display the available options 
         for option in footballOptions:
@@ -162,6 +164,9 @@ def footballMenu(leagueData):
                     anotherGame = ""
                     newPrediction = []
                     newPrediction = manualGameAnalysis(leagueData)
+                    if newPrediction == False:
+                        selection = ""
+                        break
                     if newPrediction != "" and newPrediction != []:
                         predictions.append(newPrediction)
                         selection = ""
