@@ -1,4 +1,4 @@
-# Football menu system
+#Football menu system
 from commonFunctions import is_number
 from football import *
 import pprint
