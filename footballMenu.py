@@ -99,7 +99,7 @@ def reports(league_data, predictions):
                 exit_menu = True
                 return league_data
         if selection == report_options[0][1]:
-            exportJSONFile(league_data)
+            export_json_file(league_data)
         if selection == report_options[1][1]:
             display_selected_leagues(league_data)
         if selection == report_options[2][1]:
@@ -114,7 +114,7 @@ def football_menu(league_data):
                         ["(4) Run analytics on upcoming fixtures*", "4", analyseFixtures],
                         ["(5) Display analytics in upcoming fixtures*", "5", displayAnalysis],
                         ["(6) Single game analysis from fixture list*", "6", singleGameAnalysis],
-                        ["(7) Manual single game analysis", "7", manualGameAnalysis],
+                        ["(7) Manual single game analysis", "7", manual_game_analysis],
                         ["(8) Reports", "8", reports],
                         ["(9) Import data from JSON file", "9"],
                         ["(10) Clear currently loaded league data", "10"],
@@ -191,7 +191,7 @@ def football_menu(league_data):
                 selection = ""
                 continue
             if selection == "9":
-                league_data = importJSONFile()
+                league_data = import_json_file()
                 selection = ""
                 continue
             if selection == "10":
