@@ -2,13 +2,6 @@ import unittest
 
 from commonFunctions import is_number, valid_input
 
-"""
-01- 10 - 2018
-Ran 5 tests in 0.001s
-
-OK
-"""
-
 
 class LeapTest(unittest.TestCase):
     def test_is_number_str(self):
@@ -25,6 +18,9 @@ class LeapTest(unittest.TestCase):
 
     def test_valid_input2(self):
         self.assertIs(valid_input('eggs', ['spam', 'snakes', 'r/programming']), False)
+
+    def test_valid_input3(self):
+        self.assertIs(valid_input(int('2'), range(1, 10 + 1)), True)
 
 
 if __name__ == '__main__':

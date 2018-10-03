@@ -1,7 +1,7 @@
 #Useful functions
 
 
-def is_number(s: str) -> bool:
+def is_number(s) -> bool:
     """
     Tests if the value passed is a number.
     Returns True or False.
@@ -11,10 +11,13 @@ def is_number(s: str) -> bool:
     return isinstance(s, int) or isinstance(s, float)
 
 
-def valid_input(selection, options: list) -> bool:
+def valid_input(selection, options) -> bool:
     """
     Takes the user's selection and a list of valid options.
     Returns True if the selection is in the list.
     Returns False if it's not.
     """
+    if isinstance(selection, str):
+        if selection.isnumeric():
+            selection = int(selection)
     return selection in options

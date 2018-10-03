@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
-from commonFunctions import *
+from commonFunctions import is_number, valid_input
 import pprint
 import json
 
@@ -85,11 +85,15 @@ def import_json_file():
     """
 
     print("---LOADING...---")
-    with open("leagueData.json") as infile:
-        loaded_json = json.load(infile)
-    print("---LOADED---")
+    try:
+        with open("leagueData.json") as infile:
+            loaded_json = json.load(infile)
+            print("---LOADED---")
+        return loaded_json
+    except FileNotFoundError:
+        print('No data found')
+
     input("Press enter to continue")
-    return loaded_json
 
 
 def export_json_file(league_data):
