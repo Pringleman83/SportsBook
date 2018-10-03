@@ -12,8 +12,6 @@ __status__ = "Development"
 predictions = []
 
 # temporary, placeholder functions:
-
-
 def download_fixtures(x):
     print("\nThe download fixtures feature is not yet available.\n")
 
@@ -82,6 +80,7 @@ def reports(league_data, predictions):
     selection = ""
     
     # Gather a list of available_option numbers for input recognition
+
     for option in report_options:
         available_options.append(option[1])
     

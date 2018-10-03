@@ -37,7 +37,7 @@ def select_league(league_data):
         for league in available_leagues:
             if option == available_leagues[league][0]:
                 selection = league
-            
+
         gather_data = display_selection(selection, league_data)
         # If the user exits instead of downlaoding the league data, just exit.
         # Otherwise, confirm data has been downloaded before exiting.
@@ -87,8 +87,7 @@ available_leagues = {"1 English Premier League":["1", "england/premier-league/",
                     "36 Turkish Super Lig":["36", "turkey/super-lig/", 18],
                     "37 Turkish 1 Lig":["37", "turkey/1.-lig/", 18]
                     }  
-
-            
+         
 def import_json_file():
 
     """
@@ -135,7 +134,7 @@ def display_selection(selection, league_data):
             return league_data
         elif choice == "2":
             return False
-
+          
 def get_league_data(selection, league_data):
     """
     Takes the key of the selected league from the availableLeagues dictionary.
@@ -310,7 +309,6 @@ def list_teams(league_data):
     Takes the leagueData dictionary.
     Returns a list of all teams within it.
     """
-
     team_list = []
     for league in league_data:
         for team in league_data[league]:
@@ -335,6 +333,7 @@ def manual_game_analysis(league_data):
         print("Please select a league or import a JSON file first.")
         input("Press enter to continue")
         return False
+
     for team in list_teams(league_data):
         team_list.append(team)
 
@@ -347,7 +346,7 @@ def manual_game_analysis(league_data):
     while not valid_input(selection2, range(1, len(team_list) + 1)):
         print("\nSelect away team from the above list:", end = " ")
         selection2 = input()
-        
+
     home_team = team_list[int(selection1)-1]
     away_team = team_list[int(selection2)-1]
     home_team_league = get_league(home_team, league_data)
@@ -358,6 +357,7 @@ def manual_game_analysis(league_data):
     for stat in league_data[home_team_league][home_team]["Home"]:
         print(stat, league_data[home_team_league][home_team]["Home"][stat], end=" ")
     print("\nTotal game stats:")
+
     for stat in league_data[home_team_league][home_team]["Total"]:
         print(stat, league_data[home_team_league][home_team]["Total"][stat], end=" ")
             
@@ -368,7 +368,7 @@ def manual_game_analysis(league_data):
     print("\nTotal game stats")
     for stat in league_data[away_team_league][away_team]["Total"]:
         print(stat, league_data[away_team_league][away_team]["Total"][stat], end=" ")
-
+        
     comparison = compare(home_team, away_team, league_data)
     print("\n\nComparison")
     print("==========")
@@ -378,6 +378,7 @@ def manual_game_analysis(league_data):
         
     print("Home / Away Game Statistical Differences")
     print("========================================")
+
     for stat in league_data[home_team_league][home_team]["Home"]:
         print(stat, comparison[0][comparison_index_count], end=" ")
         comparison_index_count += 1
@@ -393,7 +394,6 @@ def manual_game_analysis(league_data):
     print("\n\nPredicted outcome:")
     print("==================")
     home_team_predicted_score = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Average gaols per for per game
-
     away_team_predicted_score = int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Average gaols per for per game
     
     """
