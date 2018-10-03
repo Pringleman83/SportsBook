@@ -75,7 +75,7 @@ football.py
     compare(home_team, away_team, league_data)
         Returns a list of two lists. One list contains a home / away league statistic comparison. The other list contains a total league statistic comparison.
         
-    listTeams(league_data)
+    list_teams(league_data)
         Returns a list of all of the teams in the current leagueData dictionary.
     
     manual_game_analysis(league_data)
