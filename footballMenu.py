@@ -12,25 +12,23 @@ __status__ = "Development"
 predictions = []
 
 # temporary, placeholder functions:
-
-
-def downloadFixtures(x):
+def download_fixtures(x):
     print("\nThe download fixtures feature is not yet available.\n")
 
 
-def displayFixtures(x):
+def display_fixtures(x):
     print("\nThe display fixtures feature is not yet available.\n")
 
 
-def analyseFixtures(x):
+def analyse_fixtures(x):
     print("\nThe analyse fixtures feature is not yet available.\n")
 
 
-def displayAnalysis(x):
+def display_analysis(x):
     print("\nThe display analysis feature is not yet available.\n")
 
 
-def singleGameAnalysis(x):
+def single_game_analysis(x):
     print("\nThe single game analysis feature is not yet available.\n")
 
 
@@ -53,9 +51,9 @@ def display_predictions(predictions):
     """
 
     if not predictions:
-        print("\n No predictions to display. Run manual game analysis and select games to predict first.")
+        print("\nNo predictions to display. Run manual game analysis and select games to predict first.")
 
-        print("\nPress enter to return to previous menu.\n")
+        print("\nPress enter to return to previous menu.")
         input()
         return
     else:
@@ -69,7 +67,7 @@ def display_predictions(predictions):
 
 def reports(league_data, predictions):
     print("\nReports Menu\n")
-
+    print("============")
     
     report_options = [["(1) Export JSON data", "1"],
                       ["(2) Display currently loaded league data", "2"],
@@ -81,7 +79,8 @@ def reports(league_data, predictions):
     available_options = []
     selection = ""
     
-    # Gather a list of availableOption numbers for input recognition
+    # Gather a list of available_option numbers for input recognition
+
     for option in report_options:
         available_options.append(option[1])
     
@@ -111,11 +110,11 @@ def reports(league_data, predictions):
 
 def football_menu(league_data):
     football_options = [["(1) Select a league", "1", choose_leagues],  # The selectLeague function from football.py
-                        ["(2) Download upcoming fixtures*", "2", downloadFixtures],
-                        ["(3) Display upcoming fixtures*", "3", displayFixtures],
-                        ["(4) Run analytics on upcoming fixtures*", "4", analyseFixtures],
-                        ["(5) Display analytics in upcoming fixtures*", "5", displayAnalysis],
-                        ["(6) Single game analysis from fixture list*", "6", singleGameAnalysis],
+                        ["(2) Download upcoming fixtures*", "2", download_fixtures],
+                        ["(3) Display upcoming fixtures*", "3", display_fixtures],
+                        ["(4) Run analytics on upcoming fixtures*", "4", analyse_fixtures],
+                        ["(5) Display analytics in upcoming fixtures*", "5", display_analysis],
+                        ["(6) Single game analysis from fixture list*", "6", single_game_analysis],
                         ["(7) Manual single game analysis", "7", manual_game_analysis],
                         ["(8) Reports", "8", reports],
                         ["(9) Import data from JSON file", "9"],
@@ -164,8 +163,8 @@ def football_menu(league_data):
             selection = input()
             selection = selection.lower()
 
-        # If the selection is in the list, check if it is "m". If it's not, run it's function,
-        # passing the leagueData dictionary.
+        # If the selection is in the list, run it's function passing
+        #the leagueData dictionary by default.
         for option in football_options:
             if selection.lower() == "m":
                 exit_menu = True
@@ -176,9 +175,11 @@ def football_menu(league_data):
                     another_game = ""
                     new_prediction = []
                     new_prediction = manual_game_analysis(league_data)
+                    if not new_prediction:
+                        selection = ""
+                        break
                     if new_prediction != "" and new_prediction != []:
                         predictions.append(new_prediction)
-
                         selection = ""
                         while another_game.lower() != "y" and another_game.lower() != "n":
                             print("\nAnalyse another game? (Y/N)")
@@ -187,8 +188,7 @@ def football_menu(league_data):
                                 exit_manual_analysis_menu = True
                                 break
                             if another_game.lower() == "y":
-                                break
-                            
+                                break           
                 continue     
             if selection == "8":
                 reports(league_data, predictions)
