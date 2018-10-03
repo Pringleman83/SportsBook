@@ -1,4 +1,4 @@
-# Football menu system
+#Football menu system
 from commonFunctions import is_number
 from football import *
 import pprint
@@ -51,23 +51,25 @@ def display_predictions(predictions):
     Takes in the current list of predictions generated via game analysis options.
     Displays the predictions on screen.
     """
+
     if not predictions:
         print("\n No predictions to display. Run manual game analysis and select games to predict first.")
+
         print("\nPress enter to return to previous menu.\n")
         input()
         return
     else:
-        print("\n Predictions")
-        print("-----------\n")
+        print("\nPredictions")
+        print("===========\n")
         for game in predictions:
             print(game[0], game[1], game[2], game[3])
         print("\nPress enter to return to previous menu.\n")
         input()
         return
 
-
 def reports(league_data, predictions):
     print("\nReports Menu\n")
+
     
     report_options = [["(1) Export JSON data", "1"],
                       ["(2) Display currently loaded league data", "2"],
@@ -144,10 +146,11 @@ def football_menu(league_data):
                 selected_leagues.append(league)
             print("\n Selected league(s):\n")
             for league in selected_leagues:
+
                 print(league)
             print()
         else:
-            print("\n No league currently selected. Please start by selecting a league.\n")
+            print("\nNo league currently selected. Please start by selecting a league.\n")
 
         # Display the available options 
         for option in football_options:
@@ -175,6 +178,7 @@ def football_menu(league_data):
                     new_prediction = manual_game_analysis(league_data)
                     if new_prediction != "" and new_prediction != []:
                         predictions.append(new_prediction)
+
                         selection = ""
                         while another_game.lower() != "y" and another_game.lower() != "n":
                             print("\nAnalyse another game? (Y/N)")

@@ -32,6 +32,7 @@ def select_league(league_data):
         # pprint.pprint(availableOptions)
 
         # While no valid option has been entered, wait for a valid option
+
         # (the earlier described input validation)
         while option not in available_options:
             print("\n Select a league to add: ")
@@ -44,14 +45,14 @@ def select_league(league_data):
                 # Debug code: Display selected league string
                 # print("Selected league: " + league)
 
+                
         league_data = display_selection(selection, league_data)
         print("\nLeague data has been downloaded. Press enter to continue.")
         input()
         return league_data
-
+      
 # The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com",
 #  "Number of teams in league"]
-
 
 available_leagues = {"1 English Premier League":["1", "england/premier-league/", 20],
                      "2 English Championship":["2", "england/championship/", 24],
@@ -78,8 +79,9 @@ available_leagues = {"1 English Premier League":["1", "england/premier-league/",
                      "23 Scottish League Two":["23", "scotland/league-two/", 10]
                      }
 
-
+            
 def import_json_file():
+
     """
     Loads the leagueData.json file into the leagueData dictionary.
     """
@@ -114,7 +116,7 @@ def display_selection(selection, league_data):
     to the main menu.
     """
     choice = ""
-    print("You selected " + selection + "\n")
+    print("You selected " + selection + ".")
     
     # Debug code: display the URL that will be used to obtain the league data
     # print("This will use the following url: " + availableLeagues[selection][1] + "\n")
@@ -127,8 +129,8 @@ def display_selection(selection, league_data):
             get_league_data(selection, league_data)
             return league_data
         elif choice == "2":
-            return league_data
 
+            return league_data
 
 def get_league_data(selection, league_data):
     """
@@ -330,22 +332,23 @@ def manual_game_analysis(league_data):
     if league_data == {}:
         print("You can't run manual game analysis until you have selected the appropriate league(s).")
         print("Please select a league or import a JSON file first.")
+
         return league_data
     for team in list_teams(league_data):
         team_list.append(team)
-        
+
     for team in team_list:
         print(team_list.index(team) + 1, team)
         
     # while homeTeam not in teamList or awayTeam not in teamList:
         
+
     while not valid_input(selection1, range(1, len(team_list) + 1)):
         print("\n Select home team from the above list.")
         selection1 = input()
     while not valid_input(selection2, range(1, len(team_list) + 1)):
         print("\n Select away team from the above list.")
-        selection2 = input()
-        
+
     home_team = team_list[int(selection1)-1]
     away_team = team_list[int(selection2)-1]
     home_team_league = get_league(home_team, league_data)
@@ -367,6 +370,7 @@ def manual_game_analysis(league_data):
     for stat in league_data[away_team_league][away_team]["Total"]:
         print(stat, league_data[away_team_league][away_team]["Total"][stat], end=" ")
         
+
     comparison = compare(home_team, away_team, league_data)
     print("\n\nComparison\nPositive numbers indicate Home team statistic is higher."
           " \nNegative numbers indicate Away team statistic is higher.\n")
@@ -386,6 +390,7 @@ def manual_game_analysis(league_data):
     # Basic prediction based on average goals scored per game for each team at home or away respectively
     print("Predicted outcome: \n")
     home_team_predicted_score = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Average gaols per for per game
+
     
     away_team_predicted_score = int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Average gaols per for per game
     
