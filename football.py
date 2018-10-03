@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
-from commonFunctions import is_number, valid_input
+from commonFunctions import valid_input
 import pprint
 import json
 
@@ -45,7 +45,6 @@ def select_league(league_data):
                 # Debug code: Display selected league string
                 # print("Selected league: " + league)
 
-                
         league_data = display_selection(selection, league_data)
         print("\nLeague data has been downloaded. Press enter to continue.")
         input()
@@ -53,6 +52,7 @@ def select_league(league_data):
       
 # The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com",
 #  "Number of teams in league"]
+
 
 available_leagues = {"1 English Premier League":["1", "england/premier-league/", 20],
                      "2 English Championship":["2", "england/championship/", 24],
@@ -132,6 +132,7 @@ def display_selection(selection, league_data):
 
             return league_data
 
+
 def get_league_data(selection, league_data):
     """
     Takes the key of the selected league from the availableLeagues dictionary.
@@ -150,7 +151,12 @@ def get_league_data(selection, league_data):
     season = "c/"  # c is current
     full_url = bet_study_main + season + available_leagues[selection][1]
     web_client = uReq(full_url)
+
+    if web_client.getcode() != 200:
+        print('Cannot retrieve data, webpage is down')
+        return
     web_html = web_client.read()
+
     web_client.close()
     web_soup = soup(web_html, "html.parser")
     table = web_soup.find("div", {"id": "tab03_"})
@@ -341,7 +347,6 @@ def manual_game_analysis(league_data):
         print(team_list.index(team) + 1, team)
         
     # while homeTeam not in teamList or awayTeam not in teamList:
-        
 
     while not valid_input(selection1, range(1, len(team_list) + 1)):
         print("\n Select home team from the above list.")
@@ -369,7 +374,6 @@ def manual_game_analysis(league_data):
     print("\nTotal game stats")
     for stat in league_data[away_team_league][away_team]["Total"]:
         print(stat, league_data[away_team_league][away_team]["Total"][stat], end=" ")
-        
 
     comparison = compare(home_team, away_team, league_data)
     print("\n\nComparison\nPositive numbers indicate Home team statistic is higher."
@@ -391,7 +395,6 @@ def manual_game_analysis(league_data):
     print("Predicted outcome: \n")
     home_team_predicted_score = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Average gaols per for per game
 
-    
     away_team_predicted_score = int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Average gaols per for per game
     
     """
