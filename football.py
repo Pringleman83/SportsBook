@@ -124,8 +124,6 @@ def display_selection(selection, league_data):
     
     # Debug code: display the URL that will be used to obtain the league data
     # print("This will use the following url: " + availableLeagues[selection][1] + "\n")
-    
-    print("The league has " + str(available_leagues[selection][2]) + " teams.")
 
     while choice != "1" or choice != "2":
         choice = input("Type 1 to download this data or 2 to go back to the main menu.")
