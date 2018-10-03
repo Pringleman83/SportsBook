@@ -18,68 +18,76 @@ def select_league(league_data):
     """             
     while True:
         available_options = []
-        option = ""  # Number entered by user
-        selection = ""  # League the option relates to
+        option = "" #Number entered by user
+        selection = "" #League the option relates to
    
         # Display the leagues available and create the availableOptions list of availble
-        # option numbers for input validation later on.
+        #option numbers for input validation later on.
         for league in available_leagues:
             print(league)
             available_options.append(available_leagues[league][0])
 
-        # Debug code: view the availableOptions list after it is created.
-        # print("Available options:")
-        # pprint.pprint(availableOptions)
-
         # While no valid option has been entered, wait for a valid option
-
-        # (the earlier described input validation)
+        #(the earlier described input validation)
         while option not in available_options:
-            print("\n Select a league to add: ")
+            print("\nSelect a league to add: ")
             option = input()
 
         # Assign the league name to the selection variable
         for league in available_leagues:
             if option == available_leagues[league][0]:
                 selection = league
-                # Debug code: Display selected league string
-                # print("Selected league: " + league)
 
-                
-        league_data = display_selection(selection, league_data)
-        print("\nLeague data has been downloaded. Press enter to continue.")
-        input()
-        return league_data
-      
-# The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com",
-#  "Number of teams in league"]
+        gather_data = display_selection(selection, league_data)
+        # If the user exits instead of downlaoding the league data, just exit.
+        # Otherwise, confirm data has been downloaded before exiting.
+        if gather_data == False:
+            return league_data
+        else:
+            print("\nLeague data has been downloaded. Press enter to continue.")
+            input()
+            return league_data
 
+# The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com", "Number of teams in league"]   
 available_leagues = {"1 English Premier League":["1", "england/premier-league/", 20],
-                     "2 English Championship":["2", "england/championship/", 24],
-                     "3 English League One":["3", "england/league-one/", 24],
-                     "4 English League Two":["4", "england/league-two/", 24],
-                     "5 Spanish Primera":["5", "spain/primera-division/", 20],
-                     "6 Spanish Segunda":["6", "spain/segunda-division/", 22],
-                     "7 Spanish Segunda B":["7", "spain/segunda-b/", 20],
-                     "8 French Lique 1":["8", "france/ligue-1/", 20],
-                     "9 French Ligue 2":["9", "france/ligue-2/", 20],
-                     "10 German Bundesliga":["10", "germany/bundesliga/", 18],
-                     "11 German 2 Bundesliga":["11", "germany/2.-bundesliga/", 18],
-                     "12 German Liga":["12", "germany/3.-liga/", 20],
-                     "13 Italian Serie A":["13", "italy/serie-a/", 20],
-                     "14 Italian Serie B":["14", "italy/serie-b/", 19],
-                     "15 Brazillian Serie A":["15", "brazil/serie-a/", 20],
-                     "16 Brazillian Serie B":["16", "brazil/serie-b/", 20],
-                     "17 Argentinian Primera Division":["17", "argentina/primera-division/", 26],
-                     "18 Argentinian Prim B Nacional":["18", "argentina/prim-b-nacional/", 25],
-                     "19 Argentinian Prim B Metro":["19", "argentina/prim-b-metro/", 20],
-                     "20 Scottish Premier":["20", "scotland/premiership/", 12],
-                     "21 Scottish Championship":["21", "scotland/championship/", 10],
-                     "22 Scottish League One":["22", "scotland/league-one/", 10],
-                     "23 Scottish League Two":["23", "scotland/league-two/", 10]
-                     }
-
-            
+                    "2 English Championship":["2", "england/championship/", 24],
+                    "3 English League One":["3", "england/league-one/", 24],
+                    "4 English League Two":["4", "england/league-two/", 24],
+                    "5 Spanish Primera":["5", "spain/primera-division/", 20],
+                    "6 Spanish Segunda":["6", "spain/segunda-division/", 22],
+                    "7 Spanish Segunda B":["7", "spain/segunda-b/", 20],
+                    "8 French Lique 1":["8", "france/ligue-1/", 20],
+                    "9 French Ligue 2":["9", "france/ligue-2/", 20],
+                    "10 German Bundesliga":["10", "germany/bundesliga/", 18],
+                    "11 German 2 Bundesliga":["11", "germany/2.-bundesliga/", 18],
+                    "12 German Liga":["12", "germany/3.-liga/", 20],
+                    "13 Italian Serie A":["13", "italy/serie-a/", 20],
+                    "14 Italian Serie B":["14", "italy/serie-b/", 19],
+                    "15 Brazillian Serie A":["15", "brazil/serie-a/", 20],
+                    "16 Brazillian Serie B":["16", "brazil/serie-b/", 20],
+                    "17 Argentinian Primera Division":["17", "argentina/primera-division/", 26],
+                    "18 Argentinian Prim B Nacional":["18", "argentina/prim-b-nacional/", 25],
+                    "19 Argentinian Prim B Metro":["19", "argentina/prim-b-metro/", 20],
+                    "20 Scottish Premier":["20", "scotland/premiership/", 12],
+                    "21 Scottish Championship":["21", "scotland/championship/", 10],
+                    "22 Scottish League One":["22", "scotland/league-one/", 10],
+                    "23 Scottish League Two":["23", "scotland/league-two/", 10],
+                    "24 Swiss Super League":["24", "switzerland/super-league/", 10],
+                    "25 Swiss Challenge League":["25", "switzerland/challenge-league/", 10],
+                    "26 Ukranian Premier League":["26", "ukraine/premier-league/", 12],
+                    "27 Ukranian Persha Liga":["27", "ukraine/persha-liga/", 16],
+                    "28 Dutch Eredivisie":["28", "netherlands/eredivisie/", 18],
+                    "29 Dutch Eerste Divisie":["29", "netherlands/eerste-divisie/", 20],
+                    "30 Greek Super League":["30", "greece/super-league/", 16],
+                    "31 Greek Football League":["31", "greece/football-league/", 18],
+                    "32 Czech Liga":["32", "czech-republic/czech-liga/", 16],
+                    "33 Czech FNL":["33", "czech-republic/fnl/", 16],
+                    "34 Russian Premier League":["34", "russia/premier-league/", 16],
+                    "35 Russina FNL":["35", "russia/fnl/", 20],
+                    "36 Turkish Super Lig":["36", "turkey/super-lig/", 18],
+                    "37 Turkish 1 Lig":["37", "turkey/1.-lig/", 18]
+                    }  
+         
 def import_json_file():
 
     """
@@ -125,9 +133,8 @@ def display_selection(selection, league_data):
             get_league_data(selection, league_data)
             return league_data
         elif choice == "2":
-
-            return league_data
-
+            return False
+          
 def get_league_data(selection, league_data):
     """
     Takes the key of the selected league from the availableLeagues dictionary.
@@ -209,7 +216,6 @@ def get_league(t, league_data):
     """
     Takes in a team name as a string and the leagueData dictionary.
     Returns the name of the league the team belongs to as a string.
-
     Not yet in use.
     """
     league_team_pairs = league_data.items()
@@ -228,7 +234,6 @@ def compare(home_team, away_team, league_data):
     Returns a list of 2 lists.
     First list contains Home / Away differences.
     Second list contains Total differences.
-
     Works as expected, but doesn't provide a clear comparison alone.
     For example, a difference of -2 for goals "for" is good for the away team.
     However, a difference of - 2 for goals "against" is good for the home team.
@@ -237,7 +242,6 @@ def compare(home_team, away_team, league_data):
     league data, this function may need to be updated.
     A solution would be to use dictionaries instead of lists. Bending my head now
     though, so probably my next task for another day.
-
     Not yet in use.
     """
     # Check what league the home team belongs to
@@ -305,7 +309,6 @@ def list_teams(league_data):
     Takes the leagueData dictionary.
     Returns a list of all teams within it.
     """
-
     team_list = []
     for league in league_data:
         for team in league_data[league]:
@@ -328,22 +331,21 @@ def manual_game_analysis(league_data):
     if league_data == {}:
         print("You can't run manual game analysis until you have selected the appropriate league(s).")
         print("Please select a league or import a JSON file first.")
+        input("Press enter to continue")
+        return False
 
-        return league_data
     for team in list_teams(league_data):
         team_list.append(team)
 
     for team in team_list:
         print(team_list.index(team) + 1, team)
         
-    # while homeTeam not in teamList or awayTeam not in teamList:
-        
-
     while not valid_input(selection1, range(1, len(team_list) + 1)):
-        print("\n Select home team from the above list.")
+        print("\nSelect home team from the above list:", end = " ")
         selection1 = input()
     while not valid_input(selection2, range(1, len(team_list) + 1)):
-        print("\n Select away team from the above list.")
+        print("\nSelect away team from the above list:", end = " ")
+        selection2 = input()
 
     home_team = team_list[int(selection1)-1]
     away_team = team_list[int(selection2)-1]
@@ -354,7 +356,8 @@ def manual_game_analysis(league_data):
     print("Home game stats:")
     for stat in league_data[home_team_league][home_team]["Home"]:
         print(stat, league_data[home_team_league][home_team]["Home"][stat], end=" ")
-    print("\nTotal game stats")
+    print("\nTotal game stats:")
+
     for stat in league_data[home_team_league][home_team]["Total"]:
         print(stat, league_data[home_team_league][home_team]["Total"][stat], end=" ")
             
@@ -366,28 +369,31 @@ def manual_game_analysis(league_data):
     for stat in league_data[away_team_league][away_team]["Total"]:
         print(stat, league_data[away_team_league][away_team]["Total"][stat], end=" ")
         
-
     comparison = compare(home_team, away_team, league_data)
-    print("\n\nComparison\nPositive numbers indicate Home team statistic is higher."
+    print("\n\nComparison")
+    print("==========")
+    print("\nPositive numbers indicate Home team statistic is higher."
           " \nNegative numbers indicate Away team statistic is higher.\n")
     comparison_index_count = 0
         
     print("Home / Away Game Statistical Differences")
+    print("========================================")
+
     for stat in league_data[home_team_league][home_team]["Home"]:
         print(stat, comparison[0][comparison_index_count], end=" ")
         comparison_index_count += 1
         
     print("\n\nTotal Game Statistical Differences")
+    print("==================================")
     comparison_index_count = 0
     for stat in league_data[away_team_league][away_team]["Away"]:
         print(stat, comparison[0][comparison_index_count], end=" ")
         comparison_index_count += 1
     
     # Basic prediction based on average goals scored per game for each team at home or away respectively
-    print("Predicted outcome: \n")
+    print("\n\nPredicted outcome:")
+    print("==================")
     home_team_predicted_score = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Average gaols per for per game
-
-    
     away_team_predicted_score = int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Average gaols per for per game
     
     """
