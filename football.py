@@ -10,52 +10,46 @@ __maintainer__ = "David Bristoll"
 __email__ = "david.bristoll@gmail.com"
 __status__ = "Development"
 
-def selectLeague(leagueData):
+
+def select_league(league_data):
     """Takes  in the leagueData dictionary.
     Prompts the user to select a league.
     Returns the key value of the selected league.
     """             
     while True:
-        availableOptions = []
+        available_options = []
         option = "" #Number entered by user
         selection = "" #League the option relates to
    
         # Display the leagues available and create the availableOptions list of availble
         #option numbers for input validation later on.
-        for league in availableLeagues:
+        for league in available_leagues:
             print(league)
-            availableOptions.append(availableLeagues[league][0])
-
-        # Debug code: view the availableOptions list after it is created.
-        #print("Available options:")
-        #pprint.pprint(availableOptions)
+            available_options.append(available_leagues[league][0])
 
         # While no valid option has been entered, wait for a valid option
         #(the earlier described input validation)
-        while option not in availableOptions:
+        while option not in available_options:
             print("\nSelect a league to add: ")
             option = input()
 
         # Assign the league name to the selection variable
-        for league in availableLeagues:
-            if option == availableLeagues[league][0]:
+        for league in available_leagues:
+            if option == available_leagues[league][0]:
                 selection = league
-                #Debug code: Display selected league string
-                #print("Selected league: " + league)
             
-
-        gatherData = displaySelection(selection, leagueData)
+        gather_data = display_selection(selection, league_data)
         # If the user exits instead of downlaoding the league data, just exit.
         # Otherwise, confirm data has been downloaded before exiting.
-        if gatherData == False:
-            return leagueData
+        if gather_data == False:
+            return league_data
         else:
             print("\nLeague data has been downloaded. Press enter to continue.")
             input()
-            return leagueData
+            return league_data
 
 # The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com", "Number of teams in league"]   
-availableLeagues = {"1 English Premier League":["1", "england/premier-league/", 20],
+available_leagues = {"1 English Premier League":["1", "england/premier-league/", 20],
                     "2 English Championship":["2", "england/championship/", 24],
                     "3 English League One":["3", "england/league-one/", 24],
                     "4 English League Two":["4", "england/league-two/", 24],
@@ -92,32 +86,35 @@ availableLeagues = {"1 English Premier League":["1", "england/premier-league/", 
                     "35 Russina FNL":["35", "russia/fnl/", 20],
                     "36 Turkish Super Lig":["36", "turkey/super-lig/", 18],
                     "37 Turkish 1 Lig":["37", "turkey/1.-lig/", 18]
-                    }          
+                    }  
+
             
-def importJSONFile():
+def import_json_file():
+
     """
     Loads the leagueData.json file into the leagueData dictionary.
     """
-    loadedJSON = {}
+
     print("---LOADING...---")
     with open("leagueData.json") as infile:
-    
-        loadedJSON = json.load(infile)
+        loaded_json = json.load(infile)
     print("---LOADED---")
     input("Press enter to continue")
-    return loadedJSON
-        
-def exportJSONFile(leagueData):
+    return loaded_json
+
+
+def export_json_file(league_data):
     """ Saves the leagueData dictionary to a json file called
     leagueData.json.
     """
     print("---SAVING...---")
     with open("leagueData.json", "w") as outfile:
-        json.dump(leagueData, outfile, indent = 1)
+        json.dump(league_data, outfile, indent=1)
     print("---SAVED---")
     input("Press enter to continue")
 
-def displaySelection(selection, leagueData):
+
+def display_selection(selection, league_data):
     """ Takes in the key value of the selected league.
     Prints the league name and number of teams in that league.
     Gives the option of confirming the selection of that league or returning
@@ -127,21 +124,19 @@ def displaySelection(selection, leagueData):
     print("You selected " + selection + ".")
     
     # Debug code: display the URL that will be used to obtain the league data
-    #print("This will use the following url: " + availableLeagues[selection][1] + "\n")
+    # print("This will use the following url: " + availableLeagues[selection][1] + "\n")
     
-    # Currently no need to display the following information
-    #print("The league has " + str(availableLeagues[selection][2]) + " teams.")
+    print("The league has " + str(available_leagues[selection][2]) + " teams.")
 
     while choice != "1" or choice != "2":
         choice = input("Type 1 to download this data or 2 to go back to the main menu.")
         if choice == "1":
-            getLeagueData(selection, leagueData)
-            return leagueData
+            get_league_data(selection, league_data)
+            return league_data
         elif choice == "2":
             return False
 
-
-def getLeagueData(selection, leagueData):
+def get_league_data(selection, league_data):
     """
     Takes the key of the selected league from the availableLeagues dictionary.
     Scrapes the selected league information from bedstudy.com.
@@ -155,80 +150,84 @@ def getLeagueData(selection, leagueData):
         * Accept an option for previous seasons (other functionality of
         the program would need to be built around that).
     """
-    betStudyMain = "https://www.betstudy.com/soccer-stats/"
-    season = "c/" #c is current
-    fullURL = betStudyMain + season + availableLeagues[selection][1]
-    webClient = uReq(fullURL)
-    webHTML = webClient.read()
-    webClient.close()
-    webSoup = soup(webHTML, "html.parser")
-    table = webSoup.find("div",{"id":"tab03_"})
+    bet_study_main = "https://www.betstudy.com/soccer-stats/"
+    season = "c/"  # c is current
+    full_url = bet_study_main + season + available_leagues[selection][1]
+    web_client = uReq(full_url)
+    web_html = web_client.read()
+    web_client.close()
+    web_soup = soup(web_html, "html.parser")
+    table = web_soup.find("div", {"id": "tab03_"})
 
-    for i in range(1, availableLeagues[selection][2] + 1):
+    for i in range(1, available_leagues[selection][2] + 1):
         position = int(table.select('td')[((i-1)*16)].text)
-        teamName = table.select('td')[((i-1)*16)+1].text
-        homePlayed = int(table.select('td')[((i-1)*16)+2].text)
-        homeWon = int(table.select('td')[((i-1)*16)+3].text)
-        homeDrew = int(table.select('td')[((i-1)*16)+4].text)
-        homeLost = int(table.select('td')[((i-1)*16)+5].text)
-        homeFor = int(table.select('td')[((i-1)*16)+6].text)
-        homeAgainst = int(table.select('td')[((i-1)*16)+7].text)
-        homePoints = int(table.select('td')[((i-1)*16)+8].text)
-        awayPlayed = int(table.select('td')[((i-1)*16)+9].text)
-        awayWon = int(table.select('td')[((i-1)*16)+10].text)
-        awayDrew = int(table.select('td')[((i-1)*16)+11].text)
-        awayLost = int(table.select('td')[((i-1)*16)+12].text)
-        awayFor = int(table.select('td')[((i-1)*16)+13].text)
-        awayAgainst = int(table.select('td')[((i-1)*16)+14].text)
-        awayPoints = int(table.select('td')[((i-1)*16)+15].text)
-        totalPlayed = homePlayed + awayPlayed
-        totalWon = homeWon + awayWon
-        totalDrew = homeDrew + awayDrew
-        totalLost = homeLost + awayLost
-        totalFor = homeFor + awayFor
-        totalAgainst = homeAgainst + awayAgainst
-        totalPoints = homePoints + awayPoints
+        team_name = table.select('td')[((i-1)*16)+1].text
+        home_played = int(table.select('td')[((i-1)*16)+2].text)
+        home_won = int(table.select('td')[((i-1)*16)+3].text)
+        home_drew = int(table.select('td')[((i-1)*16)+4].text)
+        home_lost = int(table.select('td')[((i-1)*16)+5].text)
+        home_for = int(table.select('td')[((i-1)*16)+6].text)
+        home_against = int(table.select('td')[((i-1)*16)+7].text)
+        home_points = int(table.select('td')[((i-1)*16)+8].text)
+        away_played = int(table.select('td')[((i-1)*16)+9].text)
+        away_won = int(table.select('td')[((i-1)*16)+10].text)
+        away_drew = int(table.select('td')[((i-1)*16)+11].text)
+        away_lost = int(table.select('td')[((i-1)*16)+12].text)
+        away_for = int(table.select('td')[((i-1)*16)+13].text)
+        away_against = int(table.select('td')[((i-1)*16)+14].text)
+        away_points = int(table.select('td')[((i-1)*16)+15].text)
+        total_played = home_played + away_played
+        total_won = home_won + away_won
+        total_drew = home_drew + away_drew
+        total_lost = home_lost + away_lost
+        total_for = home_for + away_for
+        total_against = home_against + away_against
+        total_points = home_points + away_points
 
         # Add league to the leagueData dictionary if the league does not already exist within it.
-        #Any additional stats calculated above must be added to the dictionary generator here.
-        if selection not in leagueData:
-            leagueData[selection] = {teamName:
-            {"Home":
-            {"Played":homePlayed, "Won":homeWon, "Drew":homeDrew, "Lost":homeLost, "For":homeFor, "Against":homeAgainst, "Points":homePoints}
-            , "Away":
-            {"Played":awayPlayed, "Won":awayWon, "Drew":awayDrew, "Lost":awayLost, "For":awayFor, "Against":awayAgainst, "Points":awayPoints}
-            , "Total":
-            {"Played":totalPlayed, "Won":totalWon, "Drew":totalDrew, "Lost":totalLost, "For":totalFor, "Against":totalAgainst, "Points":totalPoints}
-            }
-            }
+        # Any additional stats calculated above must be added to the dictionary generator here.
+        if selection not in league_data:
+            league_data[selection] = {
+                team_name:
+                    {"Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
+                              "For": home_for, "Against": home_against, "Points": home_points},
+                     "Away": {"Played": away_played, "Won": away_won, "Drew": away_drew, "Lost": away_lost,
+                              "For": away_for, "Against": away_against, "Points": away_points},
+                     "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
+                               "For": total_for, "Against": total_against, "Points": total_points}
+                     }
+                }
 
         # If the league does already exist, just update the teams and statistics.
         else:
-            leagueData[selection][teamName] = {"Home":
-            {"Played":homePlayed, "Won":homeWon, "Drew":homeDrew, "Lost":homeLost, "For":homeFor, "Against":homeAgainst, "Points":homePoints}
-            , "Away":
-            {"Played":awayPlayed, "Won":awayWon, "Drew":awayDrew, "Lost":awayLost, "For":awayFor, "Against":awayAgainst, "Points":awayPoints}
-            , "Total":
-            {"Played":totalPlayed, "Won":totalWon, "Drew":totalDrew, "Lost":totalLost, "For":totalFor, "Against":totalAgainst, "Points":totalPoints}
-            }
-    return leagueData
+            league_data[selection][team_name] = {
 
-def getLeague(t, leagueData):
+                 "Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
+                          "For": home_for, "Against": home_against, "Points": home_points},
+                 "Away": {"Played": away_played, "Won": away_won, "Drew": away_drew, "Lost": away_lost,
+                          "For": away_for, "Against": away_against, "Points": away_points},
+                 "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
+                           "For": total_for, "Against": total_against, "Points": total_points}
+                 }
+
+    return league_data
+
+
+def get_league(t, league_data):
     """
     Takes in a team name as a string and the leagueData dictionary.
     Returns the name of the league the team belongs to as a string.
-
     Not yet in use.
     """
-    leagueTeamPairs = leagueData.items()
-    for team in leagueTeamPairs:
+    league_team_pairs = league_data.items()
+    for team in league_team_pairs:
         if t in team[1]:
             return team[0]
     print("Error: Team not found")
-    return ("Error: Team not found")
+    return "Error: Team not found"
 
 
-def compare(homeTeam, awayTeam, leagueData):
+def compare(home_team, away_team, league_data):
     """
     Takes in 2 team names as strings.
     Compares the home team's home stats with the away team's away stats.
@@ -236,7 +235,6 @@ def compare(homeTeam, awayTeam, leagueData):
     Returns a list of 2 lists.
     First list contains Home / Away differences.
     Second list contains Total differences.
-
     Works as expected, but doesn't provide a clear comparison alone.
     For example, a difference of -2 for goals "for" is good for the away team.
     However, a difference of - 2 for goals "against" is good for the home team.
@@ -245,52 +243,51 @@ def compare(homeTeam, awayTeam, leagueData):
     league data, this function may need to be updated.
     A solution would be to use dictionaries instead of lists. Bending my head now
     though, so probably my next task for another day.
-
     Not yet in use.
     """
     # Check what league the home team belongs to
-    homeLeague = getLeague(homeTeam, leagueData)
+    home_league = get_league(home_team, league_data)
 
     # Initialise the home team stats lists (one for home and one for total)
-    homeTeamHomeStats = [homeTeam]
-    homeTeamTotalStats = [homeTeam]
+    home_team_home_stats = [home_team]
+    home_team_total_stats = [home_team]
 
     # Append the value of each "Home" stat for the home team to the homeTeamHomeStats list
     # Append the value of each "Total" stat for the home team to the homeTeamTotalStats list
     for section in ["Home", "Total"]:
-        for stat in leagueData[homeLeague][homeTeam][section]:
+        for stat in league_data[home_league][home_team][section]:
             if section == "Home":
-                homeTeamHomeStats.append(leagueData[homeLeague][homeTeam][section][stat])
+                home_team_home_stats.append(league_data[home_league][home_team][section][stat])
             if section == "Total":
-                homeTeamTotalStats.append(leagueData[homeLeague][homeTeam][section][stat])
+                home_team_total_stats.append(league_data[home_league][home_team][section][stat])
 
     # Check what league the away team belongs to
-    awayLeague = getLeague(awayTeam, leagueData)
+    away_league = get_league(away_team, league_data)
 
     # Initialise the away stats lists (one for away and one for total)
-    awayTeamAwayStats = [awayTeam]
-    awayTeamTotalStats = [awayTeam]
+    away_team_away_stats = [away_team]
+    away_team_total_stats = [away_team]
 
     # Append the value of each "Away" stat for the away team to the awayTeamAwayStats list
     # Append the value of each "Total" stat for the away team to the awayTeamTotalStats list
     for section in ["Away", "Total"]:
-        for stat in leagueData[awayLeague][awayTeam][section]:
+        for stat in league_data[away_league][away_team][section]:
             if section == "Away":
-                awayTeamAwayStats.append(leagueData[awayLeague][awayTeam][section][stat])
+                away_team_away_stats.append(league_data[away_league][away_team][section][stat])
             if section == "Total":
-                awayTeamTotalStats.append(leagueData[awayLeague][awayTeam][section][stat])
+                away_team_total_stats.append(league_data[away_league][away_team][section][stat])
 
     # Initialise the homeAwaydifference, totalDifference and pcVariance lists
-    homeAwayDifference = []
-    totalDifference = []
-    #pcVariance = ["Variance %"] #Omitted, see line comment below
+    home_away_difference = []
+    total_difference = []
+    # pcVariance = ["Variance %"] #Omitted, see line comment below
 
     # For each statistic for each team calculate the home and away difference and the total difference
     # Assign the values to the appropriate list
-    for stat in range(1,len(homeTeamHomeStats)):
+    for stat in range(1, len(home_team_home_stats)):
         
-        homeAwayDifference.append(homeTeamHomeStats[stat] - awayTeamAwayStats[stat])
-        totalDifference.append(homeTeamTotalStats[stat] - awayTeamTotalStats[stat])
+        home_away_difference.append(home_team_home_stats[stat] - away_team_away_stats[stat])
+        total_difference.append(home_team_total_stats[stat] - away_team_total_stats[stat])
 
         """
         Calculating variance percentage: Not working as planned so currently omitted.
@@ -302,23 +299,26 @@ def compare(homeTeam, awayTeam, leagueData):
             pcVariance.append(round(min(homeTeamStats[stat], awayTeamStats[stat])
                               / max(homeTeamStats[stat], awayTeamStats[stat])*100, 2))
         """
-    #initialise comparison list for easy return of all generated lists
-    comparison = [homeAwayDifference, totalDifference]
+    # initialise comparison list for easy return of all generated lists
+    comparison = [home_away_difference, total_difference]
     
     return comparison
 
-def listTeams(leagueData):
-    """
-	Takes the leagueData dictionary.
-	Returns a list of all teams within it.
-	"""
-    teamList = []
-    for league in leagueData:
-        for team in leagueData[league]:
-            teamList.append(team)
-    return teamList
 
-def manualGameAnalysis(leagueData):
+def list_teams(league_data):
+    """
+    Takes the leagueData dictionary.
+    Returns a list of all teams within it.
+    """
+
+    team_list = []
+    for league in league_data:
+        for team in league_data[league]:
+            team_list.append(team)
+    return team_list
+
+
+def manual_game_analysis(league_data):
     """
     Takes the leagueData dictionary.
     Asks the user to select the home and away teams from the available
@@ -326,79 +326,75 @@ def manualGameAnalysis(leagueData):
     Provides a comparison and a comparison.
     Returns the prediction as a list: [homeTeam, predictedHomeScore, awayTeam, predictedAwayScore]
     """
-    homeTeam = ""
-    awayTeam = ""
-    teamList = []
+
+    team_list = []
     selection1 = ""
     selection2 = ""
-    homeTeamPredictedScore = 0
-    awayTeamPredictedScore = 0
-    predictions = []
-    if leagueData == {}:
+    if league_data == {}:
         print("You can't run manual game analysis until you have selected the appropriate league(s).")
         print("Please select a league or import a JSON file first.")
+        input("Press enter to continue")
         return False
-    for team in listTeams(leagueData):
-        teamList.append(team)
+    for team in list_teams(league_data):
+        team_list.append(team)
+
+    for team in team_list:
+        print(team_list.index(team) + 1, team)
         
-    for team in teamList:
-        print(teamList.index(team) + 1, team)
-        
-    #while homeTeam not in teamList or awayTeam not in teamList:
-        
-    while not validInput(selection1, range(1, len(teamList) + 1)):
+    while not valid_input(selection1, range(1, len(team_list) + 1)):
         print("\nSelect home team from the above list:", end = " ")
         selection1 = input()
-    while not validInput(selection2, range(1, len(teamList) + 1)):
-        print("Select away team from the above list:", end = " ")
+    while not valid_input(selection2, range(1, len(team_list) + 1)):
+        print("\nSelect away team from the above list:", end = " ")
         selection2 = input()
         
-    homeTeam = teamList[int(selection1)-1]
-    awayTeam = teamList[int(selection2)-1]
-    homeTeamLeague = getLeague(homeTeam, leagueData)
-    awayTeamLeague = getLeague(awayTeam, leagueData)
+    home_team = team_list[int(selection1)-1]
+    away_team = team_list[int(selection2)-1]
+    home_team_league = get_league(home_team, league_data)
+    away_team_league = get_league(away_team, league_data)
         
-    print("\nHome Team is: ", homeTeam)
+    print("\nHome Team is: ", home_team)
     print("Home game stats:")
-    for stat in leagueData[homeTeamLeague][homeTeam]["Home"]:
-        print(stat, leagueData[homeTeamLeague][homeTeam]["Home"][stat], end = " ")
-    print("\nTotal game stats")
-    for stat in leagueData[homeTeamLeague][homeTeam]["Total"]:
-        print(stat, leagueData[homeTeamLeague][homeTeam]["Total"][stat], end = " ")
+    for stat in league_data[home_team_league][home_team]["Home"]:
+        print(stat, league_data[home_team_league][home_team]["Home"][stat], end=" ")
+    print("\nTotal game stats:")
+    for stat in league_data[home_team_league][home_team]["Total"]:
+        print(stat, league_data[home_team_league][home_team]["Total"][stat], end=" ")
             
-    print("\n\nAway Team is: ", awayTeam)
+    print("\n\nAway Team is: ", away_team)
     print("Away game stats:")
-    for stat in leagueData[awayTeamLeague][awayTeam]["Away"]:
-        print(stat, leagueData[awayTeamLeague][awayTeam]["Away"][stat], end = " ")
+    for stat in league_data[away_team_league][away_team]["Away"]:
+        print(stat, league_data[away_team_league][away_team]["Away"][stat], end=" ")
     print("\nTotal game stats")
-    for stat in leagueData[awayTeamLeague][awayTeam]["Total"]:
-        print(stat, leagueData[awayTeamLeague][awayTeam]["Total"][stat], end = " ")
-        
-    comparison = compare(homeTeam, awayTeam, leagueData)
+    for stat in league_data[away_team_league][away_team]["Total"]:
+        print(stat, league_data[away_team_league][away_team]["Total"][stat], end=" ")
+
+    comparison = compare(home_team, away_team, league_data)
     print("\n\nComparison")
     print("==========")
-    print("\nPositive numbers indicate home team statistic is higher. \nNegative numbers indicate away team statsistic is higher.\n")
-    comparisonIndexCount = 0
+    print("\nPositive numbers indicate Home team statistic is higher."
+          " \nNegative numbers indicate Away team statistic is higher.\n")
+    comparison_index_count = 0
         
     print("Home / Away Game Statistical Differences")
     print("========================================")
-    for stat in leagueData[homeTeamLeague][homeTeam]["Home"]:
-        print(stat, comparison[0][comparisonIndexCount], end = " ")
-        comparisonIndexCount += 1
+    for stat in league_data[home_team_league][home_team]["Home"]:
+        print(stat, comparison[0][comparison_index_count], end=" ")
+        comparison_index_count += 1
         
     print("\n\nTotal Game Statistical Differences")
     print("==================================")
-    comparisonIndexCount = 0
-    for stat in leagueData[awayTeamLeague][awayTeam]["Away"]:
-        print(stat, comparison[0][comparisonIndexCount], end = " ")
-        comparisonIndexCount += 1
+    comparison_index_count = 0
+    for stat in league_data[away_team_league][away_team]["Away"]:
+        print(stat, comparison[0][comparison_index_count], end=" ")
+        comparison_index_count += 1
     
-    #Basic prediction based on average goals scored per game for each team at home or away respectively
+    # Basic prediction based on average goals scored per game for each team at home or away respectively
     print("\n\nPredicted outcome:")
     print("==================")
-    homeTeamPredictedScore = int(leagueData[homeTeamLeague][homeTeam]["Home"]["For"] / leagueData[homeTeamLeague][homeTeam]["Home"]["Played"]) # Average gaols per for per game
-    
-    awayTeamPredictedScore = int(leagueData[awayTeamLeague][awayTeam]["Away"]["For"] / leagueData[awayTeamLeague][awayTeam]["Away"]["Played"])# Average gaols per for per game
+    home_team_predicted_score = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Average gaols per for per game
+
+    away_team_predicted_score = int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Average gaols per for per game
     
     """
     ***For possible future use***
@@ -407,8 +403,8 @@ def manualGameAnalysis(leagueData):
     
     print(homeTeam + " " + str(homeTeamPredictedScorea) + " - " + awayTeam + " " + str(awayTeamPredictedScorea))
     """
-    print(homeTeam + " " + str(homeTeamPredictedScore) + " - " + awayTeam + " " + str(awayTeamPredictedScore))
+    print(home_team + " " + str(home_team_predicted_score) + " - " + away_team + " " + str(away_team_predicted_score))
 
-    predictions = [homeTeam, homeTeamPredictedScore, awayTeam, awayTeamPredictedScore]
+    predictions = [home_team, home_team_predicted_score, away_team, away_team_predicted_score]
     
     return predictions
