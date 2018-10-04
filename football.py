@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
-from commonFunctions import *
+from commonFunctions import valid_input
 import pprint
 import json
 
@@ -37,6 +37,44 @@ def select_league(league_data):
         for league in available_leagues:
             if option == available_leagues[league][0]:
                 selection = league
+<<<<<<< HEAD
+                # Debug code: Display selected league string
+                # print("Selected league: " + league)
+
+        league_data = display_selection(selection, league_data)
+        print("\nLeague data has been downloaded. Press enter to continue.")
+        input()
+        return league_data
+      
+# The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com",
+#  "Number of teams in league"]
+
+
+available_leagues = {"1 English Premier League":["1", "england/premier-league/", 20],
+                     "2 English Championship":["2", "england/championship/", 24],
+                     "3 English League One":["3", "england/league-one/", 24],
+                     "4 English League Two":["4", "england/league-two/", 24],
+                     "5 Spanish Primera":["5", "spain/primera-division/", 20],
+                     "6 Spanish Segunda":["6", "spain/segunda-division/", 22],
+                     "7 Spanish Segunda B":["7", "spain/segunda-b/", 20],
+                     "8 French Lique 1":["8", "france/ligue-1/", 20],
+                     "9 French Ligue 2":["9", "france/ligue-2/", 20],
+                     "10 German Bundesliga":["10", "germany/bundesliga/", 18],
+                     "11 German 2 Bundesliga":["11", "germany/2.-bundesliga/", 18],
+                     "12 German Liga":["12", "germany/3.-liga/", 20],
+                     "13 Italian Serie A":["13", "italy/serie-a/", 20],
+                     "14 Italian Serie B":["14", "italy/serie-b/", 19],
+                     "15 Brazillian Serie A":["15", "brazil/serie-a/", 20],
+                     "16 Brazillian Serie B":["16", "brazil/serie-b/", 20],
+                     "17 Argentinian Primera Division":["17", "argentina/primera-division/", 26],
+                     "18 Argentinian Prim B Nacional":["18", "argentina/prim-b-nacional/", 25],
+                     "19 Argentinian Prim B Metro":["19", "argentina/prim-b-metro/", 20],
+                     "20 Scottish Premier":["20", "scotland/premiership/", 12],
+                     "21 Scottish Championship":["21", "scotland/championship/", 10],
+                     "22 Scottish League One":["22", "scotland/league-one/", 10],
+                     "23 Scottish League Two":["23", "scotland/league-two/", 10]
+                     }
+=======
 
         gather_data = display_selection(selection, league_data)
         # If the user exits instead of downlaoding the league data, just exit.
@@ -47,6 +85,7 @@ def select_league(league_data):
             print("\nLeague data has been downloaded. Press enter to continue.")
             input()
             return league_data
+>>>>>>> ec0b4ad28b32287a6965c6d284f22789d33c1036
 
 # The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com", "Number of teams in league"]   
 available_leagues = {"1 English Premier League":["1", "england/premier-league/", 20],
@@ -95,11 +134,15 @@ def import_json_file():
     """
 
     print("---LOADING...---")
-    with open("leagueData.json") as infile:
-        loaded_json = json.load(infile)
-    print("---LOADED---")
+    try:
+        with open("leagueData.json") as infile:
+            loaded_json = json.load(infile)
+            print("---LOADED---")
+        return loaded_json
+    except FileNotFoundError:
+        print('No data found')
+
     input("Press enter to continue")
-    return loaded_json
 
 
 def export_json_file(league_data):
@@ -131,8 +174,15 @@ def display_selection(selection, league_data):
             get_league_data(selection, league_data)
             return league_data
         elif choice == "2":
+<<<<<<< HEAD
+
+            return league_data
+
+
+=======
             return False
           
+>>>>>>> ec0b4ad28b32287a6965c6d284f22789d33c1036
 def get_league_data(selection, league_data):
     """
     Takes the key of the selected league from the availableLeagues dictionary.
@@ -151,7 +201,12 @@ def get_league_data(selection, league_data):
     season = "c/"  # c is current
     full_url = bet_study_main + season + available_leagues[selection][1]
     web_client = uReq(full_url)
+
+    if web_client.getcode() != 200:
+        print('Cannot retrieve data, webpage is down')
+        return
     web_html = web_client.read()
+
     web_client.close()
     web_soup = soup(web_html, "html.parser")
     table = web_soup.find("div", {"id": "tab03_"})
@@ -338,6 +393,11 @@ def manual_game_analysis(league_data):
     for team in team_list:
         print(team_list.index(team) + 1, team)
         
+<<<<<<< HEAD
+    # while homeTeam not in teamList or awayTeam not in teamList:
+
+=======
+>>>>>>> ec0b4ad28b32287a6965c6d284f22789d33c1036
     while not valid_input(selection1, range(1, len(team_list) + 1)):
         print("\nSelect home team from the above list:", end = " ")
         selection1 = input()
@@ -366,7 +426,11 @@ def manual_game_analysis(league_data):
     print("\nTotal game stats")
     for stat in league_data[away_team_league][away_team]["Total"]:
         print(stat, league_data[away_team_league][away_team]["Total"][stat], end=" ")
+<<<<<<< HEAD
+
+=======
         
+>>>>>>> ec0b4ad28b32287a6965c6d284f22789d33c1036
     comparison = compare(home_team, away_team, league_data)
     print("\n\nComparison")
     print("==========")
@@ -392,6 +456,10 @@ def manual_game_analysis(league_data):
     print("\n\nPredicted outcome:")
     print("==================")
     home_team_predicted_score = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Average gaols per for per game
+<<<<<<< HEAD
+
+=======
+>>>>>>> ec0b4ad28b32287a6965c6d284f22789d33c1036
     away_team_predicted_score = int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Average gaols per for per game
     
     """
