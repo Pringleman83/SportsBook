@@ -66,7 +66,7 @@ def display_predictions(predictions):
         return
 
 def reports(league_data, predictions):
-    print("\nReports Menu\n")
+    print("\nReports Menu")
     print("============")
     
     report_options = [["(1) Export JSON data", "1"],
@@ -119,6 +119,7 @@ def football_menu(league_data):
                         ["(8) Reports", "8", reports],
                         ["(9) Import data from JSON file", "9"],
                         ["(10) Clear currently loaded league data", "10"],
+                        ["(11) Clear currently stored prediction data", "11"],
                         ["(M) Previous menu", "m", leave]
                         ]
     selected_leagues = []
@@ -179,8 +180,11 @@ def football_menu(league_data):
                         selection = ""
                         break
                     if new_prediction != "" and new_prediction != []:
-                        predictions.append(new_prediction)
-                        selection = ""
+                        if new_prediction not in predictions:
+                            predictions.append(new_prediction)
+                            selection = ""
+                        else:
+                            print("\nThis prediction is already in the predictions list.")
                         while another_game.lower() != "y" and another_game.lower() != "n":
                             print("\nAnalyse another game? (Y/N)")
                             another_game = input()
@@ -200,6 +204,10 @@ def football_menu(league_data):
                 continue
             if selection == "10":
                 league_data = {}
+                selection = ""
+                continue    
+            if selection == "11":
+                predictions.clear()
                 selection = ""
                 continue
             
