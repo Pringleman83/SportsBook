@@ -1,0 +1,6526 @@
+{
+ "24 Swiss Super League": {
+  "Young Boys": {
+   "Home": {
+    "Played": 5,
+    "Won": 5,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 20,
+    "Against": 3,
+    "Points": 15
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 12,
+    "Against": 3,
+    "Points": 12
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 9,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 32,
+    "Against": 6,
+    "Points": 27
+   }
+  },
+  "Z\u00fcrich": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 4,
+    "Against": 2,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 4,
+    "Against": 6,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 4,
+    "Drew": 3,
+    "Lost": 2,
+    "For": 8,
+    "Against": 8,
+    "Points": 15
+   }
+  },
+  "Thun": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 8,
+    "Against": 7,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 11,
+    "Against": 7,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 19,
+    "Against": 14,
+    "Points": 14
+   }
+  },
+  "St. Gallen": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 9,
+    "Against": 10,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 5,
+    "Against": 5,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 14,
+    "Against": 15,
+    "Points": 14
+   }
+  },
+  "Basel": {
+   "Home": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 11,
+    "Against": 8,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 5,
+    "Against": 11,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 4,
+    "Lost": 2,
+    "For": 16,
+    "Against": 19,
+    "Points": 13
+   }
+  },
+  "Lugano": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 5,
+    "Against": 6,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 8,
+    "Against": 10,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 2,
+    "Drew": 4,
+    "Lost": 3,
+    "For": 13,
+    "Against": 16,
+    "Points": 10
+   }
+  },
+  "Sion": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 5,
+    "Against": 7,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 11,
+    "Against": 12,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 6,
+    "For": 16,
+    "Against": 19,
+    "Points": 9
+   }
+  },
+  "Luzern": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 9,
+    "Against": 11,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 3,
+    "Against": 5,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 6,
+    "For": 12,
+    "Against": 16,
+    "Points": 9
+   }
+  },
+  "Neuch\u00e2tel Xamax": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 6,
+    "Against": 10,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 5,
+    "Against": 11,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 5,
+    "For": 11,
+    "Against": 21,
+    "Points": 8
+   }
+  },
+  "Grasshopper": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 5,
+    "Against": 6,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 6,
+    "Against": 12,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 6,
+    "For": 11,
+    "Against": 18,
+    "Points": 7
+   }
+  }
+ },
+ "25 Swiss Challenge League": {
+  "Wil": {
+   "Home": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 8,
+    "Against": 2,
+    "Points": 13
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 5,
+    "Against": 5,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 5,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 13,
+    "Against": 7,
+    "Points": 18
+   }
+  },
+  "Lausanne Sport": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 10,
+    "Against": 5,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 5,
+    "Against": 4,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 4,
+    "Drew": 4,
+    "Lost": 1,
+    "For": 15,
+    "Against": 9,
+    "Points": 16
+   }
+  },
+  "Rapperswil-Jona": {
+   "Home": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 8,
+    "Against": 7,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 6,
+    "Against": 4,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 14,
+    "Against": 11,
+    "Points": 16
+   }
+  },
+  "Winterthur": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 7,
+    "Against": 5,
+    "Points": 8
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 5,
+    "Against": 4,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 12,
+    "Against": 9,
+    "Points": 14
+   }
+  },
+  "Servette": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 3,
+    "Against": 2,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 8,
+    "Against": 5,
+    "Points": 8
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 3,
+    "Lost": 3,
+    "For": 11,
+    "Against": 7,
+    "Points": 12
+   }
+  },
+  "FC Schaffhausen": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 8,
+    "Against": 3,
+    "Points": 8
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 4,
+    "Against": 9,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 3,
+    "Lost": 3,
+    "For": 12,
+    "Against": 12,
+    "Points": 12
+   }
+  },
+  "Vaduz": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 6,
+    "Against": 6,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 5,
+    "Against": 7,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 11,
+    "Against": 13,
+    "Points": 11
+   }
+  },
+  "Chiasso": {
+   "Home": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 3,
+    "Against": 10,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 5,
+    "Against": 7,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 5,
+    "For": 8,
+    "Against": 17,
+    "Points": 10
+   }
+  },
+  "Kriens": {
+   "Home": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 3,
+    "Against": 7,
+    "Points": 2
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 4,
+    "Lost": 0,
+    "For": 7,
+    "Against": 5,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 1,
+    "Drew": 6,
+    "Lost": 2,
+    "For": 10,
+    "Against": 12,
+    "Points": 9
+   }
+  },
+  "Aarau": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 4,
+    "Against": 7,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 4,
+    "Against": 10,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 7,
+    "For": 8,
+    "Against": 17,
+    "Points": 4
+   }
+  }
+ },
+ "26 Ukrainian Premier League": {
+  "Shakhtar Donetsk": {
+   "Home": {
+    "Played": 4,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 12,
+    "Against": 1,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 5,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 17,
+    "Against": 4,
+    "Points": 15
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 9,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 29,
+    "Against": 5,
+    "Points": 27
+   }
+  },
+  "Dynamo Kyiv": {
+   "Home": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 7,
+    "Against": 2,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 6,
+    "Against": 2,
+    "Points": 11
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 7,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 13,
+    "Against": 4,
+    "Points": 23
+   }
+  },
+  "Oleksandria": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 4,
+    "Against": 2,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 9,
+    "Against": 6,
+    "Points": 10
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 6,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 13,
+    "Against": 8,
+    "Points": 19
+   }
+  },
+  "Vorskla": {
+   "Home": {
+    "Played": 4,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 7,
+    "Against": 3,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 4,
+    "Against": 8,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 6,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 11,
+    "Against": 11,
+    "Points": 18
+   }
+  },
+  "Zorya": {
+   "Home": {
+    "Played": 6,
+    "Won": 1,
+    "Drew": 4,
+    "Lost": 1,
+    "For": 4,
+    "Against": 5,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 7,
+    "Against": 3,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 4,
+    "Lost": 3,
+    "For": 11,
+    "Against": 8,
+    "Points": 13
+   }
+  },
+  "Illichivets'": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 4,
+    "Against": 8,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 8,
+    "Against": 8,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 5,
+    "For": 12,
+    "Against": 16,
+    "Points": 13
+   }
+  },
+  "Olimpik Donetsk": {
+   "Home": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 7,
+    "Against": 12,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 7,
+    "Against": 5,
+    "Points": 8
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 3,
+    "Lost": 4,
+    "For": 14,
+    "Against": 17,
+    "Points": 12
+   }
+  },
+  "Lviv": {
+   "Home": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 3,
+    "Against": 6,
+    "Points": 2
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 6,
+    "Against": 4,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 2,
+    "Drew": 5,
+    "Lost": 3,
+    "For": 9,
+    "Against": 10,
+    "Points": 11
+   }
+  },
+  "Desna": {
+   "Home": {
+    "Played": 6,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 3,
+    "Against": 9,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 6,
+    "Against": 6,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 6,
+    "For": 9,
+    "Against": 15,
+    "Points": 10
+   }
+  },
+  "Karpaty": {
+   "Home": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 5,
+    "For": 5,
+    "Against": 14,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 5,
+    "Against": 3,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 5,
+    "For": 10,
+    "Against": 17,
+    "Points": 9
+   }
+  },
+  "Chornomorets": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 4,
+    "Against": 4,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 3,
+    "Against": 8,
+    "Points": 2
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 5,
+    "For": 7,
+    "Against": 12,
+    "Points": 9
+   }
+  },
+  "Arsenal Kyiv": {
+   "Home": {
+    "Played": 6,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 5,
+    "For": 3,
+    "Against": 14,
+    "Points": 1
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 2,
+    "Against": 6,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 8,
+    "For": 5,
+    "Against": 20,
+    "Points": 4
+   }
+  }
+ },
+ "27 Ukranian Persha Liga": {
+  "Dnipro-1": {
+   "Home": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 15,
+    "Against": 5,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 5,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 12,
+    "Against": 2,
+    "Points": 15
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 8,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 27,
+    "Against": 7,
+    "Points": 24
+   }
+  },
+  "Kolos Kovalivka": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 9,
+    "Against": 4,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 8,
+    "Against": 0,
+    "Points": 13
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 6,
+    "Drew": 4,
+    "Lost": 0,
+    "For": 17,
+    "Against": 4,
+    "Points": 22
+   }
+  },
+  "Volyn": {
+   "Home": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 12,
+    "Against": 6,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 6,
+    "Against": 6,
+    "Points": 10
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 7,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 18,
+    "Against": 12,
+    "Points": 22
+   }
+  },
+  "Inhulets": {
+   "Home": {
+    "Played": 6,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 10,
+    "Against": 8,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 4,
+    "Against": 3,
+    "Points": 10
+   },
+   "Total": {
+    "Played": 11,
+    "Won": 6,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 14,
+    "Against": 11,
+    "Points": 20
+   }
+  },
+  "Metalist 1925 Kharkiv": {
+   "Home": {
+    "Played": 6,
+    "Won": 5,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 12,
+    "Against": 2,
+    "Points": 15
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 2,
+    "Against": 3,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 6,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 14,
+    "Against": 5,
+    "Points": 19
+   }
+  },
+  "Avanhard": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 7,
+    "Against": 3,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 4,
+    "Lost": 0,
+    "For": 12,
+    "Against": 8,
+    "Points": 13
+   },
+   "Total": {
+    "Played": 11,
+    "Won": 4,
+    "Drew": 5,
+    "Lost": 2,
+    "For": 19,
+    "Against": 11,
+    "Points": 17
+   }
+  },
+  "Mykolaiv": {
+   "Home": {
+    "Played": 6,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 10,
+    "Against": 3,
+    "Points": 14
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 1,
+    "Against": 5,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 5,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 11,
+    "Against": 8,
+    "Points": 17
+   }
+  },
+  "Obolon'-Brovar": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 2,
+    "Against": 3,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 9,
+    "Against": 5,
+    "Points": 10
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 5,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 11,
+    "Against": 8,
+    "Points": 17
+   }
+  },
+  "Teplovyk": {
+   "Home": {
+    "Played": 6,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 9,
+    "Against": 4,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 3,
+    "Against": 6,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 11,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 6,
+    "For": 12,
+    "Against": 10,
+    "Points": 13
+   }
+  },
+  "Balkany Zorya": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 6,
+    "Against": 2,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 5,
+    "For": 4,
+    "Against": 13,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 11,
+    "Won": 3,
+    "Drew": 3,
+    "Lost": 5,
+    "For": 10,
+    "Against": 15,
+    "Points": 12
+   }
+  },
+  "Sumy": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 4,
+    "Against": 7,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 6,
+    "Against": 15,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 5,
+    "For": 10,
+    "Against": 22,
+    "Points": 11
+   }
+  },
+  "Hirnyk-Sport": {
+   "Home": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 7,
+    "Against": 7,
+    "Points": 8
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 4,
+    "Against": 15,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 5,
+    "For": 11,
+    "Against": 22,
+    "Points": 9
+   }
+  },
+  "Rukh Vynnyky": {
+   "Home": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 4,
+    "Against": 9,
+    "Points": 2
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 4,
+    "Against": 7,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 6,
+    "For": 8,
+    "Against": 16,
+    "Points": 6
+   }
+  },
+  "Ahrobiznes Volochysk": {
+   "Home": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 1,
+    "Against": 8,
+    "Points": 0
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 0,
+    "Drew": 3,
+    "Lost": 3,
+    "For": 1,
+    "Against": 5,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 0,
+    "Drew": 3,
+    "Lost": 7,
+    "For": 2,
+    "Against": 13,
+    "Points": 3
+   }
+  },
+  "Zirka": {
+   "Home": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 2,
+    "Against": 8,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 5,
+    "For": 3,
+    "Against": 17,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 9,
+    "For": 5,
+    "Against": 25,
+    "Points": 3
+   }
+  },
+  "Helios": {
+   "Home": {
+    "Played": 0,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 0,
+    "Against": 0,
+    "Points": 0
+   },
+   "Away": {
+    "Played": 0,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 0,
+    "Against": 0,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 0,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 0,
+    "Against": 0,
+    "Points": 0
+   }
+  }
+ },
+ "28 Dutch Eredivisie": {
+  "PSV": {
+   "Home": {
+    "Played": 3,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 13,
+    "Against": 1,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 13,
+    "Against": 2,
+    "Points": 12
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 7,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 26,
+    "Against": 3,
+    "Points": 21
+   }
+  },
+  "Ajax": {
+   "Home": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 9,
+    "Against": 1,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 7,
+    "Against": 3,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 16,
+    "Against": 4,
+    "Points": 16
+   }
+  },
+  "Feyenoord": {
+   "Home": {
+    "Played": 4,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 10,
+    "Against": 3,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 6,
+    "Against": 6,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 16,
+    "Against": 9,
+    "Points": 16
+   }
+  },
+  "Heracles": {
+   "Home": {
+    "Played": 4,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 13,
+    "Against": 5,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 6,
+    "Against": 9,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 19,
+    "Against": 14,
+    "Points": 16
+   }
+  },
+  "AZ": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 8,
+    "Against": 3,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 9,
+    "Against": 5,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 17,
+    "Against": 8,
+    "Points": 12
+   }
+  },
+  "VVV": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 4,
+    "Against": 2,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 4,
+    "Against": 3,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 8,
+    "Against": 5,
+    "Points": 11
+   }
+  },
+  "Vitesse": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 6,
+    "Against": 6,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 4,
+    "Against": 3,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 2,
+    "For": 10,
+    "Against": 9,
+    "Points": 9
+   }
+  },
+  "Excelsior": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 7,
+    "Against": 8,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 4,
+    "Against": 5,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 2,
+    "For": 11,
+    "Against": 13,
+    "Points": 9
+   }
+  },
+  "Willem II": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 7,
+    "Against": 3,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 7,
+    "Against": 12,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 14,
+    "Against": 15,
+    "Points": 8
+   }
+  },
+  "ADO Den Haag": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 4,
+    "Against": 10,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 8,
+    "Against": 8,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 12,
+    "Against": 18,
+    "Points": 8
+   }
+  },
+  "Heerenveen": {
+   "Home": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 8,
+    "Against": 12,
+    "Points": 2
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 7,
+    "Against": 6,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 4,
+    "Lost": 2,
+    "For": 15,
+    "Against": 18,
+    "Points": 7
+   }
+  },
+  "PEC Zwolle": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 3,
+    "Against": 7,
+    "Points": 0
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 4,
+    "Against": 4,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 7,
+    "Against": 11,
+    "Points": 7
+   }
+  },
+  "De Graafschap": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 5,
+    "Against": 4,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 1,
+    "Against": 8,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 6,
+    "Against": 12,
+    "Points": 7
+   }
+  },
+  "Emmen": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 2,
+    "Against": 6,
+    "Points": 1
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 5,
+    "Against": 9,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 7,
+    "Against": 15,
+    "Points": 7
+   }
+  },
+  "Fortuna Sittard": {
+   "Home": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 6,
+    "Against": 9,
+    "Points": 2
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 5,
+    "Against": 6,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 3,
+    "For": 11,
+    "Against": 15,
+    "Points": 6
+   }
+  },
+  "Utrecht": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 4,
+    "Against": 3,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 2,
+    "Against": 7,
+    "Points": 2
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 3,
+    "For": 6,
+    "Against": 10,
+    "Points": 6
+   }
+  },
+  "Groningen": {
+   "Home": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 2,
+    "Against": 6,
+    "Points": 1
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 2,
+    "Against": 8,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 5,
+    "For": 4,
+    "Against": 14,
+    "Points": 4
+   }
+  },
+  "NAC Breda": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 5,
+    "Against": 7,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 2,
+    "Against": 12,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 6,
+    "For": 7,
+    "Against": 19,
+    "Points": 3
+   }
+  }
+ },
+ "29 Dutch Eerste Divisie": {
+  "Go Ahead Eagles": {
+   "Home": {
+    "Played": 3,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 10,
+    "Against": 1,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 7,
+    "Against": 6,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 17,
+    "Against": 7,
+    "Points": 16
+   }
+  },
+  "Almere City": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 8,
+    "Against": 6,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 9,
+    "Against": 3,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 17,
+    "Against": 9,
+    "Points": 16
+   }
+  },
+  "Twente": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 8,
+    "Against": 5,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 7,
+    "Against": 3,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 15,
+    "Against": 8,
+    "Points": 16
+   }
+  },
+  "Sparta Rotterdam": {
+   "Home": {
+    "Played": 4,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 9,
+    "Against": 2,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 2,
+    "Against": 2,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 11,
+    "Against": 4,
+    "Points": 16
+   }
+  },
+  "NEC": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 8,
+    "Against": 7,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 8,
+    "Against": 5,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 16,
+    "Against": 12,
+    "Points": 15
+   }
+  },
+  "Cambuur": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 6,
+    "Against": 2,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 5,
+    "Against": 3,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 11,
+    "Against": 5,
+    "Points": 14
+   }
+  },
+  "Roda JC": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 4,
+    "Against": 4,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 5,
+    "Against": 4,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 9,
+    "Against": 8,
+    "Points": 13
+   }
+  },
+  "Oss": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 5,
+    "Against": 4,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 4,
+    "Against": 2,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 9,
+    "Against": 6,
+    "Points": 11
+   }
+  },
+  "MVV": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 3,
+    "Against": 5,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 4,
+    "Against": 2,
+    "Points": 8
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 7,
+    "Against": 7,
+    "Points": 11
+   }
+  },
+  "Ajax II": {
+   "Home": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 7,
+    "Against": 5,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 4,
+    "Against": 5,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 11,
+    "Against": 10,
+    "Points": 10
+   }
+  },
+  "Den Bosch": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 7,
+    "Against": 9,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 4,
+    "Against": 3,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 11,
+    "Against": 12,
+    "Points": 10
+   }
+  },
+  "Telstar": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 4,
+    "Against": 4,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 4,
+    "Against": 4,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 8,
+    "Against": 8,
+    "Points": 9
+   }
+  },
+  "PSV II": {
+   "Home": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 4,
+    "Against": 2,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 8,
+    "Against": 13,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 12,
+    "Against": 15,
+    "Points": 8
+   }
+  },
+  "RKC Waalwijk": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 3,
+    "Against": 4,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 4,
+    "Against": 6,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 7,
+    "Against": 10,
+    "Points": 7
+   }
+  },
+  "AZ U23": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 5,
+    "Against": 6,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 5,
+    "Against": 8,
+    "Points": 2
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 10,
+    "Against": 14,
+    "Points": 5
+   }
+  },
+  "Utrecht U23": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 4,
+    "Against": 4,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 1,
+    "Against": 10,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 5,
+    "Against": 14,
+    "Points": 5
+   }
+  },
+  "Eindhoven": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 1,
+    "Against": 5,
+    "Points": 0
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 4,
+    "Against": 4,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 5,
+    "For": 5,
+    "Against": 9,
+    "Points": 4
+   }
+  },
+  "Helmond Sport": {
+   "Home": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 6,
+    "Against": 9,
+    "Points": 2
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 1,
+    "Against": 3,
+    "Points": 2
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 0,
+    "Drew": 4,
+    "Lost": 3,
+    "For": 7,
+    "Against": 12,
+    "Points": 4
+   }
+  },
+  "Volendam": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 2,
+    "Against": 3,
+    "Points": 2
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 2,
+    "Against": 8,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 0,
+    "Drew": 3,
+    "Lost": 4,
+    "For": 4,
+    "Against": 11,
+    "Points": 3
+   }
+  },
+  "Dordrecht": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 1,
+    "Against": 6,
+    "Points": 1
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 5,
+    "Against": 11,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 6,
+    "For": 6,
+    "Against": 17,
+    "Points": 1
+   }
+  }
+ },
+ "30 Greek Super League": {
+  "PAOK": {
+   "Home": {
+    "Played": 2,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 3,
+    "Against": 0,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 5,
+    "Against": 1,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 5,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 8,
+    "Against": 1,
+    "Points": 15
+   }
+  },
+  "Atromitos": {
+   "Home": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 3,
+    "Against": 0,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 2,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 4,
+    "Against": 1,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 7,
+    "Against": 1,
+    "Points": 13
+   }
+  },
+  "AEK Athens": {
+   "Home": {
+    "Played": 2,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 6,
+    "Against": 0,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 4,
+    "Against": 2,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 10,
+    "Against": 2,
+    "Points": 12
+   }
+  },
+  "Aris": {
+   "Home": {
+    "Played": 3,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 6,
+    "Against": 0,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 2,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 3,
+    "Against": 1,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 9,
+    "Against": 1,
+    "Points": 12
+   }
+  },
+  "Olympiakos Piraeus": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 8,
+    "Against": 2,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 1,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 1,
+    "Against": 0,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 9,
+    "Against": 2,
+    "Points": 12
+   }
+  },
+  "Panathinaikos": {
+   "Home": {
+    "Played": 3,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 8,
+    "Against": 2,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 2,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 4,
+    "Against": 1,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 5,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 12,
+    "Against": 3,
+    "Points": 15
+   }
+  },
+  "Xanthi": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 4,
+    "Against": 2,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 2,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 0,
+    "Against": 0,
+    "Points": 2
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 4,
+    "Against": 2,
+    "Points": 6
+   }
+  },
+  "Larissa": {
+   "Home": {
+    "Played": 2,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 2,
+    "Against": 3,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 1,
+    "Against": 4,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 3,
+    "Against": 7,
+    "Points": 6
+   }
+  },
+  "PAS Giannina": {
+   "Home": {
+    "Played": 1,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 1,
+    "Against": 0,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 3,
+    "Against": 10,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 4,
+    "Against": 10,
+    "Points": 6
+   }
+  },
+  "Panaitolikos": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 5,
+    "Against": 5,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 2,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 1,
+    "Against": 2,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 6,
+    "Against": 7,
+    "Points": 5
+   }
+  },
+  "Panionios": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 2,
+    "Against": 4,
+    "Points": 1
+   },
+   "Away": {
+    "Played": 2,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 2,
+    "Against": 4,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 4,
+    "Against": 8,
+    "Points": 4
+   }
+  },
+  "Asteras Tripolis": {
+   "Home": {
+    "Played": 2,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 2,
+    "Against": 1,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 1,
+    "Against": 5,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 3,
+    "Against": 6,
+    "Points": 3
+   }
+  },
+  "Levadiakos": {
+   "Home": {
+    "Played": 2,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 1,
+    "Against": 2,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 0,
+    "Against": 6,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 1,
+    "Against": 8,
+    "Points": 3
+   }
+  },
+  "Lamia": {
+   "Home": {
+    "Played": 2,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 0,
+    "Against": 3,
+    "Points": 1
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 3,
+    "Against": 6,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 3,
+    "Against": 9,
+    "Points": 2
+   }
+  },
+  "OFI": {
+   "Home": {
+    "Played": 2,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 1,
+    "Against": 6,
+    "Points": 0
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 3,
+    "Against": 7,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 4,
+    "Against": 13,
+    "Points": 1
+   }
+  },
+  "Apollon Smirnis": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 1,
+    "Against": 5,
+    "Points": 0
+   },
+   "Away": {
+    "Played": 2,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 0,
+    "Against": 3,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 5,
+    "For": 1,
+    "Against": 8,
+    "Points": 0
+   }
+  }
+ },
+ "31 Greek Football League": {
+  "OFI": {
+   "Home": {
+    "Played": 17,
+    "Won": 16,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 55,
+    "Against": 6,
+    "Points": 48
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 11,
+    "Drew": 5,
+    "Lost": 1,
+    "For": 31,
+    "Against": 8,
+    "Points": 38
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 27,
+    "Drew": 5,
+    "Lost": 2,
+    "For": 86,
+    "Against": 14,
+    "Points": 86
+   }
+  },
+  "Aris": {
+   "Home": {
+    "Played": 17,
+    "Won": 14,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 36,
+    "Against": 3,
+    "Points": 45
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 12,
+    "Drew": 4,
+    "Lost": 1,
+    "For": 29,
+    "Against": 10,
+    "Points": 40
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 26,
+    "Drew": 7,
+    "Lost": 1,
+    "For": 65,
+    "Against": 13,
+    "Points": 85
+   }
+  },
+  "Panachaiki": {
+   "Home": {
+    "Played": 17,
+    "Won": 11,
+    "Drew": 4,
+    "Lost": 2,
+    "For": 25,
+    "Against": 10,
+    "Points": 37
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 11,
+    "Drew": 3,
+    "Lost": 3,
+    "For": 25,
+    "Against": 11,
+    "Points": 36
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 22,
+    "Drew": 7,
+    "Lost": 5,
+    "For": 50,
+    "Against": 21,
+    "Points": 73
+   }
+  },
+  "Kissamikos": {
+   "Home": {
+    "Played": 17,
+    "Won": 12,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 36,
+    "Against": 15,
+    "Points": 37
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 7,
+    "Drew": 6,
+    "Lost": 4,
+    "For": 28,
+    "Against": 17,
+    "Points": 27
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 19,
+    "Drew": 7,
+    "Lost": 8,
+    "For": 64,
+    "Against": 32,
+    "Points": 64
+   }
+  },
+  "Doxa Dramas": {
+   "Home": {
+    "Played": 17,
+    "Won": 9,
+    "Drew": 7,
+    "Lost": 1,
+    "For": 37,
+    "Against": 11,
+    "Points": 34
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 9,
+    "Drew": 2,
+    "Lost": 6,
+    "For": 20,
+    "Against": 14,
+    "Points": 29
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 18,
+    "Drew": 9,
+    "Lost": 7,
+    "For": 57,
+    "Against": 25,
+    "Points": 63
+   }
+  },
+  "Trikala": {
+   "Home": {
+    "Played": 17,
+    "Won": 9,
+    "Drew": 4,
+    "Lost": 4,
+    "For": 19,
+    "Against": 11,
+    "Points": 31
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 7,
+    "Drew": 6,
+    "Lost": 4,
+    "For": 12,
+    "Against": 11,
+    "Points": 27
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 16,
+    "Drew": 10,
+    "Lost": 8,
+    "For": 31,
+    "Against": 22,
+    "Points": 58
+   }
+  },
+  "Apollon Kalamarias": {
+   "Home": {
+    "Played": 17,
+    "Won": 8,
+    "Drew": 7,
+    "Lost": 2,
+    "For": 21,
+    "Against": 7,
+    "Points": 31
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 6,
+    "Drew": 4,
+    "Lost": 7,
+    "For": 22,
+    "Against": 20,
+    "Points": 22
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 14,
+    "Drew": 11,
+    "Lost": 9,
+    "For": 43,
+    "Against": 27,
+    "Points": 53
+   }
+  },
+  "Karaiskakis": {
+   "Home": {
+    "Played": 17,
+    "Won": 11,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 26,
+    "Against": 12,
+    "Points": 35
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 2,
+    "Drew": 7,
+    "Lost": 8,
+    "For": 9,
+    "Against": 20,
+    "Points": 13
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 13,
+    "Drew": 9,
+    "Lost": 12,
+    "For": 35,
+    "Against": 32,
+    "Points": 48
+   }
+  },
+  "Ergotelis": {
+   "Home": {
+    "Played": 17,
+    "Won": 8,
+    "Drew": 4,
+    "Lost": 5,
+    "For": 32,
+    "Against": 20,
+    "Points": 28
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 5,
+    "Drew": 3,
+    "Lost": 9,
+    "For": 24,
+    "Against": 27,
+    "Points": 18
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 13,
+    "Drew": 7,
+    "Lost": 14,
+    "For": 56,
+    "Against": 47,
+    "Points": 46
+   }
+  },
+  "Apollon Larisas": {
+   "Home": {
+    "Played": 17,
+    "Won": 12,
+    "Drew": 0,
+    "Lost": 5,
+    "For": 32,
+    "Against": 19,
+    "Points": 36
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 12,
+    "For": 13,
+    "Against": 35,
+    "Points": 13
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 16,
+    "Drew": 1,
+    "Lost": 17,
+    "For": 45,
+    "Against": 54,
+    "Points": 49
+   }
+  },
+  "Aiginiakos": {
+   "Home": {
+    "Played": 17,
+    "Won": 7,
+    "Drew": 5,
+    "Lost": 5,
+    "For": 21,
+    "Against": 20,
+    "Points": 26
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 11,
+    "For": 15,
+    "Against": 34,
+    "Points": 14
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 11,
+    "Drew": 7,
+    "Lost": 16,
+    "For": 36,
+    "Against": 54,
+    "Points": 40
+   }
+  },
+  "Sparti": {
+   "Home": {
+    "Played": 17,
+    "Won": 9,
+    "Drew": 4,
+    "Lost": 4,
+    "For": 20,
+    "Against": 17,
+    "Points": 31
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 12,
+    "For": 9,
+    "Against": 29,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 11,
+    "Drew": 7,
+    "Lost": 16,
+    "For": 29,
+    "Against": 46,
+    "Points": 40
+   }
+  },
+  "Anagennisi Karditsas": {
+   "Home": {
+    "Played": 17,
+    "Won": 10,
+    "Drew": 3,
+    "Lost": 4,
+    "For": 22,
+    "Against": 11,
+    "Points": 33
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 1,
+    "Drew": 4,
+    "Lost": 12,
+    "For": 10,
+    "Against": 30,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 11,
+    "Drew": 7,
+    "Lost": 16,
+    "For": 32,
+    "Against": 41,
+    "Points": 40
+   }
+  },
+  "Panserraikos": {
+   "Home": {
+    "Played": 17,
+    "Won": 6,
+    "Drew": 5,
+    "Lost": 6,
+    "For": 27,
+    "Against": 23,
+    "Points": 23
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 13,
+    "For": 16,
+    "Against": 29,
+    "Points": 10
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 9,
+    "Drew": 6,
+    "Lost": 19,
+    "For": 43,
+    "Against": 52,
+    "Points": 33
+   }
+  },
+  "Panegialios": {
+   "Home": {
+    "Played": 17,
+    "Won": 7,
+    "Drew": 4,
+    "Lost": 6,
+    "For": 16,
+    "Against": 15,
+    "Points": 25
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 13,
+    "For": 13,
+    "Against": 42,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 8,
+    "Drew": 7,
+    "Lost": 19,
+    "For": 29,
+    "Against": 57,
+    "Points": 31
+   }
+  },
+  "Kallithea": {
+   "Home": {
+    "Played": 17,
+    "Won": 4,
+    "Drew": 6,
+    "Lost": 7,
+    "For": 14,
+    "Against": 18,
+    "Points": 18
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 12,
+    "For": 12,
+    "Against": 22,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 34,
+    "Won": 6,
+    "Drew": 9,
+    "Lost": 19,
+    "For": 26,
+    "Against": 40,
+    "Points": 27
+   }
+  },
+  "Veria": {
+   "Home": {
+    "Played": 16,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 13,
+    "For": 5,
+    "Against": 31,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 17,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 13,
+    "For": 8,
+    "Against": 39,
+    "Points": 8
+   },
+   "Total": {
+    "Played": 33,
+    "Won": 5,
+    "Drew": 2,
+    "Lost": 26,
+    "For": 13,
+    "Against": 70,
+    "Points": 17
+   }
+  },
+  "Acharnaikos": {
+   "Home": {
+    "Played": 17,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 16,
+    "For": 1,
+    "Against": 48,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 16,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 16,
+    "For": 1,
+    "Against": 47,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 33,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 32,
+    "For": 2,
+    "Against": 95,
+    "Points": 3
+   }
+  }
+ },
+ "32 Czech Liga": {
+  "Slavia Praha": {
+   "Home": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 12,
+    "Against": 3,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 11,
+    "Against": 3,
+    "Points": 12
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 8,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 23,
+    "Against": 6,
+    "Points": 24
+   }
+  },
+  "Viktoria Plze\u0148": {
+   "Home": {
+    "Played": 5,
+    "Won": 5,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 10,
+    "Against": 1,
+    "Points": 15
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 5,
+    "Against": 8,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 8,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 15,
+    "Against": 9,
+    "Points": 24
+   }
+  },
+  "Sparta Praha": {
+   "Home": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 11,
+    "Against": 3,
+    "Points": 13
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 8,
+    "Against": 3,
+    "Points": 10
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 7,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 19,
+    "Against": 6,
+    "Points": 23
+   }
+  },
+  "Ban\u00edk Ostrava": {
+   "Home": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 8,
+    "Against": 2,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 8,
+    "Against": 4,
+    "Points": 10
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 7,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 16,
+    "Against": 6,
+    "Points": 22
+   }
+  },
+  "Zl\u00edn": {
+   "Home": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 9,
+    "Against": 5,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 8,
+    "Against": 3,
+    "Points": 10
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 6,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 17,
+    "Against": 8,
+    "Points": 20
+   }
+  },
+  "Jablonec": {
+   "Home": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 11,
+    "Against": 6,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 5,
+    "Against": 5,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 16,
+    "Against": 11,
+    "Points": 16
+   }
+  },
+  "P\u0159\u00edbram": {
+   "Home": {
+    "Played": 6,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 14,
+    "Against": 6,
+    "Points": 13
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 3,
+    "Against": 12,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 17,
+    "Against": 18,
+    "Points": 14
+   }
+  },
+  "Slovan Liberec": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 7,
+    "Against": 3,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 5,
+    "Against": 9,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 4,
+    "Lost": 3,
+    "For": 12,
+    "Against": 12,
+    "Points": 13
+   }
+  },
+  "Mlad\u00e1 Boleslav": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 12,
+    "Against": 8,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 10,
+    "Against": 15,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 5,
+    "For": 22,
+    "Against": 23,
+    "Points": 13
+   }
+  },
+  "Bohemians 1905": {
+   "Home": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 3,
+    "Against": 4,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 7,
+    "Against": 8,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 3,
+    "Lost": 4,
+    "For": 10,
+    "Against": 12,
+    "Points": 12
+   }
+  },
+  "Karvin\u00e1": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 9,
+    "Against": 7,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 5,
+    "Against": 12,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 6,
+    "For": 14,
+    "Against": 19,
+    "Points": 10
+   }
+  },
+  "Opava": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 7,
+    "Against": 6,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 4,
+    "Against": 12,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 6,
+    "For": 11,
+    "Against": 18,
+    "Points": 10
+   }
+  },
+  "Teplice": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 8,
+    "Against": 12,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 3,
+    "Lost": 2,
+    "For": 4,
+    "Against": 7,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 5,
+    "For": 12,
+    "Against": 19,
+    "Points": 9
+   }
+  },
+  "Slov\u00e1cko": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 6,
+    "Against": 11,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 5,
+    "Against": 11,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 7,
+    "For": 11,
+    "Against": 22,
+    "Points": 9
+   }
+  },
+  "Sigma Olomouc": {
+   "Home": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 4,
+    "Against": 11,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 5,
+    "Against": 10,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 8,
+    "For": 9,
+    "Against": 21,
+    "Points": 6
+   }
+  },
+  "Dukla Praha": {
+   "Home": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 5,
+    "Against": 7,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 5,
+    "For": 2,
+    "Against": 14,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 8,
+    "For": 7,
+    "Against": 21,
+    "Points": 4
+   }
+  }
+ },
+ "33 Czech FNL": {
+  "Vyso\u010dina Jihlava": {
+   "Home": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 8,
+    "Against": 4,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 10,
+    "Against": 5,
+    "Points": 10
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 6,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 18,
+    "Against": 9,
+    "Points": 20
+   }
+  },
+  "Hradec Kr\u00e1lov\u00e9": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 9,
+    "Against": 2,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 5,
+    "Against": 3,
+    "Points": 10
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 6,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 14,
+    "Against": 5,
+    "Points": 20
+   }
+  },
+  "\u010cesk\u00e9 Bud\u011bjovice": {
+   "Home": {
+    "Played": 6,
+    "Won": 5,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 13,
+    "Against": 4,
+    "Points": 15
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 4,
+    "Against": 6,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 6,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 17,
+    "Against": 10,
+    "Points": 19
+   }
+  },
+  "FK Pardubice": {
+   "Home": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 10,
+    "Against": 2,
+    "Points": 11
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 8,
+    "Against": 10,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 4,
+    "Drew": 4,
+    "Lost": 2,
+    "For": 18,
+    "Against": 12,
+    "Points": 16
+   }
+  },
+  "\u00dast\u00ed nad Labem": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 9,
+    "Against": 4,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 5,
+    "Against": 9,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 14,
+    "Against": 13,
+    "Points": 16
+   }
+  },
+  "Varnsdorf": {
+   "Home": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 3,
+    "Against": 1,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 2,
+    "Against": 3,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 4,
+    "Drew": 4,
+    "Lost": 2,
+    "For": 5,
+    "Against": 4,
+    "Points": 16
+   }
+  },
+  "Prost\u011bjov": {
+   "Home": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 4,
+    "Lost": 0,
+    "For": 7,
+    "Against": 5,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 4,
+    "Against": 6,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 4,
+    "Drew": 4,
+    "Lost": 2,
+    "For": 11,
+    "Against": 11,
+    "Points": 16
+   }
+  },
+  "V\u00edtkovice": {
+   "Home": {
+    "Played": 4,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 9,
+    "Against": 2,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 5,
+    "Against": 12,
+    "Points": 2
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 14,
+    "Against": 14,
+    "Points": 14
+   }
+  },
+  "Zbrojovka Brno": {
+   "Home": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 10,
+    "Against": 5,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 3,
+    "Lost": 2,
+    "For": 8,
+    "Against": 10,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 4,
+    "Lost": 3,
+    "For": 18,
+    "Against": 15,
+    "Points": 13
+   }
+  },
+  "Znojmo": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 6,
+    "Against": 5,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 7,
+    "Against": 10,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 3,
+    "Lost": 4,
+    "For": 13,
+    "Against": 15,
+    "Points": 12
+   }
+  },
+  "Ban\u00edk Sokolov": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 7,
+    "Against": 5,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 3,
+    "Against": 10,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 5,
+    "For": 10,
+    "Against": 15,
+    "Points": 11
+   }
+  },
+  "Vla\u0161im": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 10,
+    "Against": 6,
+    "Points": 8
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 5,
+    "Against": 11,
+    "Points": 2
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 2,
+    "Drew": 4,
+    "Lost": 4,
+    "For": 15,
+    "Against": 17,
+    "Points": 10
+   }
+  },
+  "Chrudim": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 8,
+    "Against": 7,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 3,
+    "Against": 10,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 6,
+    "For": 11,
+    "Against": 17,
+    "Points": 10
+   }
+  },
+  "Viktoria \u017di\u017ekov": {
+   "Home": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 12,
+    "Against": 11,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 1,
+    "Against": 9,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 2,
+    "Drew": 4,
+    "Lost": 4,
+    "For": 13,
+    "Against": 20,
+    "Points": 10
+   }
+  },
+  "T\u0159inec": {
+   "Home": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 5,
+    "Against": 7,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 3,
+    "Against": 9,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 7,
+    "For": 8,
+    "Against": 16,
+    "Points": 7
+   }
+  },
+  "T\u00e1borsko": {
+   "Home": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 7,
+    "Against": 7,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 4,
+    "Against": 10,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 10,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 6,
+    "For": 11,
+    "Against": 17,
+    "Points": 6
+   }
+  }
+ },
+ "34 Russian Premier League": {
+  "Zenit": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 10,
+    "Against": 4,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 8,
+    "Against": 3,
+    "Points": 12
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 7,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 18,
+    "Against": 7,
+    "Points": 22
+   }
+  },
+  "Krasnodar": {
+   "Home": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 5,
+    "Against": 2,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 12,
+    "Against": 4,
+    "Points": 13
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 6,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 17,
+    "Against": 6,
+    "Points": 19
+   }
+  },
+  "Rostov": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 6,
+    "Against": 2,
+    "Points": 8
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 4,
+    "Against": 1,
+    "Points": 10
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 5,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 10,
+    "Against": 3,
+    "Points": 18
+   }
+  },
+  "CSKA Moskva": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 8,
+    "Against": 2,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 6,
+    "Against": 2,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 4,
+    "Drew": 4,
+    "Lost": 1,
+    "For": 14,
+    "Against": 4,
+    "Points": 16
+   }
+  },
+  "Spartak Moskva": {
+   "Home": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 5,
+    "Against": 4,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 2,
+    "Against": 1,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 4,
+    "Drew": 3,
+    "Lost": 2,
+    "For": 7,
+    "Against": 5,
+    "Points": 15
+   }
+  },
+  "Rubin Kazan'": {
+   "Home": {
+    "Played": 5,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 6,
+    "Against": 4,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 4,
+    "Lost": 0,
+    "For": 5,
+    "Against": 5,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 5,
+    "Lost": 1,
+    "For": 11,
+    "Against": 9,
+    "Points": 14
+   }
+  },
+  "Lokomotiv Moskva": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 5,
+    "Against": 2,
+    "Points": 8
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 5,
+    "Against": 8,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 3,
+    "Lost": 3,
+    "For": 10,
+    "Against": 10,
+    "Points": 12
+   }
+  },
+  "Terek Grozny": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 5,
+    "Against": 3,
+    "Points": 8
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 4,
+    "Against": 9,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 9,
+    "Against": 12,
+    "Points": 11
+   }
+  },
+  "Gazovik Orenburg": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 3,
+    "Against": 4,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 7,
+    "Against": 5,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 10,
+    "Against": 9,
+    "Points": 11
+   }
+  },
+  "Ural": {
+   "Home": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 7,
+    "Against": 7,
+    "Points": 8
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 3,
+    "Against": 9,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 10,
+    "Against": 16,
+    "Points": 11
+   }
+  },
+  "Dinamo Moskva": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 6,
+    "Against": 2,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 3,
+    "Lost": 2,
+    "For": 3,
+    "Against": 7,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 2,
+    "Drew": 4,
+    "Lost": 3,
+    "For": 9,
+    "Against": 9,
+    "Points": 10
+   }
+  },
+  "Anzhi": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 3,
+    "Against": 8,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 3,
+    "Against": 7,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 6,
+    "For": 6,
+    "Against": 15,
+    "Points": 9
+   }
+  },
+  "Arsenal Tula": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 9,
+    "Against": 4,
+    "Points": 8
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 1,
+    "Against": 6,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 4,
+    "For": 10,
+    "Against": 10,
+    "Points": 9
+   }
+  },
+  "Ufa": {
+   "Home": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 5,
+    "Against": 7,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 1,
+    "Against": 5,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 5,
+    "For": 6,
+    "Against": 12,
+    "Points": 8
+   }
+  },
+  "Krylya Sovetov": {
+   "Home": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 1,
+    "Against": 7,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 2,
+    "Against": 7,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 6,
+    "For": 3,
+    "Against": 14,
+    "Points": 7
+   }
+  },
+  "Yenisey": {
+   "Home": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 3,
+    "Against": 5,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 1,
+    "Against": 8,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 9,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 6,
+    "For": 4,
+    "Against": 13,
+    "Points": 5
+   }
+  }
+ },
+ "35 Russina FNL": {
+  "Tambov": {
+   "Home": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 14,
+    "Against": 8,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 7,
+    "Won": 6,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 13,
+    "Against": 5,
+    "Points": 19
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 9,
+    "Drew": 4,
+    "Lost": 1,
+    "For": 27,
+    "Against": 13,
+    "Points": 31
+   }
+  },
+  "Tom' Tomsk": {
+   "Home": {
+    "Played": 9,
+    "Won": 7,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 17,
+    "Against": 4,
+    "Points": 22
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 5,
+    "Against": 6,
+    "Points": 8
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 9,
+    "Drew": 3,
+    "Lost": 2,
+    "For": 22,
+    "Against": 10,
+    "Points": 30
+   }
+  },
+  "Spartak Moskva II": {
+   "Home": {
+    "Played": 6,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 9,
+    "Against": 5,
+    "Points": 13
+   },
+   "Away": {
+    "Played": 8,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 13,
+    "Against": 6,
+    "Points": 16
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 9,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 22,
+    "Against": 11,
+    "Points": 29
+   }
+  },
+  "Avangard Kursk": {
+   "Home": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 7,
+    "Against": 5,
+    "Points": 13
+   },
+   "Away": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 11,
+    "Against": 8,
+    "Points": 13
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 8,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 18,
+    "Against": 13,
+    "Points": 26
+   }
+  },
+  "Krasnodar II": {
+   "Home": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 2,
+    "For": 10,
+    "Against": 11,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 9,
+    "Against": 5,
+    "Points": 15
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 6,
+    "Drew": 6,
+    "Lost": 2,
+    "For": 19,
+    "Against": 16,
+    "Points": 24
+   }
+  },
+  "Shakhter-Volga-Olimpiets": {
+   "Home": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 9,
+    "Against": 5,
+    "Points": 14
+   },
+   "Away": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 5,
+    "Against": 6,
+    "Points": 8
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 6,
+    "Drew": 4,
+    "Lost": 4,
+    "For": 14,
+    "Against": 11,
+    "Points": 22
+   }
+  },
+  "Dinamo St. Petersburg": {
+   "Home": {
+    "Played": 6,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 4,
+    "Against": 7,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 8,
+    "Won": 4,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 21,
+    "Against": 11,
+    "Points": 15
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 5,
+    "Drew": 5,
+    "Lost": 4,
+    "For": 25,
+    "Against": 18,
+    "Points": 20
+   }
+  },
+  "Chertanovo": {
+   "Home": {
+    "Played": 8,
+    "Won": 3,
+    "Drew": 4,
+    "Lost": 1,
+    "For": 16,
+    "Against": 13,
+    "Points": 13
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 9,
+    "Against": 12,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 5,
+    "Drew": 5,
+    "Lost": 4,
+    "For": 25,
+    "Against": 25,
+    "Points": 20
+   }
+  },
+  "Mordovia Saransk": {
+   "Home": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 5,
+    "For": 8,
+    "Against": 12,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 10,
+    "Against": 6,
+    "Points": 14
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 5,
+    "Drew": 3,
+    "Lost": 6,
+    "For": 18,
+    "Against": 18,
+    "Points": 18
+   }
+  },
+  "Fakel": {
+   "Home": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 9,
+    "Against": 5,
+    "Points": 11
+   },
+   "Away": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 5,
+    "For": 7,
+    "Against": 12,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 5,
+    "Drew": 2,
+    "Lost": 7,
+    "For": 16,
+    "Against": 17,
+    "Points": 17
+   }
+  },
+  "Shinnik": {
+   "Home": {
+    "Played": 8,
+    "Won": 2,
+    "Drew": 4,
+    "Lost": 2,
+    "For": 7,
+    "Against": 7,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 6,
+    "Against": 8,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 4,
+    "Drew": 5,
+    "Lost": 5,
+    "For": 13,
+    "Against": 15,
+    "Points": 17
+   }
+  },
+  "SKA-Energiya": {
+   "Home": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 11,
+    "Against": 7,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 7,
+    "Won": 0,
+    "Drew": 5,
+    "Lost": 2,
+    "For": 8,
+    "Against": 12,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 3,
+    "Drew": 8,
+    "Lost": 3,
+    "For": 19,
+    "Against": 19,
+    "Points": 17
+   }
+  },
+  "Khimki": {
+   "Home": {
+    "Played": 6,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 10,
+    "Against": 12,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 8,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 11,
+    "Against": 13,
+    "Points": 11
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 4,
+    "Drew": 4,
+    "Lost": 6,
+    "For": 21,
+    "Against": 25,
+    "Points": 16
+   }
+  },
+  "Tyumen": {
+   "Home": {
+    "Played": 10,
+    "Won": 4,
+    "Drew": 4,
+    "Lost": 2,
+    "For": 13,
+    "Against": 10,
+    "Points": 16
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 1,
+    "Against": 9,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 4,
+    "Drew": 4,
+    "Lost": 6,
+    "For": 14,
+    "Against": 19,
+    "Points": 16
+   }
+  },
+  "Luch Vladivostok": {
+   "Home": {
+    "Played": 9,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 7,
+    "Against": 6,
+    "Points": 11
+   },
+   "Away": {
+    "Played": 5,
+    "Won": 0,
+    "Drew": 4,
+    "Lost": 1,
+    "For": 1,
+    "Against": 2,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 3,
+    "Drew": 6,
+    "Lost": 5,
+    "For": 8,
+    "Against": 8,
+    "Points": 15
+   }
+  },
+  "Baltika": {
+   "Home": {
+    "Played": 5,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 5,
+    "Against": 7,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 9,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 4,
+    "For": 11,
+    "Against": 15,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 3,
+    "Drew": 5,
+    "Lost": 6,
+    "For": 16,
+    "Against": 22,
+    "Points": 14
+   }
+  },
+  "Rotor Volgograd": {
+   "Home": {
+    "Played": 5,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 6,
+    "Against": 5,
+    "Points": 8
+   },
+   "Away": {
+    "Played": 9,
+    "Won": 0,
+    "Drew": 6,
+    "Lost": 3,
+    "For": 6,
+    "Against": 11,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 2,
+    "Drew": 8,
+    "Lost": 4,
+    "For": 12,
+    "Against": 16,
+    "Points": 14
+   }
+  },
+  "Sibir": {
+   "Home": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 5,
+    "Against": 7,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 8,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 4,
+    "For": 5,
+    "Against": 11,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 3,
+    "Drew": 4,
+    "Lost": 7,
+    "For": 10,
+    "Against": 18,
+    "Points": 13
+   }
+  },
+  "Torpedo Armavir": {
+   "Home": {
+    "Played": 6,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 7,
+    "Against": 10,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 8,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 5,
+    "For": 6,
+    "Against": 15,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 3,
+    "Drew": 3,
+    "Lost": 8,
+    "For": 13,
+    "Against": 25,
+    "Points": 12
+   }
+  },
+  "Zenit St. Petersburg II": {
+   "Home": {
+    "Played": 7,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 6,
+    "For": 6,
+    "Against": 16,
+    "Points": 1
+   },
+   "Away": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 4,
+    "Against": 7,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 14,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 10,
+    "For": 10,
+    "Against": 23,
+    "Points": 6
+   }
+  }
+ },
+ "36 Turkish Super Lig": {
+  "Galatasaray": {
+   "Home": {
+    "Played": 4,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 12,
+    "Against": 1,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 3,
+    "Against": 8,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 5,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 15,
+    "Against": 9,
+    "Points": 15
+   }
+  },
+  "\u0130stanbul Ba\u015fak\u015fehir": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 10,
+    "Against": 2,
+    "Points": 10
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 2,
+    "Against": 2,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 12,
+    "Against": 4,
+    "Points": 14
+   }
+  },
+  "Be\u015fikta\u015f": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 8,
+    "Against": 5,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 5,
+    "Against": 3,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 13,
+    "Against": 8,
+    "Points": 14
+   }
+  },
+  "Antalyaspor": {
+   "Home": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 7,
+    "Against": 5,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 4,
+    "Against": 8,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 11,
+    "Against": 13,
+    "Points": 13
+   }
+  },
+  "G\u00f6ztepe": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 7,
+    "Against": 5,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 2,
+    "Against": 3,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 9,
+    "Against": 8,
+    "Points": 12
+   }
+  },
+  "Kas\u0131mpa\u015fa": {
+   "Home": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 5,
+    "Against": 4,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 9,
+    "Against": 10,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 14,
+    "Against": 14,
+    "Points": 12
+   }
+  },
+  "Alanyaspor": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 4,
+    "Against": 3,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 2,
+    "Against": 8,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 6,
+    "Against": 11,
+    "Points": 12
+   }
+  },
+  "Konyaspor": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 4,
+    "Against": 4,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 8,
+    "Against": 6,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 12,
+    "Against": 10,
+    "Points": 11
+   }
+  },
+  "Yeni Malatyaspor": {
+   "Home": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 2,
+    "Against": 1,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 5,
+    "Against": 4,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 7,
+    "Against": 5,
+    "Points": 11
+   }
+  },
+  "Trabzonspor": {
+   "Home": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 12,
+    "Against": 5,
+    "Points": 9
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 2,
+    "Against": 5,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 14,
+    "Against": 10,
+    "Points": 10
+   }
+  },
+  "Ankarag\u00fcc\u00fc": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 4,
+    "Against": 6,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 4,
+    "Against": 2,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 8,
+    "Against": 8,
+    "Points": 10
+   }
+  },
+  "Sivasspor": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 5,
+    "Against": 5,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 3,
+    "Against": 6,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 8,
+    "Against": 11,
+    "Points": 8
+   }
+  },
+  "Kayserispor": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 2,
+    "Against": 2,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 3,
+    "Against": 6,
+    "Points": 4
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 5,
+    "Against": 8,
+    "Points": 8
+   }
+  },
+  "Fenerbah\u00e7e": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 5,
+    "Against": 5,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 1,
+    "Against": 5,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 4,
+    "For": 6,
+    "Against": 10,
+    "Points": 7
+   }
+  },
+  "Rizespor": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 6,
+    "Against": 4,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 2,
+    "Against": 4,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 3,
+    "For": 8,
+    "Against": 8,
+    "Points": 6
+   }
+  },
+  "Akhisar Belediyespor": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 5,
+    "Against": 2,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 3,
+    "Against": 8,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 8,
+    "Against": 10,
+    "Points": 5
+   }
+  },
+  "Bursaspor": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 3,
+    "Lost": 0,
+    "For": 1,
+    "Against": 1,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 3,
+    "Against": 6,
+    "Points": 2
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 0,
+    "Drew": 5,
+    "Lost": 2,
+    "For": 4,
+    "Against": 7,
+    "Points": 5
+   }
+  },
+  "Erzurum BB": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 1,
+    "Against": 5,
+    "Points": 0
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 4,
+    "Against": 6,
+    "Points": 2
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 5,
+    "For": 5,
+    "Against": 11,
+    "Points": 2
+   }
+  }
+ },
+ "37 Turkish 1 Lig": {
+  "Gen\u00e7lerbirli\u011fi": {
+   "Home": {
+    "Played": 4,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 10,
+    "Against": 1,
+    "Points": 12
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 5,
+    "Against": 1,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 7,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 15,
+    "Against": 2,
+    "Points": 21
+   }
+  },
+  "Boluspor": {
+   "Home": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 4,
+    "Against": 1,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 8,
+    "Against": 3,
+    "Points": 12
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 6,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 12,
+    "Against": 4,
+    "Points": 19
+   }
+  },
+  "Adana Demirspor": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 9,
+    "Against": 3,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 0,
+    "For": 3,
+    "Against": 0,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 5,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 12,
+    "Against": 3,
+    "Points": 16
+   }
+  },
+  "Denizlispor": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 7,
+    "Against": 2,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 3,
+    "Against": 4,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 10,
+    "Against": 6,
+    "Points": 13
+   }
+  },
+  "Giresunspor": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 5,
+    "Against": 3,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 2,
+    "Against": 2,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 4,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 7,
+    "Against": 5,
+    "Points": 12
+   }
+  },
+  "Gaziantep BB": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 4,
+    "Against": 5,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 0,
+    "For": 2,
+    "Against": 0,
+    "Points": 7
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 2,
+    "Lost": 2,
+    "For": 6,
+    "Against": 5,
+    "Points": 11
+   }
+  },
+  "Altay": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 3,
+    "Against": 3,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 7,
+    "Against": 3,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 2,
+    "For": 10,
+    "Against": 6,
+    "Points": 9
+   }
+  },
+  "Osmanl\u0131spor": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 0,
+    "Against": 4,
+    "Points": 0
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 10,
+    "Against": 3,
+    "Points": 9
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 10,
+    "Against": 7,
+    "Points": 9
+   }
+  },
+  "Bal\u0131kesirspor": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 2,
+    "Against": 4,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 5,
+    "Against": 4,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 6,
+    "Won": 2,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 7,
+    "Against": 8,
+    "Points": 9
+   }
+  },
+  "\u00dcmran\u0131yespor": {
+   "Home": {
+    "Played": 3,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 1,
+    "For": 4,
+    "Against": 3,
+    "Points": 6
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 2,
+    "Against": 4,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 6,
+    "Won": 3,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 6,
+    "Against": 7,
+    "Points": 9
+   }
+  },
+  "Afjet Afyonspor": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 2,
+    "Against": 3,
+    "Points": 2
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 6,
+    "Against": 5,
+    "Points": 6
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 8,
+    "Against": 8,
+    "Points": 8
+   }
+  },
+  "Hatayspor": {
+   "Home": {
+    "Played": 4,
+    "Won": 2,
+    "Drew": 1,
+    "Lost": 1,
+    "For": 5,
+    "Against": 3,
+    "Points": 7
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 0,
+    "Against": 4,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 2,
+    "Drew": 2,
+    "Lost": 3,
+    "For": 5,
+    "Against": 7,
+    "Points": 8
+   }
+  },
+  "Adanaspor": {
+   "Home": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 2,
+    "Against": 5,
+    "Points": 1
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 5,
+    "Against": 5,
+    "Points": 5
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 3,
+    "For": 7,
+    "Against": 10,
+    "Points": 6
+   }
+  },
+  "Alt\u0131nordu": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 5,
+    "Against": 3,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 3,
+    "Lost": 1,
+    "For": 2,
+    "Against": 3,
+    "Points": 3
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 3,
+    "For": 7,
+    "Against": 6,
+    "Points": 6
+   }
+  },
+  "\u0130stanbulspor": {
+   "Home": {
+    "Played": 4,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 2,
+    "For": 6,
+    "Against": 12,
+    "Points": 4
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 2,
+    "Lost": 1,
+    "For": 3,
+    "Against": 4,
+    "Points": 2
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 3,
+    "Lost": 3,
+    "For": 9,
+    "Against": 16,
+    "Points": 6
+   }
+  },
+  "Eski\u015fehirspor": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 0,
+    "For": 4,
+    "Against": 2,
+    "Points": 5
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 4,
+    "For": 2,
+    "Against": 16,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 2,
+    "Lost": 4,
+    "For": 6,
+    "Against": 18,
+    "Points": 5
+   }
+  },
+  "Elaz\u0131\u011fspor": {
+   "Home": {
+    "Played": 3,
+    "Won": 1,
+    "Drew": 0,
+    "Lost": 2,
+    "For": 6,
+    "Against": 4,
+    "Points": 3
+   },
+   "Away": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 2,
+    "Against": 9,
+    "Points": 1
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 1,
+    "Drew": 1,
+    "Lost": 5,
+    "For": 8,
+    "Against": 13,
+    "Points": 4
+   }
+  },
+  "Karab\u00fckspor": {
+   "Home": {
+    "Played": 4,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 3,
+    "For": 1,
+    "Against": 7,
+    "Points": 1
+   },
+   "Away": {
+    "Played": 3,
+    "Won": 0,
+    "Drew": 0,
+    "Lost": 3,
+    "For": 1,
+    "Against": 9,
+    "Points": 0
+   },
+   "Total": {
+    "Played": 7,
+    "Won": 0,
+    "Drew": 1,
+    "Lost": 6,
+    "For": 2,
+    "Against": 16,
+    "Points": 1
+   }
+  }
+ }
+}

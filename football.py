@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
-from commonFunctions import *
+from commonFunctions import valid_input
 import pprint
 import json
 
@@ -37,6 +37,9 @@ def select_league(league_data):
         for league in available_leagues:
             if option == available_leagues[league][0]:
                 selection = league
+
+                # Debug code: Display selected league string
+                # print("Selected league: " + league)
 
         gather_data = display_selection(selection, league_data)
         # If the user exits instead of downlaoding the league data, just exit.
@@ -95,11 +98,15 @@ def import_json_file():
     """
 
     print("---LOADING...---")
-    with open("leagueData.json") as infile:
-        loaded_json = json.load(infile)
-    print("---LOADED---")
+    try:
+        with open("leagueData.json") as infile:
+            loaded_json = json.load(infile)
+            print("---LOADED---")
+        return loaded_json
+    except FileNotFoundError:
+        print('No data found')
+
     input("Press enter to continue")
-    return loaded_json
 
 
 def export_json_file(league_data):
@@ -124,8 +131,6 @@ def display_selection(selection, league_data):
     
     # Debug code: display the URL that will be used to obtain the league data
     # print("This will use the following url: " + availableLeagues[selection][1] + "\n")
-    
-    print("The league has " + str(available_leagues[selection][2]) + " teams.")
 
     while choice != "1" or choice != "2":
         choice = input("Type 1 to download this data or 2 to go back to the main menu.")
@@ -134,7 +139,7 @@ def display_selection(selection, league_data):
             return league_data
         elif choice == "2":
             return False
-          
+            
 def get_league_data(selection, league_data):
     """
     Takes the key of the selected league from the availableLeagues dictionary.
@@ -153,7 +158,12 @@ def get_league_data(selection, league_data):
     season = "c/"  # c is current
     full_url = bet_study_main + season + available_leagues[selection][1]
     web_client = uReq(full_url)
+
+    if web_client.getcode() != 200:
+        print("Cannot retrieve data, webpage is down")
+        return
     web_html = web_client.read()
+
     web_client.close()
     web_soup = soup(web_html, "html.parser")
     table = web_soup.find("div", {"id": "tab03_"})
@@ -339,7 +349,9 @@ def manual_game_analysis(league_data):
 
     for team in team_list:
         print(team_list.index(team) + 1, team)
-        
+
+    # while homeTeam not in teamList or awayTeam not in teamList:
+
     while not valid_input(selection1, range(1, len(team_list) + 1)):
         print("\nSelect home team from the above list:", end = " ")
         selection1 = input()
@@ -368,6 +380,7 @@ def manual_game_analysis(league_data):
     print("\nTotal game stats")
     for stat in league_data[away_team_league][away_team]["Total"]:
         print(stat, league_data[away_team_league][away_team]["Total"][stat], end=" ")
+
         
     comparison = compare(home_team, away_team, league_data)
     print("\n\nComparison")

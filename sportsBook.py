@@ -1,5 +1,5 @@
 from footballMenu import football_menu
-from commonFunctions import *
+from commonFunctions import is_number
 
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
