@@ -88,7 +88,7 @@ available_leagues = {"1 English Premier League": ["1", "england/premier-league/"
                      "32 Czech Liga": ["32", "czech-republic/czech-liga/", 16],
                      "33 Czech FNL": ["33", "czech-republic/fnl/", 16],
                      "34 Russian Premier League": ["34", "russia/premier-league/", 16],
-                     "35 Russina FNL": ["35", "russia/fnl/", 20],
+                     "35 Russian FNL": ["35", "russia/fnl/", 20],
                      "36 Turkish Super Lig": ["36", "turkey/super-lig/", 18],
                      "37 Turkish 1 Lig": ["37", "turkey/1.-lig/", 18]
                     }  
@@ -230,7 +230,6 @@ def get_league(t, league_data):
     """
     Takes in a team name as a string and the leagueData dictionary.
     Returns the name of the league the team belongs to as a string.
-    Not yet in use.
     """
     league_team_pairs = league_data.items()
     for team in league_team_pairs:
@@ -256,7 +255,6 @@ def compare(home_team, away_team, league_data):
     league data, this function may need to be updated.
     A solution would be to use dictionaries instead of lists. Bending my head now
     though, so probably my next task for another day.
-    Not yet in use.
     """
     # Check what league the home team belongs to
     home_league = get_league(home_team, league_data)
@@ -342,18 +340,24 @@ def manual_game_analysis(league_data):
     team_list = []
     selection1 = ""
     selection2 = ""
+    team_list_display = []
     if league_data == {}:
         print("You can't run manual game analysis until you have selected the appropriate league(s).")
         print("Please select a league or import a JSON file first.")
         input("Press enter to continue")
         return False
 
+    # Build the basic team list (this must be kept for later use)
     for team in list_teams(league_data):
         team_list.append(team)
-
+    
+    # Build a list of teams with their option numbers ready for display
     for team in team_list:
-        print(team_list.index(team) + 1, team)
-
+        team_list_display.append(str(team_list.index(team) + 1) + " " + team)
+    
+    # Display the newly generated list
+    custom_pretty_print(team_list_display, 3)
+       
     # while homeTeam not in teamList or awayTeam not in teamList:
 
     while not valid_input(selection1, range(1, len(team_list) + 1)):

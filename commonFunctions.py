@@ -27,10 +27,9 @@ def valid_input(selection, options) -> bool:
 
 
 def custom_pretty_print(data, k):
-    """Takes any given dictionary {data} and prints its keys in k columns, (could also be suited to work with
-     plain lists if needed)
+    """Takes any given dictionary or list {data} and prints its keys (in the case of a dictionary) or values (in the case of a list) in k columns.
 
-    data = dictionary
+    data = dictionary or list
     k = key or number of columns wanted
 
 
@@ -90,8 +89,10 @@ def custom_pretty_print(data, k):
         l = []
         for _ in range(len(data)//k):
 
-            l.append(list(data.keys())[s_0:s_1])
-
+            if type(data) == dict:
+                l.append(list(data.keys())[s_0:s_1])
+            elif type(data) == list:
+                l.append(data[s_0:s_1])
             s_0 += k
             s_1 += k
         return l
