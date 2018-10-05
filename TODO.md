@@ -1,7 +1,8 @@
 For ease and quick communication I've set up a "Slack" workspace for contributors.
 The invite link is: https://join.slack.com/t/sportsbookgroup/shared_invite/enQtNDQ5MDMyMTIwNzA2LWRhY2YxOGY0NWYzNTE2ZDMyNGI3NWQzMTk0YTkxODMyNzEyM2UyMjlkMTVlYmU3NDMzNTVlNWVmZDM4YTNjMjE
 
-Please be sure that your forks are upto date before continuing development as it causes problems when merging new code that has some older features than the existing code. If there's something I can do to make this easier, let me know.
+Please be sure that your forks are up to date before continuing development as it causes problems when merging new code that has some older features than the existing code.
+If there's something I can do to make this easier, let me know.
 
 To Do:
 

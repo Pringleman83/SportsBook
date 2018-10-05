@@ -1,5 +1,5 @@
-#Football menu system
-from commonFunctions import is_number
+# Football menu system
+
 from football import *
 import pprint
 
@@ -12,6 +12,8 @@ __status__ = "Development"
 predictions = []
 
 # temporary, placeholder functions:
+
+
 def download_fixtures(x):
     print("\nThe download fixtures feature is not yet available.\n")
 
@@ -64,6 +66,7 @@ def display_predictions(predictions):
         print("\nPress enter to return to previous menu.\n")
         input()
         return
+
 
 def reports(league_data, predictions):
     print("\nReports Menu")
@@ -152,8 +155,10 @@ def football_menu(league_data):
         else:
             print("\nNo league currently selected. Please start by selecting a league.\n")
 
-        # Display the available options 
+        # Display the available options
+
         for option in football_options:
+
             print(option[0])
             
         # Display any additional information
@@ -161,20 +166,18 @@ def football_menu(league_data):
 
         # Keep asking for a selection while the selection provided is not in the availableOptions list.
         while selection not in available_options:
-            selection = input()
-            selection = selection.lower()
+            selection = input().lower()
 
         # If the selection is in the list, run it's function passing
-        #the leagueData dictionary by default.
+        # the leagueData dictionary by default.
         for option in football_options:
-            if selection.lower() == "m":
+            if selection == "m":
                 exit_menu = True
                 break
             if selection == "7":
                 exit_manual_analysis_menu = False
                 while not exit_manual_analysis_menu:
                     another_game = ""
-                    new_prediction = []
                     new_prediction = manual_game_analysis(league_data)
                     if not new_prediction:
                         selection = ""

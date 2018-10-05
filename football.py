@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
-from commonFunctions import valid_input
-import pprint
+from commonFunctions import valid_input, custom_pretty_print
 import json
 
 __author__ = "David Bristoll"
@@ -18,17 +17,17 @@ def select_league(league_data):
     """             
     while True:
         available_options = []
-        option = "" #Number entered by user
-        selection = "" #League the option relates to
+        option = ""  # Number entered by user
+        selection = ""  # League the option relates to
    
         # Display the leagues available and create the availableOptions list of availble
-        #option numbers for input validation later on.
+        # option numbers for input validation later on.
+        custom_pretty_print(available_leagues, 3)
         for league in available_leagues:
-            print(league)
             available_options.append(available_leagues[league][0])
 
         # While no valid option has been entered, wait for a valid option
-        #(the earlier described input validation)
+        # (the earlier described input validation)
         while option not in available_options:
             print("\nSelect a league to add: ")
             option = input()
@@ -42,55 +41,59 @@ def select_league(league_data):
                 # print("Selected league: " + league)
 
         gather_data = display_selection(selection, league_data)
-        # If the user exits instead of downlaoding the league data, just exit.
+        # If the user exits instead of downloading the league data, just exit.
         # Otherwise, confirm data has been downloaded before exiting.
-        if gather_data == False:
+        if not gather_data:
             return league_data
         else:
             print("\nLeague data has been downloaded. Press enter to continue.")
             input()
             return league_data
 
-# The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com", "Number of teams in league"]   
-available_leagues = {"1 English Premier League":["1", "england/premier-league/", 20],
-                    "2 English Championship":["2", "england/championship/", 24],
-                    "3 English League One":["3", "england/league-one/", 24],
-                    "4 English League Two":["4", "england/league-two/", 24],
-                    "5 Spanish Primera":["5", "spain/primera-division/", 20],
-                    "6 Spanish Segunda":["6", "spain/segunda-division/", 22],
-                    "7 Spanish Segunda B":["7", "spain/segunda-b/", 20],
-                    "8 French Lique 1":["8", "france/ligue-1/", 20],
-                    "9 French Ligue 2":["9", "france/ligue-2/", 20],
-                    "10 German Bundesliga":["10", "germany/bundesliga/", 18],
-                    "11 German 2 Bundesliga":["11", "germany/2.-bundesliga/", 18],
-                    "12 German Liga":["12", "germany/3.-liga/", 20],
-                    "13 Italian Serie A":["13", "italy/serie-a/", 20],
-                    "14 Italian Serie B":["14", "italy/serie-b/", 19],
-                    "15 Brazillian Serie A":["15", "brazil/serie-a/", 20],
-                    "16 Brazillian Serie B":["16", "brazil/serie-b/", 20],
-                    "17 Argentinian Primera Division":["17", "argentina/primera-division/", 26],
-                    "18 Argentinian Prim B Nacional":["18", "argentina/prim-b-nacional/", 25],
-                    "19 Argentinian Prim B Metro":["19", "argentina/prim-b-metro/", 20],
-                    "20 Scottish Premier":["20", "scotland/premiership/", 12],
-                    "21 Scottish Championship":["21", "scotland/championship/", 10],
-                    "22 Scottish League One":["22", "scotland/league-one/", 10],
-                    "23 Scottish League Two":["23", "scotland/league-two/", 10],
-                    "24 Swiss Super League":["24", "switzerland/super-league/", 10],
-                    "25 Swiss Challenge League":["25", "switzerland/challenge-league/", 10],
-                    "26 Ukranian Premier League":["26", "ukraine/premier-league/", 12],
-                    "27 Ukranian Persha Liga":["27", "ukraine/persha-liga/", 16],
-                    "28 Dutch Eredivisie":["28", "netherlands/eredivisie/", 18],
-                    "29 Dutch Eerste Divisie":["29", "netherlands/eerste-divisie/", 20],
-                    "30 Greek Super League":["30", "greece/super-league/", 16],
-                    "31 Greek Football League":["31", "greece/football-league/", 18],
-                    "32 Czech Liga":["32", "czech-republic/czech-liga/", 16],
-                    "33 Czech FNL":["33", "czech-republic/fnl/", 16],
-                    "34 Russian Premier League":["34", "russia/premier-league/", 16],
-                    "35 Russina FNL":["35", "russia/fnl/", 20],
-                    "36 Turkish Super Lig":["36", "turkey/super-lig/", 18],
-                    "37 Turkish 1 Lig":["37", "turkey/1.-lig/", 18]
+# The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com",
+#  "Number of teams in league"]
+
+
+available_leagues = {"1 English Premier League": ["1", "england/premier-league/", 20],
+                     "2 English Championship": ["2", "england/championship/", 24],
+                     "3 English League One": ["3", "england/league-one/", 24],
+                     "4 English League Two": ["4", "england/league-two/", 24],
+                     "5 Spanish Primera": ["5", "spain/primera-division/", 20],
+                     "6 Spanish Segunda": ["6", "spain/segunda-division/", 22],
+                     "7 Spanish Segunda B": ["7", "spain/segunda-b/", 20],
+                     "8 French Lique 1": ["8", "france/ligue-1/", 20],
+                     "9 French Ligue 2": ["9", "france/ligue-2/", 20],
+                     "10 German Bundesliga": ["10", "germany/bundesliga/", 18],
+                     "11 German 2 Bundesliga": ["11", "germany/2.-bundesliga/", 18],
+                     "12 German Liga": ["12", "germany/3.-liga/", 20],
+                     "13 Italian Serie A": ["13", "italy/serie-a/", 20],
+                     "14 Italian Serie B": ["14", "italy/serie-b/", 19],
+                     "15 Brazillian Serie A": ["15", "brazil/serie-a/", 20],
+                     "16 Brazillian Serie B": ["16", "brazil/serie-b/", 20],
+                     "17 Argentinian Primera Division": ["17", "argentina/primera-division/", 26],
+                     "18 Argentinian Prim B Nacional": ["18", "argentina/prim-b-nacional/", 25],
+                     "19 Argentinian Prim B Metro": ["19", "argentina/prim-b-metro/", 20],
+                     "20 Scottish Premier": ["20", "scotland/premiership/", 12],
+                     "21 Scottish Championship": ["21", "scotland/championship/", 10],
+                     "22 Scottish League One": ["22", "scotland/league-one/", 10],
+                     "23 Scottish League Two": ["23", "scotland/league-two/", 10],
+                     "24 Swiss Super League": ["24", "switzerland/super-league/", 10],
+                     "25 Swiss Challenge League": ["25", "switzerland/challenge-league/", 10],
+                     "26 Ukranian Premier League": ["26", "ukraine/premier-league/", 12],
+                     "27 Ukranian Persha Liga": ["27", "ukraine/persha-liga/", 16],
+                     "28 Dutch Eredivisie": ["28", "netherlands/eredivisie/", 18],
+                     "29 Dutch Eerste Divisie": ["29", "netherlands/eerste-divisie/", 20],
+                     "30 Greek Super League": ["30", "greece/super-league/", 16],
+                     "31 Greek Football League": ["31", "greece/football-league/", 18],
+                     "32 Czech Liga": ["32", "czech-republic/czech-liga/", 16],
+                     "33 Czech FNL": ["33", "czech-republic/fnl/", 16],
+                     "34 Russian Premier League": ["34", "russia/premier-league/", 16],
+                     "35 Russian FNL": ["35", "russia/fnl/", 20],
+                     "36 Turkish Super Lig": ["36", "turkey/super-lig/", 18],
+                     "37 Turkish 1 Lig": ["37", "turkey/1.-lig/", 18]
                     }  
-         
+
+
 def import_json_file():
 
     """
@@ -139,7 +142,8 @@ def display_selection(selection, league_data):
             return league_data
         elif choice == "2":
             return False
-            
+
+
 def get_league_data(selection, league_data):
     """
     Takes the key of the selected league from the availableLeagues dictionary.
@@ -226,7 +230,6 @@ def get_league(t, league_data):
     """
     Takes in a team name as a string and the leagueData dictionary.
     Returns the name of the league the team belongs to as a string.
-    Not yet in use.
     """
     league_team_pairs = league_data.items()
     for team in league_team_pairs:
@@ -252,7 +255,6 @@ def compare(home_team, away_team, league_data):
     league data, this function may need to be updated.
     A solution would be to use dictionaries instead of lists. Bending my head now
     though, so probably my next task for another day.
-    Not yet in use.
     """
     # Check what league the home team belongs to
     home_league = get_league(home_team, league_data)
@@ -338,18 +340,24 @@ def manual_game_analysis(league_data):
     team_list = []
     selection1 = ""
     selection2 = ""
+    team_list_display = []
     if league_data == {}:
         print("You can't run manual game analysis until you have selected the appropriate league(s).")
         print("Please select a league or import a JSON file first.")
         input("Press enter to continue")
         return False
 
+    # Build the basic team list (this must be kept for later use)
     for team in list_teams(league_data):
         team_list.append(team)
-
+    
+    # Build a list of teams with their option numbers ready for display
     for team in team_list:
-        print(team_list.index(team) + 1, team)
-
+        team_list_display.append(str(team_list.index(team) + 1) + " " + team)
+    
+    # Display the newly generated list
+    custom_pretty_print(team_list_display, 3)
+       
     # while homeTeam not in teamList or awayTeam not in teamList:
 
     while not valid_input(selection1, range(1, len(team_list) + 1)):
