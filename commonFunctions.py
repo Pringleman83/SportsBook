@@ -95,8 +95,18 @@ def custom_pretty_print(data, k):
                 l.append(data[s_0:s_1])
             s_0 += k
             s_1 += k
+        
+        # Add last items and blank items to ensure all items are displayed
+        blanks = k - (len(data) % k)
+        if type(data) == dict:
+            l.append(list(data.keys())[s_0:len(data)])
+        elif type(data) == list:
+            l.append(data[s_0:len(data)])
+    
+        for _ in range(blanks):
+            l[-1].append("")
         return l
-
+    
     x = PrettyTable()
     for i in get_k_sized_list(data, k):
         x.add_row(i)
