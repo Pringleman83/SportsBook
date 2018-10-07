@@ -98,9 +98,9 @@ def custom_pretty_print(data, k):
         
         # Add last items and blank items to ensure all items are displayed
         blanks = k - (len(data) % k)
-        if type(data) == dict:
+        if isinstance(data, dict):
             l.append(list(data.keys())[s_0:len(data)])
-        elif type(data) == list:
+        if isinstance(data, list):
             l.append(data[s_0:len(data)])
     
         for _ in range(blanks):
