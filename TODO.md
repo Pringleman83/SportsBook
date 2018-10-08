@@ -9,11 +9,15 @@ To Do:
 This is a list of what I'd like to do next. However, if any contributors have other ideas please feel free to share them and discuss.
 
 (1)
+
+DONE
+
 Tidy the league select and team select screen so that 3 or 4 leagues / teams appear on each line.
 For example:
 
 1) English Premier   2) English Championship    3) English League 1
 
+DONE
 
 (2)
 Design a fixture list scraper.
