@@ -27,7 +27,8 @@ def valid_input(selection, options) -> bool:
 
 
 def custom_pretty_print(data, k):
-    """Takes any given dictionary or list {data} and prints its keys (in the case of a dictionary) or values (in the case of a list) in k columns.
+    """Takes any given dictionary or list {data} and prints its keys (in the case of a dictionary)
+        or values (in the case of a list) in k columns.
 
     data = dictionary or list
     k = key or number of columns wanted
@@ -51,7 +52,9 @@ def custom_pretty_print(data, k):
         +--------------------------+------------------------+----------------------+
         | 1 English Premier League | 2 English Championship | 3 English League One |
         | 4 English League Two     | 5 Spanish Primera      | 6 Spanish Segunda    |
+        | 7 Spanish Segunda B      | 8 French Lique 1       |                      |
         +--------------------------+------------------------+----------------------+
+
 
     -- custom_pretty_print(my_dictionary, 2):
 
@@ -81,9 +84,14 @@ def custom_pretty_print(data, k):
     Any of this could be very well changed if needed, will probably de-hardcode this variables and make them needed or
     optional to the function in the future. Open issue or message Surister for any further info or request
 
+
+
+
+
+
      """
 
-    def get_k_sized_list(data, k):
+    def _get_k_sized_list(data, k):
         s_0 = 0
         s_1 = k
         l = []
@@ -98,17 +106,21 @@ def custom_pretty_print(data, k):
         
         # Add last items and blank items to ensure all items are displayed
         blanks = k - (len(data) % k)
+
         if isinstance(data, dict):
             l.append(list(data.keys())[s_0:len(data)])
         if isinstance(data, list):
             l.append(data[s_0:len(data)])
     
-        for _ in range(blanks):
+        for _ in range(blanks):     # This resolves the problem of having an odd list divided
+                                    # in a even fashion (and the other way around)
+
             l[-1].append("")
+
         return l
-    
+
     x = PrettyTable()
-    for i in get_k_sized_list(data, k):
+    for i in _get_k_sized_list(data, k):
         x.add_row(i)
         x.align = 'l'
         x.header = False
