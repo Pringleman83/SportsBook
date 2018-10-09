@@ -49,7 +49,9 @@ def main_menu(options):
         # Having broken out of the loop, run the selected function
         if selected == options[0][0]:
             league_data = {}
-            football_menu(league_data)
+            fixtures = []
+            predictions = []
+            football_menu(league_data, fixtures, predictions)
         if selected == options[1][0]:
             tennis()
 
