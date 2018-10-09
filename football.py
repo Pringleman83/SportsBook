@@ -513,6 +513,6 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
         if not prediction in predictions:
             predictions.append(prediction)
     
-    print(predictions)
+    #print(predictions)
     # Return the new predictions list
     return predictions
