@@ -10,7 +10,7 @@ __email__ = "david.bristoll@gmail.com"
 __status__ = "Development"
 
 
-def select_league(league_data):
+def select_league(league_data, fixtures):
     """Takes  in the leagueData dictionary.
     Prompts the user to select a league.
     Returns the key value of the selected league.
@@ -40,15 +40,15 @@ def select_league(league_data):
                 # Debug code: Display selected league string
                 # print("Selected league: " + league)
 
-        gather_data = display_selection(selection, league_data)
+        gather_data = display_selection(selection, league_data, fixtures)
         # If the user exits instead of downloading the league data, just exit.
         # Otherwise, confirm data has been downloaded before exiting.
         if not gather_data:
-            return league_data
+            return (league_data, fixtures)
         else:
             print("\nLeague data has been downloaded. Press enter to continue.")
             input()
-            return league_data
+            return (league_data, fixtures)
 
 # The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com",
 #  "Number of teams in league"]
@@ -123,9 +123,9 @@ def export_json_file(league_data):
     input("Press enter to continue")
 
 
-def display_selection(selection, league_data):
+def display_selection(selection, league_data, fixtures):
     """ Takes in the key value of the selected league.
-    Prints the league name and number of teams in that league.
+    Prints the league name.
     Gives the option of confirming the selection of that league or returning
     to the main menu.
     """
@@ -138,19 +138,22 @@ def display_selection(selection, league_data):
     while choice != "1" or choice != "2":
         choice = input("Type 1 to download this data or 2 to go back to the main menu.")
         if choice == "1":
-            get_league_data(selection, league_data)
-            return league_data
+            league_data_and_fixtures = get_league_data(selection, league_data, fixtures)
+            return league_data_and_fixtures
         elif choice == "2":
             return False
 
 
-def get_league_data(selection, league_data):
+def get_league_data(selection, league_data, fixtures):
     """
     Takes the key of the selected league from the availableLeagues dictionary.
     Scrapes the selected league information from bedstudy.com.
     Calculates unscraped data (for example, total games won).
     Adds all data to the leagueData dictionary.
-    Currently assumes the global leagueData dictionary.
+    
+    Scrapes the next 15 fixtures of the selected league.
+    Adds therm to the fixtures list.
+    
     Future upgrades to this function may include:
         * Separate the calculation of additional data to an additional function.
         * Add more calculations (for example, average goals per game) to this
@@ -167,7 +170,6 @@ def get_league_data(selection, league_data):
         print("Cannot retrieve data, webpage is down")
         return
     web_html = web_client.read()
-
     web_client.close()
     web_soup = soup(web_html, "html.parser")
     table = web_soup.find("div", {"id": "tab03_"})
@@ -222,8 +224,51 @@ def get_league_data(selection, league_data):
                  "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
                            "For": total_for, "Against": total_against, "Points": total_points}
                  }
+    # Get fixtures
+    fixtures_url = "d/fixtures/"
+    full_url = bet_study_main + season + available_leagues[selection][1] + fixtures_url
+    
+    web_client = uReq(full_url)
 
-    return league_data
+    if web_client.getcode() != 200:
+        print("Cannot retrieve data, webpage is down.")
+        return
+    web_html = web_client.read()
+
+    web_client.close()
+    web_soup = soup(web_html, "html.parser")
+    table = web_soup.find("table", {"class": "schedule-table"})
+    
+    number_of_games = 15 # Enough games to include the next game for each team
+    
+    #fixture list 0.text date, 2.text time, 1.text home team, 3.text away team
+    #fixture list 5            7            6                 8
+    fixture = []
+    
+    while True:
+        try:
+            # Scrape the nunmber of requested fixtures and then break out of the loop.
+            
+            # Each fixture contains 5 cells
+            # Multiply the number of games required by 5
+            # Produce a list of the 4 of 5 cells needed for each game
+            # Add list to fixture list
+            for i in range(0,number_of_games * 5, 5):
+                fixture = ["", "", "", ""]
+                #print(str(i) + " " + str(table.select('td')[i]) + "\n")
+                fixture[0] = str(table.select('td')[i].text) # date
+                fixture[1] = str(table.select('td')[i + 2].text) # time
+                fixture[2] = str(table.select('td')[i + 1].text) # home team
+                fixture[3] = str(table.select('td')[i + 3].text) # away team
+                
+                # Only add the fixture to the fixtures list if it's not already present.
+                if not fixture in fixtures:
+                    fixtures.append(fixture[:]) # add fixture details to fixtures                    
+            break
+        except:
+            # Number of requested fixtures exceeds the number of requested fixtures, break.
+            break
+    return (league_data, fixtures)
 
 
 def get_league(t, league_data):
@@ -419,13 +464,55 @@ def manual_game_analysis(league_data):
     
     """
     ***For possible future use***
-    homeGoalsAgainstPerGame = int(leagueData[homeTeamLeague][homeTeam]["Home"]["Against"] / leagueData[homeTeamLeague][homeTeam]["Home"]["Played"]) # Average goals against per game
-    awayGoalsAgainstPerGame = int(leagueData[awayTeamLeague][awayTeam]["Away"]["Against"] / leagueData[awayTeamLeague][awayTeam]["Away"]["Played"])  # Average goals against per game
+    homeGoalsAgainstPerGame = int(leagueData[homeTeamLeague][homeTeam]["Home"]["Against"] / league_data[homeTeamLeague][homeTeam]["Home"]["Played"]) # Average goals against per game
+    awayGoalsAgainstPerGame = int(league_data[awayTeamLeague][awayTeam]["Away"]["Against"] / leagueData[awayTeamLeague][awayTeam]["Away"]["Played"])  # Average goals against per game
     
     print(homeTeam + " " + str(homeTeamPredictedScorea) + " - " + awayTeam + " " + str(awayTeamPredictedScorea))
     """
     print(home_team + " " + str(home_team_predicted_score) + " - " + away_team + " " + str(away_team_predicted_score))
 
     predictions = [home_team, home_team_predicted_score, away_team, away_team_predicted_score]
+    print(predictions)
+    return predictions
+
+def upcoming_fixture_predictions(fixtures, predictions, league_data):
+    """
+    Takes in the fixtures and predictions lists.
+    Runs predictions on all upcoming fixtures.
+    Adds each prediction to the predictions list.
+    Returns the updated predictions list.
+    """
     
+    for fixture in fixtures:
+        home_team = fixture[2]
+        away_team = fixture[3]
+        #comparison = compare(homeTeam, awayTeam, league_data)
+        """
+        comaprison return notes:
+        [H/A compare[Pld,W,D,L,F,A,Pts], Total compare[Pld,W,D,L,F,A,Pts]]
+        """
+        
+        home_team_league = get_league(home_team, league_data)
+        away_team_league = get_league(away_team, league_data)
+    
+        home_team_avg_gpg_f = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Home team average gaols per for per game
+        
+        away_team_avg_gpg_f =int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away teamverage goals per for per game
+        
+        home_team_avg_gpg_a = int(league_data[home_team_league][home_team]["Home"]["Against"] / league_data[home_team_league][home_team]["Home"]["Played"]) # Away team average goals against per game
+        
+        away_team_avg_gpg_a = int(league_data[away_team_league][away_team]["Away"]["Against"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away team average goals against per game
+        
+        home_team_goals = int((home_team_avg_gpg_f * 1.25) * (away_team_avg_gpg_a))
+        away_team_goals = int((away_team_avg_gpg_f * 1.25) * (home_team_avg_gpg_a))
+        
+        # Save current prediction as a list item.
+        prediction = [home_team, home_team_goals, away_team, away_team_goals]
+        
+        # If the prediction is not already in the predictions list, add it.
+        if not prediction in predictions:
+            predictions.append(prediction)
+    
+    print(predictions)
+    # Return the new predictions list
     return predictions
