@@ -12,15 +12,43 @@ class League:
     Contains all teams within that league.
     Has methods for returning league specific stats such as top scoring team etc.
     """
+    # A blank list that will hold the names of all created league objects initiated.
+    leagues = []
+    
     def __init__(self, league_name):
+        """
+        Initiate a league object.
+        Takes a league name.
+        Adds the name to the list of leages created.
+        """
+        
+        # The object holds a list of all of the team objects belonging to the league
         self.data = {"league_name": self.league_name,
                      "teams": []}
         
-        # list of league aliases for the comparing of data from various sources.
+        # A list of league aliases for the comparing of data from various sources.
         self.aliases = []
+        
+        # Add the name of the league initiated to the league list.
+        leagues.append(league_name)
 
 class Team:
+    """
+    Team Object.
+    Contains all of the data belonging to each team.
+    Contains a list of all team objects that have been initiated.
+    Has methods for comparing teams and predicting outcomes.
+    """
+    
+    # A blank list that will hold the names of all created team objects initiated.
+    teams = []
+    
     def __init__(self, team_name, league_name, home_stats, away_stats):
+        """
+        Initiate a team object.
+        Takes the team name, the league it belongs to, the team's home stats as a list and the teams away stats as a list.
+        Calculates additional statistics base on those passed to it for future use.
+        """
         self.data:{"league_name": self.league_name,
                    "team_name": self.team_name,
                    "home":{
@@ -71,6 +99,9 @@ class Team:
                   }
                 # List of team aliases for the comparing of data from various sources.
                 self.aliases = []
+                
+                # Add the name of the team initiated to the teams list.
+                teams.append(team_name)
             
             def __gt__(self, opponent):
                 """
