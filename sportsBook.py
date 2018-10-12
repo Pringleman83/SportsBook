@@ -102,6 +102,7 @@ class MainMenu(object):
                     except KeyError:
                         # If it's not valid, go back to the beginning.
                         break
+                    # If we got this far, go back to the beginning.
                     break
 
 
