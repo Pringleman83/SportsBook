@@ -96,15 +96,13 @@ class MainMenu(object):
                     # check to see if it is a valid key.
                     try:
                         if options[selected] == "Football":
-                            # Note: Coming back to this menu from
-                            # footballMenu.py is not currently elegant,
-                            # dumps you back halfway into this loop.
                             self.football()
                         elif options[selected] == "Tennis":
                             self.tennis()
                     except KeyError:
                         # If it's not valid, go back to the beginning.
                         break
+                    break
 
 
 mainmenu = MainMenu()
