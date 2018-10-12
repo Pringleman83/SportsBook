@@ -1,5 +1,7 @@
 from footballMenu import football_menu
 from commonFunctions import is_number
+import argparse
+from sys import exit
 
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
@@ -8,54 +10,102 @@ __email__ = "david.bristoll@gmail.com"
 __status__ = "Development"
 
 
-def tennis():
+class MainMenu(object):
     """
-    Placeholder for Tennis selection.
-    Serves no function except for menu testing.
+    Main menu class object. Takes user input and moves onto the next menu.
     """
-    print("The tennis option is a placeholder for testing. The option is not currently available. \n\n")
+    def __init__(self):
 
-# options list can only now be declared (after its functions have been)
+        self.parse_args()
 
+    def tennis(self):
+        """
+        Placeholder for Tennis selection.
+        Serves no function except for menu testing.
+        """
+        print("The tennis option is a placeholder for testing.")
+        print("The option is not supported in this build. \n\n")
 
-options = [[1, "Football", football_menu], [2, "Tennis", tennis], ["Q", "Quit"]]
+    def football(self):
+        """
+        Just calls the imported football_menu() function, so that if this
+        functionality changes in future it's easy to change once
+        rather than repeating ourselves throughout the code.
+        """
 
+        league_data = {}
+        fixtures = []
+        predictions = []
 
-def main_menu(options):
-    """
-    Main menu function
-    Offers all options in the options list (no need to edit this function)
-    Returns the selected funtion to run.
-    """
-    while True:
+        football_menu(league_data, fixtures, predictions)
+
+    def parse_args(self):
+        """"
+        Parses the command line arguments, so that power-users can
+        skip the menus. Currently very bare-bones.
+        """
+        parser = argparse.ArgumentParser()
+        parser.add_argument(
+            '-s', '--sport', help="The sport you wish to analyse.")
+
+        self.args = parser.parse_args()
+
+    def display_menu(self):
+        """
+        Main menu function
+        Offers all options in the options list.
+        Returns the selected function to run.
+        """
+        options = {
+            1: "Football",
+            2: "Tennis",
+        }
+        # If the user picked a sport by CLI argument, skip the main menu.
+        # This should be refactored to use the options dict, probably.
+        if self.args.sport:
+            if self.args.sport == "football":
+                self.football()
+            elif self.args.sport == "tennis":
+                self.tennis()
+            else:
+                print("{} is not currently a supported sport."
+                      .format(self.args.sport))
+                return
+
         print("Welcome to SportsBook - A sports analysis tool.")
-        print("Please select from one of the following sports:")
-        # Display all options
-        for option in options:
-            print(str(option[0]) + " " + str(option[1]))
-        # Take user selection
         while True:
-            print("Enter option: ")
-            selected = input()
-            # Quit option
-            if selected.lower() == "q":
-                exit()
-            # If a number has been entered, convert the string to an integer
-            if is_number(selected):
-                selected = int(selected)
-                # If the selection is in the list break out of the infinite loop
-                if selected in range(len(options)) and selected != 0:
-                    break
-        # Having broken out of the loop, run the selected function
-        if selected == options[0][0]:
-            league_data = {}
-            fixtures = []
-            predictions = []
-            football_menu(league_data, fixtures, predictions)
-        if selected == options[1][0]:
-            tennis()
+            print("Main Menu")
+            print("---------")
+            print("Please select from one of the following sports:")
+            # Display all options
+            for key in options:
+                print("{}) {}".format(key, options[key]))
+            print("q) Quit")
+            # Take user selection
+            while True:
+                print("Enter option: ")
+                selected = input()
+                # Quit option
+                if selected.lower() == "q":
+                    exit()
+                # If a number has been entered,
+                # convert the string to an integer.
+                if is_number(selected):
+                    selected = int(selected)
+                    # If selected is a number,
+                    # check to see if it is a valid key.
+                    try:
+                        if options[selected] == "Football":
+                            # Note: Coming back to this menu from
+                            # footballMenu.py is not currently elegant,
+                            # dumps you back halfway into this loop.
+                            self.football()
+                        elif options[selected] == "Tennis":
+                            self.tennis()
+                    except KeyError:
+                        # If it's not valid, go back to the beginning.
+                        break
 
-# As this is the main file, call up the main menu
 
-
-main_menu(options)
+mainmenu = MainMenu()
+mainmenu.display_menu()
