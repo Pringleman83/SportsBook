@@ -83,8 +83,7 @@ class MainMenu(object):
             print("q) Quit")
             # Take user selection
             while True:
-                print("Enter option: ")
-                selected = input()
+                selected = input("Enter option: ")
                 # Quit option
                 if selected.lower() == "q":
                     exit()
