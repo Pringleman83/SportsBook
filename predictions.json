@@ -1,0 +1,692 @@
+[
+ [
+  "Barnsley",
+  1,
+  "Luton Town",
+  0,
+  "Home team home stats",
+  {
+   "Played": 5,
+   "Won": 2,
+   "Drew": 3,
+   "Lost": 0,
+   "For": 8,
+   "Against": 3,
+   "Points": 9
+  },
+  "Home team home stats",
+  {
+   "Played": 11,
+   "Won": 6,
+   "Drew": 4,
+   "Lost": 1,
+   "For": 23,
+   "Against": 7,
+   "Points": 22
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 1,
+   "Drew": 2,
+   "Lost": 3,
+   "For": 5,
+   "Against": 8,
+   "Points": 5
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 5,
+   "Drew": 4,
+   "Lost": 3,
+   "For": 17,
+   "Against": 15,
+   "Points": 19
+  }
+ ],
+ [
+  "AFC Wimbledon",
+  0,
+  "Portsmouth",
+  1,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 1,
+   "Drew": 1,
+   "Lost": 4,
+   "For": 6,
+   "Against": 10,
+   "Points": 4
+  },
+  "Home team home stats",
+  {
+   "Played": 12,
+   "Won": 3,
+   "Drew": 2,
+   "Lost": 7,
+   "For": 9,
+   "Against": 16,
+   "Points": 11
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 5,
+   "Drew": 1,
+   "Lost": 0,
+   "For": 10,
+   "Against": 4,
+   "Points": 16
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 8,
+   "Drew": 3,
+   "Lost": 1,
+   "For": 21,
+   "Against": 10,
+   "Points": 27
+  }
+ ],
+ [
+  "Accrington Stanley",
+  1,
+  "Bradford City",
+  1,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 2,
+   "Drew": 3,
+   "Lost": 1,
+   "For": 6,
+   "Against": 6,
+   "Points": 9
+  },
+  "Home team home stats",
+  {
+   "Played": 12,
+   "Won": 5,
+   "Drew": 5,
+   "Lost": 2,
+   "For": 14,
+   "Against": 12,
+   "Points": 20
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 2,
+   "Drew": 0,
+   "Lost": 4,
+   "For": 6,
+   "Against": 9,
+   "Points": 6
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 3,
+   "Drew": 1,
+   "Lost": 8,
+   "For": 9,
+   "Against": 17,
+   "Points": 10
+  }
+ ],
+ [
+  "Burton Albion",
+  0,
+  "Bristol Rovers",
+  0,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 3,
+   "Drew": 1,
+   "Lost": 2,
+   "For": 8,
+   "Against": 5,
+   "Points": 10
+  },
+  "Home team home stats",
+  {
+   "Played": 11,
+   "Won": 3,
+   "Drew": 2,
+   "Lost": 6,
+   "For": 12,
+   "Against": 15,
+   "Points": 11
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 1,
+   "Drew": 3,
+   "Lost": 2,
+   "For": 4,
+   "Against": 5,
+   "Points": 6
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 2,
+   "Drew": 4,
+   "Lost": 6,
+   "For": 9,
+   "Against": 12,
+   "Points": 10
+  }
+ ],
+ [
+  "Coventry City",
+  0,
+  "Wycombe Wanderers",
+  0,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 2,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 4,
+   "Against": 5,
+   "Points": 7
+  },
+  "Home team home stats",
+  {
+   "Played": 12,
+   "Won": 4,
+   "Drew": 3,
+   "Lost": 5,
+   "For": 10,
+   "Against": 13,
+   "Points": 15
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 1,
+   "Drew": 3,
+   "Lost": 2,
+   "For": 8,
+   "Against": 11,
+   "Points": 6
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 2,
+   "Drew": 6,
+   "Lost": 4,
+   "For": 14,
+   "Against": 18,
+   "Points": 12
+  }
+ ],
+ [
+  "Fleetwood Town",
+  1,
+  "Shrewsbury Town",
+  0,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 1,
+   "Drew": 3,
+   "Lost": 2,
+   "For": 7,
+   "Against": 9,
+   "Points": 6
+  },
+  "Home team home stats",
+  {
+   "Played": 12,
+   "Won": 4,
+   "Drew": 5,
+   "Lost": 3,
+   "For": 19,
+   "Against": 11,
+   "Points": 17
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 0,
+   "Drew": 3,
+   "Lost": 3,
+   "For": 4,
+   "Against": 7,
+   "Points": 3
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 2,
+   "Drew": 6,
+   "Lost": 4,
+   "For": 10,
+   "Against": 11,
+   "Points": 12
+  }
+ ],
+ [
+  "Gillingham",
+  1,
+  "Southend United",
+  2,
+  "Home team home stats",
+  {
+   "Played": 5,
+   "Won": 1,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 7,
+   "Against": 11,
+   "Points": 4
+  },
+  "Home team home stats",
+  {
+   "Played": 11,
+   "Won": 3,
+   "Drew": 2,
+   "Lost": 6,
+   "For": 15,
+   "Against": 20,
+   "Points": 11
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 3,
+   "Drew": 1,
+   "Lost": 2,
+   "For": 7,
+   "Against": 8,
+   "Points": 10
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 5,
+   "Drew": 2,
+   "Lost": 5,
+   "For": 15,
+   "Against": 16,
+   "Points": 17
+  }
+ ],
+ [
+  "Oxford United",
+  1,
+  "Plymouth Argyle",
+  0,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 1,
+   "Drew": 0,
+   "Lost": 5,
+   "For": 8,
+   "Against": 12,
+   "Points": 3
+  },
+  "Home team home stats",
+  {
+   "Played": 12,
+   "Won": 1,
+   "Drew": 3,
+   "Lost": 8,
+   "For": 11,
+   "Against": 23,
+   "Points": 6
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 0,
+   "Drew": 2,
+   "Lost": 4,
+   "For": 3,
+   "Against": 9,
+   "Points": 2
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 1,
+   "Drew": 4,
+   "Lost": 7,
+   "For": 9,
+   "Against": 20,
+   "Points": 7
+  }
+ ],
+ [
+  "Rochdale",
+  1,
+  "Doncaster Rovers",
+  2,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 1,
+   "Drew": 1,
+   "Lost": 4,
+   "For": 6,
+   "Against": 13,
+   "Points": 4
+  },
+  "Home team home stats",
+  {
+   "Played": 12,
+   "Won": 3,
+   "Drew": 4,
+   "Lost": 5,
+   "For": 17,
+   "Against": 25,
+   "Points": 13
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 3,
+   "Drew": 1,
+   "Lost": 2,
+   "For": 11,
+   "Against": 8,
+   "Points": 10
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 6,
+   "Drew": 3,
+   "Lost": 3,
+   "For": 18,
+   "Against": 14,
+   "Points": 21
+  }
+ ],
+ [
+  "Scunthorpe United",
+  2,
+  "Peterborough United",
+  7,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 2,
+   "Drew": 3,
+   "Lost": 1,
+   "For": 12,
+   "Against": 14,
+   "Points": 9
+  },
+  "Home team home stats",
+  {
+   "Played": 12,
+   "Won": 4,
+   "Drew": 5,
+   "Lost": 3,
+   "For": 20,
+   "Against": 24,
+   "Points": 17
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 5,
+   "Drew": 1,
+   "Lost": 0,
+   "For": 19,
+   "Against": 8,
+   "Points": 16
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 7,
+   "Drew": 3,
+   "Lost": 2,
+   "For": 28,
+   "Against": 19,
+   "Points": 24
+  }
+ ],
+ [
+  "Blackpool",
+  1,
+  "AFC Wimbledon",
+  0,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 2,
+   "Drew": 3,
+   "Lost": 1,
+   "For": 9,
+   "Against": 7,
+   "Points": 9
+  },
+  "Home team home stats",
+  {
+   "Played": 11,
+   "Won": 3,
+   "Drew": 7,
+   "Lost": 1,
+   "For": 12,
+   "Against": 9,
+   "Points": 16
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 2,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 3,
+   "Against": 6,
+   "Points": 7
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 3,
+   "Drew": 2,
+   "Lost": 7,
+   "For": 9,
+   "Against": 16,
+   "Points": 11
+  }
+ ],
+ [
+  "Bradford City",
+  0,
+  "Rochdale",
+  1,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 1,
+   "Drew": 1,
+   "Lost": 4,
+   "For": 3,
+   "Against": 8,
+   "Points": 4
+  },
+  "Home team home stats",
+  {
+   "Played": 12,
+   "Won": 3,
+   "Drew": 1,
+   "Lost": 8,
+   "For": 9,
+   "Against": 17,
+   "Points": 10
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 2,
+   "Drew": 3,
+   "Lost": 1,
+   "For": 11,
+   "Against": 12,
+   "Points": 9
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 3,
+   "Drew": 4,
+   "Lost": 5,
+   "For": 17,
+   "Against": 25,
+   "Points": 13
+  }
+ ],
+ [
+  "Bristol Rovers",
+  0,
+  "Oxford United",
+  0,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 1,
+   "Drew": 1,
+   "Lost": 4,
+   "For": 5,
+   "Against": 7,
+   "Points": 4
+  },
+  "Home team home stats",
+  {
+   "Played": 12,
+   "Won": 2,
+   "Drew": 4,
+   "Lost": 6,
+   "For": 9,
+   "Against": 12,
+   "Points": 10
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 0,
+   "Drew": 3,
+   "Lost": 3,
+   "For": 3,
+   "Against": 11,
+   "Points": 3
+  },
+  "Away team total stats",
+  {
+   "Played": 12,
+   "Won": 1,
+   "Drew": 3,
+   "Lost": 8,
+   "For": 11,
+   "Against": 23,
+   "Points": 6
+  }
+ ],
+ [
+  "Charlton Athletic",
+  0,
+  "Barnsley",
+  2,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 3,
+   "Drew": 1,
+   "Lost": 2,
+   "For": 8,
+   "Against": 7,
+   "Points": 10
+  },
+  "Home team home stats",
+  {
+   "Played": 12,
+   "Won": 5,
+   "Drew": 3,
+   "Lost": 4,
+   "For": 19,
+   "Against": 18,
+   "Points": 18
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 4,
+   "Drew": 1,
+   "Lost": 1,
+   "For": 15,
+   "Against": 4,
+   "Points": 13
+  },
+  "Away team total stats",
+  {
+   "Played": 11,
+   "Won": 6,
+   "Drew": 4,
+   "Lost": 1,
+   "For": 23,
+   "Against": 7,
+   "Points": 22
+  }
+ ],
+ [
+  "Doncaster Rovers",
+  1,
+  "Gillingham",
+  1,
+  "Home team home stats",
+  {
+   "Played": 6,
+   "Won": 3,
+   "Drew": 2,
+   "Lost": 1,
+   "For": 7,
+   "Against": 6,
+   "Points": 11
+  },
+  "Home team home stats",
+  {
+   "Played": 12,
+   "Won": 6,
+   "Drew": 3,
+   "Lost": 3,
+   "For": 18,
+   "Against": 14,
+   "Points": 21
+  },
+  "Away team away stats",
+  {
+   "Played": 6,
+   "Won": 2,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 8,
+   "Against": 9,
+   "Points": 7
+  },
+  "Away team total stats",
+  {
+   "Played": 11,
+   "Won": 3,
+   "Drew": 2,
+   "Lost": 6,
+   "For": 15,
+   "Against": 20,
+   "Points": 11
+  }
+ ]
+]

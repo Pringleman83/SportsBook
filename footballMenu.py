@@ -71,6 +71,7 @@ def reports(league_data, fixtures, predictions):
                       ["(2) Display currently loaded league data", "2"],
                       ["(3) Display currently loaded fixtures", "3"],
                       ["(4) Display predictions", "4"],
+                      ["(5) Save predictions to file", "5"],
                       ["(M) Return to previous menu", "m"]
                       ]
     
@@ -99,13 +100,15 @@ def reports(league_data, fixtures, predictions):
                 exit_menu = True
                 return league_data
         if selection == report_options[0][1]: # Export data to JSON
-            export_json_file(league_data)
+            export_json_file(league_data, "leagueData")
         if selection == report_options[1][1]: # Display currently loaded league data
             display_selected_leagues(league_data)
         if selection == report_options[2][1]: # Display currently loaded    fixtures
             display_fixtures(fixtures)     
         if selection == report_options[3][1]: # Display currently loaded predictions
             display_predictions(predictions)
+        if selection == report_options[4][1]: # Save predictions
+            export_json_file(predictions, "predictions")
         selection = ""
 
 
@@ -181,25 +184,17 @@ def football_menu(league_data, fixtures, predictions):
             if selection == "4": # Manual single game analysis
                 exit_manual_analysis_menu = False
                 while not exit_manual_analysis_menu:
+                    selection = ""
                     another_game = ""
-                    new_prediction = manual_game_analysis(league_data)
-                    if not new_prediction:
-                        selection = ""
-                        break
-                    if new_prediction != "" and new_prediction != []:
-                        if new_prediction not in predictions:
-                            predictions.append(new_prediction)
-                            selection = ""
-                        else:
-                            print("\nThis prediction is already in the predictions list.")
-                        while another_game.lower() != "y" and another_game.lower() != "n":
-                            print("\nAnalyse another game? (Y/N)")
-                            another_game = input()
-                            if another_game.lower() == "n":
-                                exit_manual_analysis_menu = True
-                                break
-                            if another_game.lower() == "y":
-                                break
+                    manual_game_analysis(league_data, predictions)
+                    while another_game.lower() != "y" and another_game.lower() != "n":
+                        print("\nAnalyse another game? (Y/N)")
+                        another_game = input()
+                        if another_game.lower() == "n":
+                            exit_manual_analysis_menu = True
+                            break
+                        if another_game.lower() == "y":
+                            break
                                 
             if selection == "5": # Reports
                 reports(league_data, fixtures, predictions)

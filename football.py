@@ -112,13 +112,13 @@ def import_json_file():
     input("Press enter to continue")
 
 
-def export_json_file(league_data):
+def export_json_file(data, file_name):
     """ Saves the leagueData dictionary to a json file called
     leagueData.json.
     """
     print("---SAVING...---")
-    with open("leagueData.json", "w") as outfile:
-        json.dump(league_data, outfile, indent=1)
+    with open(file_name + ".json", "w") as outfile:
+        json.dump(data, outfile, indent=1)
     print("---SAVED---")
     input("Press enter to continue")
 
@@ -373,7 +373,7 @@ def list_teams(league_data):
     return team_list
 
 
-def manual_game_analysis(league_data):
+def manual_game_analysis(league_data, predictions):
     """
     Takes the leagueData dictionary.
     Asks the user to select the home and away teams from the available
@@ -455,13 +455,7 @@ def manual_game_analysis(league_data):
     for stat in league_data[away_team_league][away_team]["Away"]:
         print(stat, comparison[0][comparison_index_count], end=" ")
         comparison_index_count += 1
-    
-    # **Old method*** Basic prediction based on average goals scored per game for each team at home or away respectively
-    """print("\n\nPredicted outcome:")
-    print("==================")
-    home_team_goals = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Average gaols per for per game
-    away_team_goals = int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Average gaols per for per game
-    """
+
     home_team_avg_gpg_f = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Home team average gaols per for per game
     
     away_team_avg_gpg_f =int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away teamverage goals per for per game
@@ -482,10 +476,16 @@ def manual_game_analysis(league_data):
     if away_team_goals > away_team_max_goals:
         away_team_goals = away_team_max_goals
     
-    print(home_team + " " + str(home_team_goals) + " - " + away_team + " " + str(away_team_goals))
+    
+    print("\n" + "Predicted Outcome" + "\n=================\n" + home_team + " " + str(home_team_goals) + " - " + away_team + " " + str(away_team_goals))
 
-    predictions = [home_team, home_team_goals, away_team, away_team_goals]
-    print(predictions)
+    # Save current prediction as a list item.
+    prediction = [home_team, home_team_goals, away_team, away_team_goals, league_data[home_team_league][home_team]["Home"], league_data[home_team_league][home_team]["Total"], league_data[away_team_league][away_team]["Away"], league_data[away_team_league][away_team]["Total"]]
+    
+    # If the prediction is not already in the predictions list, add it.
+    if not prediction in predictions:
+        predictions.append(prediction)
+    
     return predictions
 
 def upcoming_fixture_predictions(fixtures, predictions, league_data):
@@ -529,7 +529,7 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
             away_team_goals = away_team_max_goals
         
         # Save current prediction as a list item.
-        prediction = [home_team, home_team_goals, away_team, away_team_goals]
+        prediction = [home_team, home_team_goals, away_team, away_team_goals, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
         
         # If the prediction is not already in the predictions list, add it.
         if not prediction in predictions:
