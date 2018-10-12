@@ -456,22 +456,35 @@ def manual_game_analysis(league_data):
         print(stat, comparison[0][comparison_index_count], end=" ")
         comparison_index_count += 1
     
-    # Basic prediction based on average goals scored per game for each team at home or away respectively
-    print("\n\nPredicted outcome:")
+    # **Old method*** Basic prediction based on average goals scored per game for each team at home or away respectively
+    """print("\n\nPredicted outcome:")
     print("==================")
-    home_team_predicted_score = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Average gaols per for per game
-    away_team_predicted_score = int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Average gaols per for per game
-    
+    home_team_goals = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Average gaols per for per game
+    away_team_goals = int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Average gaols per for per game
     """
-    ***For possible future use***
-    homeGoalsAgainstPerGame = int(leagueData[homeTeamLeague][homeTeam]["Home"]["Against"] / league_data[homeTeamLeague][homeTeam]["Home"]["Played"]) # Average goals against per game
-    awayGoalsAgainstPerGame = int(league_data[awayTeamLeague][awayTeam]["Away"]["Against"] / leagueData[awayTeamLeague][awayTeam]["Away"]["Played"])  # Average goals against per game
+    home_team_avg_gpg_f = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Home team average gaols per for per game
     
-    print(homeTeam + " " + str(homeTeamPredictedScorea) + " - " + awayTeam + " " + str(awayTeamPredictedScorea))
-    """
-    print(home_team + " " + str(home_team_predicted_score) + " - " + away_team + " " + str(away_team_predicted_score))
+    away_team_avg_gpg_f =int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away teamverage goals per for per game
+    
+    home_team_avg_gpg_a = int(league_data[home_team_league][home_team]["Home"]["Against"] / league_data[home_team_league][home_team]["Home"]["Played"]) # Away team average goals against per game
+    
+    away_team_avg_gpg_a = int(league_data[away_team_league][away_team]["Away"]["Against"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away team average goals against per game
+    
+    home_team_max_goals = home_team_avg_gpg_f * 2.5
+    away_team_max_goals = away_team_avg_gpg_f * 2.5
+    
+    home_team_goals = int((home_team_avg_gpg_f * 1.25) * (away_team_avg_gpg_a))
+    away_team_goals = int((away_team_avg_gpg_f * 1.25) * (home_team_avg_gpg_a))
+    
+    if home_team_goals > home_team_max_goals:
+        home_team_goals = home_team_max_goals
+    
+    if away_team_goals > away_team_max_goals:
+        away_team_goals = away_team_max_goals
+    
+    print(home_team + " " + str(home_team_goals) + " - " + away_team + " " + str(away_team_goals))
 
-    predictions = [home_team, home_team_predicted_score, away_team, away_team_predicted_score]
+    predictions = [home_team, home_team_goals, away_team, away_team_goals]
     print(predictions)
     return predictions
 
@@ -503,8 +516,17 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
         
         away_team_avg_gpg_a = int(league_data[away_team_league][away_team]["Away"]["Against"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away team average goals against per game
         
+        home_team_max_goals = home_team_avg_gpg_f * 2.5
+        away_team_max_goals = away_team_avg_gpg_f * 2.5
+        
         home_team_goals = int((home_team_avg_gpg_f * 1.25) * (away_team_avg_gpg_a))
         away_team_goals = int((away_team_avg_gpg_f * 1.25) * (home_team_avg_gpg_a))
+        
+        if home_team_goals > home_team_max_goals:
+            home_team_goals = home_team_max_goals
+        
+        if away_team_goals > away_team_max_goals:
+            away_team_goals = away_team_max_goals
         
         # Save current prediction as a list item.
         prediction = [home_team, home_team_goals, away_team, away_team_goals]
