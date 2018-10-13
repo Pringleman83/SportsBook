@@ -15,7 +15,7 @@ DONE
 Tidy the league select and team select screen so that 3 or 4 leagues / teams appear on each line.
 For example:
 
-1) English Premier   2) English Championship    3) English League 1
+1) English Premier   2) English Championship    3) English League 1 (Done)
 
 DONE
 
@@ -24,7 +24,7 @@ Design a fixture list scraper.
 This is a relatively big task. I'm hoping to get started on this Monday 8 October and have it working by Saturday 13.
 Once complete:
   (2b)
-  Develop an automated prediction process so that the user can run predictions for all upcoming fixtures in all selected leagues.
+  Develop an automated prediction process so that the user can run predictions for all upcoming fixtures in all selected leagues. (Done)
   (2c)
   Develop an option for the user to view upcoming fixtures and select from them which games to predict.
   
