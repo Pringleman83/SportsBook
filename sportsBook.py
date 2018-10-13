@@ -1,5 +1,4 @@
 from footballMenu import football_menu
-from commonFunctions import is_number
 import argparse
 from sys import exit
 
