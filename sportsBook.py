@@ -67,8 +67,7 @@ class MainMenu(object):
             elif self.args.sport == "tennis":
                 self.tennis()
             else:
-                print("{} is not currently a supported sport."
-                      .format(self.args.sport))
+                print(f"{self.args.sport} is not currently a supported sport.")
                 return
 
         print("Welcome to SportsBook - A sports analysis tool.")
@@ -78,7 +77,7 @@ class MainMenu(object):
             print("Please select from one of the following sports:")
             # Display all options
             for key in options:
-                print("{}) {}".format(key, options[key]))
+                print(f"{key}) {options[key]}")
             print("q) Quit")
             # Take user selection
             while True:
