@@ -1,10 +1,10 @@
 # SportsBook
 A sports data scraping and analysis tool
 
-This project is in its very early days and currently only supports football (soccer). The Python script currently gives the user the option to select a league (or multiple leagues) to load, view the loaded leagues, export it/them to a json file and import a previously exported json file.
+This "Experimentation" branch is reserved for where we are trying new things.
 
-When complete, the user will be able to select a sport and a league or competition. They'll then be able to view stats, build comparisons, review fixtures and generate reports.
+Currently we're in the process of restructuring the code to make it object orientated.
 
-Read the wiki to see the latest news and progress.
-
-It'd be great to hear from you so please leave a comment.
+The aim was to make the code easier to understand, edit and further develop. However,
+in the process, it's become clear that this approach will enable us to make the code 
+much more powerful with less effort.
