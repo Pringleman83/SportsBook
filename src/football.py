@@ -479,8 +479,8 @@ def manual_game_analysis(league_data, predictions):
     
     print("\n" + "Predicted Outcome" + "\n=================\n" + home_team + " " + str(home_team_goals) + " - " + away_team + " " + str(away_team_goals))
 
-    # Save current prediction as a list item.
-    prediction = [home_team, home_team_goals, away_team, away_team_goals, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
+    # Save current prediction as a list item. First two empty items are where fixtured games store the fixture date and time.
+    prediction = ["", "", home_team, home_team_goals, away_team, away_team_goals, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
     
     # If the prediction is not already in the predictions list, add it.
     if not prediction in predictions:
@@ -497,6 +497,8 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
     """
     
     for fixture in fixtures:
+        fixture_date = fixture[0]
+        fixture_time = fixture[1]
         home_team = fixture[2]
         away_team = fixture[3]
         #comparison = compare(homeTeam, awayTeam, league_data)
@@ -529,7 +531,7 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
             away_team_goals = away_team_max_goals
         
         # Save current prediction as a list item.
-        prediction = [home_team, home_team_goals, away_team, away_team_goals, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
+        prediction = [fixture_date, fixture_time, home_team, home_team_goals, away_team, away_team_goals, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
         
         # If the prediction is not already in the predictions list, add it.
         if not prediction in predictions:

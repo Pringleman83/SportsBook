@@ -57,7 +57,7 @@ def display_predictions(predictions):
         print("\nPredictions")
         print("===========\n")
         for game in predictions:
-            print(game[0], game[1], game[2], game[3])
+            print(game[0], game[1], game[2], game[3], game[4], game[5]) #Date, time, home, home_score, away, away_score
         print("\nPress enter to return to previous menu.")
         input()
         return
