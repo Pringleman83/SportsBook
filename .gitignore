@@ -114,3 +114,6 @@ dmypy.json
 
 # personal surister (pycharm)
 *.idea
+
+# OS X fluff
+.DS_Store
