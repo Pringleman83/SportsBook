@@ -480,7 +480,7 @@ def manual_game_analysis(league_data, predictions):
     print("\n" + "Predicted Outcome" + "\n=================\n" + home_team + " " + str(home_team_goals) + " - " + away_team + " " + str(away_team_goals))
 
     # Save current prediction as a list item.
-    prediction = [home_team, home_team_goals, away_team, away_team_goals, league_data[home_team_league][home_team]["Home"], league_data[home_team_league][home_team]["Total"], league_data[away_team_league][away_team]["Away"], league_data[away_team_league][away_team]["Total"]]
+    prediction = [home_team, home_team_goals, away_team, away_team_goals, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
     
     # If the prediction is not already in the predictions list, add it.
     if not prediction in predictions:
