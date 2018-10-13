@@ -89,20 +89,22 @@ class MainMenu(object):
                     exit()
                 # If a number has been entered,
                 # convert the string to an integer.
-                if is_number(selected):
+                try:
                     selected = int(selected)
-                    # If selected is a number,
-                    # check to see if it is a valid key.
-                    try:
-                        if options[selected] == "Football":
-                            self.football()
-                        elif options[selected] == "Tennis":
-                            self.tennis()
-                    except KeyError:
-                        # If it's not valid, go back to the beginning.
-                        break
-                    # If we got this far, go back to the beginning.
+                except ValueError:
                     break
+                # If selected is a number,
+                # check to see if it is a valid key.
+                try:
+                    if options[selected] == "Football":
+                        self.football()
+                    elif options[selected] == "Tennis":
+                        self.tennis()
+                except KeyError:
+                    # If it's not valid, go back to the beginning.
+                    break
+                # If we got this far, go back to the beginning.
+                break
 
 
 mainmenu = MainMenu()
