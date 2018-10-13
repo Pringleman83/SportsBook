@@ -89,9 +89,9 @@ def custom_pretty_print(data, k):
         l = []
         for _ in range(len(data)//k):
 
-            if isinstance(data, dict):
+            if type(data) == dict:
                 l.append(list(data.keys())[s_0:s_1])
-            elif isinstance(data, list):
+            elif type(data) == list:
                 l.append(data[s_0:s_1])
             s_0 += k
             s_1 += k
