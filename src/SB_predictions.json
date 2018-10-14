@@ -1,0 +1,722 @@
+[
+ [
+  "20.10.2018",
+  "11:30",
+  "Chelsea",
+  2,
+  "Manchester United",
+  1,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 3,
+   "Drew": 1,
+   "Lost": 0,
+   "For": 10,
+   "Against": 4,
+   "Points": 10
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 6,
+   "Drew": 2,
+   "Lost": 0,
+   "For": 18,
+   "Against": 5,
+   "Points": 20
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 2,
+   "Drew": 0,
+   "Lost": 2,
+   "For": 7,
+   "Against": 7,
+   "Points": 6
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 4,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 13,
+   "Against": 14,
+   "Points": 13
+  }
+ ],
+ [
+  "20.10.2018",
+  "14:00",
+  "AFC Bournemouth",
+  2,
+  "Southampton",
+  0,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 3,
+   "Drew": 1,
+   "Lost": 0,
+   "For": 10,
+   "Against": 5,
+   "Points": 10
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 5,
+   "Drew": 1,
+   "Lost": 2,
+   "For": 16,
+   "Against": 12,
+   "Points": 16
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 1,
+   "Drew": 0,
+   "Lost": 3,
+   "For": 3,
+   "Against": 7,
+   "Points": 3
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 1,
+   "Drew": 2,
+   "Lost": 5,
+   "For": 6,
+   "Against": 14,
+   "Points": 5
+  }
+ ],
+ [
+  "20.10.2018",
+  "14:00",
+  "Cardiff City",
+  0,
+  "Fulham",
+  0,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 0,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 3,
+   "Against": 10,
+   "Points": 1
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 0,
+   "Drew": 2,
+   "Lost": 6,
+   "For": 4,
+   "Against": 17,
+   "Points": 2
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 0,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 3,
+   "Against": 11,
+   "Points": 1
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 1,
+   "Drew": 2,
+   "Lost": 5,
+   "For": 9,
+   "Against": 21,
+   "Points": 5
+  }
+ ],
+ [
+  "20.10.2018",
+  "14:00",
+  "Manchester City",
+  3,
+  "Burnley",
+  0,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 4,
+   "Drew": 0,
+   "Lost": 0,
+   "For": 13,
+   "Against": 2,
+   "Points": 12
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 6,
+   "Drew": 2,
+   "Lost": 0,
+   "For": 21,
+   "Against": 3,
+   "Points": 20
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 1,
+   "Drew": 1,
+   "Lost": 2,
+   "For": 4,
+   "Against": 6,
+   "Points": 4
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 2,
+   "Drew": 2,
+   "Lost": 4,
+   "For": 10,
+   "Against": 12,
+   "Points": 8
+  }
+ ],
+ [
+  "20.10.2018",
+  "14:00",
+  "Newcastle United",
+  0,
+  "Brighton & Hove Albion",
+  0,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 0,
+   "Drew": 0,
+   "Lost": 4,
+   "For": 3,
+   "Against": 8,
+   "Points": 0
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 0,
+   "Drew": 2,
+   "Lost": 6,
+   "For": 6,
+   "Against": 13,
+   "Points": 2
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 0,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 2,
+   "Against": 7,
+   "Points": 1
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 2,
+   "Drew": 2,
+   "Lost": 4,
+   "For": 9,
+   "Against": 13,
+   "Points": 8
+  }
+ ],
+ [
+  "20.10.2018",
+  "14:00",
+  "West Ham United",
+  0,
+  "Tottenham Hotspur",
+  2,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 1,
+   "Drew": 1,
+   "Lost": 2,
+   "For": 4,
+   "Against": 4,
+   "Points": 4
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 2,
+   "Drew": 1,
+   "Lost": 5,
+   "For": 8,
+   "Against": 13,
+   "Points": 7
+  },
+  "Away team away stats",
+  {
+   "Played": 5,
+   "Won": 4,
+   "Drew": 0,
+   "Lost": 1,
+   "For": 10,
+   "Against": 4,
+   "Points": 12
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 6,
+   "Drew": 0,
+   "Lost": 2,
+   "For": 15,
+   "Against": 7,
+   "Points": 18
+  }
+ ],
+ [
+  "20.10.2018",
+  "14:00",
+  "Wolverhampton Wanderers",
+  1,
+  "Watford",
+  0,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 2,
+   "Drew": 2,
+   "Lost": 0,
+   "For": 6,
+   "Against": 3,
+   "Points": 8
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 4,
+   "Drew": 3,
+   "Lost": 1,
+   "For": 9,
+   "Against": 6,
+   "Points": 15
+  },
+  "Away team away stats",
+  {
+   "Played": 3,
+   "Won": 1,
+   "Drew": 1,
+   "Lost": 1,
+   "For": 4,
+   "Against": 4,
+   "Points": 4
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 4,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 11,
+   "Against": 12,
+   "Points": 13
+  }
+ ],
+ [
+  "20.10.2018",
+  "16:30",
+  "Huddersfield Town",
+  0,
+  "Liverpool",
+  1,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 0,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 0,
+   "Against": 6,
+   "Points": 1
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 0,
+   "Drew": 3,
+   "Lost": 5,
+   "For": 4,
+   "Against": 17,
+   "Points": 3
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 3,
+   "Drew": 1,
+   "Lost": 0,
+   "For": 7,
+   "Against": 3,
+   "Points": 10
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 6,
+   "Drew": 2,
+   "Lost": 0,
+   "For": 15,
+   "Against": 3,
+   "Points": 20
+  }
+ ],
+ [
+  "21.10.2018",
+  "15:00",
+  "Everton",
+  1,
+  "Crystal Palace",
+  1,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 2,
+   "Drew": 1,
+   "Lost": 1,
+   "For": 7,
+   "Against": 5,
+   "Points": 7
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 3,
+   "Drew": 3,
+   "Lost": 2,
+   "For": 13,
+   "Against": 12,
+   "Points": 12
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 2,
+   "Drew": 0,
+   "Lost": 2,
+   "For": 5,
+   "Against": 4,
+   "Points": 6
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 2,
+   "Drew": 1,
+   "Lost": 5,
+   "For": 5,
+   "Against": 9,
+   "Points": 7
+  }
+ ],
+ [
+  "22.10.2018",
+  "19:00",
+  "Arsenal",
+  1,
+  "Leicester City",
+  0,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 3,
+   "Drew": 0,
+   "Lost": 1,
+   "For": 7,
+   "Against": 3,
+   "Points": 9
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 6,
+   "Drew": 0,
+   "Lost": 2,
+   "For": 19,
+   "Against": 10,
+   "Points": 18
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 2,
+   "Drew": 0,
+   "Lost": 2,
+   "For": 7,
+   "Against": 7,
+   "Points": 6
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 4,
+   "Drew": 0,
+   "Lost": 4,
+   "For": 14,
+   "Against": 12,
+   "Points": 12
+  }
+ ],
+ [
+  "27.10.2018",
+  "14:00",
+  "Brighton & Hove Albion",
+  0,
+  "Wolverhampton Wanderers",
+  0,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 2,
+   "Drew": 1,
+   "Lost": 1,
+   "For": 7,
+   "Against": 6,
+   "Points": 7
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 2,
+   "Drew": 2,
+   "Lost": 4,
+   "For": 9,
+   "Against": 13,
+   "Points": 8
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 2,
+   "Drew": 1,
+   "Lost": 1,
+   "For": 3,
+   "Against": 3,
+   "Points": 7
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 4,
+   "Drew": 3,
+   "Lost": 1,
+   "For": 9,
+   "Against": 6,
+   "Points": 15
+  }
+ ],
+ [
+  "27.10.2018",
+  "14:00",
+  "Fulham",
+  1,
+  "AFC Bournemouth",
+  2,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 1,
+   "Drew": 1,
+   "Lost": 2,
+   "For": 6,
+   "Against": 10,
+   "Points": 4
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 1,
+   "Drew": 2,
+   "Lost": 5,
+   "For": 9,
+   "Against": 21,
+   "Points": 5
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 2,
+   "Drew": 0,
+   "Lost": 2,
+   "For": 6,
+   "Against": 7,
+   "Points": 6
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 5,
+   "Drew": 1,
+   "Lost": 2,
+   "For": 16,
+   "Against": 12,
+   "Points": 16
+  }
+ ],
+ [
+  "27.10.2018",
+  "14:00",
+  "Liverpool",
+  2,
+  "Cardiff City",
+  0,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 3,
+   "Drew": 1,
+   "Lost": 0,
+   "For": 8,
+   "Against": 0,
+   "Points": 10
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 6,
+   "Drew": 2,
+   "Lost": 0,
+   "For": 15,
+   "Against": 3,
+   "Points": 20
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 0,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 1,
+   "Against": 7,
+   "Points": 1
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 0,
+   "Drew": 2,
+   "Lost": 6,
+   "For": 4,
+   "Against": 17,
+   "Points": 2
+  }
+ ],
+ [
+  "27.10.2018",
+  "14:00",
+  "Southampton",
+  0,
+  "Newcastle United",
+  0,
+  "Home team home stats",
+  {
+   "Played": 4,
+   "Won": 0,
+   "Drew": 2,
+   "Lost": 2,
+   "For": 3,
+   "Against": 7,
+   "Points": 2
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 1,
+   "Drew": 2,
+   "Lost": 5,
+   "For": 6,
+   "Against": 14,
+   "Points": 5
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 0,
+   "Drew": 2,
+   "Lost": 2,
+   "For": 3,
+   "Against": 5,
+   "Points": 2
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 0,
+   "Drew": 2,
+   "Lost": 6,
+   "For": 6,
+   "Against": 13,
+   "Points": 2
+  }
+ ],
+ [
+  "27.10.2018",
+  "14:00",
+  "Watford",
+  2,
+  "Huddersfield Town",
+  1,
+  "Home team home stats",
+  {
+   "Played": 5,
+   "Won": 3,
+   "Drew": 0,
+   "Lost": 2,
+   "For": 7,
+   "Against": 8,
+   "Points": 9
+  },
+  "Home team home stats",
+  {
+   "Played": 8,
+   "Won": 4,
+   "Drew": 1,
+   "Lost": 3,
+   "For": 11,
+   "Against": 12,
+   "Points": 13
+  },
+  "Away team away stats",
+  {
+   "Played": 4,
+   "Won": 0,
+   "Drew": 2,
+   "Lost": 2,
+   "For": 4,
+   "Against": 11,
+   "Points": 2
+  },
+  "Away team total stats",
+  {
+   "Played": 8,
+   "Won": 0,
+   "Drew": 3,
+   "Lost": 5,
+   "For": 4,
+   "Against": 17,
+   "Points": 3
+  }
+ ]
+]

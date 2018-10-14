@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
-from commonFunctions import valid_input, custom_pretty_print
-import json
+import commonFunctions as cf
 
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
@@ -22,7 +21,7 @@ def select_league(league_data, fixtures):
    
         # Display the leagues available and create the availableOptions list of availble
         # option numbers for input validation later on.
-        custom_pretty_print(available_leagues, 3)
+        cf.custom_pretty_print(available_leagues, 3)
         for league in available_leagues:
             available_options.append(available_leagues[league][0])
 
@@ -90,38 +89,22 @@ available_leagues = {"1 English Premier League": ["1", "england/premier-league/"
                      "34 Russian Premier League": ["34", "russia/premier-league/", 16],
                      "35 Russian FNL": ["35", "russia/fnl/", 20],
                      "36 Turkish Super Lig": ["36", "turkey/super-lig/", 18],
-                     "37 Turkish 1 Lig": ["37", "turkey/1.-lig/", 18]
+                     "37 Turkish 1 Lig": ["37", "turkey/1.-lig/", 18],
+                     "38 Belgian Pro League": ["38", "belgium/pro-league/", 16],
+                     "39 Belgian Second Division": ["39", "belgium/second-division/", 8],
+                     "40 Danish Superliga": ["40", "denmark/superliga/", 14],
+                     "41 Danish 1st Division": ["41", "denmark/1st-division/", 12],
+                     "42 Norwegian Eliteserien": ["42", "norway/eliteserien/", 16],
+                     "43 Norwegian 1. Division": ["43", "norway/1.-division/", 16],
+                     "44 Polish Ekstraklasa": ["44", "poland/ekstraklasa/", 16],
+                     "45 Polish I Liga": ["45", "poland/i-liga/", 18],
+                     "46 Lithuanian 1 Lyga": ["46", "lithuania/1-lyga/", 14],
+                     "47 Croatian 1. HNL": ["47", "croatia/1.-hnl/", 10],
+                     "48 Croatian 2. HNL": ["48", "croatia/2.-hnl/", 14],
+                     "49 Indonesian ISL": ["49", "indonesia/isl/", 18],
+                     "50 Swedish Allsvenskan": ["50", "sweden/allsvenskan/", 16],
+                     "51 Swedish Superettan": ["51", "sweden/superettan/", 16],
                     }  
-
-
-def import_json_file():
-
-    """
-    Loads the leagueData.json file into the leagueData dictionary.
-    """
-
-    print("---LOADING...---")
-    try:
-        with open("leagueData.json") as infile:
-            loaded_json = json.load(infile)
-            print("---LOADED---")
-        return loaded_json
-    except FileNotFoundError:
-        print('No data found')
-
-    input("Press enter to continue")
-
-
-def export_json_file(data, file_name):
-    """ Saves the leagueData dictionary to a json file called
-    leagueData.json.
-    """
-    print("---SAVING...---")
-    with open(file_name + ".json", "w") as outfile:
-        json.dump(data, outfile, indent=1)
-    print("---SAVED---")
-    input("Press enter to continue")
-
 
 def display_selection(selection, league_data, fixtures):
     """ Takes in the key value of the selected league.
@@ -401,14 +384,14 @@ def manual_game_analysis(league_data, predictions):
         team_list_display.append(str(team_list.index(team) + 1) + " " + team)
     
     # Display the newly generated list
-    custom_pretty_print(team_list_display, 3)
+    cf.custom_pretty_print(team_list_display, 3)
        
     # while homeTeam not in teamList or awayTeam not in teamList:
 
-    while not valid_input(selection1, range(1, len(team_list) + 1)):
+    while not cf.valid_input(selection1, range(1, len(team_list) + 1)):
         print("\nSelect home team from the above list:", end = " ")
         selection1 = input()
-    while not valid_input(selection2, range(1, len(team_list) + 1)):
+    while not cf.valid_input(selection2, range(1, len(team_list) + 1)):
         print("\nSelect away team from the above list:", end = " ")
         selection2 = input()
 
@@ -416,6 +399,11 @@ def manual_game_analysis(league_data, predictions):
     away_team = team_list[int(selection2)-1]
     home_team_league = get_league(home_team, league_data)
     away_team_league = get_league(away_team, league_data)
+    
+    if home_team_league == away_team_league:
+        league = home_team_league
+    else:
+        league = "(mixed leagues)"
         
     print("\nHome Team is: ", home_team)
     print("Home game stats:")
@@ -480,7 +468,7 @@ def manual_game_analysis(league_data, predictions):
     print("\n" + "Predicted Outcome" + "\n=================\n" + home_team + " " + str(home_team_goals) + " - " + away_team + " " + str(away_team_goals))
 
     # Save current prediction as a list item. First two empty items are where fixtured games store the fixture date and time.
-    prediction = ["", "", home_team, home_team_goals, away_team, away_team_goals, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
+    prediction = [league, "", "", home_team, home_team_goals, away_team, away_team_goals, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
     
     # If the prediction is not already in the predictions list, add it.
     if not prediction in predictions:
@@ -509,6 +497,11 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
         
         home_team_league = get_league(home_team, league_data)
         away_team_league = get_league(away_team, league_data)
+        
+        if home_team_league == away_team_league:
+            league = home_team_league
+        else:
+            league = "(mixed leagues)"
     
         home_team_avg_gpg_f = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Home team average gaols per for per game
         
@@ -531,12 +524,11 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
             away_team_goals = away_team_max_goals
         
         # Save current prediction as a list item.
-        prediction = [fixture_date, fixture_time, home_team, home_team_goals, away_team, away_team_goals, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
+        prediction = [league, fixture_date, fixture_time, home_team, home_team_goals, away_team, away_team_goals, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
         
         # If the prediction is not already in the predictions list, add it.
         if not prediction in predictions:
             predictions.append(prediction)
     
-    #print(predictions)
     # Return the new predictions list
     return predictions

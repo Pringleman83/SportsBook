@@ -2,6 +2,7 @@
 
 from football import *
 import pprint
+import commonFunctions as cf
 
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
@@ -55,9 +56,15 @@ def display_predictions(predictions):
         return
     else:
         print("\nPredictions")
-        print("===========\n")
+        print("===========")
+        league = ""
         for game in predictions:
-            print(game[0], game[1], game[2], game[3], game[4], game[5]) #Date, time, home, home_score, away, away_score
+            #If a new league is present, print the league name
+            if game[0] != league:
+                print("\n\n" + game[0] + "\n")
+            league = game[0]
+            print(game[1], game[2], game[3], game[4], game[5], game[6])
+                #league, date, time, home, home_score, away, away_score
         print("\nPress enter to return to previous menu.")
         input()
         return
@@ -67,7 +74,7 @@ def reports(league_data, fixtures, predictions):
     print("\nReports Menu")
     print("============")
     
-    report_options = [["(1) Export JSON data", "1"],
+    report_options = [["(1) Export league data (!fixture information not currently included!)", "1"],
                       ["(2) Display currently loaded league data", "2"],
                       ["(3) Display currently loaded fixtures", "3"],
                       ["(4) Display predictions", "4"],
@@ -100,7 +107,7 @@ def reports(league_data, fixtures, predictions):
                 exit_menu = True
                 return league_data
         if selection == report_options[0][1]: # Export data to JSON
-            export_json_file(league_data, "leagueData")
+            cf.export_json_file(league_data)
         if selection == report_options[1][1]: # Display currently loaded league data
             display_selected_leagues(league_data)
         if selection == report_options[2][1]: # Display currently loaded    fixtures
@@ -108,7 +115,7 @@ def reports(league_data, fixtures, predictions):
         if selection == report_options[3][1]: # Display currently loaded predictions
             display_predictions(predictions)
         if selection == report_options[4][1]: # Save predictions
-            export_json_file(predictions, "predictions")
+            cf.export_json_file(predictions)
         selection = ""
 
 
@@ -201,7 +208,7 @@ def football_menu(league_data, fixtures, predictions):
                 selection = ""
                 continue
             if selection == "6": # Import data from JSON file
-                league_data = import_json_file()
+                league_data = cf.import_json_file()
                 selection = ""
                 continue
             if selection == "7": # Clear currently loaded league data.
