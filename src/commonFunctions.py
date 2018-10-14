@@ -2,10 +2,23 @@
 from prettytable import PrettyTable
 import json
 
+def remove_duplicates(old_list):
+    """
+    Takes a list.
+    Returns a new list with all duplicates removed.
+    """
+    new_list = []
+    for item in old_list:
+        if item not in new_list:
+            new_list.append(item)
+    return new_list
+
 def import_json_file():
 
     """
-    Loads the leagueData.json file into the leagueData dictionary.
+    Takes no arguments.
+    Asks the user for a filename.
+    Loads the filename.json and returns it as a dictionary.
     """
     print("\n Enter the name of the file you wish to load (no extension required): ", end="")
     file_name = input()
@@ -22,8 +35,8 @@ def import_json_file():
 
 
 def export_json_file(data):
-    """ Saves the leagueData dictionary to a json file called
-    leagueData.json.
+    """
+    Saves any passed data to a json file after asking thue suser for a file name.
     """
     print("\n Enter a file name (no extension required): ", end="")
     file_name = input()
