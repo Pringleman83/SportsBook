@@ -2,6 +2,17 @@
 from prettytable import PrettyTable
 import json
 
+def remove_duplicates(old_list):
+    """
+    Takes a list.
+    Returns a new list with all duplicates removed.
+    """
+    new_list = []
+    for item in old_list:
+        if item not in new_list:
+            new_list.append(item)
+    return new_list
+
 def import_json_file():
 
     """

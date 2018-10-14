@@ -68,6 +68,7 @@ def select_league(league_data, fixtures):
         
         # If there are leagues in the selected_leagues list, scrape them.
         if selected_leagues:
+            selected_leagues = cf.remove_duplicates(selected_leagues)
             print("\nDownloading the requested data, please wait...")
             for selection in selected_leagues:
                 gather_data = inform_and_scrape(selection, league_data, fixtures)
