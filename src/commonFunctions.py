@@ -1,6 +1,38 @@
 # Useful functions
 from prettytable import PrettyTable
+import json
 
+def import_json_file():
+
+    """
+    Loads the leagueData.json file into the leagueData dictionary.
+    """
+    print("\n Enter the name of the file you wish to load (no extension required): ", end="")
+    file_name = input()
+    print("---LOADING...---")
+    try:
+        with open(file_name + ".json") as infile:
+            loaded_json = json.load(infile)
+            print("---LOADED---")
+        return loaded_json
+    except FileNotFoundError:
+        print('File not found')
+
+    input("Press enter to continue")
+
+
+def export_json_file(data):
+    """ Saves the leagueData dictionary to a json file called
+    leagueData.json.
+    """
+    print("\n Enter a file name (no extension required): ", end="")
+    file_name = input()
+    print("---SAVING...---")
+    # Add file prefix to prevent any nastiness with moving around the file system.
+    with open("SB_" + file_name + ".json", "w") as outfile:
+        json.dump(data, outfile, indent=1)
+    print(f"---File SB_{file_name}.json SAVED---")
+    input("Press enter to continue")
 
 def is_number(s) -> bool:
 
