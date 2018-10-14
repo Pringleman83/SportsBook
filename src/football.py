@@ -17,8 +17,8 @@ def select_league(league_data, fixtures):
     while True:
         available_options = []
         option = ""  # Number entered by user
-        selection = ""  # League the option relates to
-   
+        gather_data = "" # Will store gathered data if user chooses a league.
+        
         # Display the leagues available and create the availableOptions list of availble
         # option numbers for input validation later on.
         cf.custom_pretty_print(available_leagues, 3)
@@ -27,20 +27,54 @@ def select_league(league_data, fixtures):
 
         # While no valid option has been entered, wait for a valid option
         # (the earlier described input validation)
-        while option not in available_options:
-            print("\nSelect a league to add: ")
-            option = input()
+        
+        # Add extra options to available options.
+        extra_options = ["0", "all"]
+        for extra_option in extra_options:
+            available_options.append(extra_option)
+        
+        # Create a list to store the selected leagues.
+        selected_leagues = []
+        
+        # Print instructions outside of the loop to avoid repetition.
+        print("\nEnter leagues to add (one at a time). Enter all to select all leagues. Enter 0 when done.")
+        
+        # True loop to add multiple leagues
+        while True:
+            while option not in available_options:
+            
+                option = input().lower()
+            
+            # If all entered, add all leagues and commence scrape.
+            if option == "all":
+                for league in available_leagues:
+                    selected_leagues.append(league)
+                    option = "0"
+            else:
+                # Add the selected league name selected_leagues list
+                for league in available_leagues:
+                    if option == available_leagues[league][0]:
+                        selected_leagues.append(league)
 
-        # Assign the league name to the selection variable
-        for league in available_leagues:
-            if option == available_leagues[league][0]:
-                selection = league
-
-                # Debug code: Display selected league string
-                # print("Selected league: " + league)
-
-        gather_data = display_selection(selection, league_data, fixtures)
-        # If the user exits instead of downloading the league data, just exit.
+            # Debug code: Display selected_leagues list.
+            # print("Selected leagues: " + selected_leagues)
+            
+            # If user enters 0, exit the loop.
+            if option == "0":
+                break
+            
+            # Reset the input to blank ready for the next selection.
+            option = ""
+        
+        # If there are leagues in the selected_leagues list, scrape them.
+        if selected_leagues:
+            print("\nDownloading the requested data, please wait...")
+            for selection in selected_leagues:
+                gather_data = inform_and_scrape(selection, league_data, fixtures)
+        else:
+            print("No leagues added.")
+            
+        # If gather_data is blank (user entered 0 without selecting leagues or scraping failed) just exit.
         # Otherwise, confirm data has been downloaded before exiting.
         if not gather_data:
             return (league_data, fixtures)
@@ -106,25 +140,22 @@ available_leagues = {"1 English Premier League": ["1", "england/premier-league/"
                      "51 Swedish Superettan": ["51", "sweden/superettan/", 16],
                     }  
 
-def display_selection(selection, league_data, fixtures):
-    """ Takes in the key value of the selected league.
-    Prints the league name.
-    Gives the option of confirming the selection of that league or returning
-    to the main menu.
+def inform_and_scrape(selection, league_data, fixtures):
     """
-    choice = ""
-    print("You selected " + selection + ".")
-    
+    Takes in the key value of a selected league.
+    Advised that downloading of that league is taking place.
+    Passes the league key to the get_league_data function for scraping.
+    """
     # Debug code: display the URL that will be used to obtain the league data
     # print("This will use the following url: " + availableLeagues[selection][1] + "\n")
-
-    while choice != "1" or choice != "2":
-        choice = input("Type 1 to download this data or 2 to go back to the main menu.")
-        if choice == "1":
-            league_data_and_fixtures = get_league_data(selection, league_data, fixtures)
-            return league_data_and_fixtures
-        elif choice == "2":
-            return False
+    
+    league_data_and_fixtures = get_league_data(selection, league_data, fixtures)
+    
+    if league_data_and_fixtures == "Scrape error":
+        return
+    else:
+        print(selection + " download complete.")
+    return league_data_and_fixtures
 
 
 def get_league_data(selection, league_data, fixtures):
@@ -215,7 +246,7 @@ def get_league_data(selection, league_data, fixtures):
 
     if web_client.getcode() != 200:
         print("Cannot retrieve data, webpage is down.")
-        return
+        return "Scrape error"
     web_html = web_client.read()
 
     web_client.close()
