@@ -118,7 +118,7 @@ available_leagues = {"1 English Premier League": ["1", "england/premier-league/"
                      "28 Dutch Eredivisie": ["28", "netherlands/eredivisie/", 18],
                      "29 Dutch Eerste Divisie": ["29", "netherlands/eerste-divisie/", 20],
                      "30 Greek Super League": ["30", "greece/super-league/", 16],
-                     "31 Greek Football League": ["31", "greece/football-league/", 18],
+                     "31 Greek Football League": ["31", "greece/football-league/", 16],
                      "32 Czech Liga": ["32", "czech-republic/czech-liga/", 16],
                      "33 Czech FNL": ["33", "czech-republic/fnl/", 16],
                      "34 Russian Premier League": ["34", "russia/premier-league/", 16],
