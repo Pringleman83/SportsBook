@@ -1,6 +1,7 @@
 # Useful functions
 from prettytable import PrettyTable
 import json
+import pandas as pd
 
 def remove_duplicates(old_list):
     """
@@ -34,19 +35,56 @@ def import_json_file():
     input("Press enter to continue")
 
 
-def export_json_file(data):
+def export_data(data, file_extension = "choose"):
     """
-    Saves any passed data to a json file after asking thue suser for a file name.
+    Saves any passed data to a file.
+    The file_extension parameter, if passed, determines the file type.
+    If it is "json" or "xls", the data will be saved as that file type.
+    If it is "choose", the user will be given the coice of the two formats.
     """
-    print("\n Enter a file name (no extension required): ", end="")
+    
+    if file_extension == "choose":
+        # Give the user a choice of file types
+        choice = ""
+        valid_options = ["1","2","m"]
+        print("\nExport data: Please select one of the following file types: ")
+        print("1: JSON \n2: Excel \n\nOr enter M to return to the previous menu")
+        while choice not in valid_options:
+            choice = input().lower()
+        if choice == "m":
+            print("No file saved.")
+            return
+        elif choice == "1":
+            file_extension = "json"
+        elif choice == "2":
+            file_extension = "xls"
+    
+    print("\nEnter a file name (no extension required): ", end="")
     file_name = input()
     print("---SAVING...---")
-    # Add file prefix to prevent any nastiness with moving around the file system.
-    with open("SB_" + file_name + ".json", "w") as outfile:
-        json.dump(data, outfile, indent=1)
-    print(f"---File SB_{file_name}.json SAVED---")
-    input("Press enter to continue")
+    
+    if file_extension == "json":    
 
+        # Add file prefix to prevent any nastiness with moving around the file system.
+        with open("SB_" + file_name + ".json", "w") as outfile:
+            json.dump(data, outfile, indent=1)
+        print(f"---File SB_{file_name}.json SAVED---")
+        input("Press enter to continue")
+        return
+    
+    elif file_extension == "xls":
+        # Create a Pandas dataframe
+        data_frame = pd.DataFrame(data)
+        
+        # Create a Pandas Excel writer
+        data_frame.to_excel("SB_" + file_name + ".xls")
+ 
+        print(f"---File SB_{file_name}.xls SAVED---")
+        input("\nPress enter to continue\n")
+        return
+    print("\nSomething went wrong - file not saved.\n")
+    return
+    
 def is_number(s) -> bool:
 
     """

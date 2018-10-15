@@ -106,16 +106,19 @@ def reports(league_data, fixtures, predictions):
         if selection.lower() == "m":
                 exit_menu = True
                 return league_data
-        if selection == report_options[0][1]: # Export data to JSON
-            cf.export_json_file(league_data)
+        if selection == report_options[0][1]: # Export league data to JSON
+            cf.export_data(league_data, "json")
         if selection == report_options[1][1]: # Display currently loaded league data
             display_selected_leagues(league_data)
-        if selection == report_options[2][1]: # Display currently loaded    fixtures
+        if selection == report_options[2][1]: # Display currently loaded fixtures
             display_fixtures(fixtures)     
         if selection == report_options[3][1]: # Display currently loaded predictions
             display_predictions(predictions)
         if selection == report_options[4][1]: # Save predictions
-            cf.export_json_file(predictions)
+            if predictions:
+                cf.export_data(predictions, "choose")
+            else:
+                print("\nNo predictions loaded. Generate predictions or run game analysis first.\n")
         selection = ""
 
 
