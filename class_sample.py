@@ -6,6 +6,7 @@ team_aliases = {"manchester united": ["manchester united", "man utd", "mancheste
             }
 league_aliases = {}
 
+
 class League:
     """
     League object.
@@ -31,6 +32,7 @@ class League:
         
         # Add the name of the league initiated to the league list.
         self.leagues.append(league_name)
+
 
 class Team:
     """
