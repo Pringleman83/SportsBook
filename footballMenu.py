@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Football menu system
 
 from football import *
@@ -219,3 +220,13 @@ def football_menu(league_data, fixtures, predictions):
                 option[2](league_data)
                 selection = ""
                 continue
+=======
+#temp file to run menu
+
+def football_menu(x,y,z):
+    print(f"{x}{y}{z}")
+    
+
+
+    
+>>>>>>> 8ae888f6b7cf4327f3903f573c2332f8bdd96bc2
