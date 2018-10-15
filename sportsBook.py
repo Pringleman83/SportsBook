@@ -1,4 +1,4 @@
-from footballMenu import football_menu
+from commonFunctions import AbstractUtility
 import argparse
 from sys import exit
 
@@ -9,21 +9,35 @@ __email__ = "david.bristoll@gmail.com"
 __status__ = "Development"
 
 
-class MainMenu(object):
+class Display:
+
+    def __init__(self):
+        pass
+
+
+class MainMenu(AbstractUtility):
     """
     Main menu class object. Takes user input and moves onto the next menu.
     """
     def __init__(self):
+        super().__init__()
+        self.running = True
+        self.session = False
+        self.main_options = ('tennis', 'football')
 
         self.parse_args()
+
+    @staticmethod
+    def _log(args):
+        print(args)
 
     def tennis(self):
         """
         Placeholder for Tennis selection.
         Serves no function except for menu testing.
         """
-        print("The tennis option is a placeholder for testing.")
-        print("The option is not supported in this build. \n\n")
+        self._log("The tennis option is a placeholder for testing.")
+        self._log("The option is not supported in this build. \n\n")
 
     def football(self):
         """
@@ -35,8 +49,8 @@ class MainMenu(object):
         league_data = {}
         fixtures = []
         predictions = []
-
-        football_menu(league_data, fixtures, predictions)
+        self._log('football')
+        #football_menu(league_data, fixtures, predictions)
 
     def parse_args(self):
         """"
@@ -49,61 +63,43 @@ class MainMenu(object):
 
         self.args = parser.parse_args()
 
-    def display_menu(self):
+    def caller(self, n):
+
+        return self.football() if n == 1 else self.tennis()
+
+    def run(self):
         """
         Main menu function
         Offers all options in the options list.
         Returns the selected function to run.
         """
-        options = {
-            1: "Football",
-            2: "Tennis",
-        }
-        # If the user picked a sport by CLI argument, skip the main menu.
-        # This should be refactored to use the options dict, probably.
-        if self.args.sport:
-            if self.args.sport == "football":
-                self.football()
-            elif self.args.sport == "tennis":
-                self.tennis()
-            else:
-                print(f"{self.args.sport} is not currently a supported sport.")
-                return
 
-        print("Welcome to SportsBook - A sports analysis tool.")
-        while True:
-            print("Main Menu")
-            print("---------")
-            print("Please select from one of the following sports:")
+        self._log("Welcome to SportsBook - A sports analysis tool.")
+        while self.running:
+
+            self._log("Main Menu")
+            self._log("---------")
+            self._log("Please select from one of the following sports:")
+
             # Display all options
-            for key in options:
-                print(f"{key}) {options[key]}")
-            print("q) Quit")
-            # Take user selection
+
+            for k, v in enumerate(self.main_options):
+                self._log(f"{k}) {v}")
+            self._log("q) Quit")
+
+            self.session = True
+
             while True:
-                selected = input("Enter option: ")
+                selected_input = input("Enter option: ")
                 # Quit option
-                if selected.lower() == "q":
+                if selected_input.lower() == "q":
                     exit()
-                # If a number has been entered,
-                # convert the string to an integer.
-                try:
-                    selected = int(selected)
-                except ValueError:
-                    break
-                # If selected is a number,
-                # check to see if it is a valid key.
-                try:
-                    if options[selected] == "Football":
-                        self.football()
-                    elif options[selected] == "Tennis":
-                        self.tennis()
-                except KeyError:
-                    # If it's not valid, go back to the beginning.
-                    break
-                # If we got this far, go back to the beginning.
-                break
+                if self.is_number(selected_input):
+                    if int(selected_input) in list(range(len(self.main_options))):
+                        self.caller(int(selected_input))
+                    else:
+                        self._log('Selected input is not valid, please try again.')
 
 
-mainmenu = MainMenu()
-mainmenu.display_menu()
+app = MainMenu()
+app.run()

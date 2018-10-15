@@ -12,13 +12,14 @@ The League and Team classes have registry dictionaries holding links to all inst
 This means that each object is iterable and all data can be accessed via loops rather than direct calls.
 """
 
-import pprint as p #Just for the examples at the end of the file.
+import pprint as p  # Just for the examples at the end of the file.
 
 # A dictionaries of aliases for comparing data from vaious sources
 team_aliases = {"manchester united": ["manchester united", "man utd", "manchester utd", "man united"],
              "manchester city": ["manchester city", "man city"]
             }
 league_aliases = {}
+
 
 class League:
     """
@@ -46,6 +47,7 @@ class League:
         # Add the name of the league initiated to the league list.
         self.leagues[league_name] = self
 
+
 class Team:
     """
     Team Object.
@@ -68,7 +70,7 @@ class Team:
         Takes the team name, the league it belongs to, the team's home stats as a list and the teams away stats as a list.
         Calculates additional statistics base on those passed to it for future use.
         """
-        self.data = { "league_name": league_name,
+        self.data = {"league_name": league_name,
             "team_name": team_name,
             "home":{
                 "played": int(home_stats[0]),
@@ -140,14 +142,13 @@ class Team:
         # If the League object already exists
         else:
             # Add the existing league object to the Team class leagues list.
-            # This will enable itrating through team objects outside of the class.
+            # This will enable terating through team objects outside of the class.
             self.data["league"] = self.leagues[league_name] # This objects "league":<League object> = the league object named league_name in the league list.
 
             # Add this team to the existing league objects team list.
             # (This object's league object.teams list . append self)            
             self.data["league"].data["teams"].append(self)
-        
-    
+
         def __gt__(self, opponent):
             """
             Takes an oopposing team.
