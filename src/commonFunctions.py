@@ -76,7 +76,7 @@ def export_data(data, file_extension = "choose"):
         # Create a Pandas dataframe
         data_frame = pd.DataFrame(data)
         
-        # Create a Pandas Excel writer
+        # Save Excel file
         data_frame.to_excel("SB_" + file_name + ".xls")
  
         print(f"---File SB_{file_name}.xls SAVED---")

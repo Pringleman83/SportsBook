@@ -60,11 +60,12 @@ def display_predictions(predictions):
         league = ""
         for game in predictions:
             #If a new league is present, print the league name
-            if game[0] != league:
-                print("\n\n" + game[0] + "\n")
-            league = game[0]
-            print(game[1], game[2], game[3], game[4], game[5], game[6])
-                #league, date, time, home, home_score, away, away_score
+            if game["League"] != league:
+                print("\n\n" + game["League"] + "\n")
+            league = game["League"]
+            print(game["Date"], game["Time"], game["Home team"], game["Home team predicted score"], game["Away team"], game["Away team predicted score"],
+            "Goal separation: ", game["Predicted goal separation"], "Will both teams score?: ", game["Will both teams score?"])
+            
         print("\nPress enter to return to previous menu.")
         input()
         return
