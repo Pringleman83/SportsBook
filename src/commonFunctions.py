@@ -21,7 +21,7 @@ def import_json_file():
     Asks the user for a filename.
     Loads the filename.json and returns it as a dictionary.
     """
-    print("\n Enter the name of the file you wish to load (no extension required): ", end="")
+    print("\nEnter the name of the file you wish to load (no extension required): ", end="")
     file_name = input()
     print("---LOADING...---")
     try:
@@ -77,7 +77,6 @@ def export_data(data, file_extension = "choose"):
         # Save Excel file
         data.to_excel("SB_" + file_name + ".xls")
         
- 
         print(f"---File SB_{file_name}.xls SAVED---")
         input("\nPress enter to continue\n")
         return
