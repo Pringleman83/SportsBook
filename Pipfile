@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 "beautifulsoup4" = "*"
 prettytable = "*"
+"bs4" = "*"
+pandas = "*"
+xlwt = "*"
 
 [dev-packages]
 

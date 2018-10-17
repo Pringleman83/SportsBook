@@ -1,6 +1,6 @@
 # Football menu system
 
-from football import *
+import football as fb
 import pprint
 import commonFunctions as cf
 
@@ -23,7 +23,7 @@ def leave(x):
 
 
 def choose_leagues(league_data, fixtures):
-    league_data_and_fixtures = select_league(league_data, fixtures)
+    league_data_and_fixtures = fb.select_league(league_data, fixtures)
     league_data = league_data_and_fixtures[0]
     fixtures = league_data_and_fixtures[1]
 
@@ -63,8 +63,8 @@ def display_predictions(predictions):
             if game["League"] != league:
                 print("\n\n" + game["League"] + "\n")
             league = game["League"]
-            print(game["Date"], game["Time"], game["Home team"], game["Home team predicted score"], game["Away team"], game["Away team predicted score"],
-            "Goal separation: ", game["Predicted goal separation"], "Will both teams score?: ", game["Will both teams score?"])
+            print(game["Date"], game["Time"], game["Home team"], game["Home team prediction"], game["Away team"], game["Away team prediction"],
+            "Goal separation: ", game["Predicted separation"], "Will both teams score?: ", game["Both to score"])
             
         print("\nPress enter to return to previous menu.")
         input()
@@ -117,7 +117,7 @@ def reports(league_data, fixtures, predictions):
             display_predictions(predictions)
         if selection == report_options[4][1]: # Save predictions
             if predictions:
-                cf.export_data(predictions, "choose")
+                cf.export_data(fb.prepare_prediction_dataframe(predictions), "xls")
             else:
                 print("\nNo predictions loaded. Generate predictions or run game analysis first.\n")
         selection = ""
@@ -127,7 +127,7 @@ def football_menu(league_data, fixtures, predictions):
     football_options = [["(1) Select a league", "1", choose_leagues],  # The selectLeague function from football.py
                         ["(2) Generate predictions on currently loaded fixtures", "2"],
                         ["(3) Single game analysis from fixture list*", "3", single_game_analysis],
-                        ["(4) Manual single game analysis", "4", manual_game_analysis],
+                        ["(4) Manual single game analysis", "4", fb.manual_game_analysis],
                         ["(5) Reports", "5", reports],
                         ["(6) Import data from JSON file", "6"],
                         ["(7) Clear currently loaded league data", "7"],
@@ -189,7 +189,7 @@ def football_menu(league_data, fixtures, predictions):
                 selection = ""
                 continue
             if selection == "2": # Run analysis on currently loaded fixtures
-                predictions = upcoming_fixture_predictions(fixtures, predictions, league_data)
+                predictions = fb.upcoming_fixture_predictions(fixtures, predictions, league_data)
                 selection = ""
                 continue
             if selection == "4": # Manual single game analysis
@@ -197,7 +197,7 @@ def football_menu(league_data, fixtures, predictions):
                 while not exit_manual_analysis_menu:
                     selection = ""
                     another_game = ""
-                    manual_game_analysis(league_data, predictions)
+                    fb.manual_game_analysis(league_data, predictions)
                     while another_game.lower() != "y" and another_game.lower() != "n":
                         print("\nAnalyse another game? (Y/N)")
                         another_game = input()
