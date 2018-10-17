@@ -59,12 +59,11 @@ def display_predictions(predictions):
         print("===========")
         league = ""
         for game in predictions:
-            #If a new league is present, print the league name
+            # If a new league is present, print the league name
             if game["League"] != league:
                 print("\n\n" + game["League"] + "\n")
             league = game["League"]
-            print(game["Date"], game["Time"], game["Home team"], game["Home team prediction"], game["Away team"], game["Away team prediction"],
-            "Goal separation: ", game["Predicted separation"], "Will both teams score?: ", game["Both to score"])
+            print(game["Date"], game["Time"], game["Home team"], game["Home team prediction"], game["Away team"], game["Away team prediction"])
             
         print("\nPress enter to return to previous menu.")
         input()
