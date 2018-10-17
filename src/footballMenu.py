@@ -212,7 +212,12 @@ def football_menu(league_data, fixtures, predictions):
                 selection = ""
                 continue
             if selection == "6": # Import data from JSON file
-                league_data = cf.import_json_file()
+                new_data = cf.import_json_file()
+                if new_data == None: # If load fails
+                    del new_data
+                else:
+                    league_data = new_data.copy()
+                    del new_data
                 selection = ""
                 continue
             if selection == "7": # Clear currently loaded league data.
