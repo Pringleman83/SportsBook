@@ -1,4 +1,4 @@
-from commonFunctions import AbstractUtility
+from utils import AbstractUtility
 import argparse
 from sys import exit
 
@@ -15,7 +15,7 @@ class Display:
         pass
 
 
-class MainMenu(AbstractUtility):
+class MainMenu(AbstractUtility, ...):
     """
     Main menu class object. Takes user input and moves onto the next menu.
     """
@@ -89,9 +89,8 @@ class MainMenu(AbstractUtility):
 
             self.session = True
 
-            while True:
+            while self.session:
                 selected_input = input("Enter option: ")
-                # Quit option
                 if selected_input.lower() == "q":
                     exit()
                 if self.is_number(selected_input):

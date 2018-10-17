@@ -1,4 +1,5 @@
 # Useful functions
+import json
 from prettytable import PrettyTable
 
 
@@ -11,6 +12,35 @@ class AbstractUtility:
     """
     def __init__(self):
         pass
+
+    @staticmethod
+    def import_json_file():
+
+        """
+        Loads the leagueData.json file into the leagueData dictionary.
+        """
+
+        print("---LOADING...---")
+        try:
+            with open("leagueData.json") as infile:
+                loaded_json = json.load(infile)
+                print("---LOADED---")
+            return loaded_json
+        except FileNotFoundError:
+            print('No data found')
+
+        input("Press enter to continue")
+
+    @staticmethod
+    def export_json_file(data, file_name):
+        """ Saves the leagueData dictionary to a json file called
+        leagueData.json.
+        """
+        print("---SAVING...---")
+        with open(file_name + ".json", "w") as outfile:
+            json.dump(data, outfile, indent=1)
+        print("---SAVED---")
+        input("Press enter to continue")
 
     @staticmethod
     def is_number(s) -> bool:
