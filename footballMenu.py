@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Football menu system
 
 from football import *
@@ -12,11 +12,14 @@ __status__ = "Development"
 
 # temporary, placeholder functions:
 
+
 def analyse_fixtures(x):
     print("\nThe analyse fixtures feature is not yet available.\n")
 
+
 def single_game_analysis(x):
     print("\nThe single game analysis feature is not yet available.\n")
+
 
 def leave(x):
     print("\nExit to previous menu.\n")
@@ -27,8 +30,10 @@ def choose_leagues(league_data, fixtures):
     league_data = league_data_and_fixtures[0]
     fixtures = league_data_and_fixtures[1]
 
+
 def display_selected_leagues(league_data):
     pprint.pprint(league_data)
+
 
 def display_fixtures(fixtures):
     """
@@ -41,7 +46,8 @@ def display_fixtures(fixtures):
             print(detail + " ", end = " ")
         print("")
     return 0
-    
+
+
 def display_predictions(predictions):
     """
     Takes in the current list of predictions generated via game analysis options.
@@ -219,14 +225,10 @@ def football_menu(league_data, fixtures, predictions):
             if selection == option[1]:
                 option[2](league_data)
                 selection = ""
-                continue
-=======
+
 #temp file to run menu
+
 
 def football_menu(x,y,z):
     print(f"{x}{y}{z}")
-    
 
-
-    
->>>>>>> 8ae888f6b7cf4327f3903f573c2332f8bdd96bc2
