@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
 import commonFunctions as cf
+import pandas as pd
 
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
@@ -190,6 +191,8 @@ def get_league_data(selection, league_data, fixtures):
     table = web_soup.find("div", {"id": "tab03_"})
 
     for i in range(1, available_leagues[selection][2] + 1):
+        
+        # Scraped values
         position = int(table.select('td')[((i-1)*16)].text)
         team_name = table.select('td')[((i-1)*16)+1].text
         home_played = int(table.select('td')[((i-1)*16)+2].text)
@@ -206,6 +209,8 @@ def get_league_data(selection, league_data, fixtures):
         away_for = int(table.select('td')[((i-1)*16)+13].text)
         away_against = int(table.select('td')[((i-1)*16)+14].text)
         away_points = int(table.select('td')[((i-1)*16)+15].text)
+        
+        # Calculated values
         total_played = home_played + away_played
         total_won = home_won + away_won
         total_drew = home_drew + away_drew
@@ -213,6 +218,26 @@ def get_league_data(selection, league_data, fixtures):
         total_for = home_for + away_for
         total_against = home_against + away_against
         total_points = home_points + away_points
+        
+        # Inline code to tidily avoid division by zero errors
+        home_won_per_game = 0 if home_played == 0 else round(home_won / home_played, 3)
+        home_drew_per_game = 0 if home_played == 0 else round(home_drew / home_played, 3)
+        home_lost_per_game = 0 if home_played == 0 else round(home_lost / home_played, 3)
+        home_for_per_game = 0 if home_played == 0 else round(home_for / home_played, 3)
+        home_against_per_game = 0 if home_played == 0 else round(home_against / home_played, 3)
+        home_points_per_game = 0 if home_played == 0 else round(home_points / home_played, 3)
+        away_won_per_game = 0 if away_played == 0 else round(away_won / away_played, 3)
+        away_drew_per_game = 0 if away_played == 0 else round(away_drew / away_played, 3)
+        away_lost_per_game = 0 if away_played == 0 else round(away_lost / away_played, 3)
+        away_for_per_game = 0 if away_played == 0 else round(away_for / away_played, 3)
+        away_against_per_game = 0 if away_played == 0 else round(away_against / away_played, 3)
+        away_points_per_game = 0 if away_played == 0 else round(away_points / away_played, 3)
+        total_won_per_game = 0 if total_played == 0 else round(total_won / total_played, 3)
+        total_drew_per_game = 0 if total_played == 0 else round(total_drew / total_played, 3)
+        total_lost_per_game = 0 if total_played == 0 else round(total_lost / total_played, 3)
+        total_for_per_game = 0 if total_played == 0 else round(total_for / total_played, 3)
+        total_against_per_game = 0 if total_played == 0 else round(total_against / total_played, 3)
+        total_points_per_game = 0 if total_played == 0 else round(total_points / total_played, 3)
 
         # Add league to the leagueData dictionary if the league does not already exist within it.
         # Any additional stats calculated above must be added to the dictionary generator here.
@@ -220,11 +245,20 @@ def get_league_data(selection, league_data, fixtures):
             league_data[selection] = {
                 team_name:
                     {"Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
-                              "For": home_for, "Against": home_against, "Points": home_points},
+                              "For": home_for, "Against": home_against, "Points": home_points,
+                              "Won per Game": home_won_per_game, "Drew per Game": home_drew_per_game,
+                              "Lost per Game": home_lost_per_game, "For per Game": home_for_per_game,
+                              "Against per Game": home_against_per_game, "Points per Game": home_points_per_game},
                      "Away": {"Played": away_played, "Won": away_won, "Drew": away_drew, "Lost": away_lost,
-                              "For": away_for, "Against": away_against, "Points": away_points},
+                              "For": away_for, "Against": away_against, "Points": away_points,
+                              "Won per Game": away_won_per_game, "Drew per Game": away_drew_per_game,
+                              "Lost per Game": away_lost_per_game, "For per Game": away_for_per_game,
+                              "Against per Game": away_against_per_game, "Points per Game": away_points_per_game},
                      "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
-                               "For": total_for, "Against": total_against, "Points": total_points}
+                              "For": total_for, "Against": total_against, "Points": total_points,
+                              "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
+                              "Lost per Game": total_lost_per_game, "For per game": total_for_per_game,
+                              "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
                      }
                 }
 
@@ -233,11 +267,20 @@ def get_league_data(selection, league_data, fixtures):
             league_data[selection][team_name] = {
 
                  "Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
-                          "For": home_for, "Against": home_against, "Points": home_points},
+                          "For": home_for, "Against": home_against, "Points": home_points,
+                          "Won per Game": home_won_per_game, "Drew per Game": home_drew_per_game,
+                          "Lost per Game": home_lost_per_game, "For per Game": home_for_per_game,
+                          "Against per Game": home_against_per_game, "Points per Game": home_points_per_game},
                  "Away": {"Played": away_played, "Won": away_won, "Drew": away_drew, "Lost": away_lost,
-                          "For": away_for, "Against": away_against, "Points": away_points},
+                          "For": away_for, "Against": away_against, "Points": away_points,
+                          "Won per Game": away_won_per_game, "Drew per Game": away_drew_per_game,
+                          "Lost per Game": away_lost_per_game, "For per Game": away_for_per_game,
+                          "Against per Game": away_against_per_game, "Points per Game": away_points_per_game},
                  "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
-                           "For": total_for, "Against": total_against, "Points": total_points}
+                           "For": total_for, "Against": total_against, "Points": total_points,
+                           "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
+                           "Lost per Game": total_lost_per_game, "For per Game": total_for_per_game,
+                           "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
                  }
     # Get fixtures
     fixtures_url = "d/fixtures/"
@@ -437,23 +480,7 @@ def manual_game_analysis(league_data, predictions):
     else:
         league = "(mixed leagues)"
         
-    print("\nHome Team is: ", home_team)
-    print("Home game stats:")
-    for stat in league_data[home_team_league][home_team]["Home"]:
-        print(stat, league_data[home_team_league][home_team]["Home"][stat], end=" ")
-    print("\nTotal game stats:")
-
-    for stat in league_data[home_team_league][home_team]["Total"]:
-        print(stat, league_data[home_team_league][home_team]["Total"][stat], end=" ")
-            
-    print("\n\nAway Team is: ", away_team)
-    print("Away game stats:")
-    for stat in league_data[away_team_league][away_team]["Away"]:
-        print(stat, league_data[away_team_league][away_team]["Away"][stat], end=" ")
-    print("\nTotal game stats")
-    for stat in league_data[away_team_league][away_team]["Total"]:
-        print(stat, league_data[away_team_league][away_team]["Total"][stat], end=" ")
-
+    print(home_team + " vs " + away_team)
         
     comparison = compare(home_team, away_team, league_data)
     print("\n\nComparison")
@@ -465,30 +492,39 @@ def manual_game_analysis(league_data, predictions):
     print("Home / Away Game Statistical Differences")
     print("========================================")
 
-    for stat in league_data[home_team_league][home_team]["Home"]:
-        print(stat, comparison[0][comparison_index_count], end=" ")
+    for stat in ["Played", "Won", "Drew", "Lost", "For", "Against", "Points"]:
+        print(stat, comparison[0][comparison_index_count], end = " ")
+        comparison_index_count += 1
+    print()
+    for stat in ["Won per Game", "Drew per Game", "Lost per Game"]:
+        print(stat, comparison[0][comparison_index_count], end = " ")
+        comparison_index_count += 1
+    print()
+    for stat in ["For per Game", "Against per Game", "Points per Game"]:
+        print(stat, comparison[0][comparison_index_count], end = " ")
         comparison_index_count += 1
         
     print("\n\nTotal Game Statistical Differences")
     print("==================================")
     comparison_index_count = 0
-    for stat in league_data[away_team_league][away_team]["Away"]:
-        print(stat, comparison[0][comparison_index_count], end=" ")
+    
+    for stat in ["Played", "Won", "Drew", "Lost", "For", "Against", "Points"]:
+        print(stat, comparison[1][comparison_index_count], end = " ")
+        comparison_index_count += 1
+    print()
+    for stat in ["Won per Game", "Drew per Game", "Lost per Game"]:
+        print(stat, comparison[1][comparison_index_count], end = " ")
+        comparison_index_count += 1
+    print()
+    for stat in ["For per Game", "Against per Game", "Points per Game"]:
+        print(stat, comparison[1][comparison_index_count], end = " ")
         comparison_index_count += 1
 
-    home_team_avg_gpg_f = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Home team average gaols per for per game
+    home_team_max_goals = league_data[home_team_league][home_team]["Home"]["For per Game"] * 2.5
+    away_team_max_goals = league_data[away_team_league][away_team]["Away"]["For per Game"] * 2.5
     
-    away_team_avg_gpg_f =int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away teamverage goals per for per game
-    
-    home_team_avg_gpg_a = int(league_data[home_team_league][home_team]["Home"]["Against"] / league_data[home_team_league][home_team]["Home"]["Played"]) # Away team average goals against per game
-    
-    away_team_avg_gpg_a = int(league_data[away_team_league][away_team]["Away"]["Against"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away team average goals against per game
-    
-    home_team_max_goals = home_team_avg_gpg_f * 2.5
-    away_team_max_goals = away_team_avg_gpg_f * 2.5
-    
-    home_team_goals = int((home_team_avg_gpg_f * 1.25) * (away_team_avg_gpg_a))
-    away_team_goals = int((away_team_avg_gpg_f * 1.25) * (home_team_avg_gpg_a))
+    home_team_goals = int((league_data[home_team_league][home_team]["Home"]["For per Game"] * 1.25) * league_data[away_team_league][away_team]["Away"]["Against per Game"])
+    away_team_goals = int((league_data[away_team_league][away_team]["Away"]["For per Game"] * 1.25) * league_data[home_team_league][home_team]["Home"]["Against per Game"])
     
     if home_team_goals > home_team_max_goals:
         home_team_goals = home_team_max_goals
@@ -496,15 +532,39 @@ def manual_game_analysis(league_data, predictions):
     if away_team_goals > away_team_max_goals:
         away_team_goals = away_team_max_goals
     
-    prediction_goal_difference = abs(home_team_goals - away_team_goals)
+    prediction_goal_separation = abs(home_team_goals - away_team_goals)
     
-    print("\n" + "Predicted Outcome" + "\n=================\n" + home_team + " " + str(home_team_goals) + " - " + away_team + " " + str(away_team_goals))
+    if home_team_goals > 0 and away_team_goals > 0:
+        both_to_score = "Yes"
+    else:
+        both_to_score = "No"
+    
+    prediction_name = "Home_home_F_A_vs_Away_away_F_A"
+    prediction_description = "home_team_goals = int((home_team_avg_gpg_f * 1.25) * (away_team_avg_gpg_a) : away_team_goals = int((away_team_avg_gpg_f * 1.25) * (home_team_avg_gpg_a))"
+    
+    # Save current prediction as a list item        
+    prediction = {"League": league, "Date": "N/A", "Time": "N/A", "Prediction type": prediction_name, "Home team": home_team,
+    "Home team prediction": home_team_goals, "Away team": away_team, "Away team prediction": away_team_goals, 
+    "Predicted separation": prediction_goal_separation, "Both to score": both_to_score, "Home result": "",
+    "Away result": "", "Goal separation": "", "Both teams scored": ""}
 
-    # Save current prediction as a list item. First two empty items are where fixtured games store the fixture date and time.
-    prediction = [league, "", "", home_team, home_team_goals, away_team, away_team_goals, prediction_goal_difference, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
+    # Flatten league stats for prediction storage and exporting
+    for team in [home_team, away_team]: # Do for each team
+        if team == home_team:           # Used for the prediction keys
+            h_a_stat_key = "Home Team"
+        elif team == away_team:
+            ha_stat_key = "Away Team"
+        league = get_league(team, league_data) # Get the team's league
+        for section in ["Home", "Away", "Total"]: # Go through each set of stats
+            for stat in league_data[league][team][section]: # Add each stat and a descriptive key to the prediction dictionary
+                prediction[h_a_stat_key + " " + section + " " + stat] = league_data[league][team][section][stat]
+    
+    prediction["Description"] = prediction_description
+    
+    print("\n\nPredicted outcome: " + home_team + " " + str(home_team_goals) + " " + away_team + " " + str(away_team_goals) + "\n\nFull analysis details can be viewed be exporting the predictions to a file via the 'Reports' menu.")
     
     # If the prediction is not already in the predictions list, add it.
-    if not prediction in predictions:
+    if prediction not in predictions:
         predictions.append(prediction)
     
     return predictions
@@ -536,34 +596,111 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
         else:
             league = "(mixed leagues)"
     
-        home_team_avg_gpg_f = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Home team average gaols per for per game
+        home_team_max_goals = league_data[home_team_league][home_team]["Home"]["For per Game"] * 2.5
+        away_team_max_goals = league_data[away_team_league][away_team]["Away"]["For per Game"] * 2.5
         
-        away_team_avg_gpg_f =int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away teamverage goals per for per game
-        
-        home_team_avg_gpg_a = int(league_data[home_team_league][home_team]["Home"]["Against"] / league_data[home_team_league][home_team]["Home"]["Played"]) # Away team average goals against per game
-        
-        away_team_avg_gpg_a = int(league_data[away_team_league][away_team]["Away"]["Against"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away team average goals against per game
-        
-        home_team_max_goals = home_team_avg_gpg_f * 2.5
-        away_team_max_goals = away_team_avg_gpg_f * 2.5
-        
-        home_team_goals = int((home_team_avg_gpg_f * 1.25) * (away_team_avg_gpg_a))
-        away_team_goals = int((away_team_avg_gpg_f * 1.25) * (home_team_avg_gpg_a))
+        home_team_goals = int((league_data[home_team_league][home_team]["Home"]["For per Game"] * 1.25) * league_data[away_team_league][away_team]["Away"]["Against per Game"])
+        away_team_goals = int((league_data[away_team_league][away_team]["Away"]["For per Game"] * 1.25) * league_data[home_team_league][home_team]["Home"]["Against per Game"])
         
         if home_team_goals > home_team_max_goals:
-            home_team_goals = home_team_max_goals
+            home_team_goals = int(home_team_max_goals)
         
         if away_team_goals > away_team_max_goals:
-            away_team_goals = away_team_max_goals
+            away_team_goals = int(away_team_max_goals)
         
-        prediction_goal_difference = abs(home_team_goals - away_team_goals)
+        prediction_goal_separation = abs(home_team_goals - away_team_goals)
         
-        # Save current prediction as a list item.
-        prediction = [league, fixture_date, fixture_time, home_team, home_team_goals, away_team, away_team_goals, prediction_goal_difference, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team total stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
+        if home_team_goals > 0 and away_team_goals > 0:
+            both_to_score = "Yes"
+        else:
+            both_to_score = "No"
+        
+        prediction_name = "Home_home_F_A_vs_Away_away_F_A"
+        prediction_description = "home_team_goals = int((home_team_avg_gpg_f * 1.25) * (away_team_avg_gpg_a) : away_team_goals = int((away_team_avg_gpg_f * 1.25) * (home_team_avg_gpg_a))"
+        
+        # Save current prediction as a list item        
+        prediction = {"League": league, "Date": fixture_date, "Time": fixture_time, "Prediction type": prediction_name, "Home team": home_team,
+        "Home team prediction": home_team_goals, "Away team": away_team, "Away team prediction": away_team_goals, 
+        "Predicted separation": prediction_goal_separation, "Both to score": both_to_score, "Home result": "",
+        "Away result": "", "Goal separation": "", "Both teams scored": ""}
+
+        # Flatten league stats for prediction storage and exporting
+        for team in [home_team, away_team]: # Do for each team
+            if team == home_team:           # Used for the prediction keys
+                h_a_stat_key = "Home Team"
+            elif team == away_team:
+                h_a_stat_key = "Away Team"
+            league = get_league(team, league_data) # Get the team's league
+            for section in ["Home", "Away", "Total"]: # Go through each set of stats
+                for stat in league_data[league][team][section]: # Add each stat and a descriptive key to the prediction dictionary
+                    prediction[h_a_stat_key + " " + section + " " + stat] = league_data[league][team][section][stat]
+        
+        prediction["Description"] = prediction_description
+        
+        """
+        "home_team_stats": league_data[home_team_league][home_team],
+        "away_team_stats": league_data[away_team_league][away_team]}
+        """
         
         # If the prediction is not already in the predictions list, add it.
-        if not prediction in predictions:
+        if prediction not in predictions:
             predictions.append(prediction)
     
     # Return the new predictions list
     return predictions
+    
+def prepare_prediction_dataframe(data):
+    """
+    Takes the predictions list of prediction dictionaries.
+    Returns an appropriately ordered Pandas dataframe
+    """
+    
+    df = pd.DataFrame.from_dict(data)
+    df = df[["League", "Date", "Time", "Home team", "Away team", "Home team prediction",
+         "Away team prediction", "Predicted separation", "Both to score", "Home result",
+         "Away result", "Goal separation", "Both teams scored",
+
+         "Home Team Home Played",
+         "Home Team Home Won", "Home Team Home Drew", "Home Team Home Lost",
+         "Home Team Home For", "Home Team Home Against", "Home Team Home Points",
+         "Home Team Home Won per Game", "Home Team Home Drew per Game",
+         "Home Team Home Lost per Game", "Home Team Home For per Game",
+         "Home Team Home Against per Game", "Home Team Home Points per Game",
+         
+         "Home Team Away Played", "Home Team Away Won", "Home Team Away Drew",
+         "Home Team Away Lost", "Home Team Away For", "Home Team Away Against",
+         "Home Team Away Points", "Home Team Away Won per Game",
+         "Home Team Away Drew per Game", "Home Team Away Lost per Game",
+         "Home Team Away For per Game", "Home Team Away Against per Game",
+         "Home Team Away Points per Game",
+
+         "Home Team Total Played", "Home Team Total Won", "Home Team Total Drew",
+         "Home Team Total Lost", "Home Team Total For", "Home Team Total Against",
+         "Home Team Total Points", "Home Team Total Won per Game",
+         "Home Team Total Drew per Game", "Home Team Total Lost per Game",
+         "Home Team Total For per Game", "Home Team Total Against per Game",
+         "Home Team Total Points per Game",
+
+         "Away Team Home Played",
+         "Away Team Home Won", "Away Team Home Drew", "Away Team Home Lost",
+         "Away Team Home For", "Away Team Home Against", "Away Team Home Points",
+         "Away Team Home Won per Game", "Away Team Home Drew per Game",
+         "Away Team Home Lost per Game", "Away Team Home For per Game",
+         "Away Team Home Against per Game", "Away Team Home Points per Game",
+         
+         "Away Team Away Played", "Away Team Away Won", "Away Team Away Drew",
+         "Away Team Away Lost", "Away Team Away For", "Away Team Away Against",
+         "Away Team Away Points", "Away Team Away Won per Game",
+         "Away Team Away Drew per Game", "Away Team Away Lost per Game",
+         "Away Team Away For per Game", "Away Team Away Against per Game",
+         "Away Team Away Points per Game",
+
+         "Away Team Total Played", "Away Team Total Won", "Away Team Total Drew",
+         "Away Team Total Lost", "Away Team Total For", "Away Team Total Against",
+         "Away Team Total Points", "Away Team Total Won per Game",
+         "Away Team Total Drew per Game", "Away Team Total Lost per Game",
+         "Away Team Total For per Game", "Away Team Total Against per Game",
+         "Away Team Total Points per Game",
+
+         "Prediction type", "Description"]]
+    return df

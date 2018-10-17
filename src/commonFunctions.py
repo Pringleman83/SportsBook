@@ -34,13 +34,13 @@ def import_json_file():
 
     input("Press enter to continue")
 
-
 def export_data(data, file_extension = "choose"):
     """
     Saves any passed data to a file.
     The file_extension parameter, if passed, determines the file type.
     If it is "json" or "xls", the data will be saved as that file type.
     If it is "choose", the user will be given the coice of the two formats.
+    Data passed to be saved in xls format must be a Pandas dataframe object.
     """
     
     if file_extension == "choose":
@@ -73,11 +73,10 @@ def export_data(data, file_extension = "choose"):
         return
     
     elif file_extension == "xls":
-        # Create a Pandas dataframe
-        data_frame = pd.DataFrame(data)
         
-        # Create a Pandas Excel writer
-        data_frame.to_excel("SB_" + file_name + ".xls")
+        # Save Excel file
+        data.to_excel("SB_" + file_name + ".xls")
+        
  
         print(f"---File SB_{file_name}.xls SAVED---")
         input("\nPress enter to continue\n")
