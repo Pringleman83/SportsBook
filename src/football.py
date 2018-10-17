@@ -79,11 +79,11 @@ def select_league(league_data, fixtures):
         # If gather_data is blank (user entered 0 without selecting leagues or scraping failed) just exit.
         # Otherwise, confirm data has been downloaded before exiting.
         if not gather_data:
-            return (league_data, fixtures)
+            return league_data, fixtures
         else:
             print("\nLeague data has been downloaded. Press enter to continue.")
             input()
-            return (league_data, fixtures)
+            return league_data, fixtures
 
 # The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com",
 #  "Number of teams in league"]
@@ -569,6 +569,7 @@ def manual_game_analysis(league_data, predictions):
     
     return predictions
 
+
 def upcoming_fixture_predictions(fixtures, predictions, league_data):
     """
     Takes in the fixtures and predictions lists.
@@ -645,7 +646,7 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
         # If the prediction is not already in the predictions list, add it.
         if prediction not in predictions:
             predictions.append(prediction)
-    
+
     # Return the new predictions list
     return predictions
     

@@ -1,6 +1,5 @@
-from footballMenu import football_menu
 from commonFunctions import is_number
-
+from footballMenu import football_menu
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
 __maintainer__ = "David Bristoll"

@@ -1,38 +1,5 @@
 # Useful functions
 from prettytable import PrettyTable
-import json
-import pandas as pd
-
-def remove_duplicates(old_list):
-    """
-    Takes a list.
-    Returns a new list with all duplicates removed.
-    """
-    new_list = []
-    for item in old_list:
-        if item not in new_list:
-            new_list.append(item)
-    return new_list
-
-def import_json_file():
-
-    """
-    Takes no arguments.
-    Asks the user for a filename.
-    Loads the filename.json and returns it as a dictionary.
-    """
-    print("\n Enter the name of the file you wish to load (no extension required): ", end="")
-    file_name = input()
-    print("---LOADING...---")
-    try:
-        with open(file_name + ".json") as infile:
-            loaded_json = json.load(infile)
-            print("---LOADED---")
-        return loaded_json
-    except FileNotFoundError:
-        print('File not found')
-
-    input("Press enter to continue")
 
 def export_data(data, file_extension = "choose"):
     """
@@ -83,7 +50,7 @@ def export_data(data, file_extension = "choose"):
         return
     print("\nSomething went wrong - file not saved.\n")
     return
-    
+
 def is_number(s) -> bool:
 
     """
