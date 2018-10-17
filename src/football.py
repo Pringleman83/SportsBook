@@ -44,11 +44,11 @@ def select_league(league_data, fixtures):
         # If the user exits instead of downloading the league data, just exit.
         # Otherwise, confirm data has been downloaded before exiting.
         if not gather_data:
-            return (league_data, fixtures)
+            return league_data, fixtures
         else:
             print("\nLeague data has been downloaded. Press enter to continue.")
             input()
-            return (league_data, fixtures)
+            return league_data, fixtures
 
 # The availableLeagues dictionary: "League name":["Option number", "League link from betstudy.com",
 #  "Number of teams in league"]
@@ -458,7 +458,7 @@ def manual_game_analysis(league_data, predictions):
 
     home_team_avg_gpg_f = int(league_data[home_team_league][home_team]["Home"]["For"] / league_data[home_team_league][home_team]["Home"]["Played"])  # Home team average gaols per for per game
     
-    away_team_avg_gpg_f =int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away teamverage goals per for per game
+    away_team_avg_gpg_f = int(league_data[away_team_league][away_team]["Away"]["For"] / league_data[away_team_league][away_team]["Away"]["Played"])  # Away teamverage goals per for per game
     
     home_team_avg_gpg_a = int(league_data[home_team_league][home_team]["Home"]["Against"] / league_data[home_team_league][home_team]["Home"]["Played"]) # Away team average goals against per game
     
@@ -487,6 +487,7 @@ def manual_game_analysis(league_data, predictions):
         predictions.append(prediction)
     
     return predictions
+
 
 def upcoming_fixture_predictions(fixtures, predictions, league_data):
     """
@@ -532,9 +533,9 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
         prediction = [home_team, home_team_goals, away_team, away_team_goals, "Home team home stats", league_data[home_team_league][home_team]["Home"], "Home team home stats", league_data[home_team_league][home_team]["Total"], "Away team away stats", league_data[away_team_league][away_team]["Away"], "Away team total stats", league_data[away_team_league][away_team]["Total"]]
         
         # If the prediction is not already in the predictions list, add it.
-        if not prediction in predictions:
+        if prediction not in predictions:
             predictions.append(prediction)
     
-    #print(predictions)
+    # print(predictions)
     # Return the new predictions list
     return predictions
