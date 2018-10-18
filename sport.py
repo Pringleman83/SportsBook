@@ -12,17 +12,18 @@ class Tennis:
 
 class Sport(AbstractUtility):
 
-    def __init__(self, _type, Mainmenu):
+    def __init__(self, _type: str, mainmenu):
         super().__init__()
-        self.main_menu = Mainmenu
+        self.main_menu = mainmenu
         self._type = _type
 
         self.league = self.option = None
+
         self.league_text = 'No league selected, please start by selecting one' if self.league is None else self.league
 
         self._run()
 
-    def _run(self):
+    def _run(self) -> None:
 
         while self.option is None:
             self._log(f'\nCurrent selected league is -> {self.league_text}\n')
@@ -43,4 +44,3 @@ class Sport(AbstractUtility):
 
                     self._log(f' {self.option} is not a valid input , please try again.')
                     self.option = None
-

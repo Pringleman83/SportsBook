@@ -1,6 +1,7 @@
 # Useful functions
 import json
 from prettytable import PrettyTable
+from typing import Union, Collection, Any
 
 
 class AbstractUtility:
@@ -8,13 +9,13 @@ class AbstractUtility:
     """
     This class provides some utility functions that would normally be module-level functions but for the sake
     of convenience they belong to this class.
-
     """
+
     def __init__(self):
         super().__init__()
 
     @staticmethod
-    def _log(args):
+    def _log(args)-> None:
         print(args)
 
     @staticmethod
@@ -36,7 +37,7 @@ class AbstractUtility:
         input("Press enter to continue")
 
     @staticmethod
-    def export_json_file(data, file_name):
+    def export_json_file(data, file_name: str)-> None:
         """ Saves the leagueData dictionary to a json file called
         leagueData.json.
         """
@@ -47,7 +48,7 @@ class AbstractUtility:
         input("Press enter to continue")
 
     @staticmethod
-    def is_number(s) -> bool:
+    def is_number(s: Union[int, str, float]) -> bool:
 
         """
         Tests if the value passed is a number.
@@ -58,7 +59,7 @@ class AbstractUtility:
         return isinstance(s, int) or isinstance(s, float)
 
     @staticmethod
-    def valid_input(selection, options) -> bool:
+    def valid_input(selection: Any, options: Collection)-> bool:
         """
         Takes the user's selection and a list of valid options.
         Returns True if the selection is in the list.
@@ -70,8 +71,9 @@ class AbstractUtility:
                 selection = int(selection)
         return selection in options
 
-    def custom_pretty_print(self, data, k):
-        """Takes any given dictionary or list {data} and prints its keys (in the case of a dictionary) or values (in the case of a list) in k columns.
+    def custom_pretty_print(self, data: Union[dict, list], k: int)-> None:
+        """Takes any given dictionary or list {data} and prints its keys (in the case of a dictionary) or values
+        (in the case of a list) in k columns.
 
         data = dictionary or list
         k = key or number of columns wanted
@@ -122,34 +124,34 @@ class AbstractUtility:
         1 3 5
         2 4 6
 
-        Any of this could be very well changed if needed, will probably de-hardcode this variables and make them needed or
-        optional to the function in the future. Open issue or message Surister for any further info or request
+        Any of this could be very well changed if needed, will probably de-hardcode this variables and make them needed
+        or optional to the function in the future. Open issue or message Surister for any further info or request
 
          """
 
-        def get_k_sized_list(data, k):
+        def get_k_sized_list(data: Union[dict, list], k: int)-> list:
             s_0 = 0
             s_1 = k
-            l = []
+            leagues_list = []
             for _ in range(len(data)//k):
 
                 if type(data) == dict:
-                    l.append(list(data.keys())[s_0:s_1])
+                    leagues_list.append(list(data.keys())[s_0:s_1])
                 elif type(data) == list:
-                    l.append(data[s_0:s_1])
+                    leagues_list.append(data[s_0:s_1])
                 s_0 += k
                 s_1 += k
 
             # Add last items and blank items to ensure all items are displayed
             blanks = k - (len(data) % k)
             if isinstance(data, dict):
-                l.append(list(data.keys())[s_0:len(data)])
+                leagues_list.append(list(data.keys())[s_0:len(data)])
             if isinstance(data, list):
-                l.append(data[s_0:len(data)])
+                leagues_list.append(data[s_0:len(data)])
 
             for _ in range(blanks):
-                l[-1].append("")
-            return l
+                leagues_list[-1].append("")
+            return leagues_list
 
         x = PrettyTable()
         for i in get_k_sized_list(data, k):

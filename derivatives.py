@@ -17,7 +17,7 @@ for team in a.teams:
 
 
 class Team:
-    def __init__(self, name):
+    def __init__(self, name: str):
         self.name = name
 
     def __repr__(self):
@@ -25,7 +25,7 @@ class Team:
 
 
 class League:
-    def __init__(self, name, *teams: Team):
+    def __init__(self, name: str, *teams: Team):
 
         for team in teams:
             if not isinstance(team, Team):
@@ -42,13 +42,13 @@ class League:
         return f'League: {self.name}'
 
     @property
-    def teams(self):
+    def teams(self)-> list:
         return self.__teams
 
     @property
-    def info(self):
+    def info(self)-> str:
         return f'{self}, Teams: {self.teams}'
 
-    def append(self, other):
+    def append(self, other)-> None:
         assert isinstance(other, Team)
         self.__teams.append(other)

@@ -40,11 +40,11 @@ class MainMenu(AbstractUtility):
 
         self.args = parser.parse_args()
 
-    def _caller(self, n):
+    def _caller(self, n: int)-> None:
 
         self.current_sport = Sport(self.main_options[n], self)
 
-    def run(self):
+    def run(self)-> None:
         """
         Main menu function
         Offers all options in the options list.

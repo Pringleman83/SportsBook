@@ -2,7 +2,8 @@
 Constants file
 """
 
-available_leagues_football_leagues = {"1 English Premier League": ["1", "england/premier-league/", 20],
+available_leagues_football_leagues = {
+                     "1 English Premier League": ["1", "england/premier-league/", 20],
                      "2 English Championship": ["2", "england/championship/", 24],
                      "3 English League One": ["3", "england/league-one/", 24],
                      "4 English League Two": ["4", "england/league-two/", 24],
