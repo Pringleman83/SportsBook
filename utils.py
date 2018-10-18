@@ -14,6 +14,10 @@ class AbstractUtility:
         super().__init__()
 
     @staticmethod
+    def _log(args):
+        print(args)
+
+    @staticmethod
     def import_json_file():
 
         """
