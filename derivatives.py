@@ -20,6 +20,9 @@ class Team:
     def __init__(self, name):
         self.name = name
 
+    def __repr__(self):
+        return f'{self.name}'
+
 
 class League:
     def __init__(self, name, *teams: Team):
@@ -41,6 +44,10 @@ class League:
     @property
     def teams(self):
         return self.__teams
+
+    @property
+    def info(self):
+        return f'{self}, Teams: {self.teams}'
 
     def append(self, other):
         assert isinstance(other, Team)
