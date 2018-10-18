@@ -553,7 +553,7 @@ def manual_game_analysis(league_data, predictions):
         if team == home_team:           # Used for the prediction keys
             h_a_stat_key = "Home Team"
         elif team == away_team:
-            ha_stat_key = "Away Team"
+            h_a_stat_key = "Away Team"
         league = get_league(team, league_data) # Get the team's league
         for section in ["Home", "Away", "Total"]: # Go through each set of stats
             for stat in league_data[league][team][section]: # Add each stat and a descriptive key to the prediction dictionary
