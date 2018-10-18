@@ -11,7 +11,7 @@ class AbstractUtility:
 
     """
     def __init__(self):
-        pass
+        super().__init__()
 
     @staticmethod
     def import_json_file():

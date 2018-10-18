@@ -12,10 +12,13 @@ __status__ = "Development"
 class Display:
 
     def __init__(self):
-        pass
+        self._test = 'THIS IS A SUPER TEST'
+
+    def test(self):
+        print(self._test)
 
 
-class MainMenu(AbstractUtility, ...):
+class MainMenu(AbstractUtility, Display):
     """
     Main menu class object. Takes user input and moves onto the next menu.
     """
@@ -24,7 +27,7 @@ class MainMenu(AbstractUtility, ...):
         self.running = True
         self.session = False
         self.main_options = ('tennis', 'football')
-
+        self.test()
         self.parse_args()
 
     @staticmethod
@@ -50,7 +53,7 @@ class MainMenu(AbstractUtility, ...):
         fixtures = []
         predictions = []
         self._log('football')
-        #football_menu(league_data, fixtures, predictions)
+        # football_menu(league_data, fixtures, predictions)
 
     def parse_args(self):
         """"
