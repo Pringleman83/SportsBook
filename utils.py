@@ -59,7 +59,12 @@ class AbstractUtility:
         return isinstance(s, int) or isinstance(s, float)
 
     @staticmethod
-    def valid_input(selection: Any, options: Collection)-> bool:
+    def valid_input(selection: int, options: dict)-> bool:
+        range_list = list(range(len(options)))
+        return selection in range_list
+
+    @staticmethod
+    def ex_valid_input(selection: Any, options: Collection)-> bool:
         """
         Takes the user's selection and a list of valid options.
         Returns True if the selection is in the list.
