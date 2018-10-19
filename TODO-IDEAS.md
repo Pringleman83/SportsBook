@@ -27,3 +27,6 @@ into classes yet.
 Question that I still hold myself and will think about it, about the league_and_team_classes.py
 design pattern, is it really necessary to have a Team Class? maybe yeah if we want to perhaps in 
 the future add some more functionalities. Surister, WED-OCT-17 - 11:44
+
+
+# parse_args function has to be review to whether it is useful or not

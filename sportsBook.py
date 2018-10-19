@@ -1,6 +1,6 @@
 from utils import AbstractUtility
+from sport import Sport
 import argparse
-from sys import exit
 
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
@@ -10,12 +10,12 @@ __status__ = "Development"
 
 
 class Display:
-
+    """ Extra Display utilities functions and placeholders"""
     def __init__(self):
         pass
 
 
-class MainMenu(AbstractUtility, ...):
+class MainMenu(AbstractUtility):
     """
     Main menu class object. Takes user input and moves onto the next menu.
     """
@@ -23,36 +23,13 @@ class MainMenu(AbstractUtility, ...):
         super().__init__()
         self.running = True
         self.session = False
-        self.main_options = ('tennis', 'football')
-
+        self.main_options = ('Tennis', 'Football')
         self.parse_args()
-
-    @staticmethod
-    def _log(args):
-        print(args)
-
-    def tennis(self):
-        """
-        Placeholder for Tennis selection.
-        Serves no function except for menu testing.
-        """
-        self._log("The tennis option is a placeholder for testing.")
-        self._log("The option is not supported in this build. \n\n")
-
-    def football(self):
-        """
-        Just calls the imported football_menu() function, so that if this
-        functionality changes in future it's easy to change once
-        rather than repeating ourselves throughout the code.
-        """
-
-        league_data = {}
-        fixtures = []
-        predictions = []
-        self._log('football')
-        #football_menu(league_data, fixtures, predictions)
+        self.current_sport = None
 
     def parse_args(self):
+        # parse_args function has to be review to whether it is useful or not
+
         """"
         Parses the command line arguments, so that power-users can
         skip the menus. Currently very bare-bones.
@@ -63,11 +40,11 @@ class MainMenu(AbstractUtility, ...):
 
         self.args = parser.parse_args()
 
-    def caller(self, n):
+    def _caller(self, n: int)-> None:
 
-        return self.football() if n == 1 else self.tennis()
+        self.current_sport = Sport(self.main_options[n], self)
 
-    def run(self):
+    def run(self)-> None:
         """
         Main menu function
         Offers all options in the options list.
@@ -90,12 +67,12 @@ class MainMenu(AbstractUtility, ...):
             self.session = True
 
             while self.session:
-                selected_input = input("Enter option: ")
+                selected_input = input("Enter option->   ")
                 if selected_input.lower() == "q":
-                    exit()
+                    self.running = self.session = False
                 if self.is_number(selected_input):
                     if int(selected_input) in list(range(len(self.main_options))):
-                        self.caller(int(selected_input))
+                        self._caller(int(selected_input))
                     else:
                         self._log('Selected input is not valid, please try again.')
 
