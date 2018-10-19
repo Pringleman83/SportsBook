@@ -67,7 +67,7 @@ class MainMenu(AbstractUtility):
             self.session = True
 
             while self.session:
-                selected_input = input("Enter option: ")
+                selected_input = input("Enter option->   ")
                 if selected_input.lower() == "q":
                     self.running = self.session = False
                 if self.is_number(selected_input):
