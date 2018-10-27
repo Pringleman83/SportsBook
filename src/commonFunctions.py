@@ -14,20 +14,24 @@ def remove_duplicates(old_list):
             new_list.append(item)
     return new_list
 
-def import_json_file():
+def import_json_file(file_name = "ask", display_updates = True):
 
     """
-    Takes no arguments.
-    Asks the user for a filename.
+    If no arguments are passed, asks for a filename to import.
+    Will otherwise use the passed argument for the filename.
     Loads the filename.json and returns it as a dictionary.
     """
-    print("\nEnter the name of the file you wish to load (no extension required): ", end="")
-    file_name = input()
-    print("---LOADING...---")
+    if file_name == "ask":
+        print("\nEnter the name of the file you wish to load (no extension required): ", end="")
+        file_name = input()
+    
+    if display_updates:
+        print("---LOADING...---")
     try:
         with open(file_name + ".json") as infile:
             loaded_json = json.load(infile)
-            print("---LOADED---")
+            if display_updates:
+                print("---LOADED---")
         return loaded_json
     except FileNotFoundError:
         print('File not found')
