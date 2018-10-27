@@ -196,10 +196,19 @@ def football_menu(league_data, fixtures, predictions):
                 while not exit_manual_analysis_menu:
                     selection = ""
                     another_game = ""
-                    fb.manual_game_analysis(league_data, predictions)
+                    
+                    # Manual_predictions holds an error message if something goes wrong.
+                    manual_predictions = fb.manual_game_analysis(league_data, predictions) 
                     while another_game.lower() != "y" and another_game.lower() != "n":
-                        print("\nAnalyse another game? (Y/N)")
-                        another_game = input()
+                    
+                        # If something went wrong, don't ask to run another game analysis.
+                        print(manual_predictions)
+                        if manual_predictions == "No leagues loaded":
+                            exit_manual_analysis_menu = True
+                            break
+                        else:
+                            print("\nAnalyse another game? (Y/N)")
+                            another_game = input()
                         if another_game.lower() == "n":
                             exit_manual_analysis_menu = True
                             break
