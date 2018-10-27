@@ -132,8 +132,8 @@ def get_league_data(selection, league_data, fixtures):
     web_client = uReq(full_url)
 
     if web_client.getcode() != 200:
-        print("Cannot retrieve data, webpage is down")
-        return
+        print("\nCannot retrieve data, webpage is down")
+        return "Scrape error"
     web_html = web_client.read()
     web_client.close()
     web_soup = soup(web_html, "html.parser")
@@ -148,8 +148,8 @@ def get_league_data(selection, league_data, fixtures):
         except:
             # If no teams have yet been added, there is an error.
             if team_count == 0:
-                print("Web page error - Check link integrity and website status.")
-                return
+                print("\n" + selection + "\nWeb page error - Check url integrity and website status.")
+                return "Scrape error"
             # If teams have been added, the loop has reached the end of the table
             else:
                 break
@@ -412,8 +412,9 @@ def manual_game_analysis(league_data, predictions):
     if league_data == {}:
         print("You can't run manual game analysis until you have selected the appropriate league(s).")
         print("Please select a league or import a JSON file first.")
-        input("Press enter to continue")
-        return False
+        input("\nPress enter to continue")
+        error = "No leagues loaded" # Response advising why the function failed.
+        return error
 
     # Build the basic team list (this must be kept for later use)
     for team in list_teams(league_data):
