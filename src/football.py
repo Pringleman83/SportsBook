@@ -83,9 +83,6 @@ def select_league(league_data, fixtures, data_source):
             print("\nDownloading the requested data, please wait...")
             for selection in selected_leagues:
                 gather_data = inform_and_scrape(selection, league_data, fixtures, available_leagues, data_source)
-                print("=====gather_data DEBUG Line 86=====")
-                print(gather_data)
-                print("=====END OF DEBUG Line 88=====")
         else:
             print("No leagues added.")
             

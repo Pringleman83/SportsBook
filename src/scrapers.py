@@ -14,13 +14,6 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
     
     Scrapes the next 15 fixtures of the selected league.
     Adds therm to the fixtures list.
-    
-    Future upgrades to this function may include:
-        * Separate the calculation of additional data to an additional function.
-        * Add more calculations (for example, average goals per game) to this
-        function or the additional function.
-        * Accept an option for previous seasons (other functionality of
-        the program would need to be built around that).
     """
     bet_study_main = "https://www.betstudy.com/soccer-stats/"
     season = "c/"  # c is current
@@ -192,21 +185,13 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
 def get_league_data_soccer_stats(selection, league_data, fixtures, available_leagues):
     """
     Takes the key of the selected league from the availableLeagues dictionary.
-    Scrapes the selected league information from bedstudy.com.
+    Scrapes the selected league information from soccerstats.com.
     Calculates unscraped data (for example, total games won).
     Adds all data to the leagueData dictionary.
     
-    Scrapes the next 15 fixtures of the selected league.
-    Adds therm to the fixtures list.
-    
-    Future upgrades to this function may include:
-        * Separate the calculation of additional data to an additional function.
-        * Add more calculations (for example, average goals per game) to this
-        function or the additional function.
-        * Accept an option for previous seasons (other functionality of
-        the program would need to be built around that).
+    Scrapes all results and fixtures of the current season.
     """
-    print("===" + str(selection) + "===") #DEBUG CODE
+    #print("===" + str(selection) + "===") #DEBUG CODE
     
     def clean_string(st):
         """
@@ -442,47 +427,4 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
                 # Only add the fixture to the fixtures list if it's not already present.
                 if fixture not in fixtures:
                     fixtures.append(fixture[:]) # add fixture details to fixtures
-    """print("======SOCCER STATS SCRAPER DEBUG CODE======")
-    print("====FIXTURES===") # DEBUG CODE
-    print(fixtures)
-    print("====RESULTS===") # DEBUG CODE
-    print(results)
-    print("========END OF SOCCER STATS DEBUG========")
-    """
     return "Success"
-
-"""
-    #number_of_games = 15 # Enough games to include the next game for each team
-
-    fixtures = []
-    results = []
-    i = 0
-    while True:
-        try:
-            # Scrape the number of requested fixtures and then break out of the loop.
-            
-            # Each fixture contains 5 cells
-            # Multiply the number of games required by 5
-            # Produce a list of the 4 of 5 cells needed for each game
-            # Add list to fixture list
-                fixture = ["", "", "", ""]
-                # Round, Date and time, Home team, Away team
-                result = ["", "", "", "", ""]
-                
-                
-                
-                #print(str(i) + " " + str(table.select('td')[i]) + "\n")
-                fixture[0] = str(table.select('td')[i].text) # date
-                fixture[1] = str(table.select('td')[i + 2].text) # time
-                fixture[2] = str(table.select('td')[i + 1].text) # home team
-                fixture[3] = str(table.select('td')[i + 3].text) # away team
-                
-                # Only add the fixture to the fixtures list if it's not already present.
-                if not fixture in fixtures:
-                    fixtures.append(fixture[:]) # add fixture details to fixtures                    
-            break
-        except:
-            # Number of requested fixtures exceeds the number of available fixtures, break.
-            break
-    return (league_data, fixtures)
-"""
