@@ -1,6 +1,7 @@
+from bs4 import BeautifulSoup as soup
+from urllib.request import urlopen as uReq
 import commonFunctions as cf
 import pandas as pd
-import scrapers as scrape
 
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
@@ -9,19 +10,11 @@ __email__ = "david.bristoll@gmail.com"
 __status__ = "Development"
 
 
-def select_league(league_data, fixtures, data_source):
+def select_league(league_data, fixtures):
     """Takes  in the leagueData dictionary.
     Prompts the user to select a league.
     Returns the key value of the selected league.
-    """ 
-    # Create the appropriate availableLeagues dictionary: "League name": "League link from data source"
-    if data_source == "Bet Study":
-        # Imported from the bet-study-leagues.json file.
-        available_leagues = cf.import_json_file("bet-study-leagues", False)
-    else:
-        # Imported from the soccer-stats-leagues.json file.
-        available_leagues = cf.import_json_file("soccer-stats-leagues", False)
-        
+    """             
     while True:
         available_options = []
         new_leagues = {} # Used for input validation and tidy display of available leagues.
@@ -47,7 +40,6 @@ def select_league(league_data, fixtures, data_source):
         selected_leagues = []
         
         # Print instructions outside of the loop to avoid repetition.
-        print("\nSelected data source: " + data_source)
         print("\nEnter leagues to add (one at a time). Enter all to select all leagues. Enter 0 when done.")
         
         # True loop to add multiple leagues
@@ -82,47 +74,224 @@ def select_league(league_data, fixtures, data_source):
             selected_leagues = cf.remove_duplicates(selected_leagues)
             print("\nDownloading the requested data, please wait...")
             for selection in selected_leagues:
-                gather_data = inform_and_scrape(selection, league_data, fixtures, available_leagues, data_source)
-                print("=====gather_data DEBUG Line 86=====")
-                print(gather_data)
-                print("=====END OF DEBUG Line 88=====")
+                gather_data = inform_and_scrape(selection, league_data, fixtures)
         else:
             print("No leagues added.")
             
         # If gather_data is blank (user entered 0 without selecting leagues or scraping failed) just exit.
         # Otherwise, confirm data has been downloaded before exiting.
-        if gather_data == "Success":
-            print("\nLeague data has been downloaded. Press enter to continue.")
-            
-            input()
-            return
+        if not gather_data:
+            return league_data, fixtures
         else:
-            return
+            print("\nLeague data has been downloaded. Press enter to continue.")
+            input()
+            return league_data, fixtures
 
-def inform_and_scrape(selection, league_data, fixtures, available_leagues, data_source):
+# The availableLeagues dictionary: "League name": "League link from betstudy.com"
+# Created from the leagues.json file.
+available_leagues = cf.import_json_file("leagues", False)
+
+def inform_and_scrape(selection, league_data, fixtures):
     """
     Takes in the key value of a selected league.
     Advised that downloading of that league is taking place.
     Passes the league key to the get_league_data function for scraping.
     """
     # Debug code: display the URL that will be used to obtain the league data
-    # print("This will use the following url: " + availableLeagues[selection] + "\n")
+    # print("This will use the following url: " + availableLeagues[selection][1] + "\n")
     
-    # Select the appropriate function based on the selected data source.
-    if data_source == "Bet Study":
-        get_league_data_and_fixtures = scrape.get_league_data_bet_study(selection, league_data, fixtures, available_leagues)
-    else:
-        get_league_data_and_fixtures = scrape.get_league_data_soccer_stats(selection, league_data, fixtures, available_leagues)
+    league_data_and_fixtures = get_league_data(selection, league_data, fixtures)
     
-    if get_league_data_and_fixtures == "Scrape error":
+    if league_data_and_fixtures == "Scrape error":
         return
     else:
         print(selection + " download complete.")
-    
-    #league_data_and_fixtures checked to contain a list of a dict
-    #(league data) and a list of lists of fixtures
-    return get_league_data_and_fixtures
+    return league_data_and_fixtures
 
+
+def get_league_data(selection, league_data, fixtures):
+    """
+    Takes the key of the selected league from the availableLeagues dictionary.
+    Scrapes the selected league information from bedstudy.com.
+    Calculates unscraped data (for example, total games won).
+    Adds all data to the leagueData dictionary.
+    
+    Scrapes the next 15 fixtures of the selected league.
+    Adds therm to the fixtures list.
+    
+    Future upgrades to this function may include:
+        * Separate the calculation of additional data to an additional function.
+        * Add more calculations (for example, average goals per game) to this
+        function or the additional function.
+        * Accept an option for previous seasons (other functionality of
+        the program would need to be built around that).
+    """
+    bet_study_main = "https://www.betstudy.com/soccer-stats/"
+    season = "c/"  # c is current
+    full_url = bet_study_main + season + available_leagues[selection]
+    web_client = uReq(full_url)
+
+    if web_client.getcode() != 200:
+        print("\nCannot retrieve data, webpage is down")
+        return "Scrape error"
+    web_html = web_client.read()
+    web_client.close()
+    web_soup = soup(web_html, "html.parser")
+    table = web_soup.find("div", {"id": "tab03_"})
+    
+    team_count = 0 # Keep a count of how many teams have been detected in the league
+
+    for i in range(1, 50): # Support for leagues of up to 50 teams.
+        try:
+            # Initial scrape also determines if another team is present in the current league
+            position = int(table.select('td')[((i-1)*16)].text)
+        except:
+            # If no teams have yet been added, there is an error.
+            if team_count == 0:
+                print("\n" + selection + "\nWeb page error - Check url integrity and website status.")
+                return "Scrape error"
+            # If teams have been added, the loop has reached the end of the table
+            else:
+                break
+                
+        # Another team is present as "break" hasn't been called - continue scrape
+        
+        #position = int(table.select('td')[((i-1)*16)].text) # Commented out as this is now the test for the presence of a team.
+        team_name = table.select('td')[((i-1)*16)+1].text
+        home_played = int(table.select('td')[((i-1)*16)+2].text)
+        home_won = int(table.select('td')[((i-1)*16)+3].text)
+        home_drew = int(table.select('td')[((i-1)*16)+4].text)
+        home_lost = int(table.select('td')[((i-1)*16)+5].text)
+        home_for = int(table.select('td')[((i-1)*16)+6].text)
+        home_against = int(table.select('td')[((i-1)*16)+7].text)
+        home_points = int(table.select('td')[((i-1)*16)+8].text)
+        away_played = int(table.select('td')[((i-1)*16)+9].text)
+        away_won = int(table.select('td')[((i-1)*16)+10].text)
+        away_drew = int(table.select('td')[((i-1)*16)+11].text)
+        away_lost = int(table.select('td')[((i-1)*16)+12].text)
+        away_for = int(table.select('td')[((i-1)*16)+13].text)
+        away_against = int(table.select('td')[((i-1)*16)+14].text)
+        away_points = int(table.select('td')[((i-1)*16)+15].text)
+        
+        # Calculated values
+        total_played = home_played + away_played
+        total_won = home_won + away_won
+        total_drew = home_drew + away_drew
+        total_lost = home_lost + away_lost
+        total_for = home_for + away_for
+        total_against = home_against + away_against
+        total_points = home_points + away_points
+        
+        # Inline code to tidily avoid division by zero errors
+        home_won_per_game = 0 if home_played == 0 else round(home_won / home_played, 3)
+        home_drew_per_game = 0 if home_played == 0 else round(home_drew / home_played, 3)
+        home_lost_per_game = 0 if home_played == 0 else round(home_lost / home_played, 3)
+        home_for_per_game = 0 if home_played == 0 else round(home_for / home_played, 3)
+        home_against_per_game = 0 if home_played == 0 else round(home_against / home_played, 3)
+        home_points_per_game = 0 if home_played == 0 else round(home_points / home_played, 3)
+        away_won_per_game = 0 if away_played == 0 else round(away_won / away_played, 3)
+        away_drew_per_game = 0 if away_played == 0 else round(away_drew / away_played, 3)
+        away_lost_per_game = 0 if away_played == 0 else round(away_lost / away_played, 3)
+        away_for_per_game = 0 if away_played == 0 else round(away_for / away_played, 3)
+        away_against_per_game = 0 if away_played == 0 else round(away_against / away_played, 3)
+        away_points_per_game = 0 if away_played == 0 else round(away_points / away_played, 3)
+        total_won_per_game = 0 if total_played == 0 else round(total_won / total_played, 3)
+        total_drew_per_game = 0 if total_played == 0 else round(total_drew / total_played, 3)
+        total_lost_per_game = 0 if total_played == 0 else round(total_lost / total_played, 3)
+        total_for_per_game = 0 if total_played == 0 else round(total_for / total_played, 3)
+        total_against_per_game = 0 if total_played == 0 else round(total_against / total_played, 3)
+        total_points_per_game = 0 if total_played == 0 else round(total_points / total_played, 3)
+
+        # Add league to the leagueData dictionary if the league does not already exist within it.
+        # Any additional stats calculated above must be added to the dictionary generator here.
+        if selection not in league_data:
+            league_data[selection] = {
+                team_name:
+                    {"Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
+                              "For": home_for, "Against": home_against, "Points": home_points,
+                              "Won per Game": home_won_per_game, "Drew per Game": home_drew_per_game,
+                              "Lost per Game": home_lost_per_game, "For per Game": home_for_per_game,
+                              "Against per Game": home_against_per_game, "Points per Game": home_points_per_game},
+                     "Away": {"Played": away_played, "Won": away_won, "Drew": away_drew, "Lost": away_lost,
+                              "For": away_for, "Against": away_against, "Points": away_points,
+                              "Won per Game": away_won_per_game, "Drew per Game": away_drew_per_game,
+                              "Lost per Game": away_lost_per_game, "For per Game": away_for_per_game,
+                              "Against per Game": away_against_per_game, "Points per Game": away_points_per_game},
+                     "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
+                              "For": total_for, "Against": total_against, "Points": total_points,
+                              "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
+                              "Lost per Game": total_lost_per_game, "For per game": total_for_per_game,
+                              "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
+                     }
+                }
+
+        # If the league does already exist, just update the teams and statistics.
+        else:
+            league_data[selection][team_name] = {
+
+                 "Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
+                          "For": home_for, "Against": home_against, "Points": home_points,
+                          "Won per Game": home_won_per_game, "Drew per Game": home_drew_per_game,
+                          "Lost per Game": home_lost_per_game, "For per Game": home_for_per_game,
+                          "Against per Game": home_against_per_game, "Points per Game": home_points_per_game},
+                 "Away": {"Played": away_played, "Won": away_won, "Drew": away_drew, "Lost": away_lost,
+                          "For": away_for, "Against": away_against, "Points": away_points,
+                          "Won per Game": away_won_per_game, "Drew per Game": away_drew_per_game,
+                          "Lost per Game": away_lost_per_game, "For per Game": away_for_per_game,
+                          "Against per Game": away_against_per_game, "Points per Game": away_points_per_game},
+                 "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
+                           "For": total_for, "Against": total_against, "Points": total_points,
+                           "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
+                           "Lost per Game": total_lost_per_game, "For per Game": total_for_per_game,
+                           "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
+                 }
+        team_count += 1
+
+    # Get fixtures
+    fixtures_url = "d/fixtures/"
+    full_url = bet_study_main + season + available_leagues[selection] + fixtures_url
+    
+    web_client = uReq(full_url)
+
+    if web_client.getcode() != 200:
+        print("Cannot retrieve data, webpage is down.")
+        return "Scrape error"
+    web_html = web_client.read()
+
+    web_client.close()
+    web_soup = soup(web_html, "html.parser")
+    table = web_soup.find("table", {"class": "schedule-table"})
+    
+    number_of_games = 15 # Enough games to include the next game for each team
+    
+    #fixture list 0.text date, 2.text time, 1.text home team, 3.text away team
+    #fixture list 5            7            6                 8
+    fixture = []
+    
+    while True:
+        try:
+            # Scrape the number of requested fixtures and then break out of the loop.
+            
+            # Each fixture contains 5 cells
+            # Multiply the number of games required by 5
+            # Produce a list of the 4 of 5 cells needed for each game
+            # Add list to fixture list
+            for i in range(0,number_of_games * 5, 5):
+                fixture = ["", "", "", ""]
+                #print(str(i) + " " + str(table.select('td')[i]) + "\n")
+                fixture[0] = str(table.select('td')[i].text) # date
+                fixture[1] = str(table.select('td')[i + 2].text) # time
+                fixture[2] = str(table.select('td')[i + 1].text) # home team
+                fixture[3] = str(table.select('td')[i + 3].text) # away team
+                
+                # Only add the fixture to the fixtures list if it's not already present.
+                if not fixture in fixtures:
+                    fixtures.append(fixture[:]) # add fixture details to fixtures                    
+            break
+        except:
+            # Number of requested fixtures exceeds the number of available fixtures, break.
+            break
+    return (league_data, fixtures)
 
 
 def get_league(t, league_data):
@@ -213,6 +382,7 @@ def compare(home_team, away_team, league_data):
     comparison = [home_away_difference, total_difference]
     
     return comparison
+
 
 def list_teams(league_data):
     """
