@@ -208,6 +208,17 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
         new_string = new_string.replace("\r", "")
         new_string = new_string.replace("\n", "")
         return new_string
+    
+    def limit_characters(st):
+        """
+        Helper function to convert all various forms punctuation to one common type.
+        Code being added as problems arise.
+        This helps to ensure teams in fixture lists match those in leagues.
+        """
+        new_string = st.replace("`", "'")
+        new_string = new_string.replace("´", "'")
+        new_string = new_string.replace("\x8a", "")
+        return new_string
 
     soccer_stats_main = "https://www.soccerstats.com/widetable.asp?league="
     full_url = soccer_stats_main + available_leagues[selection]
@@ -244,7 +255,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
         # Another team is present as "break" hasn't been called - continue scrape
         
         #position = int(table.select('td')[((i-1)*22)].text) # Commented out as this is now the test for the presence of a team.
-        team_name = clean_string(table.select('td')[((i-1)*29)+1].text)
+        team_name = limit_characters(clean_string(table.select('td')[((i-1)*29)+1].text))
 
         home_won = int(table.select('td')[((i-1)*29)+13].text)
         home_drew = int(table.select('td')[((i-1)*29)+14].text)
@@ -412,8 +423,8 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
             
             # Run this code for played and unplayed games.
             # Separate home and away data.
-            home_team = teams[0]
-            away_team = teams[1]
+            home_team = limit_characters(teams[0])
+            away_team = limit_characters(teams[1])
     
             # Package results and fixtures.
             if played:

@@ -376,6 +376,8 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
         fixture_time = fixture[1]
         home_team = fixture[2]
         away_team = fixture[3]
+        #print("HOME TEAM: " + home_team + " AWAY TEAM: " + away_team) # DEBUG CODE
+        
         #comparison = compare(homeTeam, awayTeam, league_data)
         """
         comaprison return notes:
