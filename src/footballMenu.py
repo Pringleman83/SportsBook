@@ -39,7 +39,7 @@ def display_fixtures(fixtures):
     """
     for fixture in fixtures:
         for detail in range(4):
-            print(detail + " ", end = " ")
+            print(fixture[detail] + " ", end = " ")
         print("")
     return 0
     
