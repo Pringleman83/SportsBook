@@ -134,8 +134,10 @@ def football_menu(league_data, fixtures, predictions):
                         ["(7) Clear currently loaded league data", "7"],
                         ["(8) Clear currently stored prediction data", "8"],
                         ["(9) Change data source (CLEARS ALL DATA)", "9"],
-                        ["(M) Previous menu", "m", leave]
+                        ["(Q) Quit", "q", leave]
                         ]
+    
+    # ["(M) Previous menu", "m", leave] - removed as prev menu currently bypassed
     selected_leagues = []
     exit_menu = False
     available_options = []
@@ -183,10 +185,12 @@ def football_menu(league_data, fixtures, predictions):
         # If the selection is in the list, run it's function passing
         # the leagueData dictionary by default.
         for option in football_options:
-            if selection == "m":
+            """if selection == "m":
                 exit_menu = True
                 break           
-                continue 
+                continue """ #Commented out as previous menu bypassed.
+            if selection == "q":
+                quit()
             if selection == "1": # Select league
                 choose_leagues(league_data, fixtures, data_source)
                 selection = ""

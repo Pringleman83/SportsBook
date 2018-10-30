@@ -14,8 +14,33 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
     Adds all data to the leagueData dictionary.
     
     Scrapes the next 15 fixtures of the selected league.
-    Adds therm to the fixtures list.
+    Adds them to the fixtures list.
     """
+    
+    def format_datetime(dt):
+        """
+        Helper function to convert date and time value for a
+        game from the SoccerStats scraper and converts it into
+        a valid datetime object. The object is returned.
+        """
+
+        # Game date day (1-31) number
+        game_date_day = int(dt[:2])
+        
+        # Month number
+        game_date_month = int(dt[3:5])
+        
+        # Year number
+        game_date_year = int(dt[6:10])
+        # Time
+        game_hour = int(dt[12:14])
+        game_min = int(dt[15:17])
+
+        game_date = datetime(game_date_year, game_date_month,
+                             game_date_day, game_hour, game_min)
+        
+        return game_date
+
     bet_study_main = "https://www.betstudy.com/soccer-stats/"
     season = "c/"  # c is current
     full_url = bet_study_main + season + available_leagues[selection]
@@ -152,7 +177,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
     web_soup = soup(web_html, "html.parser")
     table = web_soup.find("table", {"class": "schedule-table"})
     
-    number_of_games = 15 # Enough games to include the next game for each team
+    number_of_games = 500 # Enough games to include the rest of each season's fixtures
     
     #fixture list 0.text date, 2.text time, 1.text home team, 3.text away team
     #fixture list 5            7            6                 8
@@ -167,18 +192,22 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
             # Produce a list of the 4 of 5 cells needed for each game
             # Add list to fixture list
             for i in range(0,number_of_games * 5, 5):
-                fixture = ["", "", "", ""]
-                #print(str(i) + " " + str(table.select('td')[i]) + "\n")
-                fixture[0] = str(table.select('td')[i].text) # date
-                fixture[1] = str(table.select('td')[i + 2].text) # time
-                fixture[2] = str(table.select('td')[i + 1].text) # home team
-                fixture[3] = str(table.select('td')[i + 3].text) # away team
+                date_time_str = str(table.select('td')[i].text)\
+                + "  " + str(table.select('td')[i + 2].text)
+                
+                game_date_time = format_datetime(date_time_str)
+                
+                fixture = ["",
+                    game_date_time.strftime("%d %b %Y %H:%M"),
+                    str(table.select('td')[i + 1].text),
+                    str(table.select('td')[i + 3].text),
+                    game_date_time]
                 
                 # Only add the fixture to the fixtures list if it's not already present.
                 if not fixture in fixtures:
                     fixtures.append(fixture[:]) # add fixture details to fixtures                    
             break
-        except:
+        except IndexError:
             # Number of requested fixtures exceeds the number of available fixtures, break.
             break
     return "Success"
@@ -223,10 +252,9 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
         
     def format_datetime(dt):
         """
-        Helper function to date and time value for a game from
-        the SoccerStats scraper and converts it into a valid
-        datetime object.
-        The object is returned.
+        Helper function to convert date and time value for a
+        game from the SoccerStats scraper and converts it into
+        a valid datetime object. The object is returned.
         """
         
         today = datetime.today()
