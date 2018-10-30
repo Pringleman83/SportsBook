@@ -18,7 +18,6 @@ def tennis():
 
 
 options = [[1, "Football", football_menu], [2, "Tennis", tennis], ["Q", "Quit"]]
-1
 
 def main_menu(options):
     """
@@ -28,14 +27,16 @@ def main_menu(options):
     """
     while True:
         print("Welcome to SportsBook - A sports analysis tool.")
-        print("Please select from one of the following sports:")
+        #print("Please select from one of the following sports:") # Menu bypass
         # Display all options
-        for option in options:
-            print(str(option[0]) + " " + str(option[1]))
+        #for option in options: # Menu bypass
+            #print(str(option[0]) + " " + str(option[1])) # Menu bypass
         # Take user selection
         while True:
-            print("Enter option: ")
-            selected = input()
+            #print("Enter option: ") # Menu bypass
+            selected = "1" # = input() - commented out as this is a placeholder menu 
+            #for development purposes and nedds not be shown at this stage.
+            
             # Quit option
             if selected.lower() == "q":
                 exit()

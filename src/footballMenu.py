@@ -22,10 +22,11 @@ def leave(x):
     print("\nExit to previous menu.\n")
 
 
-def choose_leagues(league_data, fixtures):
-    league_data_and_fixtures = fb.select_league(league_data, fixtures)
-    league_data = league_data_and_fixtures[0]
-    fixtures = league_data_and_fixtures[1]
+def choose_leagues(league_data, fixtures, data_source):
+    #league_data_and_fixtures = 
+    fb.select_league(league_data, fixtures, data_source)
+    #league_data = league_data_and_fixtures[0]
+    #fixtures = league_data_and_fixtures[1]
 
 def display_selected_leagues(league_data):
     pprint.pprint(league_data)
@@ -37,8 +38,8 @@ def display_fixtures(fixtures):
     Displays the list on the screen.
     """
     for fixture in fixtures:
-        for detail in fixture:
-            print(detail + " ", end = " ")
+        for detail in range(4):
+            print(fixture[detail] + " ", end = " ")
         print("")
     return 0
     
@@ -123,6 +124,7 @@ def reports(league_data, fixtures, predictions):
 
 
 def football_menu(league_data, fixtures, predictions):
+    data_source = "Soccer Stats"
     football_options = [["(1) Select a league", "1", choose_leagues],  # The selectLeague function from football.py
                         ["(2) Generate predictions on currently loaded fixtures", "2"],
                         ["(3) Single game analysis from fixture list*", "3", single_game_analysis],
@@ -131,8 +133,11 @@ def football_menu(league_data, fixtures, predictions):
                         ["(6) Import data from JSON file", "6"],
                         ["(7) Clear currently loaded league data", "7"],
                         ["(8) Clear currently stored prediction data", "8"],
-                        ["(M) Previous menu", "m", leave]
+                        ["(9) Change data source (CLEARS ALL DATA)", "9"],
+                        ["(Q) Quit", "q", leave]
                         ]
+    
+    # ["(M) Previous menu", "m", leave] - removed as prev menu currently bypassed
     selected_leagues = []
     exit_menu = False
     available_options = []
@@ -163,6 +168,7 @@ def football_menu(league_data, fixtures, predictions):
         else:
             print("\nNo league currently selected. Please start by selecting a league.\n")
 
+        print("Currently selected data source: " + data_source + "\n")
         # Display the available options
 
         for option in football_options:
@@ -179,12 +185,14 @@ def football_menu(league_data, fixtures, predictions):
         # If the selection is in the list, run it's function passing
         # the leagueData dictionary by default.
         for option in football_options:
-            if selection == "m":
+            """if selection == "m":
                 exit_menu = True
                 break           
-                continue 
+                continue """ #Commented out as previous menu bypassed.
+            if selection == "q":
+                quit()
             if selection == "1": # Select league
-                choose_leagues(league_data, fixtures)
+                choose_leagues(league_data, fixtures, data_source)
                 selection = ""
                 continue
             if selection == "2": # Run analysis on currently loaded fixtures
@@ -237,7 +245,17 @@ def football_menu(league_data, fixtures, predictions):
                 predictions.clear()
                 selection = ""
                 continue
-            
+            if selection == "9": # Switch data source.
+                if data_source == "Soccer Stats":
+                    data_source = "Bet Study"
+                else:
+                    data_source = "Soccer Stats"
+                league_data = {}
+                fixtures = []
+                predictions.clear()
+                selection = ""
+                continue
+                
             # General action for other menu items
             if selection == option[1]:
                 option[2](league_data)
