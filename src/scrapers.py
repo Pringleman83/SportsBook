@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uReq
 import requests
 import commonFunctions as cf
+from datetime import datetime
 
 def get_league_data_bet_study(selection, league_data, fixtures, available_leagues):
     """
@@ -219,6 +220,61 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
         new_string = new_string.replace("´", "'")
         new_string = new_string.replace("\x8a", "")
         return new_string
+        
+    def format_datetime(dt):
+        """
+        Helper function to date and time value for a game from
+        the SoccerStats scraper and converts it into a valid
+        datetime object.
+        The object is returned.
+        """
+        
+        today = datetime.today()
+        date_months = ["Jan.", "Feb.", "Mar.", "Apr.", "May.", "Jun.",
+            "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
+        days = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat.", "Sun."]
+
+        # Game date day (1-31) number
+        if cf.is_number(dt[5]):
+            game_date_day = dt[5]
+            if cf.is_number(dt[6]):
+                game_date_day += dt[6]
+                month_index = 8
+            else:
+                month_index = 7
+        game_date_day = int(game_date_day)
+
+        # Game day (0 - 6) number
+        game_day = dt[0:4]
+        for day in days:
+            if game_day == day:
+                game_day_number = days.index(day)
+                break
+        
+        # Month number
+        for date_month in date_months:
+            if dt[month_index:month_index + 4] == date_month:
+                game_month = date_months.index(date_month) + 1
+                break
+
+        # Time
+        game_hour = int(dt[month_index + 6:month_index + 8])
+        game_min = int(dt[month_index + 10:month_index + 12])
+        
+        # Year number
+        game_date = datetime(today.year, game_month, game_date_day,
+                                      game_hour, game_min)
+        
+        if days[game_date.weekday()] != game_day:
+            game_date = datetime(today.year - 1 , game_month, game_date_day,
+                                          game_hour, game_min)
+        if days[game_date.weekday()] != game_day:
+            game_date = datetime(today.year + 1 , game_month, game_date_day,
+                                          game_hour, game_min)
+        if days[game_date.weekday()] != game_day:
+            game_date = datetime(1111 , game_month, game_date_day,
+                                          game_hour, game_min)
+        return game_date
 
     soccer_stats_main = "https://www.soccerstats.com/widetable.asp?league="
     full_url = soccer_stats_main + available_leagues[selection]
@@ -409,7 +465,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
                 home_team_score = score[0]
                 away_team_score = score[1]
                 
-                # Commented out below code because this data is not available from all leagues.
+                # Commented out below code because this data is not available from all leagues Workaround to be implemented.
                 #ht_score = clear_whitespace_characters(str(cell[i+3].text))
                 #ht_score = ((ht_score.lstrip("(")).rstrip(")")).split("-") # Strip brackets and split into list removing spearator.
                 #home_team_ht_score = ht_score[0]
@@ -427,14 +483,16 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
             away_team = limit_characters(teams[1])
     
             # Package results and fixtures.
+            game_date_time = format_datetime(date_time)
+  
             if played:
-                result = [round_number, date_time, home_team, home_team_score, away_team, away_team_score]
+                result = [round_number, game_date_time.strftime("%d %b %Y %H:%M"), home_team, home_team_score, away_team, away_team_score, game_date_time]
                 # Omitted home_team_ht_score, away_team_ht_score
                 # Only add the fixture to the fixtures list if it's not already present.
                 if result not in results:
                     results.append(result[:]) # add result details to results
             else:
-                fixture = [round_number, date_time, home_team, away_team]
+                fixture = [round_number, game_date_time.strftime("%d %b %Y %H:%M"), home_team, away_team, game_date_time]
                 # Only add the fixture to the fixtures list if it's not already present.
                 if fixture not in fixtures:
                     fixtures.append(fixture[:]) # add fixture details to fixtures

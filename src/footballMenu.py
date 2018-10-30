@@ -38,7 +38,7 @@ def display_fixtures(fixtures):
     Displays the list on the screen.
     """
     for fixture in fixtures:
-        for detail in fixture:
+        for detail in range(4):
             print(detail + " ", end = " ")
         print("")
     return 0

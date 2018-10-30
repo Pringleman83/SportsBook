@@ -34,7 +34,9 @@ def main_menu(options):
         # Take user selection
         while True:
             print("Enter option: ")
-            selected = input()
+            selected = "1" # = input() - commented out as this is a placeholder menu 
+            #for development purposes and nedds not be shown at this stage.
+            
             # Quit option
             if selected.lower() == "q":
                 exit()
