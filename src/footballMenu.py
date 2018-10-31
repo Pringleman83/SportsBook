@@ -3,6 +3,7 @@
 import football as fb
 import pprint
 import commonFunctions as cf
+from datetime import timedelta
 
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
@@ -29,14 +30,26 @@ def choose_leagues(league_data, fixtures, data_source):
     #fixtures = league_data_and_fixtures[1]
 
 def display_selected_leagues(league_data):
+    if league_data == {}:
+        print("\nNo league data currently loaded. Select league(s) or import data first.")
+        print("\nPress enter to return to previous menu.")
+        input()
+        return 0
     pprint.pprint(league_data)
-
+    return 0
+    
 def display_fixtures(fixtures):
     """
     Takes in the current list of fixtures (each fixture being a list of 4 items).
     
     Displays the list on the screen.
     """
+    if fixtures == []:
+        print("\nNo fixtures currently loaded. Select league(s) first.")
+        print("\nPress enter to return to previous menu.")
+        input()
+        return 0
+        
     for fixture in fixtures:
         for detail in range(4):
             print(fixture[detail] + " ", end = " ")
@@ -70,52 +83,91 @@ def display_predictions(predictions):
         input()
         return
 
+def select_range(game_range):
+    print("How would you like to specify the number of games to analyse?")
+    print("1) By days from now")
+    print("2) By games from now")
+    print("M) Previous menu")
+    valid_options = ["1", "2", "m"]
+    while True:
+        option = input().lower()
+        if option == "1" or option == "2" or option == "m":
+            break
+    if option == "1":
+        while True:
+            print("\nEnter range in days (between 1 and 365):")
+            option2 = input()
+            if cf.is_number(option2):
+                if int(option2) > 0 and int(option2) < 366:
+                    game_range = timedelta(int(option2))
+                    return game_range
+        
+    if option == "2":
+        while True:
+            print("\nEnter range in games per team (between 1 and 50):")
+            option2 = input()
+            if cf.is_number(option2):
+                if int(option2) > 0 and int(option2) < 51:
+                    game_range = int(option2)
+                    return game_range
 
-def reports(league_data, fixtures, predictions):
-    print("\nReports Menu")
-    print("============")
+    if option == "m":
+        return game_range
+        
+def reports(league_data, fixtures, predictions, game_range):
     
     report_options = [["(1) Export league data (!fixture information not currently included!)", "1"],
                       ["(2) Display currently loaded league data", "2"],
-                      ["(3) Display currently loaded fixtures", "3"],
-                      ["(4) Display predictions", "4"],
-                      ["(5) Save predictions to file", "5"],
+                      ["(3) Select game range", "3"],
+                      ["(4) Display currently loaded fixtures", "4"],
+                      ["(5) Display predictions", "5"],
+                      ["(6) Save predictions to file", "6"],
                       ["(M) Return to previous menu", "m"]
                       ]
     
     exit_menu = False
     available_options = []
     selection = ""
-    
-    # Gather a list of available_option numbers for input recognition
-
-    for option in report_options:
-        available_options.append(option[1])
-    
     while not exit_menu:
-        
-        selected_leagues = []
-        
-        for option in report_options:
-            print(option[0])
-            
         while selection not in available_options:
-            selection = input()
-            selection = selection.lower()
-        
+            print("\nReports Menu")
+            print("============\n")
+            if isinstance(game_range, timedelta):
+                if game_range.days > 1:
+                    end_of_sentence = " days.\n"
+                else:
+                    end_of_sentence = " day.\n"
+                print("Current game range is " + str(game_range.days) + end_of_sentence)
+            elif isinstance(game_range, int):
+                if isinstance(game_range, int):
+                    if game_range > 1:
+                        end_of_sentence = " games.\n"
+                    else:
+                        end_of_sentence = " game.\n"
+                print("Current game range is " + str(game_range) + end_of_sentence)
+            # Gather a list of available_option numbers for input recognition
+            for option in report_options:
+                available_options.append(option[1])
+            selected_leagues = []
+            for option in report_options:
+                print(option[0]) 
+            selection = input().lower()
+
         # Menu selection conditionals
         if selection.lower() == "m":
                 exit_menu = True
-                return league_data
+                return (league_data, fixtures, predictions, game_range)
         if selection == report_options[0][1]: # Export league data to JSON
             cf.export_data(league_data, "json")
         if selection == report_options[1][1]: # Display currently loaded league data
             display_selected_leagues(league_data)
-        if selection == report_options[2][1]: # Display currently loaded fixtures
-            display_fixtures(fixtures)     
-        if selection == report_options[3][1]: # Display currently loaded predictions
+        if selection == report_options[2][1]: # Select game range
+            game_range = select_range(game_range)     
+        if selection == report_options[3][1]: # Display current fixtures
+            display_fixtures(fixtures)
+        if selection == report_options[4][1]: # Display current predictions
             display_predictions(predictions)
-        if selection == report_options[4][1]: # Save predictions
+        if selection == report_options[5][1]: # Save predictions
             if predictions:
                 cf.export_data(fb.prepare_prediction_dataframe(predictions), "xls")
             else:
@@ -123,7 +175,7 @@ def reports(league_data, fixtures, predictions):
         selection = ""
 
 
-def football_menu(league_data, fixtures, predictions):
+def football_menu(league_data, fixtures, predictions, game_range):
     data_source = "Soccer Stats"
     football_options = [["(1) Select a league", "1", choose_leagues],  # The selectLeague function from football.py
                         ["(2) Generate predictions on currently loaded fixtures", "2"],
@@ -197,6 +249,8 @@ def football_menu(league_data, fixtures, predictions):
                 continue
             if selection == "2": # Run analysis on currently loaded fixtures
                 predictions = fb.upcoming_fixture_predictions(fixtures, predictions, league_data)
+                print("\nPredictions have been processed and can be viewed via the \"Reports\" menu.\nPress enter to continue.")
+                input()
                 selection = ""
                 continue
             if selection == "4": # Manual single game analysis
@@ -205,7 +259,7 @@ def football_menu(league_data, fixtures, predictions):
                     selection = ""
                     another_game = ""
                     
-                    # Manual_predictions holds an error message if something goes wrong.
+                    # Manual_predictions holds an error message if something goes wrong in the prediction process.
                     manual_predictions = fb.manual_game_analysis(league_data, predictions) 
                     while another_game.lower() != "y" and another_game.lower() != "n":
                     
@@ -224,7 +278,7 @@ def football_menu(league_data, fixtures, predictions):
                             break
                                 
             if selection == "5": # Reports
-                reports(league_data, fixtures, predictions)
+                league_data, fixtures, predictions, game_range = reports(league_data, fixtures, predictions, game_range)
                 selection = ""
                 continue
             if selection == "6": # Import data from JSON file
