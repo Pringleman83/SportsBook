@@ -3,6 +3,7 @@
 import football as fb
 import pprint
 import commonFunctions as cf
+from datetime import datetime
 from datetime import timedelta
 
 __author__ = "David Bristoll"
@@ -12,9 +13,6 @@ __email__ = "david.bristoll@gmail.com"
 __status__ = "Development"
 
 # temporary, placeholder functions:
-
-def analyse_fixtures(x):
-    print("\nThe analyse fixtures feature is not yet available.\n")
 
 def single_game_analysis(x):
     print("\nThe single game analysis feature is not yet available.\n")
@@ -38,22 +36,56 @@ def display_selected_leagues(league_data):
     pprint.pprint(league_data)
     return 0
     
-def display_fixtures(fixtures):
+def display_fixtures(fixtures, game_range):
     """
-    Takes in the current list of fixtures (each fixture being a list of 4 items).
+    Takes in the current list of fixtures (each fixture being at least 
+    a list of 4 items) and the current game_range object.
     
     Displays the list on the screen.
     """
+    today = datetime.today()
+    game_count = 0
+    team_dict = {}
     if fixtures == []:
         print("\nNo fixtures currently loaded. Select league(s) first.")
         print("\nPress enter to return to previous menu.")
         input()
         return 0
         
-    for fixture in fixtures:
-        for detail in range(4):
-            print(fixture[detail] + " ", end = " ")
-        print("")
+
+    # If game_ragne is a timedelta object (space in time)
+    if isinstance(game_range, timedelta):
+        for fixture in fixtures:
+            # If game date within range, display the fixture.
+            if (fixture[4] - today).days <= game_range.days - 1:
+                game_count += 1
+                for detail in range(4):
+                    print(fixture[detail] + " ", end = " ")
+                print("")
+            
+    # If game_range is number of games
+    if isinstance(game_range, int):
+        # Create a dictionary of present teams and count the team's presence
+        for fixture in fixtures:
+            team_dict[fixture[2]] = team_dict.get(fixture[2], 0) + 1 
+            if team_dict[fixture[2]] <= game_range:
+                # Set to display if the home team hasn't been displayed enough times yet.
+                display_home_fixture = True
+            team_dict[fixture[3]] = team_dict.get(fixture[3], 0) + 1
+            if team_dict[fixture[3]] <= game_range:
+                # Set to display if the away team hasn't been displayed enough times yet.
+                display_away_fixture = True
+
+            if display_home_fixture or display_away_fixture:
+                # If either team is set to display, display the fixture.
+                game_count +=1
+                for detail in range(4):
+                    print(fixture[detail] + " ", end = " ")
+                print("")
+                # If no fixtures dislayed, dislpay a message.   
+            display_home_fixture, display_away_fixture = False, False
+    if game_count == 0:
+        print("No games available for the selected game range.\n")
     return 0
     
 def display_predictions(predictions):
@@ -134,16 +166,16 @@ def reports(league_data, fixtures, predictions, game_range):
             print("============\n")
             if isinstance(game_range, timedelta):
                 if game_range.days > 1:
-                    end_of_sentence = " days.\n"
+                    end_of_sentence = " days from today.\n"
                 else:
-                    end_of_sentence = " day.\n"
+                    end_of_sentence = " day from today.\n"
                 print("Current game range is " + str(game_range.days) + end_of_sentence)
             elif isinstance(game_range, int):
                 if isinstance(game_range, int):
                     if game_range > 1:
-                        end_of_sentence = " games.\n"
+                        end_of_sentence = " games per team from now.\n"
                     else:
-                        end_of_sentence = " game.\n"
+                        end_of_sentence = " game per team from now.\n"
                 print("Current game range is " + str(game_range) + end_of_sentence)
             # Gather a list of available_option numbers for input recognition
             for option in report_options:
@@ -164,7 +196,7 @@ def reports(league_data, fixtures, predictions, game_range):
         if selection == report_options[2][1]: # Select game range
             game_range = select_range(game_range)     
         if selection == report_options[3][1]: # Display current fixtures
-            display_fixtures(fixtures)
+            display_fixtures(fixtures, game_range)
         if selection == report_options[4][1]: # Display current predictions
             display_predictions(predictions)
         if selection == report_options[5][1]: # Save predictions
@@ -264,7 +296,6 @@ def football_menu(league_data, fixtures, predictions, game_range):
                     while another_game.lower() != "y" and another_game.lower() != "n":
                     
                         # If something went wrong, don't ask to run another game analysis.
-                        print(manual_predictions)
                         if manual_predictions == "No leagues loaded":
                             exit_manual_analysis_menu = True
                             break

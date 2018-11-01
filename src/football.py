@@ -213,7 +213,7 @@ def compare(home_team, away_team, league_data):
 
 def list_teams(league_data):
     """
-    Takes the leagueData dictionary.
+    Takes the league_data dictionary.
     Returns a list of all teams within it.
     """
     team_list = []
@@ -222,13 +222,12 @@ def list_teams(league_data):
             team_list.append(team)
     return team_list
 
-
 def manual_game_analysis(league_data, predictions):
     """
-    Takes the leagueData dictionary.
+    Takes the league_data dictionary and current predictions.
     Asks the user to select the home and away teams from the available
     teams.
-    Provides a comparison and a comparison.
+    Provides a comparison.
     Returns the prediction as a list: [homeTeam, predictedHomeScore, awayTeam, predictedAwayScore]
     """
 
