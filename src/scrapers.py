@@ -179,8 +179,8 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
     
     number_of_games = 500 # Enough games to include the rest of each season's fixtures
     
-    #fixture list 0.text date, 2.text time, 1.text home team, 3.text away team
-    #fixture list 5            7            6                 8
+    #fixture list 0.text league, 2.text date and time, 1.text home team, 3.text away team
+    #fixture list 5              7                     6                 8
     fixture = []
     
     while True:
@@ -197,7 +197,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
                 
                 game_date_time = format_datetime(date_time_str)
                 
-                fixture = ["",
+                fixture = [selection,
                     game_date_time.strftime("%d %b %Y %H:%M"),
                     str(table.select('td')[i + 1].text),
                     str(table.select('td')[i + 3].text),
@@ -514,13 +514,13 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
             game_date_time = format_datetime(date_time)
   
             if played:
-                result = [round_number, game_date_time.strftime("%d %b %Y %H:%M"), home_team, home_team_score, away_team, away_team_score, game_date_time]
+                result = [selection, game_date_time.strftime("%d %b %Y %H:%M"), home_team, home_team_score, away_team, away_team_score, game_date_time]
                 # Omitted home_team_ht_score, away_team_ht_score
                 # Only add the fixture to the fixtures list if it's not already present.
                 if result not in results:
                     results.append(result[:]) # add result details to results
             else:
-                fixture = [round_number, game_date_time.strftime("%d %b %Y %H:%M"), home_team, away_team, game_date_time]
+                fixture = [selection, game_date_time.strftime("%d %b %Y %H:%M"), home_team, away_team, game_date_time]
                 # Only add the fixture to the fixtures list if it's not already present.
                 if fixture not in fixtures:
                     fixtures.append(fixture[:]) # add fixture details to fixtures

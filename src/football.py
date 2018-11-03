@@ -1,6 +1,8 @@
 import commonFunctions as cf
 import pandas as pd
 import scrapers as scrape
+from datetime import datetime
+from datetime import timedelta
 
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
@@ -230,7 +232,7 @@ def manual_game_analysis(league_data, predictions):
     Provides a comparison.
     Returns the prediction as a list: [homeTeam, predictedHomeScore, awayTeam, predictedAwayScore]
     """
-
+    today = datetime.today()
     team_list = []
     selection1 = ""
     selection2 = ""
@@ -335,10 +337,10 @@ def manual_game_analysis(league_data, predictions):
     prediction_description = "home_team_goals = int((home_team_avg_gpg_f * 1.25) * (away_team_avg_gpg_a) : away_team_goals = int((away_team_avg_gpg_f * 1.25) * (home_team_avg_gpg_a))"
     
     # Save current prediction as a list item        
-    prediction = {"League": league, "Date": "N/A", "Time": "N/A", "Prediction type": prediction_name, "Home team": home_team,
+    prediction = {"League": league, "Date and time": "Manual entry: ", "Prediction type": prediction_name, "Home team": home_team,
     "Home team prediction": home_team_goals, "Away team": away_team, "Away team prediction": away_team_goals, 
     "Predicted separation": prediction_goal_separation, "Both to score": both_to_score, "Home result": "",
-    "Away result": "", "Goal separation": "", "Both teams scored": ""}
+    "Away result": "", "Goal separation": "", "Both teams scored": "",  "date_as_dtobject": today}
 
     # Flatten league stats for prediction storage and exporting
     for team in [home_team, away_team]: # Do for each team
@@ -364,15 +366,14 @@ def manual_game_analysis(league_data, predictions):
 
 def upcoming_fixture_predictions(fixtures, predictions, league_data):
     """
-    Takes in the fixtures and predictions lists.
+    Takes in the fixtures and predictions lists and league_data dictionary.
     Runs predictions on all upcoming fixtures.
     Adds each prediction to the predictions list.
     Returns the updated predictions list.
-    """
-    
+    """ 
     for fixture in fixtures:
-        fixture_date = fixture[0]
-        fixture_time = fixture[1]
+        fixture_league = fixture[0]
+        fixture_datetime = fixture[1]
         home_team = fixture[2]
         away_team = fixture[3]
         #print("HOME TEAM: " + home_team + " AWAY TEAM: " + away_team) # DEBUG CODE
@@ -414,10 +415,10 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
         prediction_description = "home_team_goals = int((home_team_avg_gpg_f * 1.25) * (away_team_avg_gpg_a) : away_team_goals = int((away_team_avg_gpg_f * 1.25) * (home_team_avg_gpg_a))"
         
         # Save current prediction as a list item        
-        prediction = {"League": league, "Date": fixture_date, "Time": fixture_time, "Prediction type": prediction_name, "Home team": home_team,
+        prediction = {"League": league, "Date and time": fixture_datetime, "Prediction type": prediction_name, "Home team": home_team,
         "Home team prediction": home_team_goals, "Away team": away_team, "Away team prediction": away_team_goals, 
         "Predicted separation": prediction_goal_separation, "Both to score": both_to_score, "Home result": "",
-        "Away result": "", "Goal separation": "", "Both teams scored": ""}
+        "Away result": "", "Goal separation": "", "Both teams scored": "", "date_as_dtobject": fixture[4]}
 
         # Flatten league stats for prediction storage and exporting
         for team in [home_team, away_team]: # Do for each team
@@ -444,14 +445,64 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
     # Return the new predictions list
     return predictions
     
-def prepare_prediction_dataframe(data):
+def get_predictions_in_range(predictions, game_range):
+    """
+    Takes the current predictions list and the currently selected game_range.
+    Returns a new list of predictions within the given game range.
+    """
+    today = datetime.today()
+    tomorrow = today + timedelta(days = 1)
+    teams = {}
+    predictions_in_range = []
+    for prediction in predictions:
+        if isinstance(game_range, timedelta):
+            # If game date within range, display the fixture.
+            if (prediction.get("date_as_dtobject", tomorrow) - today).days <= game_range.days - 1 or prediction["Date and time"] == "Manual entry: ":
+                """print("\n date ") # DEBUG CODE
+                print(game["date_as_dtobject"]) # DEBUG CODE
+                print() # DEBUG CODE"""
+                predictions_in_range.append(prediction)
+            
+    # If game_range is number of games
+    if isinstance(game_range, int):
+        # Create a dictionary of present teams and count the team's presence   
+        for prediction in predictions:
+            # Games that are manually entered do not count towards the game range limit.
+            # Only counting team appearances in games that are not manually entered.
+            if prediction["Date and time"] != "Manual entry: ":
+                teams[prediction["Home team"]] = teams.get(prediction["Home team"], 0) + 1
+                teams[prediction["Away team"]] = teams.get(prediction["Away team"], 0) + 1
+                if teams[prediction["Home team"]] <= game_range:
+                    # Set to display if the home team hasn't been displayed enough times yet.
+                    home_game_in_range = True
+
+                if teams[prediction["Away team"]] <= game_range:
+                    # Set to display if the away team hasn't been displayed enough times yet.
+                    away_game_in_range = True
+                
+                if home_game_in_range or away_game_in_range:
+                    predictions_in_range.append(prediction)
+                home_game_in_range, away_game_in_range = False, False
+            else:
+                # Ensure that the date_as_dtobject item is populated in manual entries when the game range is an int to prevent any unexpected errors later.
+                prediction["date_as_dtobject"] = tomorrow
+                predictions_in_range.append(prediction)
+    return predictions_in_range
+    
+def prepare_prediction_dataframe(predictions):
     """
     Takes the predictions list of prediction dictionaries.
     Returns an appropriately ordered Pandas dataframe
     """
+    # Create temporary copy of predictions dictionary without datetime object
+    # Can also be used to add or remove information to the spreadsheet.
+    temp_predictions = predictions.copy()
+    for prediction in temp_predictions:
+        del prediction["date_as_dtobject"]
     
-    df = pd.DataFrame.from_dict(data)
-    df = df[["League", "Date", "Time", "Home team", "Away team", "Home team prediction",
+    # Create the pandas dataframe object
+    df = pd.DataFrame.from_dict(temp_predictions)
+    df = df[["League", "Date and time", "Home team", "Away team", "Home team prediction",
          "Away team prediction", "Predicted separation", "Both to score", "Home result",
          "Away result", "Goal separation", "Both teams scored",
 
@@ -498,4 +549,7 @@ def prepare_prediction_dataframe(data):
          "Away Team Total Points per Game",
 
          "Prediction type", "Description"]]
+         
+    # Delete temporary dictionary.
+    del temp_predictions
     return df
