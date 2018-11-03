@@ -1,5 +1,7 @@
 from commonFunctions import is_number
 from footballMenu import football_menu
+from datetime import timedelta
+
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
 __maintainer__ = "David Bristoll"
@@ -51,7 +53,9 @@ def main_menu(options):
             league_data = {}
             fixtures = []
             predictions = []
-            football_menu(league_data, fixtures, predictions)
+            predictions_in_range = {}
+            game_range = timedelta(7)
+            football_menu(league_data, fixtures, predictions, predictions_in_range, game_range)
         if selected == options[1][0]:
             tennis()
 
