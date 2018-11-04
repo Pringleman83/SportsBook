@@ -124,15 +124,22 @@ def inform_and_scrape(selection, league_data, fixtures, available_leagues, data_
 
 
 
-def get_league(t, league_data):
+def get_league(home_team, away_team, league_data):
     """
-    Takes in a team name as a string and the leagueData dictionary.
-    Returns the name of the league the team belongs to as a string.
+    Takes in a the home team name and the away team name as strings and the leagu_data dictionary.
+    Returns the name of the league each team belongs to as strings.
     """
     league_team_pairs = league_data.items()
-    for team in league_team_pairs:
-        if t in team[1]:
-            return team[0]
+    for i in range(len(league_team_pairs)):
+        for team in league_team_pairs:
+            if home_team in team[1]:
+                home_team_league = team[0]
+                if away_team in league_data[home_team_league]:
+                    return home_team_league, home_team_league # Both leagues intentionally the same.
+        for team in league_team_pairs:
+            if away_team in team[1]:
+                away_team_league = team[0]
+                return home_team_league, away_team_league
     print("Error: Team not found")
     return "Error: Team not found"
 
@@ -154,10 +161,10 @@ def compare(home_team, away_team, league_data):
     A solution would be to use dictionaries instead of lists. Bending my head now
     though, so probably my next task for another day.
     """
-    # Check what league the home team belongs to
-    home_league = get_league(home_team, league_data)
+    # Get the league each team belongs to.
+    home_league, away_league = get_league(home_team, away_team, league_data)
 
-    # Initialise the home team stats lists (one for home and one for total)
+    # Initialise the home team stats lists (one for home and one for total).
     home_team_home_stats = [home_team]
     home_team_total_stats = [home_team]
 
@@ -169,9 +176,6 @@ def compare(home_team, away_team, league_data):
                 home_team_home_stats.append(league_data[home_league][home_team][section][stat])
             if section == "Total":
                 home_team_total_stats.append(league_data[home_league][home_team][section][stat])
-
-    # Check what league the away team belongs to
-    away_league = get_league(away_team, league_data)
 
     # Initialise the away stats lists (one for away and one for total)
     away_team_away_stats = [away_team]
@@ -266,8 +270,7 @@ def manual_game_analysis(league_data, predictions):
 
     home_team = team_list[int(selection1)-1]
     away_team = team_list[int(selection2)-1]
-    home_team_league = get_league(home_team, league_data)
-    away_team_league = get_league(away_team, league_data)
+    home_team_league, away_team_league = get_league(home_team, away_team, league_data)
     
     if home_team_league == away_team_league:
         league = home_team_league
@@ -321,10 +324,10 @@ def manual_game_analysis(league_data, predictions):
     away_team_goals = int((league_data[away_team_league][away_team]["Away"]["For per Game"] * 1.25) * league_data[home_team_league][home_team]["Home"]["Against per Game"])
     
     if home_team_goals > home_team_max_goals:
-        home_team_goals = home_team_max_goals
+        home_team_goals = int(home_team_max_goals)
     
     if away_team_goals > away_team_max_goals:
-        away_team_goals = away_team_max_goals
+        away_team_goals = int(away_team_max_goals)
     
     prediction_goal_separation = abs(home_team_goals - away_team_goals)
     
@@ -343,12 +346,14 @@ def manual_game_analysis(league_data, predictions):
     "Away result": "", "Goal separation": "", "Both teams scored": "",  "date_as_dtobject": today}
 
     # Flatten league stats for prediction storage and exporting
+    index = 0
     for team in [home_team, away_team]: # Do for each team
         if team == home_team:           # Used for the prediction keys
             h_a_stat_key = "Home Team"
         elif team == away_team:
             h_a_stat_key = "Away Team"
-        league = get_league(team, league_data) # Get the team's league
+        league = [home_team_league, away_team_league][index]
+        index += 1
         for section in ["Home", "Away", "Total"]: # Go through each set of stats
             for stat in league_data[league][team][section]: # Add each stat and a descriptive key to the prediction dictionary
                 prediction[h_a_stat_key + " " + section + " " + stat] = league_data[league][team][section][stat]
@@ -383,20 +388,12 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
         comaprison return notes:
         [H/A compare[Pld,W,D,L,F,A,Pts], Total compare[Pld,W,D,L,F,A,Pts]]
         """
-        
-        home_team_league = get_league(home_team, league_data)
-        away_team_league = get_league(away_team, league_data)
-        
-        if home_team_league == away_team_league:
-            league = home_team_league
-        else:
-            league = "(mixed leagues)"
     
-        home_team_max_goals = league_data[home_team_league][home_team]["Home"]["For per Game"] * 2.5
-        away_team_max_goals = league_data[away_team_league][away_team]["Away"]["For per Game"] * 2.5
+        home_team_max_goals = league_data[fixture_league][home_team]["Home"]["For per Game"] * 2.5
+        away_team_max_goals = league_data[fixture_league][away_team]["Away"]["For per Game"] * 2.5
         
-        home_team_goals = int((league_data[home_team_league][home_team]["Home"]["For per Game"] * 1.25) * league_data[away_team_league][away_team]["Away"]["Against per Game"])
-        away_team_goals = int((league_data[away_team_league][away_team]["Away"]["For per Game"] * 1.25) * league_data[home_team_league][home_team]["Home"]["Against per Game"])
+        home_team_goals = int((league_data[fixture_league][home_team]["Home"]["For per Game"] * 1.25) * league_data[fixture_league][away_team]["Away"]["Against per Game"])
+        away_team_goals = int((league_data[fixture_league][away_team]["Away"]["For per Game"] * 1.25) * league_data[fixture_league][home_team]["Home"]["Against per Game"])
         
         if home_team_goals > home_team_max_goals:
             home_team_goals = int(home_team_max_goals)
@@ -415,7 +412,7 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
         prediction_description = "home_team_goals = int((home_team_avg_gpg_f * 1.25) * (away_team_avg_gpg_a) : away_team_goals = int((away_team_avg_gpg_f * 1.25) * (home_team_avg_gpg_a))"
         
         # Save current prediction as a list item        
-        prediction = {"League": league, "Date and time": fixture_datetime, "Prediction type": prediction_name, "Home team": home_team,
+        prediction = {"League": fixture_league, "Date and time": fixture_datetime, "Prediction type": prediction_name, "Home team": home_team,
         "Home team prediction": home_team_goals, "Away team": away_team, "Away team prediction": away_team_goals, 
         "Predicted separation": prediction_goal_separation, "Both to score": both_to_score, "Home result": "",
         "Away result": "", "Goal separation": "", "Both teams scored": "", "date_as_dtobject": fixture[4]}
@@ -426,10 +423,9 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
                 h_a_stat_key = "Home Team"
             elif team == away_team:
                 h_a_stat_key = "Away Team"
-            league = get_league(team, league_data) # Get the team's league
             for section in ["Home", "Away", "Total"]: # Go through each set of stats
-                for stat in league_data[league][team][section]: # Add each stat and a descriptive key to the prediction dictionary
-                    prediction[h_a_stat_key + " " + section + " " + stat] = league_data[league][team][section][stat]
+                for stat in league_data[fixture_league][team][section]: # Add each stat and a descriptive key to the prediction dictionary
+                    prediction[h_a_stat_key + " " + section + " " + stat] = league_data[fixture_league][team][section][stat]
         
         prediction["Description"] = prediction_description
         
