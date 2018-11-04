@@ -124,7 +124,7 @@ def display_predictions(predictions):
             print(game["Date and time"], game["Home team"], game["Home team prediction"], game["Away team"], game["Away team prediction"])
         
     if manual_entries != []:
-        print("\n\n Manual Entries\n")
+        print("\n\nManual Entries\n")
         for manual_entry in manual_entries:
             print(manual_entry["Home team"], manual_entry["Home team prediction"], manual_entry["Away team"], manual_entry["Away team prediction"])
 
