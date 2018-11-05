@@ -117,3 +117,20 @@ def x_or_less_goals_scored(predictions, applied_filters):
             filtered_predictions.append(p)  
     applied_filters.append("Total number of goals is " + str(x) + " or less.")
     return (filtered_predictions, applied_filters)
+
+# Special filters
+
+def special_james_shoemark_bts(predictions, applied_filters):
+    """
+    Takes a list of predictions and the list of currently applied filters.
+    Returns a list of predictions where total goals expected is over 4 and both teams are expected to score at least one goal along with the updated applied filters list.
+    """
+    print("(x or less goals scored)\n\n")
+    filtered_predictions = []
+    
+    for p in predictions:
+        if p["Total goals expected"] > 4 and p["Home team prediction"] > 1 and p["Away team prediction"] > 1:
+            filtered_predictions.append(p)
+            
+    applied_filters.append("James Shoemark special selection")
+    return (filtered_predictions, applied_filters)

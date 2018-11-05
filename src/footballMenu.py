@@ -164,6 +164,57 @@ def select_range(game_range):
     if option == "m":
         return game_range
 
+def special_filters(filtered_predictions, applied_filters):
+    print("\nSpecial Filters")
+    print("==================\n")
+    
+    # If no filtered predictions exist.
+    if filtered_predictions == []:
+    # Filtered predictions is a copy of predictions in range.
+        filtered_predictions = predictions_in_range[:]
+        applied_filters = []
+                
+    while True:
+        if applied_filters == []:
+            print("No filters currently applied.")
+        else:
+            print("The following filters are applied:\n")
+            for filter in applied_filters:
+                print(filter)
+        print("\n" + str(len(filtered_predictions)) + " games remaining")
+
+        print("\nSelect one of the following filters to apply. Remove all games except: \n")
+        print("1) James Shoemark's Both to Score Special")
+        print("2) Display filtered predictions")
+        #print("3)")
+        #print("4)")
+        #print("5)")
+        #print("6)")
+        #print("7)")
+        #print("8)")
+        print("M) Return to previous menu.")
+        print()
+        s = input().lower()
+        
+        if s == "m":
+            return(filtered_predictions, applied_filters)
+        elif s == "1":
+            filtered_predictions, applied_filters = fp.special_james_shoemark_bts(filtered_predictions, applied_filters)
+        elif s == "2":
+            display_predictions(filtered_predictions)
+        """elif s == "3":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "4":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "5":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "6":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "7":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "8":
+            filtered_predictions, applied_filters = fp.special_"""
+
 def filter_predictions(predictions_in_range, filtered_predictions, applied_filters):
     print("\nFilter Predicitons")
     print("==================\n")
@@ -189,8 +240,9 @@ def filter_predictions(predictions_in_range, filtered_predictions, applied_filte
         print("3) Games where a team is expected to win by a specified number of goals")
         print("4) Games where a minimum of a specified number of goals are scored")
         print("5) Games where a maximum of a specified number of goals are scored")
-        print("6) Display filtered predictions")
-        print("7) Clear all filters")
+        print("6) View special filters")
+        print("7) Display filtered predictions")
+        print("8) Clear all filters")
         print("M) Return to previous menu.")
         print()
         s = input().lower()
@@ -208,8 +260,10 @@ def filter_predictions(predictions_in_range, filtered_predictions, applied_filte
         elif s == "5":
             filtered_predictions, applied_filters = fp.x_or_less_goals_scored(filtered_predictions, applied_filters)
         elif s == "6":
-            display_predictions(filtered_predictions)
+            filtered_predictions, applied_filters = special_filters(filtered_predictions, applied_filters)
         elif s == "7":
+            display_predictions(filtered_predictions)
+        elif s == "8":
             filtered_predictions, applied_filters = predictions_in_range, []
 
 def reports(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions):
