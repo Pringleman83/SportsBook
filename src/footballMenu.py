@@ -3,6 +3,7 @@
 import football as fb
 import pprint
 import commonFunctions as cf
+import filterPredictions as fp
 from datetime import datetime
 from datetime import timedelta
 
@@ -162,15 +163,120 @@ def select_range(game_range):
 
     if option == "m":
         return game_range
+
+def special_filters(filtered_predictions, applied_filters):
+    print("\nSpecial Filters")
+    print("==================\n")
+    
+    # If no filtered predictions exist.
+    if filtered_predictions == []:
+    # Filtered predictions is a copy of predictions in range.
+        filtered_predictions = predictions_in_range[:]
+        applied_filters = []
+                
+    while True:
+        if applied_filters == []:
+            print("No filters currently applied.")
+        else:
+            print("The following filters are applied:\n")
+            for filter in applied_filters:
+                print(filter)
+        print("\n" + str(len(filtered_predictions)) + " games remaining")
+
+        print("\nSelect one of the following filters to apply. Remove all games except: \n")
+        print("1) James Shoemark's Both to Score Special")
+        print("2) Display filtered predictions")
+        #print("3)")
+        #print("4)")
+        #print("5)")
+        #print("6)")
+        #print("7)")
+        #print("8)")
+        print("M) Return to previous menu.")
+        print()
+        s = input().lower()
         
-def reports(league_data, fixtures, predictions, predictions_in_range, game_range):
+        if s == "m":
+            return(filtered_predictions, applied_filters)
+        elif s == "1":
+            filtered_predictions, applied_filters = fp.special_james_shoemark_bts(filtered_predictions, applied_filters)
+        elif s == "2":
+            display_predictions(filtered_predictions)
+        """elif s == "3":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "4":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "5":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "6":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "7":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "8":
+            filtered_predictions, applied_filters = fp.special_"""
+
+def filter_predictions(predictions_in_range, filtered_predictions, applied_filters):
+    print("\nFilter Predicitons")
+    print("==================\n")
+    
+    # If no filtered predictions exist.
+    if filtered_predictions == []:
+    # Filtered predictions is a copy of predictions in range.
+        filtered_predictions = predictions_in_range[:]
+        applied_filters = []
+                
+    while True:
+        if applied_filters == []:
+            print("No filters currently applied.")
+        else:
+            print("The following filters are applied:\n")
+            for filter in applied_filters:
+                print(filter)
+        print("\n" + str(len(filtered_predictions)) + " games remaining")
+
+        print("\nSelect one of the following filters to apply. Remove all games except: \n")
+        print("1) Games where both teams are expected to score")
+        print("2) Games where no teams are expected to score")
+        print("3) Games where a team is expected to win by a specified number of goals")
+        print("4) Games where a minimum of a specified number of goals are scored")
+        print("5) Games where a maximum of a specified number of goals are scored")
+        print("6) View special filters")
+        print("7) Display filtered predictions")
+        print("8) Clear all filters")
+        print("M) Return to previous menu.")
+        print()
+        s = input().lower()
+        
+        if s == "m":
+            return(filtered_predictions, applied_filters)
+        elif s == "1":
+            filtered_predictions, applied_filters = fp.both_to_score(filtered_predictions, applied_filters)
+        elif s == "2":
+            filtered_predictions, applied_filters = fp.bore_draw(filtered_predictions, applied_filters)
+        elif s == "3":
+            filtered_predictions, applied_filters = fp.win_by_x(filtered_predictions, applied_filters)
+        elif s == "4":
+            filtered_predictions, applied_filters = fp.x_or_more_goals_scored(filtered_predictions, applied_filters)
+        elif s == "5":
+            filtered_predictions, applied_filters = fp.x_or_less_goals_scored(filtered_predictions, applied_filters)
+        elif s == "6":
+            filtered_predictions, applied_filters = special_filters(filtered_predictions, applied_filters)
+        elif s == "7":
+            display_predictions(filtered_predictions)
+        elif s == "8":
+            filtered_predictions, applied_filters = predictions_in_range, []
+
+def reports(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions):
     
     report_options = [["(1) Export league data (!fixture information not currently included!)", "1"],
                       ["(2) Display currently loaded league data", "2"],
                       ["(3) Select game range", "3"],
                       ["(4) Display currently loaded fixtures", "4"],
-                      ["(5) Display predictions", "5"],
-                      ["(6) Save predictions to file", "6"],
+                      ["(5) Display all predictions in game range", "5"],
+                      ["(6) Filter predictions (Clears all existing filters)", "6"],
+                      ["(7) Display filtered predictions in game range", "7"],
+                      ["(8) Save all predictions in range to file", "8"],
+                      ["(9) Save filtered predictions in range to file", "9"],
                       ["(M) Return to previous menu", "m"]
                       ]
     
@@ -205,7 +311,7 @@ def reports(league_data, fixtures, predictions, predictions_in_range, game_range
         # Menu selection conditionals
         if selection.lower() == "m":
                 exit_menu = True
-                return (league_data, fixtures, predictions, predictions_in_range, game_range)
+                return (league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions)
         if selection == report_options[0][1]: # Export league data to JSON
             cf.export_data(league_data, "json")
         if selection == report_options[1][1]: # Display currently loaded league data
@@ -218,15 +324,24 @@ def reports(league_data, fixtures, predictions, predictions_in_range, game_range
             display_fixtures(fixtures, game_range)
         if selection == report_options[4][1]: # Display current predictions
             display_predictions(predictions_in_range)
-        if selection == report_options[5][1]: # Save predictions
+        if selection == report_options[5][1]: # Filter predictions
+            filtered_predictions, applied_filters = filter_predictions(predictions_in_range, filtered_predictions, applied_filters)
+        if selection == report_options[6][1]: # Display filtered predictions
+            display_predictions(filtered_predictions)
+        if selection == report_options[7][1]: # Save all predictions in range
             if predictions_in_range:
                 cf.export_data(fb.prepare_prediction_dataframe(predictions_in_range), "xls")
             else:
                 print("\nNo predictions loaded. Generate predictions or run game analysis first.\n")
+        if selection == report_options[8][1]: # Save filtered predictions in range
+            if filtered_predictions:
+                cf.export_data(fb.prepare_prediction_dataframe(filtered_predictions), "xls")
+            else:
+                print("\nNo predictions found.\n")
         selection = ""
 
 
-def football_menu(league_data, fixtures, predictions, predictions_in_range, game_range):
+def football_menu(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions):
     data_source = "Soccer Stats"
     football_options = [["(1) Select a league", "1", choose_leagues],  # The selectLeague function from football.py
                         ["(2) Generate predictions on currently loaded fixtures", "2"],
@@ -329,7 +444,7 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
                             break
                                 
             if selection == "5": # Reports
-                league_data, fixtures, predictions, predictions_in_range, game_range = reports(league_data, fixtures, predictions, predictions_in_range, game_range)
+                league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions = reports(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions)
                 selection = ""
                 continue
             if selection == "6": # Import data from JSON file
@@ -349,6 +464,7 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
             if selection == "8": # Clear currently loaded predictions data.
                 predictions.clear()
                 selection = ""
+                applied_filters = []
                 continue
             if selection == "9": # Switch data source.
                 if data_source == "Soccer Stats":
@@ -359,6 +475,7 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
                 fixtures = []
                 predictions.clear()
                 selection = ""
+                applied_filters = []
                 continue
                 
             # General action for other menu items
