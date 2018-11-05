@@ -183,8 +183,8 @@ def special_filters(filtered_predictions, applied_filters):
                 print(filter)
         print("\n" + str(len(filtered_predictions)) + " games remaining")
 
-        print("\nSelect one of the following filters to apply. Remove all games except: \n")
-        print("1) James Shoemark's Both to Score Special")
+        print("\nSelect one of the following special filters to apply:\n")
+        print("1) James Shoemark's Over 2.5 Goals Special")
         print("2) Display filtered predictions")
         #print("3)")
         #print("4)")
@@ -199,7 +199,7 @@ def special_filters(filtered_predictions, applied_filters):
         if s == "m":
             return(filtered_predictions, applied_filters)
         elif s == "1":
-            filtered_predictions, applied_filters = fp.special_james_shoemark_bts(filtered_predictions, applied_filters)
+            filtered_predictions, applied_filters = fp.special_james_shoemark_3_or_more(filtered_predictions, applied_filters)
         elif s == "2":
             display_predictions(filtered_predictions)
         """elif s == "3":
