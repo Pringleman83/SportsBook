@@ -120,7 +120,7 @@ def x_or_less_goals_scored(predictions, applied_filters):
 
 # Special filters
 
-def special_james_shoemark_bts(predictions, applied_filters):
+def special_james_shoemark_3_or_more(predictions, applied_filters):
     """
     Takes a list of predictions and the list of currently applied filters.
     Returns a list of predictions where total goals expected is over 4 and both teams are expected to score at least one goal along with the updated applied filters list.
