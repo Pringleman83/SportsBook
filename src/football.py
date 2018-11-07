@@ -115,13 +115,14 @@ def inform_and_scrape(selected_leagues, league_data, fixtures, available_leagues
     # Create queue object for queueing the leagues pre scrape
     leaguesq = queue.Queue(maxsize = len(selected_leagues)) 
     # The maximum number of threads to use
-    max_threads = 5
     # Select the appropriate function based upone the selected data source
     if data_source == "Bet Study":
         scraper = scrape.get_league_data_bet_study
+        max_threads = 5
         #(selection, league_data, fixtures, available_leagues)
     else:
         scraper = scrape.get_league_data_soccer_stats
+        max_threads = 3
         #(selection, league_data, fixtures, available_leagues)
     
     # Set up a function for each scrape 
@@ -157,7 +158,7 @@ def inform_and_scrape(selected_leagues, league_data, fixtures, available_leagues
             data = scraper_function(league, scraper, league_data, fixtures, available_leagues)
             
             if data == "Scrape error":
-                print("Scrape error with: " + selection)
+                #print("Scrape error with: " + league) #Scraper already does this.
                 print("Scrape error")
                 leaguesq.task_done()
             else:  
