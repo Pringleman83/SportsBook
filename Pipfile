@@ -9,6 +9,7 @@ prettytable = "*"
 "bs4" = "*"
 pandas = "*"
 xlwt = "*"
+requests = "*"
 
 [dev-packages]
 
