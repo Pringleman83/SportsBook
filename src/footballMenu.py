@@ -237,7 +237,7 @@ def filter_predictions(predictions_in_range, filtered_predictions, applied_filte
         print("\nSelect one of the following filters to apply. Remove all games except: \n")
         print("1) Games where both teams are expected to score")
         print("2) Games where no teams are expected to score")
-        print("3) Games where a team is expected to win by a specified number of goals")
+        print("3) Games where a team is expected to win by at least x goals")
         print("4) Games where a minimum of a specified number of goals are scored")
         print("5) Games where a maximum of a specified number of goals are scored")
         print("6) View special filters")
@@ -342,30 +342,33 @@ def reports(league_data, fixtures, predictions, predictions_in_range, game_range
 
 
 def football_menu(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions):
-    data_source = "Soccer Stats"
-    football_options = [["(1) Select a league", "1", choose_leagues],  # The selectLeague function from football.py
-                        ["(2) Generate predictions on currently loaded fixtures", "2"],
-                        ["(3) Single game analysis from fixture list*", "3", single_game_analysis],
-                        ["(4) Manual single game analysis", "4", fb.manual_game_analysis],
-                        ["(5) Reports", "5", reports],
-                        ["(6) Import data from JSON file", "6"],
-                        ["(7) Clear currently loaded league data", "7"],
-                        ["(8) Clear currently stored prediction data", "8"],
-                        ["(9) Change data source (CLEARS ALL DATA)", "9"],
-                        ["(Q) Quit", "q", leave]
-                        ]
+    data_source, next_data_source = "Soccer Stats", "Bet Study"
     
-    # ["(M) Previous menu", "m", leave] - removed as prev menu currently bypassed
     selected_leagues = []
     exit_menu = False
     available_options = []
     selection = ""
-
-    # Gather a list of availableOption numbers for input recognition
-    for option in football_options:
-        available_options.append(option[1])
     
     while not exit_menu:
+        football_options = [["(1) Select a league", "1", choose_leagues],  # The selectLeague function from football.py
+                            ["(2) Generate predictions on currently loaded fixtures", "2"],
+                            ["(3) Single game analysis from fixture list*", "3", single_game_analysis],
+                            ["(4) Manual single game analysis", "4", fb.manual_game_analysis],
+                            ["(5) Reports", "5", reports],
+                            ["(6) Import data from JSON file", "6"],
+                            ["(7) Clear currently loaded league data", "7"],
+                            ["(8) Clear currently stored prediction data", "8"],
+                            ["(9) Change data source to " + next_data_source + " (CLEARS ALL DATA)", "9"],
+                            ["(Q) Quit", "q", leave]
+                            ]
+        
+        # ["(M) Previous menu", "m", leave] - removed as prev menu currently bypassed.
+
+        # Gather a list of availableOption numbers for input recognition
+        for option in football_options:
+            available_options.append(option[1])
+    
+    
         if league_data == {}:
             football_options[0][0] = "(1) Select a league"
         else:
@@ -387,6 +390,11 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
 
         print("Currently selected data source: " + data_source + "\n")
         
+        # For clarity of switching data source
+        if data_source == "Soccer Stats":
+            next_data_source = "Bet Study"
+        else:
+            next_data_source = "Soccer Stats"
         # Display the available options
         for option in football_options:
             print(option[0])
@@ -462,18 +470,20 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
                 selection = ""
                 continue    
             if selection == "8": # Clear currently loaded predictions data.
-                predictions.clear()
+                predictions = []
+                predictions_in_range = []
+                filtered_predictions = []
                 selection = ""
                 applied_filters = []
                 continue
             if selection == "9": # Switch data source.
-                if data_source == "Soccer Stats":
-                    data_source = "Bet Study"
-                else:
-                    data_source = "Soccer Stats"
+                data_source, next_data_source = next_data_source, data_source
+                # Clear all data
                 league_data = {}
                 fixtures = []
-                predictions.clear()
+                predictions = []
+                predictions_in_range = []
+                filtered_predictions = []
                 selection = ""
                 applied_filters = []
                 continue

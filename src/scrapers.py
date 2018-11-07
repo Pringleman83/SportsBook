@@ -57,7 +57,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
     season = "c/"  # c is current
     full_url = bet_study_main + season + available_leagues[selection]
     web_client = uReq(full_url)
-
+    #print(full_url)
     if web_client.getcode() != 200:
         print("\nCannot retrieve data, webpage is down")
         return "Scrape error"
@@ -73,7 +73,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
         except:
             # If no teams have yet been added, there is an error.
             if i == 1:
-                print("\n" + selection + "\nWeb page error - Check url integrity and website status.")
+                print("\n" + "\nError scraping "+ selection + "\nThe league may be in group or playoff stages or there site could be experiencing problems.")
                 return "Scrape error"
             # If teams have been added, the loop has reached the end of the table
             else:
@@ -108,24 +108,24 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
         total_points = home_points + away_points
         
         # Inline code to tidily avoid division by zero errors
-        home_won_per_game = 0 if home_played == 0 else round(home_won / home_played, 3)
-        home_drew_per_game = 0 if home_played == 0 else round(home_drew / home_played, 3)
-        home_lost_per_game = 0 if home_played == 0 else round(home_lost / home_played, 3)
-        home_for_per_game = 0 if home_played == 0 else round(home_for / home_played, 3)
-        home_against_per_game = 0 if home_played == 0 else round(home_against / home_played, 3)
-        home_points_per_game = 0 if home_played == 0 else round(home_points / home_played, 3)
-        away_won_per_game = 0 if away_played == 0 else round(away_won / away_played, 3)
-        away_drew_per_game = 0 if away_played == 0 else round(away_drew / away_played, 3)
-        away_lost_per_game = 0 if away_played == 0 else round(away_lost / away_played, 3)
-        away_for_per_game = 0 if away_played == 0 else round(away_for / away_played, 3)
-        away_against_per_game = 0 if away_played == 0 else round(away_against / away_played, 3)
-        away_points_per_game = 0 if away_played == 0 else round(away_points / away_played, 3)
-        total_won_per_game = 0 if total_played == 0 else round(total_won / total_played, 3)
-        total_drew_per_game = 0 if total_played == 0 else round(total_drew / total_played, 3)
-        total_lost_per_game = 0 if total_played == 0 else round(total_lost / total_played, 3)
-        total_for_per_game = 0 if total_played == 0 else round(total_for / total_played, 3)
-        total_against_per_game = 0 if total_played == 0 else round(total_against / total_played, 3)
-        total_points_per_game = 0 if total_played == 0 else round(total_points / total_played, 3)
+        home_won_per_game = 0 if not home_played else round(home_won / home_played, 3)
+        home_drew_per_game = 0 if not home_played else round(home_drew / home_played, 3)
+        home_lost_per_game = 0 if not home_played else round(home_lost / home_played, 3)
+        home_for_per_game = 0 if not home_played else round(home_for / home_played, 3)
+        home_against_per_game = 0 if not home_played else round(home_against / home_played, 3)
+        home_points_per_game = 0 if not home_played else round(home_points / home_played, 3)
+        away_won_per_game = 0 if not away_played else round(away_won / away_played, 3)
+        away_drew_per_game = 0 if not away_played else round(away_drew / away_played, 3)
+        away_lost_per_game = 0 if not away_played else round(away_lost / away_played, 3)
+        away_for_per_game = 0 if not away_played else round(away_for / away_played, 3)
+        away_against_per_game = 0 if not away_played else round(away_against / away_played, 3)
+        away_points_per_game = 0 if not away_played else round(away_points / away_played, 3)
+        total_won_per_game = 0 if not total_played else round(total_won / total_played, 3)
+        total_drew_per_game = 0 if not total_played else round(total_drew / total_played, 3)
+        total_lost_per_game = 0 if not total_played else round(total_lost / total_played, 3)
+        total_for_per_game = 0 if not total_played else round(total_for / total_played, 3)
+        total_against_per_game = 0 if not total_played else round(total_against / total_played, 3)
+        total_points_per_game = 0 if not total_played else round(total_points / total_played, 3)
 
         # Add league to the leagueData dictionary if the league does not already exist within it.
         # Any additional stats calculated above must be added to the dictionary generator here.
@@ -338,7 +338,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
         except:
             # If no teams have yet been added, there is an error.
             if i == 1:
-                print("\n" + selection + "\nWeb page error - Check url integrity and website status.")
+                print("\n" + "\nError scraping "+ selection + "\nThe league may be in group or playoff stages or there site could be experiencing problems.")
                 return "Scrape error"
             # If teams have been added, the loop has reached the end of the table
             else:
@@ -375,24 +375,24 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
         total_points = home_points + away_points
         
         # Inline code to tidily avoid division by zero errors
-        home_won_per_game = 0 if home_played == 0 else round(home_won / home_played, 3)
-        home_drew_per_game = 0 if home_played == 0 else round(home_drew / home_played, 3)
-        home_lost_per_game = 0 if home_played == 0 else round(home_lost / home_played, 3)
-        home_for_per_game = 0 if home_played == 0 else round(home_for / home_played, 3)
-        home_against_per_game = 0 if home_played == 0 else round(home_against / home_played, 3)
-        home_points_per_game = 0 if home_played == 0 else round(home_points / home_played, 3)
-        away_won_per_game = 0 if away_played == 0 else round(away_won / away_played, 3)
-        away_drew_per_game = 0 if away_played == 0 else round(away_drew / away_played, 3)
-        away_lost_per_game = 0 if away_played == 0 else round(away_lost / away_played, 3)
-        away_for_per_game = 0 if away_played == 0 else round(away_for / away_played, 3)
-        away_against_per_game = 0 if away_played == 0 else round(away_against / away_played, 3)
-        away_points_per_game = 0 if away_played == 0 else round(away_points / away_played, 3)
-        total_won_per_game = 0 if total_played == 0 else round(total_won / total_played, 3)
-        total_drew_per_game = 0 if total_played == 0 else round(total_drew / total_played, 3)
-        total_lost_per_game = 0 if total_played == 0 else round(total_lost / total_played, 3)
-        total_for_per_game = 0 if total_played == 0 else round(total_for / total_played, 3)
-        total_against_per_game = 0 if total_played == 0 else round(total_against / total_played, 3)
-        total_points_per_game = 0 if total_played == 0 else round(total_points / total_played, 3)
+        home_won_per_game = 0 if not home_played else round(home_won / home_played, 3)
+        home_drew_per_game = 0 if not home_played else round(home_drew / home_played, 3)
+        home_lost_per_game = 0 if not home_played else round(home_lost / home_played, 3)
+        home_for_per_game = 0 if not home_played else round(home_for / home_played, 3)
+        home_against_per_game = 0 if not home_played else round(home_against / home_played, 3)
+        home_points_per_game = 0 if not home_played else round(home_points / home_played, 3)
+        away_won_per_game = 0 if not away_played else round(away_won / away_played, 3)
+        away_drew_per_game = 0 if not away_played else round(away_drew / away_played, 3)
+        away_lost_per_game = 0 if not away_played else round(away_lost / away_played, 3)
+        away_for_per_game = 0 if not away_played else round(away_for / away_played, 3)
+        away_against_per_game = 0 if not away_played else round(away_against / away_played, 3)
+        away_points_per_game = 0 if not away_played else round(away_points / away_played, 3)
+        total_won_per_game = 0 if not total_played else round(total_won / total_played, 3)
+        total_drew_per_game = 0 if not total_played else round(total_drew / total_played, 3)
+        total_lost_per_game = 0 if not total_played else round(total_lost / total_played, 3)
+        total_for_per_game = 0 if not total_played else round(total_for / total_played, 3)
+        total_against_per_game = 0 if not total_played else round(total_against / total_played, 3)
+        total_points_per_game = 0 if not total_played else round(total_points / total_played, 3)
 
         # Add league to the leagueData dictionary if the league does not already exist within it.
         # Any additional stats calculated above must be added to the dictionary generator here.

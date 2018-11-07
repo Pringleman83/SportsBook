@@ -7,11 +7,23 @@ def both_to_score(predictions, applied_filters):
     """
     print("(Both teams to score)\n")
     filtered_predictions = []
+    filter_name = "Both to score"
     for p in predictions:
         if p["Home team prediction"] > 0 and p["Away team prediction"] > 0:
             filtered_predictions.append(p)
-    applied_filters.append("Both to score")
-    return (filtered_predictions, applied_filters)
+    if len(filtered_predictions) > 0: 
+        applied_filters.append(filter_name)
+        return (filtered_predictions, applied_filters)
+    elif filter_name in applied_filters:
+        print("\nFilter has already been applied.")
+        print("Press enter to continue.")
+        input()
+        return(predictions, applied_filters)
+    else:
+        print("\nFilter not applied as it will remove all remaining games.")
+        print("Press enter to continue.")
+        input()
+        return (predictions, applied_filters)
 
 def bore_draw(predictions, applied_filters):
     """
@@ -21,11 +33,23 @@ def bore_draw(predictions, applied_filters):
     """
     print("(No score draws)\n")
     filtered_predictions = []
+    filter_name = "0-0 draws"
     for p in predictions:
-        if p["Total goals"] == 0:
+        if p["Total goals expected"] == 0:
             filtered_predictions.append(p)
-    applied_filters.append("0-0 draws")
-    return (filtered_predictions, applied_filters)  
+    if len(filtered_predictions) > 0:
+        applied_filters.append(filter_name)
+        return (filtered_predictions, applied_filters)
+    elif filter_name in applied_filters:
+        print("\nFilter has already been applied.")
+        print("Press enter to continue.")
+        input()
+        return(predictions, applied_filters)
+    else:
+        print("\nFilter not applied as it will remove all remaining games.")
+        print("Press enter to continue.")
+        input()
+        return (predictions, applied_filters)
 
 def win_by_x(predictions, applied_filters):
     """
@@ -57,20 +81,30 @@ def win_by_x(predictions, applied_filters):
         if cf.is_number(x):
             x = int(x)
             break
-        
+    filter_name = team + " team to score at least " + str(x) + " goals more than their opponent." 
     for p in predictions:
         if s == "h":
-            if p["Home team prediction"] - p["Away team prediction"] > x:
+            if p["Home team prediction"] - p["Away team prediction"] >= x:
                 filtered_predictions.append(p)        
         elif s == "a":
-            if p["Away team prediction"] - p["Home team prediction"] > x:
+            if p["Away team prediction"] - p["Home team prediction"] >= x:
                 filtered_predictions.append(p)
         elif s == "e":
-            if p["Home team prediction"] - p["Away team prediction"] > x or p["Away team prediction"] - p["Home team prediction"] > x:
+            if p["Home team prediction"] - p["Away team prediction"] >= x or p["Away team prediction"] - p["Home team prediction"] >= x:
                 filtered_predictions.append(p)
-                
-    applied_filters.append(team + " team to score " + str(x) + " goals more than their opponent.")
-    return (filtered_predictions, applied_filters)
+    if len(filtered_predictions) > 0:           
+        applied_filters.append(filter_name)
+        return (filtered_predictions, applied_filters)
+    elif filter_name in applied_filters:
+        print("\nFilter has already been applied.")
+        print("Press enter to continue.")
+        input()
+        return(predictions, applied_filters)
+    else:
+        print("\nFilter not applied as it will remove all remaining games.")
+        print("Press enter to continue.")
+        input()
+        return (predictions, applied_filters)
 
 def x_or_more_goals_scored(predictions, applied_filters):
     """
@@ -88,13 +122,24 @@ def x_or_more_goals_scored(predictions, applied_filters):
         if cf.is_number(x):
             x = int(x)
             break
-        
+    filter_name = "Total number of goals is " + str(x) + " or more"
     for p in predictions:
         if p["Total goals expected"] >= x:
-            filtered_predictions.append(p)  
-    applied_filters.append("Total number of goals is " + str(x) + " or more.")    
-    return (filtered_predictions, applied_filters)
-    
+            filtered_predictions.append(p)
+    if len(filtered_predictions) > 0: 
+        applied_filters.append(filter_name)
+        return (filtered_predictions, applied_filters)
+    elif filter_name in applied_filters:
+        print("\nFilter has already been applied.")
+        print("Press enter to continue.")
+        input()
+        return(predictions, applied_filters)
+    else:
+        print("\nFilter not applied as it will remove all remaining games.")
+        print("Press enter to continue.")
+        input()
+        return(predictions, applied_filters)
+        
 def x_or_less_goals_scored(predictions, applied_filters):
     """
     Takes a list of predictions and the list of currently applied filters.
@@ -111,13 +156,23 @@ def x_or_less_goals_scored(predictions, applied_filters):
         if cf.is_number(x):
             x = int(x)
             break
-        
+    filter_name = "Total number of goals is " + str(x) + " or less"   
     for p in predictions:
         if p["Total goals expected"] >= x:
-            filtered_predictions.append(p)  
-    applied_filters.append("Total number of goals is " + str(x) + " or less.")
-    return (filtered_predictions, applied_filters)
-
+            filtered_predictions.append(p)
+    if len(filtered_predictions) > 0:  
+        applied_filters.append(filter_name)
+        return (filtered_predictions, applied_filters)
+    elif filter_name in applied_filters:
+        print("\nFilter has already been applied.")
+        print("Press enter to continue.")
+        input()
+        return(predictions, applied_filters)
+    else:
+        print("\nFilter not applied as it will remove all remaining games.")
+        print("Press enter to continue.")
+        input()
+        return(predictions, applied_filters)
 # Special filters
 
 def special_james_shoemark_3_or_more(predictions, applied_filters):
@@ -127,10 +182,20 @@ def special_james_shoemark_3_or_more(predictions, applied_filters):
     """
     print("(x or less goals scored)\n\n")
     filtered_predictions = []
-    
+    filter_name = "James Shoemark special selection"
     for p in predictions:
         if p["Total goals expected"] > 4 and p["Home team prediction"] > 1 and p["Away team prediction"] > 1:
             filtered_predictions.append(p)
-            
-    applied_filters.append("James Shoemark special selection")
-    return (filtered_predictions, applied_filters)
+    if len(filtered_predictions) > 0:        
+        applied_filters.append(filter_name)
+        return (filtered_predictions, applied_filters)
+    elif filter_name in applied_filters:
+        print("\nFilter has already been applied.")
+        print("Press enter to continue.")
+        input()
+        return(predictions, applied_filters)
+    else:
+        print("\nFilter not applied as it will remove all remaining games.")
+        print("Press enter to continue.")
+        input()
+        return(predictions, applied_filters)
