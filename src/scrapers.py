@@ -73,7 +73,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
         except:
             # If no teams have yet been added, there is an error.
             if i == 1:
-                print("\n" + "\nError scraping "+ selection + "\nThe league may be in group or playoff stages or there site could be experiencing problems.")
+                print("\n" + "\nError scraping "+ selection + "\nThe league may be in group or playoff stages or the web site could be experiencing problems.")
                 return "Scrape error"
             # If teams have been added, the loop has reached the end of the table
             else:
@@ -338,7 +338,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
         except:
             # If no teams have yet been added, there is an error.
             if i == 1:
-                print("\n" + "\nError scraping "+ selection + "\nThe league may be in group or playoff stages or there site could be experiencing problems.")
+                print("\n" + "\nError scraping "+ selection + "\nThe league may be in group or playoff stages or the website could be experiencing problems.")
                 return "Scrape error"
             # If teams have been added, the loop has reached the end of the table
             else:
