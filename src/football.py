@@ -3,7 +3,8 @@ import pandas as pd
 import scrapers as scrape
 from datetime import datetime
 from datetime import timedelta
-
+import threading
+import queue
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
 __maintainer__ = "David Bristoll"
@@ -83,8 +84,7 @@ def select_league(league_data, fixtures, data_source):
         if selected_leagues:
             selected_leagues = cf.remove_duplicates(selected_leagues)
             print("\nDownloading the requested data, please wait...")
-            for selection in selected_leagues:
-                gather_data = inform_and_scrape(selection, league_data, fixtures, available_leagues, data_source)
+            gather_data = inform_and_scrape(selected_leagues, league_data, fixtures, available_leagues, data_source)
         else:
             print("No leagues added.")
             
@@ -97,32 +97,95 @@ def select_league(league_data, fixtures, data_source):
             return
         else:
             return
-
-def inform_and_scrape(selection, league_data, fixtures, available_leagues, data_source):
+        
+def inform_and_scrape(selected_leagues, league_data, fixtures, available_leagues, data_source):
     """
-    Takes in the key value of a selected league.
-    Advised that downloading of that league is taking place.
-    Passes the league key to the get_league_data function for scraping.
+    Takes in:   the list of selected leagues
+                the current league_data dict.
+                the current fixtures list.
+                the available_leagues list.
+                the selected data_source string.
+                
+    Organises threads to scrape leagues concurrently.
+    Passes the league keys to the selected scraper.
+    New data is added to dictionary and list objects so no return is necessary.
+    Returns "Success" if successful.
     """
-    # Debug code: display the URL that will be used to obtain the league data
-    # print("This will use the following url: " + availableLeagues[selection] + "\n")
-    
-    # Select the appropriate function based on the selected data source.
+    threads_list = []
+    # Create queue object for queueing the leagues pre scrape
+    leaguesq = queue.Queue(maxsize = len(selected_leagues)) 
+    # The maximum number of threads to use
+    max_threads = 5
+    # Select the appropriate function based upone the selected data source
     if data_source == "Bet Study":
-        get_league_data_and_fixtures = scrape.get_league_data_bet_study(selection, league_data, fixtures, available_leagues)
+        scraper = scrape.get_league_data_bet_study
+        #(selection, league_data, fixtures, available_leagues)
     else:
-        get_league_data_and_fixtures = scrape.get_league_data_soccer_stats(selection, league_data, fixtures, available_leagues)
+        scraper = scrape.get_league_data_soccer_stats
+        #(selection, league_data, fixtures, available_leagues)
     
-    if get_league_data_and_fixtures == "Scrape error":
-        return
+    # Set up a function for each scrape 
+    def scraper_function(league, scraper, league_data, fixtures, available_leagues):
+        """
+        Takes in:   the name of the league to be scraped
+                    the scraper function to use
+                    the current league_data dictionary
+                    the current list of fixtures
+                    the available leagues dictionary
+                    the leaguedataq Queue object
+                    
+        Checks if the new league and fixture data is already present in the existing
+        league and data before queuing them to be added to the
+        """
+        data = scraper(league, league_data, fixtures, available_leagues)
+        #data = [new_league_data(dict), new_fixtures(list)
+        return data
+    
+    def threader(scraper, league_data, fixtures, available_leagues):
+        """
+        Used to organise threads and keep them working after each scrape.
+        Takes:  the selected scraper function
+                the league_data function
+                the fixtures list
+                the available leagues dictionary
+        """
+        # Keep working until the queue of leagues to scrape is empty.
+        while not leaguesq.empty():
+            # Take next league from list.
+            league = leaguesq.get()
+            # Use the selected scraper function to scrape data.
+            data = scraper_function(league, scraper, league_data, fixtures, available_leagues)
+            
+            if data == "Scrape error":
+                print("Scrape error with: " + selection)
+                print("Scrape error")
+                leaguesq.task_done()
+            else:  
+                print(league + " download complete.")
+                leaguesq.task_done()
+
+    # Prepare the queue of leagues to scrape
+    for league in selected_leagues:
+        leaguesq.put(league)
+    
+    # One thread per league unless there are more leagues than the max threads
+    if len(selected_leagues) < max_threads:
+        number_of_threads = len(selected_leagues)
     else:
-        print(selection + " download complete.")
+        number_of_threads = max_threads
     
-    #league_data_and_fixtures checked to contain a list of a dict
-    #(league data) and a list of lists of fixtures
-    return get_league_data_and_fixtures
+    # Initialise threads
+    for i in range(number_of_threads):
+        t = threading.Thread(target = threader, name = "thread " + str(i), args = (scraper, league_data, fixtures, available_leagues), daemon = True)
+        t.start()
+        #print(t.name + " started")
+        threads_list.append(t)
 
-
+    leaguesq.join()
+    # Ensure all threads have completed before continuing
+    for t in threads_list:
+        t.join()
+    return "Success"
 
 def get_league(home_team, away_team, league_data):
     """
@@ -343,8 +406,7 @@ def manual_game_analysis(league_data, predictions):
     # Save current prediction as a list item        
     prediction = {"League": league, "Date and time": "Manual entry: ", "Prediction type": prediction_name, "Home team": home_team,
     "Home team prediction": home_team_goals, "Away team": away_team, "Away team prediction": away_team_goals, "Total goalsexpected": total_goals,
-    "Predicted separation": prediction_goal_separation, "Both to score": both_to_score, "Home result": "",
-    "Away result": "", "Total goals scored": "", "Goal separation": "", "Both teams scored": "",  "date_as_dtobject": today}
+    "Predicted separation": prediction_goal_separation, "Both to score": both_to_score,  "date_as_dtobject": today}
 
     # Flatten league stats for prediction storage and exporting
     index = 0
@@ -416,8 +478,7 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
         # Save current prediction as a list item        
         prediction = {"League": fixture_league, "Date and time": fixture_datetime, "Prediction type": prediction_name, "Home team": home_team,
         "Home team prediction": home_team_goals, "Away team": away_team, "Away team prediction": away_team_goals, "Total goals expected": total_goals, 
-        "Predicted separation": prediction_goal_separation, "Both to score": both_to_score, "Home result": "",
-        "Away result": "", "Total goals scored": "", "Goal separation": "", "Both teams scored": "", "date_as_dtobject": fixture[4]}
+        "Predicted separation": prediction_goal_separation, "Both to score": both_to_score, "date_as_dtobject": fixture[4]}
 
         # Flatten league stats for prediction storage and exporting
         for team in [home_team, away_team]: # Do for each team
@@ -496,6 +557,11 @@ def prepare_prediction_dataframe(predictions):
     # Can also be used to add or remove information to the spreadsheet.
     temp_predictions = predictions.copy()
     for prediction in temp_predictions:
+        prediction["Home result"] = ""
+        prediction["Away result"] = ""
+        prediction["Total goals scored"] = ""
+        prediction["Goal separation"] = ""
+        prediction["Both teams scored"] = ""
         del prediction["date_as_dtobject"]
     
     # Create the pandas dataframe object

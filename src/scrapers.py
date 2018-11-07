@@ -5,6 +5,11 @@ from urllib.request import urlopen as uReq
 import requests
 import commonFunctions as cf
 from datetime import datetime
+import threading
+
+# Threading locks prevent multiple threads from accessing variables at the same time.
+league_data_lock = threading.Lock()
+fixtures_lock = threading.Lock()
 
 def get_league_data_bet_study(selection, league_data, fixtures, available_leagues):
     """
@@ -13,17 +18,18 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
     Calculates unscraped data (for example, total games won).
     Adds all data to the leagueData dictionary.
     
-    Scrapes the next 15 fixtures of the selected league.
+    Scrapes the all available fixtures of the selected league.
     Adds them to the fixtures list.
     """
+    new_league = {}
+    new_fixtures = []
     
     def format_datetime(dt):
         """
         Helper function to convert date and time value for a
         game from the SoccerStats scraper and converts it into
         a valid datetime object. The object is returned.
-        """
-
+        """       
         # Game date day (1-31) number
         game_date_day = int(dt[:2])
         
@@ -32,9 +38,15 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
         
         # Year number
         game_date_year = int(dt[6:10])
+        
         # Time
-        game_hour = int(dt[12:14])
-        game_min = int(dt[15:17])
+        # Default time 0000 when no time present
+        if "-" in dt[12:14]:
+            game_hour = 00
+            game_min = 00
+        else:
+            game_hour = int(dt[12:14]) 
+            game_min = int(dt[15:17])
 
         game_date = datetime(game_date_year, game_date_month,
                              game_date_day, game_hour, game_min)
@@ -53,8 +65,6 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
     web_client.close()
     web_soup = soup(web_html, "html.parser")
     table = web_soup.find("div", {"id": "tab03_"})
-    
-    team_count = 0 # Keep a count of how many teams have been detected in the league
 
     for i in range(1, 50): # Support for leagues of up to 50 teams.
         try:
@@ -62,7 +72,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
             position = int(table.select('td')[((i-1)*16)].text)
         except:
             # If no teams have yet been added, there is an error.
-            if team_count == 0:
+            if i == 1:
                 print("\n" + selection + "\nWeb page error - Check url integrity and website status.")
                 return "Scrape error"
             # If teams have been added, the loop has reached the end of the table
@@ -119,10 +129,34 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
 
         # Add league to the leagueData dictionary if the league does not already exist within it.
         # Any additional stats calculated above must be added to the dictionary generator here.
+        
         if selection not in league_data:
-            league_data[selection] = {
-                team_name:
-                    {"Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
+            with league_data_lock:
+                league_data[selection] = {
+                    team_name:
+                        {"Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
+                                  "For": home_for, "Against": home_against, "Points": home_points,
+                                  "Won per Game": home_won_per_game, "Drew per Game": home_drew_per_game,
+                                  "Lost per Game": home_lost_per_game, "For per Game": home_for_per_game,
+                                  "Against per Game": home_against_per_game, "Points per Game": home_points_per_game},
+                         "Away": {"Played": away_played, "Won": away_won, "Drew": away_drew, "Lost": away_lost,
+                                  "For": away_for, "Against": away_against, "Points": away_points,
+                                  "Won per Game": away_won_per_game, "Drew per Game": away_drew_per_game,
+                                  "Lost per Game": away_lost_per_game, "For per Game": away_for_per_game,
+                                  "Against per Game": away_against_per_game, "Points per Game": away_points_per_game},
+                         "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
+                                  "For": total_for, "Against": total_against, "Points": total_points,
+                                  "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
+                                  "Lost per Game": total_lost_per_game, "For per game": total_for_per_game,
+                                  "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
+                         }
+                    }
+        # If the league does already exist, just update the teams and statistics.
+        else:
+            with league_data_lock:
+                league_data[selection][team_name] = {
+
+                     "Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
                               "For": home_for, "Against": home_against, "Points": home_points,
                               "Won per Game": home_won_per_game, "Drew per Game": home_drew_per_game,
                               "Lost per Game": home_lost_per_game, "For per Game": home_for_per_game,
@@ -133,34 +167,11 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
                               "Lost per Game": away_lost_per_game, "For per Game": away_for_per_game,
                               "Against per Game": away_against_per_game, "Points per Game": away_points_per_game},
                      "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
-                              "For": total_for, "Against": total_against, "Points": total_points,
-                              "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
-                              "Lost per Game": total_lost_per_game, "For per game": total_for_per_game,
-                              "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
+                               "For": total_for, "Against": total_against, "Points": total_points,
+                               "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
+                               "Lost per Game": total_lost_per_game, "For per Game": total_for_per_game,
+                               "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
                      }
-                }
-
-        # If the league does already exist, just update the teams and statistics.
-        else:
-            league_data[selection][team_name] = {
-
-                 "Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
-                          "For": home_for, "Against": home_against, "Points": home_points,
-                          "Won per Game": home_won_per_game, "Drew per Game": home_drew_per_game,
-                          "Lost per Game": home_lost_per_game, "For per Game": home_for_per_game,
-                          "Against per Game": home_against_per_game, "Points per Game": home_points_per_game},
-                 "Away": {"Played": away_played, "Won": away_won, "Drew": away_drew, "Lost": away_lost,
-                          "For": away_for, "Against": away_against, "Points": away_points,
-                          "Won per Game": away_won_per_game, "Drew per Game": away_drew_per_game,
-                          "Lost per Game": away_lost_per_game, "For per Game": away_for_per_game,
-                          "Against per Game": away_against_per_game, "Points per Game": away_points_per_game},
-                 "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
-                           "For": total_for, "Against": total_against, "Points": total_points,
-                           "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
-                           "Lost per Game": total_lost_per_game, "For per Game": total_for_per_game,
-                           "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
-                 }
-        team_count += 1
 
     # Get fixtures
     fixtures_url = "d/fixtures/"
@@ -205,7 +216,8 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
                 
                 # Only add the fixture to the fixtures list if it's not already present.
                 if not fixture in fixtures:
-                    fixtures.append(fixture[:]) # add fixture details to fixtures                    
+                    with fixtures_lock:
+                        fixtures.append(fixture[:]) # add fixture details to fixtures                    
             break
         except IndexError:
             # Number of requested fixtures exceeds the number of available fixtures, break.
@@ -221,7 +233,6 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
     
     Scrapes all results and fixtures of the current season.
     """
-    #print("===" + str(selection) + "===") #DEBUG CODE
     
     def clean_string(st):
         """
@@ -320,16 +331,13 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
     """
     
     table = web_soup.find("tbody")
- 
-    team_count = 0 # Keep a count of how many teams have been detected in the league
-
     for i in range(1, 50): # Support for leagues of up to 50 teams.
         try:
             # Initial scrape also determines if another team is present in the current league
             position = int(table.select('td')[((i-1)*29)].text)
         except:
             # If no teams have yet been added, there is an error.
-            if team_count == 0:
+            if i == 1:
                 print("\n" + selection + "\nWeb page error - Check url integrity and website status.")
                 return "Scrape error"
             # If teams have been added, the loop has reached the end of the table
@@ -389,9 +397,33 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
         # Add league to the leagueData dictionary if the league does not already exist within it.
         # Any additional stats calculated above must be added to the dictionary generator here.
         if selection not in league_data:
-            league_data[selection] = {
-                team_name:
-                    {"Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
+            with league_data_lock:
+                league_data[selection] = {
+                    team_name:
+                        {"Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
+                                  "For": home_for, "Against": home_against, "Points": home_points,
+                                  "Won per Game": home_won_per_game, "Drew per Game": home_drew_per_game,
+                                  "Lost per Game": home_lost_per_game, "For per Game": home_for_per_game,
+                                  "Against per Game": home_against_per_game, "Points per Game": home_points_per_game},
+                         "Away": {"Played": away_played, "Won": away_won, "Drew": away_drew, "Lost": away_lost,
+                                  "For": away_for, "Against": away_against, "Points": away_points,
+                                  "Won per Game": away_won_per_game, "Drew per Game": away_drew_per_game,
+                                  "Lost per Game": away_lost_per_game, "For per Game": away_for_per_game,
+                                  "Against per Game": away_against_per_game, "Points per Game": away_points_per_game},
+                         "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
+                                  "For": total_for, "Against": total_against, "Points": total_points,
+                                  "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
+                                  "Lost per Game": total_lost_per_game, "For per game": total_for_per_game,
+                                  "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
+                         }
+                    }
+
+        # If the league does already exist, just update the teams and statistics.
+        else:
+            with league_data_lock:
+                league_data[selection][team_name] = {
+
+                     "Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
                               "For": home_for, "Against": home_against, "Points": home_points,
                               "Won per Game": home_won_per_game, "Drew per Game": home_drew_per_game,
                               "Lost per Game": home_lost_per_game, "For per Game": home_for_per_game,
@@ -402,35 +434,11 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
                               "Lost per Game": away_lost_per_game, "For per Game": away_for_per_game,
                               "Against per Game": away_against_per_game, "Points per Game": away_points_per_game},
                      "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
-                              "For": total_for, "Against": total_against, "Points": total_points,
-                              "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
-                              "Lost per Game": total_lost_per_game, "For per game": total_for_per_game,
-                              "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
+                               "For": total_for, "Against": total_against, "Points": total_points,
+                               "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
+                               "Lost per Game": total_lost_per_game, "For per Game": total_for_per_game,
+                               "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
                      }
-                }
-
-        # If the league does already exist, just update the teams and statistics.
-        else:
-            league_data[selection][team_name] = {
-
-                 "Home": {"Played": home_played, "Won": home_won, "Drew": home_drew, "Lost": home_lost,
-                          "For": home_for, "Against": home_against, "Points": home_points,
-                          "Won per Game": home_won_per_game, "Drew per Game": home_drew_per_game,
-                          "Lost per Game": home_lost_per_game, "For per Game": home_for_per_game,
-                          "Against per Game": home_against_per_game, "Points per Game": home_points_per_game},
-                 "Away": {"Played": away_played, "Won": away_won, "Drew": away_drew, "Lost": away_lost,
-                          "For": away_for, "Against": away_against, "Points": away_points,
-                          "Won per Game": away_won_per_game, "Drew per Game": away_drew_per_game,
-                          "Lost per Game": away_lost_per_game, "For per Game": away_for_per_game,
-                          "Against per Game": away_against_per_game, "Points per Game": away_points_per_game},
-                 "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
-                           "For": total_for, "Against": total_against, "Points": total_points,
-                           "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
-                           "Lost per Game": total_lost_per_game, "For per Game": total_for_per_game,
-                           "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
-                 }
-        team_count += 1
-
 
     # Get fixtures and results
     
@@ -476,7 +484,6 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
             continue
             
         if str(cell[i].text)[:4] in days: # If the first four characters of the cell are a day.
-            #print("TEST") # DEBUG CODE
             date_time = clear_whitespace_characters(str(cell[i].text))
             teams = str(cell[i+1].text)[1:].split(" - ") # Remove first character for tidying and split into a list removing the separator.
             #print(type(cell[i+2].text)) # DEBUG CODE
@@ -493,7 +500,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
                 home_team_score = score[0]
                 away_team_score = score[1]
                 
-                # Commented out below code because this data is not available from all leagues Workaround to be implemented.
+                # Commented out below code because this data is not available from all leagues. Workaround to be implemented.
                 #ht_score = clear_whitespace_characters(str(cell[i+3].text))
                 #ht_score = ((ht_score.lstrip("(")).rstrip(")")).split("-") # Strip brackets and split into list removing spearator.
                 #home_team_ht_score = ht_score[0]
@@ -523,5 +530,6 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
                 fixture = [selection, game_date_time.strftime("%d %b %Y %H:%M"), home_team, away_team, game_date_time]
                 # Only add the fixture to the fixtures list if it's not already present.
                 if fixture not in fixtures:
-                    fixtures.append(fixture[:]) # add fixture details to fixtures
+                    with fixtures_lock:
+                        fixtures.append(fixture[:]) # add fixture details to fixtures
     return "Success"
