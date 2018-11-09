@@ -15,9 +15,6 @@ __status__ = "Development"
 
 # temporary, placeholder functions:
 
-def single_game_analysis(x):
-    print("\nThe single game analysis feature is not yet available.\n")
-
 def leave(x):
     print("\nExit to previous menu.\n")
 
@@ -46,7 +43,7 @@ def filter_fixtures_by_range(fixtures, game_range):
         print("\nNo fixtures currently loaded. Select league(s) first.")
         print("\nPress enter to return to previous menu.")
         input()
-        return 0
+        return "No fixtures"
     
     # If game_range is a timedelta object (space in time)
     if isinstance(game_range, timedelta):
@@ -140,6 +137,32 @@ def display_predictions(predictions):
     input()
     return 0
 
+def select_fixture(fixtures):
+    """
+    Takes a fixture list.
+    Asks the user to select a game.
+    Fixtures format:
+    List of lists containing: [0-League, 1-date+time, 2-home team, 3-away team, 4-datetime object]
+    Returns the selected game.
+    """
+    league = ""
+    option_list = []
+    choice = ""
+    while choice not in option_list:
+        game_num = 1
+        for fixture in fixtures:
+            if fixture[0] != league:
+                league = fixture[0]
+                print("\n" + league + "\n")
+            print (str(game_num) + " " + fixture[1] + " " + fixture[2] + " - " + fixture[3])
+            option_list.append(str(game_num))# Gather a list of options available.
+            game_num += 1
+        print("\nSelect a fixture from above. Enter number 1 to " + str(game_num - 1))
+        #print(option_list)
+        choice = input()
+    
+    return fixtures[int(choice) - 1]
+    
 def select_range(game_range):
     print("How would you like to specify the number of games to analyse?")
     print("1) By days from now")
@@ -359,7 +382,7 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
     while not exit_menu:
         football_options = [["(1) Select a league", "1", fb.select_league],  # The selectLeague function from football.py
                             ["(2) Generate predictions on currently loaded fixtures", "2"],
-                            ["(3) Single game analysis from fixture list*", "3", single_game_analysis],
+                            ["(3) Single game analysis from fixture list", "3", select_fixture],
                             ["(4) Manual single game analysis", "4", fb.manual_game_analysis],
                             ["(5) Reports", "5", reports],
                             ["(6) Import data from JSON file", "6"],
@@ -407,7 +430,7 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
             print(option[0])
             
         # Display any additional information
-        print("\nItems marked with a * are not available in this version.")
+        #print("\nItems marked with a * are not available in this version.")
 
         # Keep asking for a selection while the selection provided is not in the availableOptions list.
         while selection not in available_options:
@@ -431,6 +454,20 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
                 predictions_in_range = fb.get_predictions_in_range(predictions, game_range)
                 print("\nPredictions have been processed and can be viewed via the \"Reports\" menu.\nPress enter to continue.")
                 input()
+                selection = ""
+                continue
+            if selection == "3": # Visually compare selected fixture
+                # Get fixtures in range
+                fixtures_in_range = filter_fixtures_by_range(fixtures, game_range)
+                # If no fixtures yet, return to menu.
+                if fixtures_in_range == "No fixtures":
+                    selection = ""
+                    continue
+                # Select fixture.
+                fixture_to_view = select_fixture(fixtures_in_range)
+                # Perform visual comparison
+                fb.visual_comparison(fixture_to_view, league_data)
+                # Return to menu
                 selection = ""
                 continue
             if selection == "4": # Manual single game analysis

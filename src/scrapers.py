@@ -147,7 +147,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, available_league
                          "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
                                   "For": total_for, "Against": total_against, "Points": total_points,
                                   "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
-                                  "Lost per Game": total_lost_per_game, "For per game": total_for_per_game,
+                                  "Lost per Game": total_lost_per_game, "For per Game": total_for_per_game,
                                   "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
                          }
                     }
@@ -413,7 +413,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
                          "Total": {"Played": total_played, "Won": total_won, "Drew": total_drew, "Lost": total_lost,
                                   "For": total_for, "Against": total_against, "Points": total_points,
                                   "Won per Game": total_won_per_game, "Drew per Game": total_drew_per_game,
-                                  "Lost per Game": total_lost_per_game, "For per game": total_for_per_game,
+                                  "Lost per Game": total_lost_per_game, "For per Game": total_for_per_game,
                                   "Against per Game": total_against_per_game, "Points per Game": total_points_per_game}
                          }
                     }

@@ -10,6 +10,8 @@ prettytable = "*"
 pandas = "*"
 xlwt = "*"
 requests = "*"
+matplotlib = "*"
+numpy = "*"
 
 [dev-packages]
 

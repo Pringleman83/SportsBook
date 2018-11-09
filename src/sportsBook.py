@@ -8,7 +8,6 @@ __maintainer__ = "David Bristoll"
 __email__ = "david.bristoll@gmail.com"
 __status__ = "Development"
 
-
 def tennis():
     """
     Placeholder for Tennis selection.
