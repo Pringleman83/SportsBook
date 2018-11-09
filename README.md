@@ -7,6 +7,8 @@ Fearure list:
 
 * Import leagues and fixtures from one of two available online sources.
 
+* See a visual comparison of the teams playing in any game.
+
 * Run manual comparison of two teams from any loaded leagues generating (somewhat inaccurate) predictions.
 
 * Run predictions on all loaded fixtures (more accurate as the teams are guaranteed to be from the same leagues).
