@@ -15,18 +15,8 @@ __status__ = "Development"
 
 # temporary, placeholder functions:
 
-def single_game_analysis(x):
-    print("\nThe single game analysis feature is not yet available.\n")
-
 def leave(x):
     print("\nExit to previous menu.\n")
-
-
-def choose_leagues(league_data, fixtures, data_source):
-    #league_data_and_fixtures = 
-    fb.select_league(league_data, fixtures, data_source)
-    #league_data = league_data_and_fixtures[0]
-    #fixtures = league_data_and_fixtures[1]
 
 def display_selected_leagues(league_data):
     if league_data == {}:
@@ -37,16 +27,63 @@ def display_selected_leagues(league_data):
     pprint.pprint(league_data)
     return 0
     
-def display_fixtures(fixtures, game_range):
+def filter_fixtures_by_range(fixtures, game_range):
     """
     Takes in the current list of fixtures (each fixture being at least 
     a list of 4 items) and the current game_range object.
     
-    Displays the list on the screen.
+    Returns a list of fixtures within the given range.
     """
     today = datetime.today()
     game_count = 0
     teams = {}
+    league = ""
+    fixtures_in_range = []
+    if fixtures == []:
+        print("\nNo fixtures currently loaded. Select league(s) first.")
+        print("\nPress enter to return to previous menu.")
+        input()
+        return "No fixtures"
+    
+    # If game_range is a timedelta object (space in time)
+    if isinstance(game_range, timedelta):
+        for fixture in fixtures:
+            # If game date within range, save the fixture.
+            if (fixture[4] - today).days <= game_range.days - 1:
+                game_count += 1
+                fixtures_in_range.append(fixture)
+    
+    # If game_range is number of games
+    if isinstance(game_range, int):
+        # Create a dictionary of present teams and count the team's presence
+        for fixture in fixtures:
+            teams[fixture[2]] = teams.get(fixture[2], 0) + 1 
+            if teams[fixture[2]] <= game_range:
+                # Set to display if the home team hasn't been saved enough times yet.
+                save_home_fixture = True
+            teams[fixture[3]] = teams.get(fixture[3], 0) + 1
+            if teams[fixture[3]] <= game_range:
+                # Set to save if the away team hasn't been added to the fixtures_in_range enough times yet.
+                save_away_fixture = True
+
+            if save_home_fixture or save_away_fixture:
+                # If either team is set to save, add the fixture to fixtures_in_range.
+                game_count +=1
+                fixtures_in_range.append(fixture)
+                # If no fixtures added to fixtures_in_range, dislpay a message.   
+            save_home_fixture, save_away_fixture = False, False
+    if game_count == 0:
+        print("No games available for the selected game range.\n")
+    return fixtures_in_range
+    
+    
+def display_fixtures(fixtures):
+    """
+    Takes in a list of fixtures (each fixture being at least 
+    a list of 4 items).
+    
+    Displays the list on the screen.
+    """
     league = ""
     if fixtures == []:
         print("\nNo fixtures currently loaded. Select league(s) first.")
@@ -54,45 +91,12 @@ def display_fixtures(fixtures, game_range):
         input()
         return 0
 
-    # If game_range is a timedelta object (space in time)
-    if isinstance(game_range, timedelta):
-        for fixture in fixtures:
-            # If game date within range, display the fixture.
-            if (fixture[4] - today).days <= game_range.days - 1:
-                game_count += 1
-                if fixture[0] != league:
-                    print("\n\n" + fixture[0] + "\n")
-                league = fixture[0]
-                for detail in range(1,4):
-                    print(fixture[detail] + " ", end = " ")
-                print("")
-            
-    # If game_range is number of games
-    if isinstance(game_range, int):
-        # Create a dictionary of present teams and count the team's presence
-        for fixture in fixtures:
-            teams[fixture[2]] = teams.get(fixture[2], 0) + 1 
-            if teams[fixture[2]] <= game_range:
-                # Set to display if the home team hasn't been displayed enough times yet.
-                display_home_fixture = True
-            teams[fixture[3]] = teams.get(fixture[3], 0) + 1
-            if teams[fixture[3]] <= game_range:
-                # Set to display if the away team hasn't been displayed enough times yet.
-                display_away_fixture = True
-
-            if display_home_fixture or display_away_fixture:
-                # If either team is set to display, display the fixture.
-                game_count +=1
-                if fixture[0] != league:
-                    print("\n\n" + fixture[0] + "\n")
-                league = fixture[0]
-                for detail in range(1, 4):
-                    print(fixture[detail] + " ", end = " ")
-                print("")
-                # If no fixtures dislayed, dislpay a message.   
-            display_home_fixture, display_away_fixture = False, False
-    if game_count == 0:
-        print("No games available for the selected game range.\n")
+    for fixture in fixtures:
+        # Display the fixture.
+        for detail in range(1,4):
+            print(fixture[detail] + " ", end = " ")
+        print("")
+        
     return 0
     
 def display_predictions(predictions):
@@ -133,6 +137,32 @@ def display_predictions(predictions):
     input()
     return 0
 
+def select_fixture(fixtures):
+    """
+    Takes a fixture list.
+    Asks the user to select a game.
+    Fixtures format:
+    List of lists containing: [0-League, 1-date+time, 2-home team, 3-away team, 4-datetime object]
+    Returns the selected game.
+    """
+    league = ""
+    option_list = []
+    choice = ""
+    while choice not in option_list:
+        game_num = 1
+        for fixture in fixtures:
+            if fixture[0] != league:
+                league = fixture[0]
+                print("\n" + league + "\n")
+            print (str(game_num) + " " + fixture[1] + " " + fixture[2] + " - " + fixture[3])
+            option_list.append(str(game_num))# Gather a list of options available.
+            game_num += 1
+        print("\nSelect a fixture from above. Enter number 1 to " + str(game_num - 1))
+        #print(option_list)
+        choice = input()
+    
+    return fixtures[int(choice) - 1]
+    
 def select_range(game_range):
     print("How would you like to specify the number of games to analyse?")
     print("1) By days from now")
@@ -271,7 +301,7 @@ def reports(league_data, fixtures, predictions, predictions_in_range, game_range
     report_options = [["(1) Export league data (!fixture information not currently included!)", "1"],
                       ["(2) Display currently loaded league data", "2"],
                       ["(3) Select game range", "3"],
-                      ["(4) Display currently loaded fixtures", "4"],
+                      ["(4) Display fixtures in range", "4"],
                       ["(5) Display all predictions in game range", "5"],
                       ["(6) Filter predictions (Clears all existing filters)", "6"],
                       ["(7) Display filtered predictions in game range", "7"],
@@ -321,7 +351,7 @@ def reports(league_data, fixtures, predictions, predictions_in_range, game_range
             # Update the predictions_in_range list to suit the newly selected range
             predictions_in_range = fb.get_predictions_in_range(predictions, game_range)
         if selection == report_options[3][1]: # Display current fixtures
-            display_fixtures(fixtures, game_range)
+            display_fixtures(filter_fixtures_by_range(fixtures, game_range))
         if selection == report_options[4][1]: # Display current predictions
             display_predictions(predictions_in_range)
         if selection == report_options[5][1]: # Filter predictions
@@ -350,9 +380,9 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
     selection = ""
     
     while not exit_menu:
-        football_options = [["(1) Select a league", "1", choose_leagues],  # The selectLeague function from football.py
+        football_options = [["(1) Select a league", "1", fb.select_league],  # The selectLeague function from football.py
                             ["(2) Generate predictions on currently loaded fixtures", "2"],
-                            ["(3) Single game analysis from fixture list*", "3", single_game_analysis],
+                            ["(3) Single game analysis from fixture list", "3", select_fixture],
                             ["(4) Manual single game analysis", "4", fb.manual_game_analysis],
                             ["(5) Reports", "5", reports],
                             ["(6) Import data from JSON file", "6"],
@@ -400,7 +430,7 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
             print(option[0])
             
         # Display any additional information
-        print("\nItems marked with a * are not available in this version.")
+        #print("\nItems marked with a * are not available in this version.")
 
         # Keep asking for a selection while the selection provided is not in the availableOptions list.
         while selection not in available_options:
@@ -416,7 +446,7 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
             if selection == "q":
                 quit()
             if selection == "1": # Select league
-                choose_leagues(league_data, fixtures, data_source)
+                fb.select_league(league_data, fixtures, data_source)
                 selection = ""
                 continue
             if selection == "2": # Run analysis on currently loaded fixtures
@@ -424,6 +454,20 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
                 predictions_in_range = fb.get_predictions_in_range(predictions, game_range)
                 print("\nPredictions have been processed and can be viewed via the \"Reports\" menu.\nPress enter to continue.")
                 input()
+                selection = ""
+                continue
+            if selection == "3": # Visually compare selected fixture
+                # Get fixtures in range
+                fixtures_in_range = filter_fixtures_by_range(fixtures, game_range)
+                # If no fixtures yet, return to menu.
+                if fixtures_in_range == "No fixtures":
+                    selection = ""
+                    continue
+                # Select fixture.
+                fixture_to_view = select_fixture(fixtures_in_range)
+                # Perform visual comparison
+                fb.visual_comparison(fixture_to_view, league_data)
+                # Return to menu
                 selection = ""
                 continue
             if selection == "4": # Manual single game analysis

@@ -5,6 +5,10 @@ from datetime import datetime
 from datetime import timedelta
 import threading
 import queue
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import numpy
+
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
 __maintainer__ = "David Bristoll"
@@ -440,6 +444,7 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
     Adds each prediction to the predictions list.
     Returns the updated predictions list.
     """ 
+    
     for fixture in fixtures:
         fixture_league = fixture[0]
         fixture_datetime = fixture[1]
@@ -548,6 +553,55 @@ def get_predictions_in_range(predictions, game_range):
                 prediction["date_as_dtobject"] = tomorrow
                 predictions_in_range.append(prediction)
     return predictions_in_range
+
+def visual_comparison(fixture, league_data):
+    """
+    Takes a fixture and the league_data dict.
+    Provides a visual comparison of the teams in the fixture.
+    fixture format:
+    [0-League, 1-date+time, 2-home team, 3-away team, 4-datetime object]
+    """
+    # Compare (Home GPG vs Away GPG, Total GPG, Home WPG va Away WPG, Total WPG, Ptspg)
+    
+    # Data prep
+    home_team_home_gpg = league_data[fixture[0]][fixture[2]]["Home"]["For per Game"]
+    away_team_away_gpg = league_data[fixture[0]][fixture[3]]["Away"]["For per Game"]
+    home_team_total_gpg = league_data[fixture[0]][fixture[2]]["Total"]["For per Game"]
+    away_team_total_gpg = league_data[fixture[0]][fixture[3]]["Total"]["For per Game"]
+    home_team_home_wpg = league_data[fixture[0]][fixture[2]]["Home"]["Won per Game"]
+    away_team_away_wpg = league_data[fixture[0]][fixture[3]]["Away"]["Won per Game"]
+    home_team_total_wpg = league_data[fixture[0]][fixture[2]]["Total"]["Won per Game"]
+    away_team_total_wpg = league_data[fixture[0]][fixture[3]]["Total"]["Won per Game"]
+    home_team_total_pts = league_data[fixture[0]][fixture[2]]["Total"]["Points per Game"]
+    away_team_total_pts = league_data[fixture[0]][fixture[3]]["Total"]["Points per Game"]
+    
+    # Bar chart prep
+    home_team = [home_team_home_gpg, home_team_total_gpg, home_team_home_wpg, home_team_total_wpg, home_team_total_pts]
+    away_team = [away_team_away_gpg, away_team_total_gpg, away_team_away_wpg, away_team_total_wpg, away_team_total_pts]
+    x = numpy.arange(len(home_team))
+    
+    # plot data
+    bar_width = 0.45
+    plt.bar(x, home_team, width = bar_width, color = "red", zorder = 2)
+    plt.bar(x + bar_width, away_team, width = bar_width, color = "blue", zorder = 2)
+
+    # labels
+    plt.xticks(x + 0.2, ["Home H-GPG\nv\nAway A-GPG", "Total GPG", "Home H-WPG\nv\nAway A-WPG", "Total WPG", "Total PtsPG"])
+    plt.title(fixture[1] + ": " + fixture[2] + " - " + fixture[3])
+    plt.xlabel("This season")
+    plt.ylabel("Statistics")
+
+    # legend
+    home_patch = mpatches.Patch(color = "red", label = fixture[2])
+    away_patch = mpatches.Patch(color = "blue", label = fixture[3])
+    plt.legend(handles = [home_patch, away_patch])
+
+    # grid
+    plt.grid(axis = "y")
+
+    plt.show()
+    
+    return 0
     
 def prepare_prediction_dataframe(predictions):
     """
