@@ -623,8 +623,8 @@ def visual_comparison(fixture, league_data):
 
     # legend
     home_home_patch = mpatches.Patch(color = "#dd0202", label = fixture[2] + " home games")
-    home_total_patch = mpatches.Patch(color = "#f90202", label = fixture[3] + " all games")
-    away_away_patch = mpatches.Patch(color = "#2001d6", label = fixture[2] + " away games")
+    home_total_patch = mpatches.Patch(color = "#f90202", label = fixture[2] + " all games")
+    away_away_patch = mpatches.Patch(color = "#2001d6", label = fixture[3] + " away games")
     away_total_patch = mpatches.Patch(color = "#170191", label = fixture[3] + " all games")
     plt.legend(handles = [home_home_patch, home_total_patch, away_total_patch, away_away_patch])
 
