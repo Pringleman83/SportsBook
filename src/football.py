@@ -126,7 +126,7 @@ def inform_and_scrape(selected_leagues, league_data, fixtures, available_leagues
         #(selection, league_data, fixtures, available_leagues)
     else:
         scraper = scrape.get_league_data_soccer_stats
-        max_threads = 3
+        max_threads = 5
         #(selection, league_data, fixtures, available_leagues)
     
     # Set up a function for each scrape 

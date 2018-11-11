@@ -6,8 +6,6 @@ import commonFunctions as cf
 from datetime import datetime
 import threading
 
-today = datetime.today() # DEBUG CODE
-
 # Threading locks prevent multiple threads from accessing variables at the same time.
 league_data_lock = threading.Lock()
 fixtures_lock = threading.Lock()
@@ -671,7 +669,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
                 teams = str(cell[i+2].text).split(" - ")
                 if len(teams) < 2:
                     teams.append(teams[0])
-                    print("Teams error in Results Mode Cell: " + str(i) + " content: " + str(cell[i])) # DEBUG CODE
+                    #print("Teams error in Results Mode Cell: " + str(i) + " content: " + str(cell[i])) # DEBUG CODE
                     
                 #print("HOME TEAM = " + teams[0] + " AWAY TEAM = " + teams[1]) # DEBUG CODE
                 
@@ -788,6 +786,6 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, available_lea
                         
     # DEBUG CODE
     #print(fixtures)
-    print(results)
+    #print(results)
     
     return "Success"
