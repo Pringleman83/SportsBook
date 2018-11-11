@@ -303,7 +303,7 @@ def reports(league_data, fixtures, predictions, predictions_in_range, game_range
                       ["(3) Select game range", "3"],
                       ["(4) Display fixtures in range", "4"],
                       ["(5) Display all predictions in game range", "5"],
-                      ["(6) Filter predictions (Clears all existing filters)", "6"],
+                      ["(6) Filter predictions", "6"],
                       ["(7) Display filtered predictions in game range", "7"],
                       ["(8) Save all predictions in range to file", "8"],
                       ["(9) Save filtered predictions in range to file", "9"],
@@ -351,7 +351,12 @@ def reports(league_data, fixtures, predictions, predictions_in_range, game_range
             # Update the predictions_in_range list to suit the newly selected range
             predictions_in_range = fb.get_predictions_in_range(predictions, game_range)
         if selection == report_options[3][1]: # Display current fixtures
-            display_fixtures(filter_fixtures_by_range(fixtures, game_range))
+            if fixtures == []:
+                print("\nNo fixtures currently loaded. Select league(s) first.")
+                print("\nPress enter to return to previous menu.")
+                input()
+            else: 
+                display_fixtures(filter_fixtures_by_range(fixtures, game_range))
         if selection == report_options[4][1]: # Display current predictions
             display_predictions(predictions_in_range)
         if selection == report_options[5][1]: # Filter predictions
