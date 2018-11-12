@@ -409,7 +409,7 @@ def manual_game_analysis(league_data, predictions):
     
     # Save current prediction as a list item        
     prediction = {"League": league, "Date and time": "Manual entry: ", "Prediction type": prediction_name, "Home team": home_team,
-    "Home team prediction": home_team_goals, "Away team": away_team, "Away team prediction": away_team_goals, "Total goalsexpected": total_goals,
+    "Home team prediction": home_team_goals, "Away team": away_team, "Away team prediction": away_team_goals, "Total goals expected": total_goals,
     "Predicted separation": prediction_goal_separation, "Both to score": both_to_score,  "date_as_dtobject": today}
 
     # Flatten league stats for prediction storage and exporting

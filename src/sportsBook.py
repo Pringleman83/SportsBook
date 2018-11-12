@@ -49,15 +49,16 @@ def main_menu(options):
                     break
         # Having broken out of the loop, run the selected function
         if selected == options[0][0]:
-            league_data = {}
-            fixtures = []
-            predictions = []
-            filtered_predictions = []
-            predictions_in_range = {}
-            game_range = timedelta(7)
-            applied_filters = []
-            results = []
-            football_menu(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions, results)
+            football_data = {"league_data": {},
+                             "fixtures": [],
+                             "predictions": [],
+                             "filtered_predictions": [],
+                             "predictions_in_range": {},
+                             "fixtures_in_range": [],
+                             "game_range": timedelta(7),
+                             "applied_filters": [],
+                             "results": []}
+            football_menu(football_data)
         if selected == options[1][0]:
             tennis()
 
