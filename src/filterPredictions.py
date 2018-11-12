@@ -1,5 +1,12 @@
 import commonFunctions as cf
 
+__author__ = "David Bristoll"
+__copyright__ = "Copyright 2018, David Bristoll"
+__maintainer__ = "David Bristoll"
+__email__ = "david.bristoll@gmail.com"
+__status__ = "Development"
+
+
 def both_to_score(predictions, applied_filters):
     """
     Takes a list of predictions and currently applied filters.
@@ -158,7 +165,7 @@ def x_or_less_goals_scored(predictions, applied_filters):
             break
     filter_name = "Total number of goals is " + str(x) + " or less"   
     for p in predictions:
-        if p["Total goals expected"] >= x:
+        if p["Total goals expected"] <= x:
             filtered_predictions.append(p)
     if len(filtered_predictions) > 0:  
         applied_filters.append(filter_name)
@@ -173,6 +180,7 @@ def x_or_less_goals_scored(predictions, applied_filters):
         print("Press enter to continue.")
         input()
         return(predictions, applied_filters)
+        
 # Special filters
 
 def special_james_shoemark_3_or_more(predictions, applied_filters):
