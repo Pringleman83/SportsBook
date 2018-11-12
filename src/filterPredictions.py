@@ -1,5 +1,12 @@
 import commonFunctions as cf
 
+__author__ = "David Bristoll"
+__copyright__ = "Copyright 2018, David Bristoll"
+__maintainer__ = "David Bristoll"
+__email__ = "david.bristoll@gmail.com"
+__status__ = "Development"
+
+
 def both_to_score(predictions, applied_filters):
     """
     Takes a list of predictions and currently applied filters.

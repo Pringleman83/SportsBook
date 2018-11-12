@@ -5,9 +5,6 @@ from datetime import datetime
 from datetime import timedelta
 import threading
 import queue
-import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-import numpy
 
 __author__ = "David Bristoll"
 __copyright__ = "Copyright 2018, David Bristoll"
@@ -509,26 +506,26 @@ def upcoming_fixture_predictions(fixtures, predictions, league_data):
     # Return the new predictions list
     return predictions
     
-def get_predictions_in_range(predictions, game_range):
+def get_predictions_in_range(predictions, future_range):
     """
-    Takes the current predictions list and the currently selected game_range.
-    Returns a new list of predictions within the given game range.
+    Takes the current predictions list and the currently selected future_range.
+    Returns a new list of predictions within the given future range.
     """
     today = datetime.today()
     tomorrow = today + timedelta(days = 1)
     teams = {}
     predictions_in_range = []
     for prediction in predictions:
-        if isinstance(game_range, timedelta):
+        if isinstance(future_range, timedelta):
             # If game date within range, display the fixture.
-            if (prediction.get("date_as_dtobject", tomorrow) - today).days <= game_range.days - 1 or prediction["Date and time"] == "Manual entry: ":
+            if (prediction.get("date_as_dtobject", tomorrow) - today).days <= future_range.days - 1 or prediction["Date and time"] == "Manual entry: ":
                 """print("\n date ") # DEBUG CODE
                 print(game["date_as_dtobject"]) # DEBUG CODE
                 print() # DEBUG CODE"""
                 predictions_in_range.append(prediction)
             
-    # If game_range is number of games
-    if isinstance(game_range, int):
+    # If future_range is number of games
+    if isinstance(future_range, int):
         # Create a dictionary of present teams and count the team's presence   
         for prediction in predictions:
             # Games that are manually entered do not count towards the game range limit.
@@ -536,11 +533,11 @@ def get_predictions_in_range(predictions, game_range):
             if prediction["Date and time"] != "Manual entry: ":
                 teams[prediction["Home team"]] = teams.get(prediction["Home team"], 0) + 1
                 teams[prediction["Away team"]] = teams.get(prediction["Away team"], 0) + 1
-                if teams[prediction["Home team"]] <= game_range:
+                if teams[prediction["Home team"]] <= future_range:
                     # Set to display if the home team hasn't been displayed enough times yet.
                     home_game_in_range = True
 
-                if teams[prediction["Away team"]] <= game_range:
+                if teams[prediction["Away team"]] <= future_range:
                     # Set to display if the away team hasn't been displayed enough times yet.
                     away_game_in_range = True
                 
@@ -553,86 +550,45 @@ def get_predictions_in_range(predictions, game_range):
                 predictions_in_range.append(prediction)
     return predictions_in_range
 
-def visual_comparison(fixture, league_data):
+def get_results_in_range(results, past_range):
     """
-    Takes a fixture and the league_data dict.
-    Provides a visual comparison of the teams in the fixture.
-    fixture format:
-    [0-League, 1-date+time, 2-home team, 3-away team, 4-datetime object]
+    Takes the current results list and the currently selected past_range.
+    Returns a new list of results within the given results range.
     """
-    # Compare (WPG, DPG, LPG, FPG, APG, PtsPG)
-    
-    # Data prep
-    # Wins per game
-    home_team_home_wpg = league_data[fixture[0]][fixture[2]]["Home"]["Won per Game"]
-    away_team_away_wpg = league_data[fixture[0]][fixture[3]]["Away"]["Won per Game"]
-    home_team_total_wpg = league_data[fixture[0]][fixture[2]]["Total"]["Won per Game"]
-    away_team_total_wpg = league_data[fixture[0]][fixture[3]]["Total"]["Won per Game"]
-    
-    # Draws per game
-    home_team_home_dpg = league_data[fixture[0]][fixture[2]]["Home"]["Drew per Game"]
-    away_team_away_dpg = league_data[fixture[0]][fixture[3]]["Away"]["Drew per Game"]
-    home_team_total_dpg = league_data[fixture[0]][fixture[2]]["Total"]["Drew per Game"]
-    away_team_total_dpg = league_data[fixture[0]][fixture[3]]["Total"]["Drew per Game"]
-    
-    # Losses per game
-    home_team_home_lpg = league_data[fixture[0]][fixture[2]]["Home"]["Lost per Game"]
-    away_team_away_lpg = league_data[fixture[0]][fixture[3]]["Away"]["Lost per Game"]
-    home_team_total_lpg = league_data[fixture[0]][fixture[2]]["Total"]["Lost per Game"]
-    away_team_total_lpg = league_data[fixture[0]][fixture[3]]["Total"]["Lost per Game"]
-    
-    # Pts per game
-    home_team_home_ptpg = league_data[fixture[0]][fixture[2]]["Home"]["Points per Game"]
-    away_team_away_ptpg = league_data[fixture[0]][fixture[3]]["Away"]["Points per Game"]
-    home_team_total_ptpg = league_data[fixture[0]][fixture[2]]["Total"]["Points per Game"]
-    away_team_total_ptpg = league_data[fixture[0]][fixture[3]]["Total"]["Points per Game"]
-    
-    home_team_home_gfpg = league_data[fixture[0]][fixture[2]]["Home"]["For per Game"]
-    away_team_away_gfpg = league_data[fixture[0]][fixture[3]]["Away"]["For per Game"]
-    home_team_total_gfpg = league_data[fixture[0]][fixture[2]]["Total"]["For per Game"]
-    away_team_total_gfpg = league_data[fixture[0]][fixture[3]]["Total"]["For per Game"]
-    
-    home_team_home_gapg = league_data[fixture[0]][fixture[2]]["Home"]["Against per Game"]
-    away_team_away_gapg = league_data[fixture[0]][fixture[3]]["Away"]["Against per Game"]
-    home_team_total_gapg = league_data[fixture[0]][fixture[2]]["Total"]["Against per Game"]
-    away_team_total_gapg = league_data[fixture[0]][fixture[3]]["Total"]["Against per Game"]
-    
-    # Bar chart prep
-    home_team_home = [home_team_home_wpg, home_team_home_dpg, home_team_home_lpg, home_team_home_gfpg,home_team_home_gapg, home_team_home_ptpg]
-    
-    home_team_total = [home_team_total_wpg, home_team_total_dpg, home_team_total_lpg, home_team_total_gfpg, home_team_total_gapg, home_team_total_ptpg]
-    
-    away_team_away = [away_team_away_wpg, away_team_away_dpg, away_team_away_lpg, away_team_away_gfpg,away_team_away_gapg, away_team_away_ptpg]
-    
-    away_team_total = [away_team_total_wpg, away_team_total_dpg, away_team_total_lpg, away_team_total_gfpg, away_team_total_gapg, away_team_total_ptpg ]
-    x = numpy.arange(len(home_team_home))
-    
-    # plot data
-    bar_width = 0.22
-    plt.bar(x, home_team_home, width = bar_width, color = "#dd0202", zorder = 2)
-    plt.bar(x + bar_width, home_team_total, width = bar_width, color = "#f90202", zorder = 2)
-    plt.bar(x + bar_width * 2, away_team_away, width = bar_width, color = "#2001d6", zorder = 2)
-    plt.bar(x + bar_width * 3, away_team_total, width = bar_width, color = "#170191", zorder = 2)
+    today = datetime.today()
+    teams = {}
+    results_in_range = []
+    for result in results:
+        if isinstance(past_range, timedelta):
+            # If game date within range, append the result to the results_in_range_list.
+            if (today - result[6]).days <= past_range.days - 1:
 
-    # labels
-    plt.xticks(x + 0.22, ["Wins\nper\nGame", "Draws\nper\nGame", "Losses\nper\nGame", "Goals (F)\nper\nGame", "Goals (A)\nper\nGame", "Points\nper\nGame"])
-    plt.title(fixture[1] + ": " + fixture[2] + " - " + fixture[3])
-    plt.xlabel("This season so far")
-    plt.ylabel("Statistics")
+                results_in_range.append(result)
+            
+    # If past_range is number of games
+    if isinstance(past_range, int):
+        # Create a dictionary of present teams and count the team's presence   
+        for result in results:
+            # Add team to teams dict if not already present.
+            # Increase the team count in the teams dict by 1.
+            print("TEAM H = " + result[2] + " TEAM A = " + result[4])
+            teams[result[2]] = teams.get(result[2], 0) + 1
+            teams[result[4]] = teams.get(result[4], 0) + 1
+            if teams[result[2]] <= past_range:
+                # Set to append if the home team hasn't been displayed enough times yet.
+                home_game_in_range = True
 
-    # legend
-    home_home_patch = mpatches.Patch(color = "#dd0202", label = fixture[2] + " home games")
-    home_total_patch = mpatches.Patch(color = "#f90202", label = fixture[2] + " all games")
-    away_away_patch = mpatches.Patch(color = "#2001d6", label = fixture[3] + " away games")
-    away_total_patch = mpatches.Patch(color = "#170191", label = fixture[3] + " all games")
-    plt.legend(handles = [home_home_patch, home_total_patch, away_total_patch, away_away_patch])
+            if teams[result[4]] <= past_range:
+                # Set to append if the away team hasn't been displayed enough times yet.
+                away_game_in_range = True
+            
+            if home_game_in_range or away_game_in_range:
+                results_in_range.append(result)
+            
+            # Reset values for next iteration
+            home_game_in_range, away_game_in_range = False, False
 
-    # grid
-    plt.grid(axis = "y")
-
-    plt.show()
-    
-    return 0
+    return results_in_range
     
 def prepare_prediction_dataframe(predictions):
     """
