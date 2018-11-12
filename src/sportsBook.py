@@ -56,7 +56,8 @@ def main_menu(options):
             predictions_in_range = {}
             game_range = timedelta(7)
             applied_filters = []
-            football_menu(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions)
+            results = []
+            football_menu(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions, results)
         if selected == options[1][0]:
             tennis()
 

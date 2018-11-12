@@ -92,9 +92,41 @@ def display_fixtures(fixtures):
         return 0
 
     for fixture in fixtures:
+        # Display new league name.
+        if fixture[0] != league:
+            league = fixture[0]
+            print("\n\n" + league + "\n")
+            
         # Display the fixture.
         for detail in range(1,4):
             print(fixture[detail] + " ", end = " ")
+        print("")
+        
+    return 0
+
+def display_results(results):
+    """
+    Takes in a list of fixtures (each fixture being at least 
+    a list of 4 items).
+    
+    Displays the list on the screen.
+    """
+    league = ""
+    if results == []:
+        print("\nNo results currently loaded. Select league(s) first.")
+        print("\nPress enter to return to previous menu.")
+        input()
+        return 0
+
+    for result in results:
+        # Display new league name.
+        if result[0] != league:
+            league = result[0]
+            print("\n\n" + league + "\n")
+            
+        # Display the fixture.
+        for detail in range(1,6):
+            print(result[detail] + " ", end = " ")
         print("")
         
     return 0
@@ -296,7 +328,7 @@ def filter_predictions(predictions_in_range, filtered_predictions, applied_filte
         elif s == "8":
             filtered_predictions, applied_filters = predictions_in_range, []
 
-def reports(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions):
+def reports(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions, results):
     
     report_options = [["(1) Export league data (!fixture information not currently included!)", "1"],
                       ["(2) Display currently loaded league data", "2"],
@@ -305,8 +337,9 @@ def reports(league_data, fixtures, predictions, predictions_in_range, game_range
                       ["(5) Display all predictions in game range", "5"],
                       ["(6) Filter predictions", "6"],
                       ["(7) Display filtered predictions in game range", "7"],
-                      ["(8) Save all predictions in range to file", "8"],
-                      ["(9) Save filtered predictions in range to file", "9"],
+                      ["(8) Display all results", "8"],
+                      ["(9) Save all predictions in range to file", "9"],
+                      ["(10) Save filtered predictions in range to file", "10"],
                       ["(M) Return to previous menu", "m"]
                       ]
     
@@ -363,12 +396,14 @@ def reports(league_data, fixtures, predictions, predictions_in_range, game_range
             filtered_predictions, applied_filters = filter_predictions(predictions_in_range, filtered_predictions, applied_filters)
         if selection == report_options[6][1]: # Display filtered predictions
             display_predictions(filtered_predictions)
-        if selection == report_options[7][1]: # Save all predictions in range
+        if selection == report_options[7][1]: # Display all results
+            display_results(results)
+        if selection == report_options[8][1]: # Save all predictions in range
             if predictions_in_range:
                 cf.export_data(fb.prepare_prediction_dataframe(predictions_in_range), "xls")
             else:
                 print("\nNo predictions loaded. Generate predictions or run game analysis first.\n")
-        if selection == report_options[8][1]: # Save filtered predictions in range
+        if selection == report_options[9][1]: # Save filtered predictions in range
             if filtered_predictions:
                 cf.export_data(fb.prepare_prediction_dataframe(filtered_predictions), "xls")
             else:
@@ -376,7 +411,7 @@ def reports(league_data, fixtures, predictions, predictions_in_range, game_range
         selection = ""
 
 
-def football_menu(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions):
+def football_menu(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions, results):
     data_source, next_data_source = "Soccer Stats", "Bet Study"
     
     selected_leagues = []
@@ -451,7 +486,7 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
             if selection == "q":
                 quit()
             if selection == "1": # Select league
-                fb.select_league(league_data, fixtures, data_source)
+                fb.select_league(league_data, fixtures, results, data_source)
                 selection = ""
                 continue
             if selection == "2": # Run analysis on currently loaded fixtures
@@ -501,7 +536,7 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
                             break
                                 
             if selection == "5": # Reports
-                league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions = reports(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions)
+                league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions = reports(league_data, fixtures, predictions, predictions_in_range, game_range, applied_filters, filtered_predictions, results)
                 selection = ""
                 continue
             if selection == "6": # Import data from JSON file
@@ -535,6 +570,7 @@ def football_menu(league_data, fixtures, predictions, predictions_in_range, game
                 filtered_predictions = []
                 selection = ""
                 applied_filters = []
+                results = []
                 continue
                 
             # General action for other menu items

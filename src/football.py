@@ -16,7 +16,7 @@ __email__ = "david.bristoll@gmail.com"
 __status__ = "Development"
 
 
-def select_league(league_data, fixtures, data_source):
+def select_league(league_data, fixtures, results, data_source):
     """Takes  in the leagueData dictionary.
     Prompts the user to select a league.
     Returns the key value of the selected league.
@@ -88,7 +88,7 @@ def select_league(league_data, fixtures, data_source):
         if selected_leagues:
             selected_leagues = cf.remove_duplicates(selected_leagues)
             print("\nDownloading the requested data, please wait...")
-            gather_data = inform_and_scrape(selected_leagues, league_data, fixtures, available_leagues, data_source)
+            gather_data = inform_and_scrape(selected_leagues, league_data, fixtures, results, available_leagues, data_source)
         else:
             print("No leagues added.")
             
@@ -102,7 +102,7 @@ def select_league(league_data, fixtures, data_source):
         else:
             return
         
-def inform_and_scrape(selected_leagues, league_data, fixtures, available_leagues, data_source):
+def inform_and_scrape(selected_leagues, league_data, fixtures, results, available_leagues, data_source):
     """
     Takes in:   the list of selected leagues
                 the current league_data dict.
@@ -130,7 +130,7 @@ def inform_and_scrape(selected_leagues, league_data, fixtures, available_leagues
         #(selection, league_data, fixtures, available_leagues)
     
     # Set up a function for each scrape 
-    def scraper_function(league, scraper, league_data, fixtures, available_leagues):
+    def scraper_function(league, scraper, league_data, fixtures, results, available_leagues):
         """
         Takes in:   the name of the league to be scraped
                     the scraper function to use
@@ -142,11 +142,10 @@ def inform_and_scrape(selected_leagues, league_data, fixtures, available_leagues
         Checks if the new league and fixture data is already present in the existing
         league and data before queuing them to be added to the
         """
-        data = scraper(league, league_data, fixtures, available_leagues)
-        #data = [new_league_data(dict), new_fixtures(list)
+        data = scraper(league, league_data, fixtures, results, available_leagues)
         return data
     
-    def threader(scraper, league_data, fixtures, available_leagues):
+    def threader(scraper, league_data, fixtures, results, available_leagues):
         """
         Used to organise threads and keep them working after each scrape.
         Takes:  the selected scraper function
@@ -159,7 +158,7 @@ def inform_and_scrape(selected_leagues, league_data, fixtures, available_leagues
             # Take next league from list.
             league = leaguesq.get()
             # Use the selected scraper function to scrape data.
-            data = scraper_function(league, scraper, league_data, fixtures, available_leagues)
+            data = scraper_function(league, scraper, league_data, fixtures, results, available_leagues)
             
             if data == "Scrape error":
                 #print("Scrape error with: " + league) #Scraper already does this.
@@ -181,7 +180,7 @@ def inform_and_scrape(selected_leagues, league_data, fixtures, available_leagues
     
     # Initialise threads
     for i in range(number_of_threads):
-        t = threading.Thread(target = threader, name = "thread " + str(i), args = (scraper, league_data, fixtures, available_leagues), daemon = True)
+        t = threading.Thread(target = threader, name = "thread " + str(i), args = (scraper, league_data, fixtures, results, available_leagues), daemon = True)
         t.start()
         #print(t.name + " started")
         threads_list.append(t)

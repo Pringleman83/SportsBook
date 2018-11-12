@@ -11,7 +11,7 @@ league_data_lock = threading.Lock()
 fixtures_lock = threading.Lock()
 results_lock = threading.Lock()
 
-def get_league_data_bet_study(selection, league_data, fixtures, results, available_leagues):
+def get_league_data_bet_study(selection, league_data, fixtures, available_leagues):
     """
     Takes the key of the selected league from the availableLeagues dictionary.
     Scrapes the selected league information from bedstudy.com.
@@ -24,6 +24,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
     Scrapes all available results for the selected league.
     Adds them to the results list.
     """
+    results = []
     def format_datetime(dt, type = "fixture"):
         """
         Helper function to convert date and time value for a
@@ -324,7 +325,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
 
     return "Success"
 
-def get_league_data_soccer_stats(selection, league_data, fixtures, results, available_leagues):
+def get_league_data_soccer_stats(selection, league_data, fixtures, available_leagues):
     """
     Takes the key of the selected league from the availableLeagues dictionary.
     Scrapes the selected league information from soccerstats.com.
@@ -380,7 +381,6 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         
         if mode == "rounds":
-            
             # Game date day (1-31) number
             if cf.is_number(dt[5]):
                 game_date_day = dt[5]
@@ -611,45 +611,13 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
     web_html = web_client.content
     web_soup = soup(web_html, "html.parser")
     table = web_soup.find_all("div", {"class", "twelve columns"})[1] 
+    table2 = web_soup.find_all("div", {"class", "six columns"})
     
-    """
-    Data Hunting!
-    table2r = web_soup.find_all("div", {"class", "six columns"})[2] # results
-    table2f = web_soup.find_all("div", {"class", "six columns"})[3] # fixtures
-
-    #tablex1 = web_soup.find_all("div", {"class", "six columns"})[0] # Nothing here
-    #tablex2 = web_soup.find_all("div", {"class", "six columns"})[1] # Nothing here
-    tablex3 = web_soup.find_all("div", {"class", "six columns"})[2] # Results
-    tablex4 = web_soup.find_all("div", {"class", "six columns"})[3] # Fixtures
-    
-    #print("\n\n===Tablex 1 ===\n\n)")
-    #print(tablex1)
-    
-    #print("\n\n===Tablex 2 ===\n\n)")
-    #print(tablex2)
-    
-    #print("\n\n===Tablex 3 ===\n\n)")
-    #print(tablex3)
-    
-    #print("\n\n===Tablex 4 ===\n\n)")
-    #print(tablex4)
-    
-    cell = tablex4.select('td')
-    
-    for i in range(len(cell)):
-        print("Length of cell" + str(i) + " is " + str(len(cell[i].text)))
-        if len(cell[i].text) > 100:
-            continue
-        print(str(i) + str(cell[i]))
-    
-    quit()
-    """
-    # When studying the source; be aware that the site uses both types of quotes!
-    
-    #print(table2) # DEBUG CODE
+    print(table2) # DEBUG CODE
     #print(table) # DEBUG CODE
     
     # Create an empty list to store each result as an external list doesn't yet exist
+    results = []
     
     days = ["Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat.", "Sun."]
     days1 = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
@@ -667,6 +635,9 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
         print("==="+str(i)+"===")
         print(cell[i].text)
         print("==========\n")
+        
+        
+        
     """
     #print("CONTENT OF CELL 1 = " + clear_whitespace_characters(cell[1].text)) # DEBUG CODE
     if clear_whitespace_characters(cell[1].text) == "All results":
@@ -675,44 +646,40 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
     else:
         #print("Rounds") # DEBUG CODE
         all_results_mode = False
-            
-    if all_results_mode:
-        # Alternative tables for the second formatting found on s.stats site.
-        table2r = web_soup.find_all("div", {"class", "six columns"})[2] # results
-        table2f = web_soup.find_all("div", {"class", "six columns"})[3] # fixtures
-        for t in [table2f, table2r]:
-            cell2 = t.select('td') # Switch table for results mode
-            #print("Working all results mode") # DEBUG CODE
-            
-            for i in range(0,(len(cell2) - 3)): # Cycle through all but the last 3 cells (as they are accessed through addition)
-                #print(str(i) + " - " + str(cell[i])) # DEBUG CODE
-                # Avoid the major content carrying <td> tags.
-                if len(str(cell2[i].text)) > 100:
-                    continue
         
-                #print(str(i) + " - " + str(cell2[i])) # DEBUG CODE display index and content of each cell
+    for i in range(0,(len(cell) - 3)): # Cycle through all but the last 3 cells (as they are accessed through addition)
+        #print(str(i) + " - " + str(cell[i])) # DEBUG CODE
+        # Avoid the major content carrying <td> tags.
+        if len(str(table.select('td')[i].text)) > 100:
+            continue
+        
+        #print(str(i) + " - " + str(cell[i])) # DEBUG CODE display index and content of each cell
+            
+        if all_results_mode:
+            #print("Working all results mode") # DEBUG CODE
+            # Get results first as the current bs table is results only.
+            
+            #print("Date catch on: " + str(cell[i].text) + "Checking day: " + clear_whitespace_characters(cell[i].text)[:2] + ". Checking month: " + clear_whitespace_characters(cell[i].text)[-4:-1] + ".")
+            
+            if clear_whitespace_characters(cell[i].text)[:2] in days1 and clear_whitespace_characters(cell[i].text)[-4:-1] in months:
+                date_timea = clear_whitespace_characters(str(cell[i].text))
+                date_timeb = clear_whitespace_characters(str(cell[i+1].text))
+                #print("DATE = " + str(date_timea) + "TIME = " + str(date_timeb)) # DEBUG CODE
+                date_time = date_timea + date_timeb
+                #print("DATETIME STRING = " + date_time) # DEBUG CODE
+                teams = str(cell[i+2].text).split(" - ")
+                if len(teams) < 2:
+                    teams.append(teams[0])
+                    print("Teams error in Results Mode Cell: " + str(i) + " content: " + str(cell[i])) # Identification for new errors
+                    
+                #print("HOME TEAM = " + teams[0] + " AWAY TEAM = " + teams[1]) # DEBUG CODE
                 
-                #print("Date catch on: " + str(cell[i].text) + "Checking day: " + clear_whitespace_characters(cell[i].text)[:2] + ". Checking month: " + clear_whitespace_characters(cell[i].text)[-4:-1] + ".")
-                
-                if cell2[i].text[:2] in days1 and cell2[i].text[-4:-1] in months and cell2[i].text[2] == " ":#Result
-                    #print("RESULT") # DEBUG CODE
-                    date_timea = clear_whitespace_characters(str(cell2[i].text))
-                    date_timeb = clear_whitespace_characters(str(cell2[i+1].text))
-                    #print("DATE = " + str(date_timea) + "TIME = " + str(date_timeb)) # DEBUG CODE
-                    date_time = date_timea + date_timeb
-                    #print("DATETIME STRING = " + date_time) # DEBUG CODE
-                    teams = str(cell2[i+2].text).split(" - ") # Strip leading space
-                    if len(teams) < 2:
-                        teams.append(teams[0])
-                        print("Teams error in Results Mode Cell: " + str(i) + " content: " + str(cell2[i])) # Identification for new errors
-                        
-                    #print("HOME TEAM = " + teams[0] + " AWAY TEAM = " + teams[1]) # DEBUG CODE
-    
+                #print(type(cell[i+2].text)) # DEBUG CODE
+                if clear_whitespace_characters(cell[i+3].text) != "":
                     #print("PLAYED") # DEBUG CODE
                     # Game has been played
                     played = True
-                    
-                    score = clear_whitespace_characters(str(cell2[i+3].text)).split(" - ") # Split into list removing separator.
+                    score = clear_whitespace_characters(str(cell[i+3].text)).split(" - ") # Split into list removing separator.
                     
                     # If a score is not displayed (Eg. game postponed) add a second value to prevent error.
                     if len(score) < 2:
@@ -720,8 +687,6 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
                     
                     home_team_score = score[0]
                     away_team_score = score[1]
-                    
-                    game_date_time = format_datetime(date_time, mode = "results")
                     #print("HOME SCORE = " + str(home_team_score) + " AWAY TEAM SCORE = " + str(away_team_score)) # DEBUG CODE
                     # Commented out below code because this data is not available from all leagues. Workaround to be implemented.
                     #ht_score = clear_whitespace_characters(str(cell[i+3].text))
@@ -729,40 +694,20 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
                     #home_team_ht_score = ht_score[0]
                     #away_team_ht_score = ht_score[1]
                     
-                elif cell2[i].text[:2] in days1 and cell2[i].text[-4:-1] in months and cell2[i].text[2] != " ":# Fixture
-                    #print("FIXTURE") # DEBUG CODE
-                    date_timea = clear_whitespace_characters(str(cell2[i].text))
-                    date_timeb = clear_whitespace_characters(str(cell2[i+1].text))
-                    #print("DATE = " + str(date_timea) + "TIME = " + str(date_timeb)) # DEBUG CODE
-                    date_time = date_timea + date_timeb
-                    #print("1st DATETIME STRING = |" + str(date_time)) # DEBUG CODE
-                    date_time = date_time[:2] + " " + date_time[4:] # Convert so that a valid datetime object can be created.
-                    #print("2nd DATETIME STRING = |" + str(date_time)) # DEBUG CODE
-                    #res mode res = res mode fix [0:2] + " " + res mode fix [4:]
-                    #print("DATETIME STRING = " + date_time) # DEBUG CODE
-                    teams = str(cell2[i+2].text)[1:].split(" - ")# Strip leading space
-                    if len(teams) < 2:
-                        teams.append(teams[0])
-                        print("Teams error in Results Mode Cell: " + str(i) + " content: " + str(cell2[i])) # Identification for new errors
-                        
-                    #print("HOME TEAM = " + teams[0] + " AWAY TEAM = " + teams[1]) # DEBUG CODE
-
+    
+                else:
                     # Game hasn't yet played
                     #print("NOT PLAYED") # DEBUG CODE
                     played = False
-                
-                    game_date_time = format_datetime(date_time, mode = "results")
-                else: # Cell2[i] is neither a result or fixture start point.
-                    continue
                 
                 # Run this code for played and unplayed games.
                 # Separate home and away data.
                 home_team = limit_characters(teams[0])
                 away_team = limit_characters(teams[1])
-            
+        
                 # Package results and fixtures.
-                
-              
+                game_date_time = format_datetime(date_time, mode = "results")
+      
                 if played:
                     result = [selection, game_date_time.strftime("%d %b %Y"), home_team, home_team_score, away_team, away_team_score, game_date_time]
                     # Omitted home_team_ht_score, away_team_ht_score
@@ -776,15 +721,10 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
                     if fixture not in fixtures:
                         with fixtures_lock:
                             fixtures.append(fixture[:]) # add fixture details to fixtures
-    # Not all results mode    
-    else:  
-        #print("Non results mode") # DEBUG CODE
-        for i in range(0,(len(cell) - 3)): # Cycle through all but the last 3 cells (as they are accessed through addition)
-            # Avoid the major content carrying <td> tags.
-            if len(str(cell[i].text)) > 100:
-                continue
-            #print(str(i) + " - " + str(cell[i])) # DEBUG CODE
-            #print("LENGTH OF CELL " + str(i) + " is " + str(len(cell[i])))
+                        
+        # Not all results mode    
+        else:
+            
             if "Round" in str(cell[i].text):
                 round_number = clear_whitespace_characters(str(cell[i].text))
         
@@ -822,16 +762,15 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
                     # Game hasn't yet played
                     #print("NOT PLAYED") # DEBUG CODE
                     played = False
-                 # Run this code for played and unplayed games.
-                 
+                
+                # Run this code for played and unplayed games.
                 # Separate home and away data.
                 home_team = limit_characters(teams[0])
                 away_team = limit_characters(teams[1])
-            
+        
                 # Package results and fixtures.
-                #print("DATE TIME = |" + date_time + "|") # DEBUG CODE
                 game_date_time = format_datetime(date_time)
-              
+      
                 if played:
                     result = [selection, game_date_time.strftime("%d %b %Y"), home_team, home_team_score, away_team, away_team_score, game_date_time]
                     # Omitted home_team_ht_score, away_team_ht_score
