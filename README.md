@@ -23,6 +23,10 @@ Fearure list:
 
 * Change the range of dates or games the predictions cover.
 
+* Display results from throughout the whole current season of each league.
+
+* Change the range of dates the results cover.
+
 * Produce a spreadsheet of all predictions or filtered predictions with a wealth of current stats for each team in each prediction.
 
 * Export currently loaded league data to a JSON file.
