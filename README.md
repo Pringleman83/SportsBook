@@ -35,6 +35,6 @@ Fearure list:
 
 The project is growing fairly quickly. I'd love to hear what your thoughts are and even keep you up to date with new features if you like. Join the Slack group here if you're interested:
 
-https://join.slack.com/t/sportsbookgroup/shared_invite/enQtNDQ5MDMyMTIwNzA2LWRhY2YxOGY0NWYzNTE2ZDMyNGI3NWQzMTk0YTkxODMyNzEyM2UyMjlkMTVlYmU3NDMzNTVlNWVmZDM4YTNjMjE
+https://join.slack.com/t/sportsbookgroup/shared_invite/enQtNDc4MjYwNzMwNzg4LTAzMDk0MDM3OWFiMGJhZWU2MzAyMzQyNGI4OTlhNjgxMWRlNTZjOTAzMTM3ODdhMDIxNDU3YjI2MzM4OTlmZjg
 
 It'd be great to hear from you so please pop in and say hi!
