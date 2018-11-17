@@ -66,20 +66,18 @@ def visual_comparison(fixture, league_data):
     bar_width = 0.22
     plt.bar(x, home_team_home, width = bar_width, color = "#dd0202", zorder = 2)
     plt.bar(x + bar_width, home_team_total, width = bar_width, color = "#f90202", zorder = 2)
-    plt.bar(x + bar_width * 2, away_team_away, width = bar_width, color = "#2001d6", zorder = 2)
-    plt.bar(x + bar_width * 3, away_team_total, width = bar_width, color = "#170191", zorder = 2)
+    plt.bar(x + bar_width * 2, away_team_total, width = bar_width, color = "#2001d6", zorder = 2)
+    plt.bar(x + bar_width * 3, away_team_away, width = bar_width, color = "#170191", zorder = 2)
 
     # labels
     plt.xticks(x + 0.22, ["Wins\nper\nGame", "Draws\nper\nGame", "Losses\nper\nGame", "Goals (F)\nper\nGame", "Goals (A)\nper\nGame", "Points\nper\nGame"])
     plt.title(fixture[1] + ": " + fixture[2] + " - " + fixture[3])
-    plt.xlabel("This season so far")
-    plt.ylabel("Statistics")
 
     # legend
     home_home_patch = mpatches.Patch(color = "#dd0202", label = fixture[2] + " home games")
     home_total_patch = mpatches.Patch(color = "#f90202", label = fixture[2] + " all games")
-    away_away_patch = mpatches.Patch(color = "#2001d6", label = fixture[3] + " away games")
-    away_total_patch = mpatches.Patch(color = "#170191", label = fixture[3] + " all games")
+    away_total_patch = mpatches.Patch(color = "#2001d6", label = fixture[3] + " all games")
+    away_away_patch = mpatches.Patch(color = "#170191", label = fixture[3] + " away games")
     plt.legend(handles = [home_home_patch, home_total_patch, away_total_patch, away_away_patch])
 
     # grid
