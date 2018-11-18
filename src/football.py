@@ -185,7 +185,9 @@ def inform_and_scrape(selected_leagues, league_data, fixtures, results, availabl
     leaguesq.join()
     # Ensure all threads have completed before continuing
     for t in threads_list:
-        t.join()
+        t.join()    
+    # Sort fixtures into order of league name.
+    fixtures.sort()
     return "Success"
 
 def get_league(home_team, away_team, league_data):
