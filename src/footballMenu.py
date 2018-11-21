@@ -382,7 +382,32 @@ def filter_predictions(predictions_in_range, filtered_predictions, applied_filte
             display_predictions(filtered_predictions)
         elif s == "8":
             filtered_predictions, applied_filters = predictions_in_range, []
-
+            
+def benchmark(fixture, football_data):
+    error = 0
+    print("\n Benchmark Result analysis\n")
+    if football_data["league_data"] == {}:
+        print("No league data loaded")
+        error += 1
+    if football_data["fixtures"] == []:
+        print("No fixtures loaded")
+        error += 1
+    if football_data["fixtures_in_range"] == []:
+        print("No fixtures in range loaded")
+        error += 1
+    if football_data["results"] == []:
+        print("No results loaded")
+        error += 1
+    if football_data["results_in_range"] == []:
+        print("No results in range loaded")
+        error += 1
+    if error > 0:
+        print("\nPress enter to return to the previous menu.")
+        input()
+        return
+    fb.benchmark_analysis(fixture, football_data)
+    
+        
 def reports(football_data):
     """
     The reports menu.
@@ -478,13 +503,14 @@ def football_menu(football_data):
     while not exit_menu:
         football_options = [["(1) Select a league", "1", fb.select_league],  # The selectLeague function from football.py
                             ["(2) Generate predictions on currently loaded fixtures", "2"],
-                            ["(3) Single game analysis from fixture list", "3", select_fixture],
-                            ["(4) Manual single game analysis", "4", fb.manual_game_analysis],
-                            ["(5) Reports", "5", reports],
-                            ["(6) Import data from JSON file", "6"],
-                            ["(7) Clear current prediction data", "7"],
-                            ["(8) Clear all data", "8"],
-                            ["(9) Change data source to " + next_data_source + " (CLEARS ALL DATA)", "9"],
+                            ["(3) Single game visual analysis from fixture list", "3", select_fixture],
+                            ["(4) Single game benchmark result analysis", "4", benchmark],
+                            ["(5) Manual single game analysis", "4", fb.manual_game_analysis],
+                            ["(6) Reports", "5", reports],
+                            ["(7) Import data from JSON file", "6"],
+                            ["(8) Clear current prediction data", "7"],
+                            ["(9) Clear all data", "8"],
+                            ["(10) Change data source to " + next_data_source + " (CLEARS ALL DATA)", "9"],
                             ["(Q) Quit", "q", leave]
                             ]
         
@@ -543,6 +569,10 @@ def football_menu(football_data):
                 quit()
             if selection == "1": # Select league
                 fb.select_league(football_data["league_data"], football_data["fixtures"], football_data["results"], data_source)
+                # Set fixtures in range
+                football_data["fixtures_in_range"] = filter_fixtures_by_range(football_data["fixtures"], football_data["future_range"])
+                # Set results in range
+                football_data["results_in_range"] = fb.get_results_in_range(football_data["results"], football_data["past_range"])
                 selection = ""
                 continue
             if selection == "2": # Run analysis on currently loaded fixtures
@@ -554,9 +584,12 @@ def football_menu(football_data):
                 continue
             if selection == "3": # Visually compare selected fixture
                 # Get fixtures in range
-                football_data["fixtures_in_range"] = filter_fixtures_by_range(football_data["fixtures"], football_data["future_range"])
+                #football_data["fixtures_in_range"] = filter_fixtures_by_range(football_data["fixtures"], football_data["future_range"])
                 # If no fixtures yet, return to menu.
-                if football_data["fixtures_in_range"] == "No fixtures":
+                if football_data["league_data"] == {}:
+                    print("No league data loaded. Select a league to download first.")
+                    print("\nPress enter to return to the previous menu.")
+                    input()
                     selection = ""
                     continue
                 # Select fixture.
@@ -566,7 +599,31 @@ def football_menu(football_data):
                 # Return to menu
                 selection = ""
                 continue
-            if selection == "4": # Manual single game analysis
+            if selection == "4": # Benchmark results analysis
+                if football_data["league_data"] == {}:
+                    print("No league data loaded. Select a league to download first.")
+                    print("\nPress enter to return to the previous menu.")
+                    input()
+                    selection = ""
+                    continue
+                
+                exit_option = False
+                while exit_option == False:
+                    # Select fixture.
+                    fixture_to_view = select_fixture(football_data["fixtures_in_range"])
+                    benchmark(fixture_to_view, football_data)
+                    while True:
+                        print("\nWould you like to benchmark analyse another game? (Y/N)\n")
+                        answer = input()
+                        if answer.lower() == "y":
+                            break
+                        elif answer.lower() == "n":
+                            exit_option = True
+                            break
+                    
+                selection = ""
+                continue    
+            if selection == "5": # Manual single game analysis
                 exit_manual_analysis_menu = False
                 while not exit_manual_analysis_menu:
                     selection = ""
@@ -591,11 +648,11 @@ def football_menu(football_data):
                         if another_game.lower() == "y":
                             break
                                 
-            if selection == "5": # Reports
+            if selection == "6": # Reports
                 reports(football_data)
                 selection = ""
                 continue
-            if selection == "6": # Import data from JSON file
+            if selection == "7": # Import data from JSON file
                 new_data = cf.import_json_file()
                 if new_data == None: # If load fails
                     del new_data
@@ -604,14 +661,14 @@ def football_menu(football_data):
                     del new_data
                 selection = ""
                 continue
-            if selection == "7": # Clear currently loaded predictions data.
+            if selection == "8": # Clear currently loaded predictions data.
                 football_data["predictions"] = []
                 football_data["predictions_in_range"] = []
                 football_data["filtered_predictions"] = []
                 football_data["applied_filters"] = []
                 selection = ""
                 continue
-            if selection == "8": # Clear currently loaded data.
+            if selection == "9": # Clear currently loaded data.
                 football_data["league_data"] = {}
                 football_data["fixtures"] = []
                 football_data["results"] = []
@@ -621,7 +678,7 @@ def football_menu(football_data):
                 football_data["applied_filters"] = []
                 selection = ""
                 continue    
-            if selection == "9": # Switch data source.
+            if selection == "10": # Switch data source.
                 data_source, next_data_source = next_data_source, data_source
                 # Clear all data
                 football_data["league_data"] = {}

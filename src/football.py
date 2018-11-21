@@ -68,6 +68,7 @@ def select_league(league_data, fixtures, results, data_source):
                 # Check which league belongs to the selected option and add it to the selection list.
                 for league in new_leagues:
                     if option == new_leagues[league][0]:
+                        print(league + " selected")
                         selected_leagues.append(new_leagues[league][1])
 
             # Debug code: Display selected_leagues list.
@@ -573,7 +574,7 @@ def get_results_in_range(results, past_range):
         for result in results:
             # Add team to teams dict if not already present.
             # Increase the team count in the teams dict by 1.
-            print("TEAM H = " + result[2] + " TEAM A = " + result[4])
+            # print("TEAM H = " + result[2] + " TEAM A = " + result[4]) # DEBUG CODE
             teams[result[2]] = teams.get(result[2], 0) + 1
             teams[result[4]] = teams.get(result[4], 0) + 1
             if teams[result[2]] <= past_range:
@@ -665,3 +666,153 @@ def prepare_prediction_dataframe(predictions):
     # Delete temporary dictionary.
     del temp_predictions
     return df
+
+def get_team_results(league, team_name, results, type="all"):
+	"""
+	Takes a team name, set of results and a type (default type is "everything").
+	Sorts through all results and returns:
+	Type = "all": a list of [home_results, away_results, all_results] for that team.
+	Type = "total": all results for that team.
+	Type = "home and away": a list of [home_results, away_results] for that team.
+	Type = "home": home results for that team.
+	Type = "away": away results.
+	"""
+	if type == "total" or type == "home and away" or type == "all":
+		get = "total"
+	else:
+		get = type
+	home_results = []
+	away_results = []
+	total_results = []
+	for result in results:
+		if (get == "home" or get == "total") and result[0] == league and result[2] == team_name:
+			home_results.append(result)
+			total_results.append(result)
+		if (get == "away" or get == "total") and result[0] == league and result[4] == team_name:
+			away_results.append(result)
+			total_results.append(result)
+
+	if type == "total":
+		return total_results
+	if type == "home and away":
+		return [home_results, away_results]
+	if type == "home":
+		return home_results
+	if type == "away":
+		return away_results
+	if type == "all":
+		return [home_results, away_results, total_results]
+	
+def get_benchmarks(home_team_all_results, away_team_all_results):
+    """
+    LIKE FOR LIKE OR HOME VS AWAY?
+    LIKE FOR LIKE ATM
+    Takes complete result sets ("all") from get_team_results() for home and away teams.
+    Returns a list containing a list of paired results for matching home games and a list
+    of paired results for matching away games.
+    """
+    #x_team_all_results=[home_results, away_results, total_results]
+    #each results list: [[0league,1datetime,2hteam,3hscore,4ateam,5ascore,6datetime obj]]
+    
+    home_benchmarks = []
+    away_benchmarks = []
+    home_vs_away_benchmarks = []
+    
+    """
+    Get home benchmarks
+    These are results from games where both teams have played at home vs the 
+    same opponent.
+    """
+    for ht_result in home_team_all_results[0]:
+        for at_result in away_team_all_results[0]:
+            if ht_result[4] == at_result[4]:
+                home_benchmarks.append([ht_result, at_result])
+    """
+    Get away benchmarks
+    These are results from games where both teams have played away vs the same 
+    opponent.
+    """
+    for ht_result in home_team_all_results[1]:
+        for at_result in away_team_all_results[1]:
+            if ht_result[2] == at_result[2]:
+                away_benchmarks.append([ht_result, at_result])
+    """            
+    Get home vs away benchmarks
+    These are games where the home team has played at home against the same team
+    as the away team has played away against.
+    """
+    for ht_result in home_team_all_results[0]:
+        for at_result in away_team_all_results[1]:
+            if ht_result[4] == at_result[2]:
+                home_vs_away_benchmarks.append([ht_result, at_result])
+    
+    benchmarks = [home_benchmarks, away_benchmarks, home_vs_away_benchmarks]
+    
+    return benchmarks
+        
+def benchmark_analysis(fixture, football_data):
+    """
+    Fixtures format:
+    List of lists containing: [0-League, 1-date+time, 2-home team, 3-away team, 4-datetime object]
+    
+    Each results list: [[0-League, 1-date+time, 2-hteam, 3-hscore, 4-ateam, 5-ascore, 6-datetime obj]]
+    """
+    league = fixture[0]
+    #date_time = fixture[1]
+    h_team = fixture[2]
+    a_team = fixture[3]
+    h_results = get_team_results(league, h_team, football_data["results"], type = "all")
+    a_results = get_team_results(league, a_team, football_data["results"], type = "all")
+    benchmarks = get_benchmarks(h_results, a_results)
+    """
+    benchmarks structure: [
+            [
+                    [home team home result vs team x, away team home result vs team x],
+                    [home team home result vs team y, away team home result vs team y]
+            ],
+            [
+                    [home team away result vs team x, away team away result vs team x],
+                    [home team away result vs team y, away team away result vs team y]
+            ],
+            [
+                    [home team home result vs team x, away team away result vs team x],
+                    [home team home result vs team y, away team away result vs team y]
+            ]
+    ]
+    """
+    print("\nHome games in common\n")
+    count = 0
+    for i in range(len(benchmarks[0])):
+        print("Benchmark " + str(i + 1) + "\n")
+        print(benchmarks[0][i][0][1] + " " + benchmarks[0][i][0][2] + " " + str(benchmarks[0][i][0][3]) + " v " + str(benchmarks[0][i][0][5]) + " " + benchmarks[0][i][0][4])
+        print(benchmarks[0][i][1][1] + " " + benchmarks[0][i][1][2] + " " + str(benchmarks[0][i][1][3]) + " v " + str(benchmarks[0][i][1][5]) + " " + benchmarks[0][i][1][4])
+        print("===")
+        count += 1
+    if count == 0:
+        print("No games matching this criteria have been found.")
+    print("Press enter to continue...")
+    input()
+    
+    print("\nAway games in common\n")
+    count = 0
+    for i in range(len(benchmarks[1])):
+        print("Benchmark " + str(i + 1) + "\n")
+        print(benchmarks[1][i][0][1] + " " + benchmarks[1][i][0][2] + " " + str(benchmarks[1][i][0][3]) + " v " + str(benchmarks[1][i][0][5]) + " " + benchmarks[1][i][0][4])
+        print(benchmarks[1][i][1][1] + " " + benchmarks[1][i][1][2] + " " + str(benchmarks[1][i][1][3]) + " v " + str(benchmarks[1][i][1][5]) + " " + benchmarks[1][i][1][4])
+        print("===")
+        count += 1
+    if count == 0:
+        print("No games matching this criteria have been found.")
+    print("Press enter to continue...")
+    input()
+        
+    print("\nHome team home games in common with away team away games\n")
+    count = 0
+    for i in range(len(benchmarks[2])):
+        print("Benchmark " + str(i + 1) + "\n")
+        print(benchmarks[2][i][0][1] + " " + benchmarks[2][i][0][2] + " " + str(benchmarks[2][i][0][3]) + " v " + str(benchmarks[2][i][0][5]) + " " + benchmarks[2][i][0][4])
+        print(benchmarks[2][i][1][1] + " " + benchmarks[2][i][1][2] + " " + str(benchmarks[2][i][1][3]) + " v " + str(benchmarks[2][i][1][5]) + " " + benchmarks[2][i][1][4])
+        print("===")
+        count += 1
+    if count == 0:
+        print("No games matching this criteria have been found.")
