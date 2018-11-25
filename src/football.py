@@ -705,8 +705,6 @@ def get_team_results(league, team_name, results, type="all"):
 	
 def get_benchmarks(home_team_all_results, away_team_all_results):
     """
-    LIKE FOR LIKE OR HOME VS AWAY?
-    LIKE FOR LIKE ATM
     Takes complete result sets ("all") from get_team_results() for home and away teams.
     Returns a list containing a list of paired results for matching home games and a list
     of paired results for matching away games.
@@ -722,10 +720,12 @@ def get_benchmarks(home_team_all_results, away_team_all_results):
     Get home benchmarks
     These are results from games where both teams have played at home vs the 
     same opponent.
+    #is_number is used to determine if the results are actual results and no
+    P-P, as it would be for a postponed game.
     """
     for ht_result in home_team_all_results[0]:
         for at_result in away_team_all_results[0]:
-            if ht_result[4] == at_result[4]:
+            if ht_result[4] == at_result[4] and cf.is_number(ht_result[3]) and cf.is_number(at_result[3]):
                 home_benchmarks.append([ht_result, at_result])
     """
     Get away benchmarks
@@ -734,7 +734,7 @@ def get_benchmarks(home_team_all_results, away_team_all_results):
     """
     for ht_result in home_team_all_results[1]:
         for at_result in away_team_all_results[1]:
-            if ht_result[2] == at_result[2]:
+            if ht_result[2] == at_result[2] and cf.is_number(ht_result[3]) and cf.is_number(at_result[3]):
                 away_benchmarks.append([ht_result, at_result])
     """            
     Get home vs away benchmarks
@@ -743,20 +743,24 @@ def get_benchmarks(home_team_all_results, away_team_all_results):
     """
     for ht_result in home_team_all_results[0]:
         for at_result in away_team_all_results[1]:
-            if ht_result[4] == at_result[2]:
+            if ht_result[4] == at_result[2] and cf.is_number(ht_result[3]) and cf.is_number(at_result[3]):
                 home_vs_away_benchmarks.append([ht_result, at_result])
     
     benchmarks = [home_benchmarks, away_benchmarks, home_vs_away_benchmarks]
     
     return benchmarks
         
-def benchmark_analysis(fixture, football_data):
+def benchmark_analysis(fixture, football_data, display = True):
     """
     Fixtures format:
     List of lists containing: [0-League, 1-date+time, 2-home team, 3-away team, 4-datetime object]
     
     Each results list: [[0-League, 1-date+time, 2-hteam, 3-hscore, 4-ateam, 5-ascore, 6-datetime obj]]
     """
+    home_games_table = {}
+    away_games_table = {}
+    hva_games_table = {}
+    
     league = fixture[0]
     #date_time = fixture[1]
     h_team = fixture[2]
@@ -780,39 +784,287 @@ def benchmark_analysis(fixture, football_data):
             ]
     ]
     """
-    print("\nHome games in common\n")
+    if display:
+        print("\nHome games in common\n")
     count = 0
-    for i in range(len(benchmarks[0])):
-        print("Benchmark " + str(i + 1) + "\n")
-        print(benchmarks[0][i][0][1] + " " + benchmarks[0][i][0][2] + " " + str(benchmarks[0][i][0][3]) + " v " + str(benchmarks[0][i][0][5]) + " " + benchmarks[0][i][0][4])
-        print(benchmarks[0][i][1][1] + " " + benchmarks[0][i][1][2] + " " + str(benchmarks[0][i][1][3]) + " v " + str(benchmarks[0][i][1][5]) + " " + benchmarks[0][i][1][4])
-        print("===")
-        count += 1
-    if count == 0:
-        print("No games matching this criteria have been found.")
-    print("Press enter to continue...")
-    input()
-    
-    print("\nAway games in common\n")
-    count = 0
-    for i in range(len(benchmarks[1])):
-        print("Benchmark " + str(i + 1) + "\n")
-        print(benchmarks[1][i][0][1] + " " + benchmarks[1][i][0][2] + " " + str(benchmarks[1][i][0][3]) + " v " + str(benchmarks[1][i][0][5]) + " " + benchmarks[1][i][0][4])
-        print(benchmarks[1][i][1][1] + " " + benchmarks[1][i][1][2] + " " + str(benchmarks[1][i][1][3]) + " v " + str(benchmarks[1][i][1][5]) + " " + benchmarks[1][i][1][4])
-        print("===")
-        count += 1
-    if count == 0:
-        print("No games matching this criteria have been found.")
-    print("Press enter to continue...")
-    input()
         
-    print("\nHome team home games in common with away team away games\n")
+    #Home games in common
+    if h_team not in home_games_table:
+        home_games_table[h_team] = {
+                "Played": 0,
+                "Won": 0,
+                "Drew": 0,
+                "Lost": 0,
+                "For": 0,
+                "Against": 0,
+                "Points": 0
+                }
+            
+    if a_team not in home_games_table:
+        home_games_table[a_team] = {
+                "Played": 0,
+                "Won": 0,
+                "Drew": 0,
+                "Lost": 0,
+                "For": 0,
+                "Against": 0,
+                "Points": 0
+                }
+    
+    for i in range(len(benchmarks[0])):
+        
+        ht_game_date_str = benchmarks[0][i][0][1]
+        at_game_date_str = benchmarks[0][i][1][1]
+        ht_home_score = int(benchmarks[0][i][0][3])
+        at_home_score = int(benchmarks[0][i][1][3])
+        ht_opponent_score = int(benchmarks[0][i][0][5])
+        at_opponent_score = int(benchmarks[0][i][1][5])
+        common_opponent = benchmarks[0][i][0][4]
+        
+        home_games_table[h_team]["Played"] += 1
+            
+        if ht_home_score > ht_opponent_score:
+            home_games_table[h_team]["Won"] += 1
+            home_games_table[h_team]["Points"] += 3
+        elif ht_home_score == ht_opponent_score:
+            home_games_table[h_team]["Drew"] += 1
+            home_games_table[h_team]["Points"] += 1
+        elif ht_home_score < ht_opponent_score:
+            home_games_table[h_team]["Lost"] += 1
+        else:
+            print("Error: game is neither a win, loss or draw.")
+
+        home_games_table[h_team]["For"] += ht_home_score
+        home_games_table[h_team]["Against"] += ht_opponent_score
+        home_games_table[a_team]["Played"] += 1
+
+        if at_home_score > at_opponent_score:
+            home_games_table[a_team]["Won"] += 1
+            home_games_table[a_team]["Points"] += 3
+        elif at_home_score == at_opponent_score:
+            home_games_table[a_team]["Drew"] += 1
+            home_games_table[a_team]["Points"] += 1
+        elif at_home_score < at_opponent_score:
+            home_games_table[a_team]["Lost"] += 1
+        else:
+            print("Error: game is neither a win, loss or draw.")
+
+        home_games_table[a_team]["For"] += at_home_score
+        home_games_table[a_team]["Against"] += at_opponent_score
+
+        if display:
+            print("Benchmark " + str(i + 1) + "\n")
+            print(ht_game_date_str + " " + h_team + " " + str(ht_home_score) + " v " + str(ht_opponent_score) + " " + common_opponent)
+            print(at_game_date_str + " " + a_team + " " + str(at_home_score) + " v " + str(at_opponent_score) + " " + common_opponent)
+            print("===")
+        count += 1        
+    if count == 0:
+        if display:
+            print("No games matching this criteria have been found.")
+    home_games_table[h_team]["Won per Game"] = 0 if not home_games_table[h_team]["Played"] else round(home_games_table[h_team]["Won"] / home_games_table[h_team]["Played"], 3)
+    home_games_table[h_team]["Drew per Game"] = 0 if not home_games_table[h_team]["Played"] else round(home_games_table[h_team]["Drew"] / home_games_table[h_team]["Played"], 3)
+    home_games_table[h_team]["Lost per Game"] = 0 if not home_games_table[h_team]["Played"] else round(home_games_table[h_team]["Lost"] / home_games_table[h_team]["Played"], 3)
+    home_games_table[h_team]["For per Game"] = 0 if not home_games_table[h_team]["Played"] else round(home_games_table[h_team]["For"] / home_games_table[h_team]["Played"], 3)
+    home_games_table[h_team]["Against per Game"] = 0 if not home_games_table[h_team]["Played"] else round(home_games_table[h_team]["Against"] / home_games_table[h_team]["Played"], 3)
+    home_games_table[h_team]["Points per Game"] = 0 if not home_games_table[h_team]["Played"] else round(home_games_table[h_team]["Points"] / home_games_table[h_team]["Played"], 3)
+    home_games_table[a_team]["Won per Game"] = 0 if not home_games_table[a_team]["Played"] else round(home_games_table[a_team]["Won"] / home_games_table[a_team]["Played"], 3)
+    home_games_table[a_team]["Drew per Game"] = 0 if not home_games_table[a_team]["Played"] else round(home_games_table[a_team]["Drew"] / home_games_table[a_team]["Played"], 3)
+    home_games_table[a_team]["Lost per Game"] = 0 if not home_games_table[a_team]["Played"] else round(home_games_table[a_team]["Lost"] / home_games_table[a_team]["Played"], 3)
+    home_games_table[a_team]["For per Game"] = 0 if not home_games_table[a_team]["Played"] else round(home_games_table[a_team]["For"] / home_games_table[a_team]["Played"], 3)
+    home_games_table[a_team]["Against per Game"] = 0 if not home_games_table[a_team]["Played"] else round(home_games_table[a_team]["Against"] / home_games_table[a_team]["Played"], 3)
+    home_games_table[a_team]["Points per Game"] = 0 if not home_games_table[a_team]["Played"] else round(home_games_table[a_team]["Points"] / home_games_table[a_team]["Played"], 3)
+        
+    if display:
+        #print(home_games_table) # DEBUG CODE
+        print("Press enter to continue...")
+        input()
+        
+        print("\nAway games in common\n")
     count = 0
+    
+    #Away games in common
+    if h_team not in away_games_table:
+        away_games_table[h_team] = {
+                "Played": 0,
+                "Won": 0,
+                "Drew": 0,
+                "Lost": 0,
+                "For": 0,
+                "Against": 0,
+                "Points": 0
+                }
+    if a_team not in away_games_table:
+        away_games_table[a_team] = {
+                "Played": 0,
+                "Won": 0,
+                "Drew": 0,
+                "Lost": 0,
+                "For": 0,
+                "Against": 0,
+                "Points": 0
+                }
+    for i in range(len(benchmarks[1])):
+        
+        ht_game_date_str = benchmarks[1][i][0][1]
+        at_game_date_str = benchmarks[1][i][1][1]
+        ht_away_score = int(benchmarks[1][i][0][5])
+        at_away_score = int(benchmarks[1][i][1][5])
+        ht_opponent_score = int(benchmarks[1][i][0][3])
+        at_opponent_score = int(benchmarks[1][i][1][3])
+        common_opponent = benchmarks[1][i][0][2]
+
+        away_games_table[h_team]["Played"] += 1
+            
+        if ht_away_score > ht_opponent_score:
+            away_games_table[h_team]["Won"] += 1
+            away_games_table[h_team]["Points"] += 3
+        elif ht_away_score == ht_opponent_score:
+            away_games_table[h_team]["Drew"] += 1
+            away_games_table[h_team]["Points"] += 1
+        elif ht_away_score < ht_opponent_score:
+            away_games_table[h_team]["Lost"] += 1
+        else:
+            print("Error: game is neither a win, loss or draw.")
+
+        away_games_table[h_team]["For"] += ht_away_score
+        away_games_table[h_team]["Against"] += ht_opponent_score
+        
+        away_games_table[a_team]["Played"] += 1
+        
+        if at_away_score > at_opponent_score:
+            away_games_table[a_team]["Won"] += 1
+            away_games_table[a_team]["Points"] += 3
+        elif at_away_score == at_opponent_score:
+            away_games_table[a_team]["Drew"] += 1
+            away_games_table[a_team]["Points"] += 1
+        elif at_away_score < at_opponent_score:
+            away_games_table[a_team]["Lost"] += 1
+        else:
+            print("Error: game is neither a win, loss or draw.")
+
+        away_games_table[a_team]["For"] += at_away_score
+        away_games_table[a_team]["Against"] += at_opponent_score
+        
+        
+        if display:
+            print("Benchmark " + str(i + 1) + "\n")
+            print(ht_game_date_str + " " + common_opponent + " " + str(ht_opponent_score) + " v " + str(ht_away_score) + " " + h_team)
+            print(at_game_date_str + " " + common_opponent + " " + str(at_opponent_score) + " v " + str(at_away_score) + " " + a_team)
+            print("===")
+        count += 1
+        
+    if count == 0:
+        if display:
+            print("No games matching this criteria have been found.")
+    away_games_table[h_team]["Won per Game"] = 0 if not away_games_table[h_team]["Played"] else round(away_games_table[h_team]["Won"] / away_games_table[h_team]["Played"], 3)
+    away_games_table[h_team]["Drew per Game"] = 0 if not away_games_table[h_team]["Played"] else round(away_games_table[h_team]["Drew"] / away_games_table[h_team]["Played"], 3)
+    away_games_table[h_team]["Lost per Game"] = 0 if not away_games_table[h_team]["Played"] else round(away_games_table[h_team]["Lost"] / away_games_table[h_team]["Played"], 3)
+    away_games_table[h_team]["For per Game"] = 0 if not away_games_table[h_team]["Played"] else round(away_games_table[h_team]["For"] / away_games_table[h_team]["Played"], 3)
+    away_games_table[h_team]["Against per Game"] = 0 if not away_games_table[h_team]["Played"] else round(away_games_table[h_team]["Against"] / away_games_table[h_team]["Played"], 3)
+    away_games_table[h_team]["Points per Game"] = 0 if not away_games_table[h_team]["Played"] else round(away_games_table[h_team]["Points"] / away_games_table[h_team]["Played"], 3)
+    away_games_table[a_team]["Won per Game"] = 0 if not away_games_table[a_team]["Played"] else round(away_games_table[a_team]["Won"] / away_games_table[a_team]["Played"], 3)
+    away_games_table[a_team]["Drew per Game"] = 0 if not away_games_table[a_team]["Played"] else round(away_games_table[a_team]["Drew"] / away_games_table[a_team]["Played"], 3)
+    away_games_table[a_team]["Lost per Game"] = 0 if not away_games_table[a_team]["Played"] else round(away_games_table[a_team]["Lost"] / away_games_table[a_team]["Played"], 3)
+    away_games_table[a_team]["For per Game"] = 0 if not away_games_table[a_team]["Played"] else round(away_games_table[a_team]["For"] / away_games_table[a_team]["Played"], 3)
+    away_games_table[a_team]["Against per Game"] = 0 if not away_games_table[a_team]["Played"] else round(away_games_table[a_team]["Against"] / away_games_table[a_team]["Played"], 3)
+    away_games_table[a_team]["Points per Game"] = 0 if not away_games_table[a_team]["Played"] else round(away_games_table[a_team]["Points"] / away_games_table[a_team]["Played"], 3)
+        
+    if display:
+        #print(away_games_table) # DEBUG CODE
+        print("Press enter to continue...")
+        input()
+        
+        print("\nHome team home games in common with away team away games\n")
+    count = 0
+    
+    #Home team home games in common with away team away games
+    
+    if h_team not in hva_games_table:
+        hva_games_table[h_team] = {
+                "Played": 0,
+                "Won": 0,
+                "Drew": 0,
+                "Lost": 0,
+                "For": 0,
+                "Against": 0,
+                "Points": 0
+                }
+    
+    if a_team not in hva_games_table:
+        hva_games_table[a_team] = {
+                "Played": 0,
+                "Won": 0,
+                "Drew": 0,
+                "Lost": 0,
+                "For": 0,
+                "Against": 0,
+                "Points": 0
+                }
+
     for i in range(len(benchmarks[2])):
-        print("Benchmark " + str(i + 1) + "\n")
-        print(benchmarks[2][i][0][1] + " " + benchmarks[2][i][0][2] + " " + str(benchmarks[2][i][0][3]) + " v " + str(benchmarks[2][i][0][5]) + " " + benchmarks[2][i][0][4])
-        print(benchmarks[2][i][1][1] + " " + benchmarks[2][i][1][2] + " " + str(benchmarks[2][i][1][3]) + " v " + str(benchmarks[2][i][1][5]) + " " + benchmarks[2][i][1][4])
-        print("===")
+        
+        ht_game_date_str = benchmarks[2][i][0][1]
+        at_game_date_str = benchmarks[2][i][1][1]
+        ht_home_score = int(benchmarks[2][i][0][3])
+        at_away_score = int(benchmarks[2][i][1][5])
+        ht_opponent_score = int(benchmarks[2][i][0][5])
+        at_opponent_score = int(benchmarks[2][i][1][3])
+        common_opponent = benchmarks[2][i][0][4]
+
+        hva_games_table[h_team]["Played"] += 1
+        
+        if ht_home_score > ht_opponent_score:
+            hva_games_table[h_team]["Won"] += 1
+            hva_games_table[h_team]["Points"] += 3
+        elif ht_home_score == ht_opponent_score:
+            hva_games_table[h_team]["Drew"] += 1
+            hva_games_table[h_team]["Points"] += 1
+        elif ht_home_score < ht_opponent_score:
+            hva_games_table[h_team]["Lost"] += 1
+        else:
+            print("Error: game is neither a win, loss or draw.")
+
+        hva_games_table[h_team]["For"] += ht_home_score
+        hva_games_table[h_team]["Against"] += ht_opponent_score
+        hva_games_table[a_team]["Played"] += 1
+        
+        if at_away_score > at_opponent_score:
+            hva_games_table[a_team]["Won"] += 1
+            hva_games_table[a_team]["Points"] += 3
+        elif at_away_score == at_opponent_score:
+            hva_games_table[a_team]["Drew"] += 1
+            hva_games_table[a_team]["Points"] += 1
+        elif at_away_score < at_opponent_score:
+            hva_games_table[a_team]["Lost"] += 1
+        else:
+            print("Error: game is neither a win, loss or draw.")
+
+        hva_games_table[a_team]["For"] += at_away_score
+        hva_games_table[a_team]["Against"] += at_opponent_score
+        
+        
+        if display:
+            print("Benchmark " + str(i + 1) + "\n")
+            print(ht_game_date_str + " " + h_team + " " + str(ht_home_score) + " v " + str(ht_opponent_score) + " " + common_opponent)
+            print(at_game_date_str + " " + common_opponent + " " + str(at_opponent_score) + " v " + str(at_away_score) + " " + a_team)
+            print("===")
         count += 1
     if count == 0:
-        print("No games matching this criteria have been found.")
+        if display:
+            print("No games matching this criteria have been found.")
+    hva_games_table[h_team]["Won per Game"] = 0 if not hva_games_table[h_team]["Played"] else round(hva_games_table[h_team]["Won"] / hva_games_table[h_team]["Played"], 3)
+    hva_games_table[h_team]["Drew per Game"] = 0 if not hva_games_table[h_team]["Played"] else round(hva_games_table[h_team]["Drew"] / hva_games_table[h_team]["Played"], 3)
+    hva_games_table[h_team]["Lost per Game"] = 0 if not hva_games_table[h_team]["Played"] else round(hva_games_table[h_team]["Lost"] / hva_games_table[h_team]["Played"], 3)
+    hva_games_table[h_team]["For per Game"] = 0 if not hva_games_table[h_team]["Played"] else round(hva_games_table[h_team]["For"] / hva_games_table[h_team]["Played"], 3)
+    hva_games_table[h_team]["Against per Game"] = 0 if not hva_games_table[h_team]["Played"] else round(hva_games_table[h_team]["Against"] / hva_games_table[h_team]["Played"], 3)
+    hva_games_table[h_team]["Points per Game"] = 0 if not hva_games_table[h_team]["Played"] else round(hva_games_table[h_team]["Points"] / hva_games_table[h_team]["Played"], 3)
+    hva_games_table[a_team]["Won per Game"] = 0 if not hva_games_table[a_team]["Played"] else round(hva_games_table[a_team]["Won"] / hva_games_table[a_team]["Played"], 3)
+    hva_games_table[a_team]["Drew per Game"] = 0 if not hva_games_table[a_team]["Played"] else round(hva_games_table[a_team]["Drew"] / hva_games_table[a_team]["Played"], 3)
+    hva_games_table[a_team]["Lost per Game"] = 0 if not hva_games_table[a_team]["Played"] else round(hva_games_table[a_team]["Lost"] / hva_games_table[a_team]["Played"], 3)
+    hva_games_table[a_team]["For per Game"] = 0 if not hva_games_table[a_team]["Played"] else round(hva_games_table[a_team]["For"] / hva_games_table[a_team]["Played"], 3)
+    hva_games_table[a_team]["Against per Game"] = 0 if not hva_games_table[a_team]["Played"] else round(hva_games_table[a_team]["Against"] / hva_games_table[a_team]["Played"], 3)
+    hva_games_table[a_team]["Points per Game"] = 0 if not hva_games_table[a_team]["Played"] else round(hva_games_table[a_team]["Points"] / hva_games_table[a_team]["Played"], 3)
+    
+    #print(hva_games_table)#DEBUG CODE
+    #input()# DEBUG CODE
+    return [home_games_table, away_games_table, hva_games_table]

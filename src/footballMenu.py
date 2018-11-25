@@ -2,6 +2,7 @@
 
 import football as fb
 import pprint
+import predictiveAlgorithms as p
 import commonFunctions as cf
 import filterPredictions as fp
 import visuals as v
@@ -52,7 +53,7 @@ def filter_fixtures_by_range(fixtures, future_range):
     if isinstance(future_range, timedelta):
         for fixture in fixtures:
             # If game date within range, save the fixture.
-            if (fixture[4] - today).days <= future_range.days - 1:
+            if (fixture[4] - today).days <= future_range.days - 1 and fixture[4] >= today:
                 game_count += 1
                 fixtures_in_range.append(fixture)
     
@@ -60,6 +61,11 @@ def filter_fixtures_by_range(fixtures, future_range):
     if isinstance(future_range, int):
         # Create a dictionary of present teams and count the team's presence
         for fixture in fixtures:
+            # Discount any fixtures that are for a previous date.
+            # These can occur if there are games that didn't take place on
+            #the planned date.
+            if fixture[4] < today:
+                continue
             teams[fixture[2]] = teams.get(fixture[2], 0) + 1 
             if teams[fixture[2]] <= future_range:
                 # Set to display if the home team hasn't been saved enough times yet.
@@ -576,12 +582,30 @@ def football_menu(football_data):
                 selection = ""
                 continue
             if selection == "2": # Run analysis on currently loaded fixtures
-                football_data["predictions"] = fb.upcoming_fixture_predictions(football_data["fixtures"], football_data["predictions"], football_data["league_data"])
-                football_data["predictions_in_range"] = fb.get_predictions_in_range(football_data["predictions"], football_data["future_range"])
-                print("\nPredictions have been processed and can be viewed via the \"Reports\" menu.\nPress enter to continue.")
-                input()
-                selection = ""
-                continue
+                if football_data["fixtures"] == []:
+                    print("\nNo fixtures currently loaded. Select a league first.")
+                    selection = ""
+                    continue
+                choice = ""
+                while choice not in ["1", "2"]:
+                    print("\nSelect a method of prediciton:")
+                    print("\n1) Classic home goals vs away goals")
+                    print("2) Benchmark games home goals vs away goals")
+                    choice = input()
+                if choice == "1":
+                    football_data["predictions"] = p.upcoming_fixture_predictions(football_data["fixtures"], football_data["predictions"], football_data["league_data"])
+                    football_data["predictions_in_range"] = fb.get_predictions_in_range(football_data["predictions"], football_data["future_range"])
+                    print("\nPredictions have been processed and can be viewed via the \"Reports\" menu.\nPress enter to continue.")
+                    input()
+                    selection = ""
+                    continue
+                if choice == "2":
+                    p.upcoming_fixture_predictions_benchmarks(football_data)
+                    football_data["predictions_in_range"] = fb.get_predictions_in_range(football_data["predictions"], football_data["future_range"])
+                    print("\nPredictions have been processed and can be viewed via the \"Reports\" menu.\nPress enter to continue.")
+                    input()
+                    selection = ""
+                    continue
             if selection == "3": # Visually compare selected fixture
                 # Get fixtures in range
                 #football_data["fixtures_in_range"] = filter_fixtures_by_range(football_data["fixtures"], football_data["future_range"])
@@ -630,7 +654,7 @@ def football_menu(football_data):
                     another_game = ""
                     
                     # Manual_predictions holds an error message if something goes wrong in the prediction process.
-                    manual_predictions = fb.manual_game_analysis(football_data["league_data"], football_data["predictions"])
+                    manual_predictions = p.manual_game_analysis(football_data["league_data"], football_data["predictions"])
                     # Add new predictions to the fixtures in range.
                     football_data["predictions_in_range"] = fb.get_predictions_in_range(football_data["predictions"], football_data["future_range"])
                     while another_game.lower() != "y" and another_game.lower() != "n":
