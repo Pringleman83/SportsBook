@@ -17,6 +17,9 @@ Fearure list:
 * Run manual comparison of two teams from any loaded leagues generating (somewhat inaccurate) predictions.
 
 * Run predictions on all loaded fixtures (more accurate as the teams are guaranteed to be from the same leagues).
+  * Select from using all available league data to compare home and away goal scoring and conceding form or only using data from games
+  where the home team has played the same team at home as the away team as played away, making the data a fairer representation of the
+  team's capabilities.
 
 * Filter predictions to show games where specific requirements are met (eg. prediction of home side winning by 2 goals).
 
