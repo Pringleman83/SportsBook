@@ -511,12 +511,12 @@ def football_menu(football_data):
                             ["(2) Generate predictions on currently loaded fixtures", "2"],
                             ["(3) Single game visual analysis from fixture list", "3", select_fixture],
                             ["(4) Single game benchmark result analysis", "4", benchmark],
-                            ["(5) Manual single game analysis", "4", fb.manual_game_analysis],
-                            ["(6) Reports", "5", reports],
-                            ["(7) Import data from JSON file", "6"],
-                            ["(8) Clear current prediction data", "7"],
-                            ["(9) Clear all data", "8"],
-                            ["(10) Change data source to " + next_data_source + " (CLEARS ALL DATA)", "9"],
+                            ["(5) Manual single game analysis", "5", fb.manual_game_analysis],
+                            ["(6) Reports", "6", reports],
+                            ["(7) Import data from JSON file", "7"],
+                            ["(8) Clear current prediction data", "8"],
+                            ["(9) Clear all data", "9"],
+                            ["(10) Change data source to " + next_data_source + " (CLEARS ALL DATA)", "10"],
                             ["(Q) Quit", "q", leave]
                             ]
         
