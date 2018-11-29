@@ -13,6 +13,9 @@ Fearure list:
   * This allows you to see the results of games where both teams have played the same opponent.
   * It shows results where both teams faced the same opponent at home, then away and then where
   the home team have faced the opponent at home and the away team have faced the opponent away.
+  * Only games where three of the above comparisons are shown. If the home team, at home, haven't
+  played the same team as the awyay team have played away on three occasions, the game is ommitted
+  from predictions.
 
 * Run manual comparison of two teams from any loaded leagues generating (somewhat inaccurate) predictions.
 
