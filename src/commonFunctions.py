@@ -1,7 +1,6 @@
 # Useful functions
 from prettytable import PrettyTable
 import json
-import pandas as pd
 
 def remove_duplicates(old_list):
     """

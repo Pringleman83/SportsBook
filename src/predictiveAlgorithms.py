@@ -232,6 +232,10 @@ def upcoming_fixture_predictions_benchmarks(football_data):
     Returns the updated predictions list.
     """ 
     
+    # Optional - Don't add predictions where benchmark games are below threshold.
+    threshold = 3
+    avoid_below_threshold = True
+    
     for fixture in football_data["fixtures"]:
         fixture_league = fixture[0]
         fixture_datetime = fixture[1]
@@ -245,7 +249,10 @@ def upcoming_fixture_predictions_benchmarks(football_data):
         comaprison return notes:
         [H/A compare[Pld,W,D,L,F,A,Pts], Total compare[Pld,W,D,L,F,A,Pts]]
         """
-    
+        # Act on benchmark games threshold.
+        if avoid_below_threshold and benchmark_tables[2][home_team]["Played"] < threshold:
+            continue
+        
         home_team_max_goals = football_data["league_data"][fixture_league][home_team]["Home"]["For per Game"] * 2.5
         away_team_max_goals = football_data["league_data"][fixture_league][away_team]["Away"]["For per Game"] * 2.5
         
