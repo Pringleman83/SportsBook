@@ -53,14 +53,16 @@ def filter_fixtures_by_range(fixtures, future_range):
     if isinstance(future_range, timedelta):
         for fixture in fixtures:
             # If game date within range, save the fixture.
-            if (fixture[4] - today).days <= future_range.days - 1 and fixture[4] >= today:
+            if (fixture[4] - today).days <= future_range.days - 1 and fixture[4] >= today - timedelta( days = 1):
                 game_count += 1
                 fixtures_in_range.append(fixture)
     
     # If future_range is number of games
     if isinstance(future_range, int):
+        
+        new_fixtures = sorted(fixtures, key=lambda x: x[4])
         # Create a dictionary of present teams and count the team's presence
-        for fixture in fixtures:
+        for fixture in new_fixtures:
             # Discount any fixtures that are for a previous date.
             # These can occur if there are games that didn't take place on
             #the planned date.
@@ -83,7 +85,11 @@ def filter_fixtures_by_range(fixtures, future_range):
             save_home_fixture, save_away_fixture = False, False
     if game_count == 0:
         print("No games available for the selected game range.\n")
-    return fixtures_in_range
+    
+    # Sort fixtures by league
+    fixtures_in_range_sorted = sorted(fixtures_in_range, key=lambda x: x[0])
+        
+    return fixtures_in_range_sorted
     
 def display_fixtures(fixtures):
     """
@@ -330,8 +336,67 @@ def special_filters(predictions_in_range, filtered_predictions, applied_filters)
             filtered_predictions, applied_filters = fp.special_
         elif s == "8":
             filtered_predictions, applied_filters = fp.special_"""
+            
+def form_filters(predictions_in_range, filtered_predictions, results_in_range, past_range, applied_filters):
+    """
+    The form filters menu for filtering predictions.
+    Takes in the currently ranged predictions, the currently filtered
+    predictions the results in the currently selected range and the currently
+    applied filters.
+    
+    On exiting the menu it return the filtered predictions and applied filters.
+    """
+    print("\nForm Filters")
+    print("============\n")
+    
+    # If no filtered predictions exist.
+    if filtered_predictions == []:
+    # Filtered predictions is a copy of predictions in range.
+        filtered_predictions = predictions_in_range[:]
+        applied_filters = []
+                
+    while True:
+        if applied_filters == []:
+            print("No filters currently applied.")
+        else:
+            print("The following filters are applied:\n")
+            for filter in applied_filters:
+                print(filter)
+        print("\n" + str(len(filtered_predictions)) + " games remaining")
 
-def filter_predictions(predictions_in_range, filtered_predictions, applied_filters):
+        print("\nSelect one of the following form filters to apply:\n")
+        print("1) Where a team has won all of their previous games in the results range by x goals.")
+        print("2) Display filtered predictions")
+        #print("3)")
+        #print("4)")
+        #print("5)")
+        #print("6)")
+        #print("7)")
+        #print("8)")
+        print("M) Return to previous menu.")
+        print()
+        s = input().lower()
+        
+        if s == "m":
+            return (filtered_predictions, applied_filters)
+        elif s == "1":
+            filtered_predictions, applied_filters = fp.form_wins(filtered_predictions, results_in_range, past_range, applied_filters)
+        elif s == "2":
+            display_predictions(filtered_predictions)
+        """elif s == "3":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "4":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "5":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "6":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "7":
+            filtered_predictions, applied_filters = fp.special_
+        elif s == "8":
+            filtered_predictions, applied_filters = fp.special_"""
+
+def filter_predictions(predictions_in_range, filtered_predictions, results_in_range, past_range, applied_filters):
     """
     The filter predictions menu.
     Take in the currently ranged predictions, the filtered_predictions and
@@ -363,9 +428,10 @@ def filter_predictions(predictions_in_range, filtered_predictions, applied_filte
         print("3) Games where a team is expected to win by at least x goals")
         print("4) Games where a minimum of a specified number of goals are scored")
         print("5) Games where a maximum of a specified number of goals are scored")
-        print("6) View special filters")
-        print("7) Display filtered predictions")
-        print("8) Clear all filters")
+        print("6) View form filters")
+        print("7) View special filters")
+        print("8) Display filtered predictions")
+        print("9) Clear all filters")
         print("M) Return to previous menu.")
         print()
         s = input().lower()
@@ -383,10 +449,12 @@ def filter_predictions(predictions_in_range, filtered_predictions, applied_filte
         elif s == "5":
             filtered_predictions, applied_filters = fp.x_or_less_goals_scored(filtered_predictions, applied_filters)
         elif s == "6":
-            filtered_predictions, applied_filters = special_filters(predictions_in_range, filtered_predictions, applied_filters)
+            filtered_predictions, applied_filters = form_filters(predictions_in_range, filtered_predictions, results_in_range, past_range, applied_filters)
         elif s == "7":
-            display_predictions(filtered_predictions)
+            filtered_predictions, applied_filters = special_filters(predictions_in_range, filtered_predictions, applied_filters)
         elif s == "8":
+            display_predictions(filtered_predictions)
+        elif s == "9":
             filtered_predictions, applied_filters = predictions_in_range, []
             
 def benchmark(fixture, football_data):
@@ -476,7 +544,7 @@ def reports(football_data):
         if selection == report_options[5][1]: # Display current predictions
             display_predictions(football_data["predictions_in_range"])
         if selection == report_options[6][1]: # Filter predictions
-            filtered_predictions, applied_filters = filter_predictions(football_data["predictions_in_range"], football_data["filtered_predictions"], football_data["applied_filters"])
+            filtered_predictions, applied_filters = filter_predictions(football_data["predictions_in_range"], football_data["filtered_predictions"], football_data["results_in_range"], football_data["past_range"], football_data["applied_filters"])
         if selection == report_options[7][1]: # Display filtered predictions
             display_predictions(football_data["filtered predictions"])
         if selection == report_options[8][1]: # Display results in range

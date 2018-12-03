@@ -2,6 +2,50 @@
 from prettytable import PrettyTable
 import json
 
+def home_or_away(either = True, menu = True):
+    """
+    Takes in optional booleans for either and menu (default is true).
+    Asks the user to enter h, a, e (if either is True) or m (if menu is True).
+    Validates the input and returns "Home", "Away", "Either" or "Exit".
+    """
+    while True:
+        if either and menu:
+            print("Enter H, A, E or M to return to previous menu making no changes.")
+        elif menu:
+            print("Enter H, A or M to return to previous menu making no changes.")
+        elif either:
+            print("Enter H, A or M to return to previous menu making no changes.")
+        else:
+            print("Enter H, or A.")
+            
+        s = input().lower()
+        if s == "h":
+            team = "Home"
+            break
+        elif s == "a":
+            team = "Away"
+            break
+        elif s == "e" and either:
+            team = "Either"
+            break
+        elif s == "m" and menu:
+            team = "Exit"
+            break
+    return team
+
+def input_goals():
+    """
+    Asks the user to enter a number of goals.
+    Validates the input and returns the given number.
+    """
+    while True:
+        print("\nEnter number of goals.")
+        num_of_goals = input()
+        if is_number(num_of_goals):
+            num_of_goals = int(num_of_goals)
+            break
+    return num_of_goals
+
 def remove_duplicates(old_list):
     """
     Takes a list.
