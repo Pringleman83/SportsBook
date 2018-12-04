@@ -80,7 +80,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
     web_client = uReq(full_url)
     #print(full_url)
     if web_client.getcode() != 200:
-        print("\nCannot retrieve data, webpage is down")
+        print("\n" + selection + " league data error: Cannot retrieve data, webpage is down")
         return "Scrape error"
     web_html = web_client.read()
     web_client.close()
@@ -202,7 +202,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
     web_client = uReq(full_url)
 
     if web_client.getcode() != 200:
-        print("Cannot retrieve data, webpage is down.")
+        print("\n" + selection + " fixtures error: Cannot retrieve data, webpage is down")
         return "Scrape error"
     web_html = web_client.read()
 
@@ -236,8 +236,8 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
                     str(table.select('td')[i + 3].text),
                     game_date_time]
                 
-                # Only add the fixture to the fixtures list if it's not already present.
-                if not fixture in fixtures:
+                # Only add the fixture to the fixtures list if it's not already present and it is still to be played.
+                if fixture not in fixtures and fixture[4] >= today:
                     with fixtures_lock:
                         fixtures.append(fixture[:]) # add fixture details to fixtures                    
             break
@@ -252,7 +252,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
     web_client = uReq(full_url)
 
     if web_client.getcode() != 200:
-        print("Cannot retrieve data, webpage is down.")
+        print("\n" + selection + " results error: Cannot retrieve data, webpage is down")
         return "Scrape error"
     web_html = web_client.read()
     web_client.close()
@@ -476,7 +476,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
     cookies = {"cookiesok": "yes"} # Required to disable the cookie popup which prevents scraping.
     web_client = requests.get(full_url, cookies = cookies)
     if web_client.status_code != 200:
-        print("\nCannot retrieve data, webpage is down")
+        print("\n" + selection + " league data error: Cannot retrieve data, webpage is down")
         return "Scrape error"
     web_html = web_client.content
     web_soup = soup(web_html, "html.parser")
@@ -606,7 +606,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
     cookies = {"cookiesok": "yes"} # Required to disable the cookie popup which prevents scraping.
     web_client = requests.get(full_url, cookies = cookies)
     if web_client.status_code != 200:
-        print("\nCannot retrieve data, webpage is down")
+        print("\n" + selection + " fixtures error: Cannot retrieve data, webpage is down")
         return "Scrape error"
     web_html = web_client.content
     web_soup = soup(web_html, "html.parser")
@@ -841,8 +841,8 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
                             results.append(result[:]) # add result details to results
                 else:
                     fixture = [selection, game_date_time.strftime("%d %b %Y %H:%M"), home_team, away_team, game_date_time]
-                    # Only add the fixture to the fixtures list if it's not already present.
-                    if fixture not in fixtures:
+                    # Only add the fixture to the fixtures list if it's not already present and it is still to be played.
+                    if fixture not in fixtures and fixture[4] >= today:
                         with fixtures_lock:
                             fixtures.append(fixture[:]) # add fixture details to fixtures
                         

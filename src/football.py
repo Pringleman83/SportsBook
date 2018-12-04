@@ -561,17 +561,19 @@ def get_results_in_range(results, past_range):
     today = datetime.today()
     teams = {}
     results_in_range = []
-    for result in results:
+    
+    # Sort results
+    new_results = sorted(results, key=lambda x: x[6], reverse=True)
+    
+    for result in new_results:
         if isinstance(past_range, timedelta):
             # If game date within range, append the result to the results_in_range_list.
             if (today - result[6]).days <= past_range.days - 1:
 
                 results_in_range.append(result)
             
-    # If past_range is number of games
-    if isinstance(past_range, int):
-        # Create a dictionary of present teams and count the team's presence   
-        for result in results:
+        # If past_range is number of games
+        if isinstance(past_range, int):
             # Add team to teams dict if not already present.
             # Increase the team count in the teams dict by 1.
             # print("TEAM H = " + result[2] + " TEAM A = " + result[4]) # DEBUG CODE
@@ -591,7 +593,10 @@ def get_results_in_range(results, past_range):
             # Reset values for next iteration
             home_game_in_range, away_game_in_range = False, False
 
-    return results_in_range
+    # Sort results_in_range by league name.
+    results_in_range_sorted = sorted(results_in_range, key=lambda x: x[0])
+    
+    return results_in_range_sorted
     
 def prepare_prediction_dataframe(predictions):
     """
