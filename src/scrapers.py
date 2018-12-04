@@ -24,6 +24,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
     Scrapes all available results for the selected league.
     Adds them to the results list.
     """
+    today = datetime.today()
     def format_datetime(dt, type = "fixture"):
         """
         Helper function to convert date and time value for a
@@ -333,7 +334,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
     
     Scrapes all results and fixtures of the current season.
     """
-    
+    today = datetime.today()
     def clean_string(st):
         """
         Helper function to clean the team name strings.
@@ -370,7 +371,6 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
         Runs in rounds mode by default but can be run in mode = "results" for
         the two forms of fixtures founf on the site.
         """
-        
         today = datetime.today()
         date_months = ["Jan.", "Feb.", "Mar.", "Apr.", "May.", "Jun.",
             "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]

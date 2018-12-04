@@ -243,7 +243,7 @@ def form_wins(predictions, results, past_range, applied_filters):
             break
     
     filtered_predictions = []
-    filter_name = team + " team has won all games in range by " + str(x) + " or more goals"
+    filter_name = team + " team has won all of their last " + str(number_of_results) + " games by " + str(x) + " or more goals"
     # For each prediction
     for p in predictions:
         
