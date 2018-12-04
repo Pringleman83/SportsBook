@@ -33,18 +33,17 @@ def home_or_away(either = True, menu = True):
             break
     return team
 
-def input_goals():
+def input_number():
     """
-    Asks the user to enter a number of goals.
+    Asks the user to enter a number.
     Validates the input and returns the given number.
     """
     while True:
-        print("\nEnter number of goals.")
-        num_of_goals = input()
-        if is_number(num_of_goals):
-            num_of_goals = int(num_of_goals)
+        number = input()
+        if is_number(number):
+            number = int(number)
             break
-    return num_of_goals
+    return number
 
 def remove_duplicates(old_list):
     """

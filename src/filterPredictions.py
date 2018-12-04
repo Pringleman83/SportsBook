@@ -72,8 +72,9 @@ def win_by_x(predictions, applied_filters):
     team = cf.home_or_away()
     if team == "Exit":
         return(predictions, applied_filters)
-            
-    x = cf.input_goals()
+    
+    print("\nEnter number of goals each team must have won by.")        
+    x = cf.input_number()
     
     filter_name = team + " team to score at least " + str(x) + " goals more than their opponent." 
     for p in predictions:
@@ -110,7 +111,7 @@ def x_or_more_goals_scored(predictions, applied_filters):
     print("(x or more goals scored)\n")
     filtered_predictions = []
     print("Enter the lowest number of goals")
-    x = cf.input_goals()
+    x = cf.input_number()
  
     filter_name = "Total number of goals is " + str(x) + " or more"
     for p in predictions:
@@ -140,9 +141,9 @@ def x_or_less_goals_scored(predictions, applied_filters):
     print("(x or less goals scored)\n\n")
     filtered_predictions = []
     print("\nX goals or less expected to be scored in each game.")
-    print("Enter the highest number of goals")
     
-    x = cf.input_goals()
+    print("Enter the highest number of goals")
+    x = cf.input_number()
     
     filter_name = "Total number of goals is " + str(x) + " or less"   
     for p in predictions:
@@ -193,7 +194,7 @@ def special_james_shoemark_3_or_more(predictions, applied_filters):
         
 # Team form filters
         
-def form_wins(predictions, results, past_range, applied_filters):#WIP
+def form_wins(predictions, results, past_range, applied_filters):
     """
     Takes a list of predictions and the list of currently applied filters.
     Asks the user to select the home team or the away team.
@@ -227,7 +228,10 @@ def form_wins(predictions, results, past_range, applied_filters):#WIP
     team = cf.home_or_away(either = False)
     
     print("Enter the lowest number of goals for the " + team + " team to have won each game by.") 
-    x = int(cf.input_goals())
+    x = int(cf.input_number())
+    
+    print("Enter the number of results to check.")
+    number_of_results = cf.input_number()
     
     # Ask the user whther they'd like to see relevant results for each team.
     display_results = ""
@@ -256,13 +260,8 @@ def form_wins(predictions, results, past_range, applied_filters):#WIP
         # Create a list to save relevant results.
         relevant_results = []
         
-        # If the game range is a number of games, store this number to prevent
-        #checking too many results as results_in_range can sometimes hold more results
-        #per team than requested so that x results for each team are shown.
-        if isinstance(past_range, int):
-            game_limit = past_range
-        else:
-            game_limit = 9999
+        # Set the limit of results to check for each iteration of the prediction loop.
+        game_limit = number_of_results
         
         # Set a game counter.
         game_count = 0
@@ -289,6 +288,9 @@ def form_wins(predictions, results, past_range, applied_filters):#WIP
                 if int(r[3]) - int(r[5]) >= x:
                     # Add the result to the relevant results list.
                     relevant_results.append(r)
+                    # Break out of results loop if game counter exceeds limit.
+                    if game_count == game_limit:
+                        break
                     # Continue the loop to check the remaining games.
                     continue
                 # If not, this is not a relevant selection.
@@ -308,6 +310,9 @@ def form_wins(predictions, results, past_range, applied_filters):#WIP
                 if int(r[5]) - int(r[3]) >= x:
                     # Add the result to the relevant results list.
                     relevant_results.append(r)
+                    # Break out of results loop if game counter exceeds limit.
+                    if game_count == game_limit:
+                        break
                     # Continue the loop to check the remaining games.
                     continue
                 # If not, this is not a relevant selection.
@@ -315,21 +320,18 @@ def form_wins(predictions, results, past_range, applied_filters):#WIP
                     # Mark as not relevant.
                     relevant_prediction = False
                     break
-            
-            # Break out of results loop if game counter exceeds limit.
-            if game_count == game_limit:
-                break
                 
         if relevant_prediction:
             filtered_predictions.append(p)
             if display_results == "y":
-                print("\n" + p[team + " team"] + " qualifying results: \n")
+                print("\n" + relevant_results[0][0] + "\n" + p[team + " team"] + " qualifying results: \n")
                 for result in relevant_results:
                     for item in range(len(result)):
-                        if item % 7 == 0:
+                        if item % 6 == 0:
                             continue
                         else:
                             print(result[item])
+                    print()
             
     if len(filtered_predictions) > 0:        
         applied_filters.append(filter_name)

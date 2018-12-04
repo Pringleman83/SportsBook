@@ -236,8 +236,8 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
                     str(table.select('td')[i + 3].text),
                     game_date_time]
                 
-                # Only add the fixture to the fixtures list if it's not already present.
-                if not fixture in fixtures:
+                # Only add the fixture to the fixtures list if it's not already present and it is still to be played.
+                if fixture not in fixtures and fixture[4] >= today:
                     with fixtures_lock:
                         fixtures.append(fixture[:]) # add fixture details to fixtures                    
             break
@@ -841,8 +841,8 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
                             results.append(result[:]) # add result details to results
                 else:
                     fixture = [selection, game_date_time.strftime("%d %b %Y %H:%M"), home_team, away_team, game_date_time]
-                    # Only add the fixture to the fixtures list if it's not already present.
-                    if fixture not in fixtures:
+                    # Only add the fixture to the fixtures list if it's not already present and it is still to be played.
+                    if fixture not in fixtures and fixture[4] >= today:
                         with fixtures_lock:
                             fixtures.append(fixture[:]) # add fixture details to fixtures
                         

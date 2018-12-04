@@ -59,7 +59,7 @@ def main_menu(options):
                              "applied_filters": [], # Filters applied to predictions
                              "results": [], # All results for each league
                              "results_in_range": [], # Results in selected results range
-                             "past_range": 5} # Selected range of results (past) - Days or number of games
+                             "past_range": timedelta(days=365)} # Selected range of results (past) - Days or number of games
             football_menu(football_data)
         if selected == options[1][0]:
             tennis()
