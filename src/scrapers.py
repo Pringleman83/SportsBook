@@ -25,18 +25,18 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
     Adds them to the results list.
     """
     today = datetime.today()
-    def format_datetime(dt, type = "fixture"):
+    def format_datetime(dt, mode = "fixture"):
         """
         Helper function to convert date and time value for a
         game from the BetStudy scraper and converts it into
         a valid datetime object. The object is returned.
         
         Takes the scraped date (and time if available) and an
-        optional string for type (default "fixture").
+        optional string for mode (default "fixture").
         
-        Behaves differently for each type.
+        Behaves differently for each mode.
         """       
-        if type == "fixture":
+        if mode == "fixture":
             # Game date day (1-31) number
             game_date_day = int(dt[:2])
             
@@ -58,7 +58,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
             game_date = datetime(game_date_year, game_date_month,
                                  game_date_day, game_hour, game_min)
                           
-        elif type == "result":
+        elif mode == "result":
         
             date = dt.split(".")
             
@@ -280,7 +280,7 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
                 #DEBUG CODE
                 #print(str(table.select('td')[i].text))
                 
-                game_date = format_datetime(table.select('td')[i].text, type = "result") # Correct date format for function?
+                game_date = format_datetime(table.select('td')[i].text, mode = "result") # Correct date format for function?
                 
                 """
                 Sorting the scores
