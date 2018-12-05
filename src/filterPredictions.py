@@ -249,10 +249,10 @@ def form_wins(predictions, results, past_range, applied_filters):
         
         """
         Get the results for the selected team from the results passed into the function.
-        type = "total" means that one list containing all(home and away) results for the
+        mode = "total" means that one list containing all(home and away) results for the
         selected team from the given results range is returned.
         """
-        team_results = f.get_team_results(p["League"], p[team + " team"], results, type = "total")
+        team_results = f.get_team_results(p["League"], p[team + " team"], results, mode = "total")
         
         # Set a flag for qualifying predictions.
         relevant_prediction = True
