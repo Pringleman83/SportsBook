@@ -136,9 +136,9 @@ def is_number(s) -> bool:
     Returns True or False.
     """
     if isinstance(s, str):
+        s = s.strip()
         return s.isnumeric()
     return isinstance(s, int) or isinstance(s, float)
-
 
 def valid_input(selection, options) -> bool:
     """

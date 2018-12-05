@@ -310,6 +310,8 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
                     away_score, # Away score
                     game_date] # Date as datetime object.
                 
+                #print(result) # DEBUG CODE
+                
                 # Only add the result to the results list if it's not already present.
                 if not result in results:
                     
@@ -320,9 +322,11 @@ def get_league_data_bet_study(selection, league_data, fixtures, results, availab
                         results.append(result[:]) # add result details to results.                    
             break
         except IndexError:
-            # Number of requested rsults exceeds the number of available results, break.
+            # Number of requested results exceeds the number of available results, break.
             break
 
+    #print(results) # DEBUG CODE
+    
     return "Success"
 
 def get_league_data_soccer_stats(selection, league_data, fixtures, results, available_leagues):
@@ -773,7 +777,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
                 else:
                     fixture = [selection, game_date_time.strftime("%d %b %Y %H:%M"), home_team, away_team, game_date_time]
                     # Only add the fixture to the fixtures list if it's not already present.
-                    if fixture not in fixtures:
+                    if fixture not in fixtures and fixture[4] >= today:
                         with fixtures_lock:
                             fixtures.append(fixture[:]) # add fixture details to fixtures
     # Not all results mode    
