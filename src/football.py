@@ -672,41 +672,42 @@ def prepare_prediction_dataframe(predictions):
     del temp_predictions
     return df
 
-def get_team_results(league, team_name, results, type="all"):
-	"""
+def get_team_results(league, team_name, results, mode="all"):
+    """
 	Takes a team name, set of results and a type (default type is "everything").
 	Sorts through all results and returns:
-	Type = "all": a list of [home_results, away_results, all_results] for that team.
-	Type = "total": all results for that team.
-	Type = "home and away": a list of [home_results, away_results] for that team.
-	Type = "home": home results for that team.
-	Type = "away": away results.
+	mode = "all": a list of [home_results, away_results, all_results] for that team.
+	mode = "total": all results for that team.
+	mode = "home and away": a list of [home_results, away_results] for that team.
+	mode = "home": home results for that team.
+	mode = "away": away results.
 	"""
-	if type == "total" or type == "home and away" or type == "all":
-		get = "total"
-	else:
-		get = type
-	home_results = []
-	away_results = []
-	total_results = []
-	for result in results:
-		if (get == "home" or get == "total") and result[0] == league and result[2] == team_name:
-			home_results.append(result)
-			total_results.append(result)
-		if (get == "away" or get == "total") and result[0] == league and result[4] == team_name:
-			away_results.append(result)
-			total_results.append(result)
+    if mode == "total" or mode == "home and away" or mode == "all":
+        get = "total"
+    else:
+        get = mode
+        
+    home_results = []
+    away_results = []
+    total_results = []
+    for result in results:
+        if (get == "home" or get == "total") and result[0] == league and result[2] == team_name:
+            home_results.append(result)
+            total_results.append(result)
+        if (get == "away" or get == "total") and result[0] == league and result[4] == team_name:
+            away_results.append(result)
+            total_results.append(result)
 
-	if type == "total":
-		return total_results
-	if type == "home and away":
-		return [home_results, away_results]
-	if type == "home":
-		return home_results
-	if type == "away":
-		return away_results
-	if type == "all":
-		return [home_results, away_results, total_results]
+    if mode == "total":
+        return total_results
+    if mode == "home and away":
+        return [home_results, away_results]
+    if mode == "home":
+        return home_results
+    if mode == "away":
+        return away_results
+    if mode == "all":
+        return [home_results, away_results, total_results]
 	
 def get_benchmarks(home_team_all_results, away_team_all_results):
     """
@@ -729,7 +730,13 @@ def get_benchmarks(home_team_all_results, away_team_all_results):
     P-P, as it would be for a postponed game.
     """
     for ht_result in home_team_all_results[0]:
+        
+        #print(ht_result) # DEBUG CODE
+        
         for at_result in away_team_all_results[0]:
+            
+            #print(at_result) # DEBUG CODE
+            
             if ht_result[4] == at_result[4] and cf.is_number(ht_result[3]) and cf.is_number(at_result[3]):
                 home_benchmarks.append([ht_result, at_result])
     """
@@ -770,9 +777,24 @@ def benchmark_analysis(fixture, football_data, display = True):
     #date_time = fixture[1]
     h_team = fixture[2]
     a_team = fixture[3]
-    h_results = get_team_results(league, h_team, football_data["results"], type = "all")
-    a_results = get_team_results(league, a_team, football_data["results"], type = "all")
+    h_results = get_team_results(league, h_team, football_data["results"], mode = "all")
+    
+    #print("HOME RESULTS") # DEBUG CODE
+    #print(h_results) # DEBUG CODE
+    #input() # DEBUG CODE
+    
+    a_results = get_team_results(league, a_team, football_data["results"], mode = "all")
+    
+    #print("AWAY RESULTS") # DEBUG CODE
+    #print(a_results) # DEBUG CODE
+    #input() # DEBUG CODE
+    
     benchmarks = get_benchmarks(h_results, a_results)
+    
+    #print("BENCHMARKS") # DEBUG CODE
+    #print(benchmarks) # DEBUG CODE
+    #input() # DEBUG CODE
+    
     """
     benchmarks structure: [
             [

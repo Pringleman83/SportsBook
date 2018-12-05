@@ -231,10 +231,11 @@ def upcoming_fixture_predictions_benchmarks(football_data):
     Adds each prediction to the predictions list.
     Returns the updated predictions list.
     """ 
-    
     # Optional - Don't add predictions where benchmark games are below threshold.
     threshold = 3
     avoid_below_threshold = True
+    
+    #print(football_data["fixtures"]) # DEBUG CODE
     
     for fixture in football_data["fixtures"]:
         fixture_league = fixture[0]
@@ -243,6 +244,8 @@ def upcoming_fixture_predictions_benchmarks(football_data):
         away_team = fixture[3]
         benchmark_tables = f.benchmark_analysis(fixture, football_data, display = False)
         #print("HOME TEAM: " + home_team + " AWAY TEAM: " + away_team) # DEBUG CODE
+        
+        #print(benchmark_tables) # DEBUG CODE
         
         #comparison = compare(homeTeam, awayTeam, league_data)
         """
@@ -281,6 +284,8 @@ def upcoming_fixture_predictions_benchmarks(football_data):
         "Home team prediction": home_team_goals, "Away team": away_team, "Away team prediction": away_team_goals, "Total goals expected": total_goals, 
         "Predicted separation": prediction_goal_separation, "Both to score": both_to_score, "date_as_dtobject": fixture[4]}
 
+        #print(prediction) # DEBUG CODE
+
         # Flatten league stats for prediction storage and exporting
         for team in [home_team, away_team]: # Do for each team
             if team == home_team:           # Used for the prediction keys
@@ -308,5 +313,8 @@ def upcoming_fixture_predictions_benchmarks(football_data):
         # If the prediction is not already in the predictions list, add it.
         if prediction not in football_data["predictions"]:
             football_data["predictions"].append(prediction)
+            
+        #print("PREDICTIONS:") # DEBUG CODE
         #print(football_data["predictions"]) # DEBUG CODE
+        
     return
