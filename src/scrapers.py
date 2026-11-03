@@ -478,7 +478,7 @@ def get_league_data_soccer_stats(selection, league_data, fixtures, results, avai
     soccer_stats_main = "https://www.soccerstats.com/widetable.asp?league="
     full_url = soccer_stats_main + available_leagues[selection]
     cookies = {"cookiesok": "yes"} # Required to disable the cookie popup which prevents scraping.
-    web_client = requests.get(full_url, cookies = cookies)
+    web_client = requests.get(full_url, cookies = cookies, timeout=30)
     if web_client.status_code != 200:
         print("\n" + selection + " league data error: Cannot retrieve data, webpage is down")
         return "Scrape error"
